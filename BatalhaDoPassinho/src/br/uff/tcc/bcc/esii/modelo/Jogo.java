@@ -1,4 +1,4 @@
-package br.uff.tcc.bcc.esii;
+package br.uff.tcc.bcc.esii.modelo;
 
 import java.util.List;
 import java.util.Queue;
