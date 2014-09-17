@@ -1,16 +1,22 @@
 package br.uff.tcc.bcc.esii;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
 import java.util.Random;
-import java.util.Set;
 
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 
+/**
+ * @author Thadeu Jose
+ *
+ */
+/**
+ * @author Thadeu Jose
+ *
+ */
 /**
  * @author Thadeu Jose
  *
@@ -53,7 +59,6 @@ public class Jogo {
 	 * 
 	 */
 	public Jogo() {
-		turno=0;
 		mapa=new Mapa();
 	}
 
@@ -73,9 +78,6 @@ public class Jogo {
 		inicializaMapa();
 	}
 
-	/**
-	 * Inicializa o mapa.
-	 */
 	private void inicializaMapa() {
 		//Region Territorio Niteroi 
 		Territorio viradouro = new Territorio("Viradouro", "Niteroi");
@@ -109,7 +111,7 @@ public class Jogo {
 		//Region Territorio Zona Sul
 		Territorio pista3 = new Territorio("Pista 3", "Zona Sul");
 		Territorio matriz = new Territorio("Matriz", "Zona Sul");
-		Territorio kalabria = new Territorio("Kalabria", "Zona Sul");
+		Territorio kallabria = new Territorio("Kallabria", "Zona Sul");
 		Territorio zozo = new Territorio("Zozo", "Zona Sul");
 		Territorio praia = new Territorio("Praia", "Zona Sul");
 		Territorio mariuzzin = new Territorio("Mariuzzin", "Zona Sul");
@@ -130,43 +132,53 @@ public class Jogo {
 		Territorio barraMusic = new Territorio("Barra Music", "Zona Oeste");
 		//EndRegion Territorio Zona Oeste
 				
-		//Region adicionaVizinhos Niteroi
+		//Region adiciona Vizinho Niteroi
 		viradouro.adicionaVizinhos(saoFirmino);
 		viradouro.adicionaVizinhos(casa);
 		viradouro.adicionaVizinhos(waxy);
 		viradouro.adicionaVizinhos(fundicao);
+		
 		waxy.adicionaVizinhos(viradouro);
 		waxy.adicionaVizinhos(casa);
 		waxy.adicionaVizinhos(touche);
+		
 		touche.adicionaVizinhos(waxy);
 		touche.adicionaVizinhos(flamboyant);
 		touche.adicionaVizinhos(casa);
+		
 		saoFirmino.adicionaVizinhos(viradouro);
 		saoFirmino.adicionaVizinhos(casa);
+		
 		casa.adicionaVizinhos(saoFirmino);
 		casa.adicionaVizinhos(waxy);
 		casa.adicionaVizinhos(viradouro);
 		casa.adicionaVizinhos(touche);
+		
 		flamboyant.adicionaVizinhos(touche);
 		flamboyant.adicionaVizinhos(woods);
+		
 		woods.adicionaVizinhos(flamboyant);
 		woods.adicionaVizinhos(circo);
-		//EndRegion adicionaVizinhos Niteroi
+		//EndRegion adiciona Vizinho Niteroi
 		
 		//Region adicionaVizinhos Centro
 		fundicao.adicionaVizinhos(provisorioClub);
 		fundicao.adicionaVizinhos(casteloBonsucesso);
 		fundicao.adicionaVizinhos(viradouro);
 		fundicao.adicionaVizinhos(circo);
+		
 		circo.adicionaVizinhos(casteloBonsucesso);
 		circo.adicionaVizinhos(six);
 		circo.adicionaVizinhos(laPaz);
 		circo.adicionaVizinhos(laPassion);
+		
 		laPaz.adicionaVizinhos(circo);
 		laPaz.adicionaVizinhos(six);
+		
 		six.adicionaVizinhos(laPaz);
 		six.adicionaVizinhos(circo);
 		six.adicionaVizinhos(laPassion);
+				
 		laPassion.adicionaVizinhos(buxixo);
 		laPassion.adicionaVizinhos(matriz);
 		laPassion.adicionaVizinhos(pista3);
@@ -175,109 +187,12 @@ public class Jogo {
 		//EndRegion adicionaVizinhos Centro
 		
 		//Region adicionaVizinhos Zona Norte
-		olimpo.adicionaVizinhos(provisorioClub);
-		olimpo.adicionaVizinhos(raioDeSol);
-		provisorioClub.adicionaVizinhos(fundicao);
-		provisorioClub.adicionaVizinhos(olimpo);
-		provisorioClub.adicionaVizinhos(casteloBonsucesso);
-		provisorioClub.adicionaVizinhos(raioDeSol);
-		raioDeSol.adicionaVizinhos(olimpo);
-		raioDeSol.adicionaVizinhos(provisorioClub);
-		raioDeSol.adicionaVizinhos(casteloBonsucesso);
-		raioDeSol.adicionaVizinhos(simpatia);
-		raioDeSol.adicionaVizinhos(imperator);
-		raioDeSol.adicionaVizinhos(openLounge);
-		simpatia.adicionaVizinhos(kissEFly);
-		simpatia.adicionaVizinhos(imperator);
-		simpatia.adicionaVizinhos(raioDeSol);
-		imperator.adicionaVizinhos(simpatia);
-		imperator.adicionaVizinhos(openLounge);
-		imperator.adicionaVizinhos(raioDeSol);
-		openLounge.adicionaVizinhos(imperator);
-		openLounge.adicionaVizinhos(raioDeSol);
-		openLounge.adicionaVizinhos(casteloBonsucesso);
-		openLounge.adicionaVizinhos(buxixo);
-		casteloBonsucesso.adicionaVizinhos(fundicao);
-		casteloBonsucesso.adicionaVizinhos(circo);
-		casteloBonsucesso.adicionaVizinhos(openLounge);
-		casteloBonsucesso.adicionaVizinhos(raioDeSol);
-		casteloBonsucesso.adicionaVizinhos(provisorioClub);
-		casteloBonsucesso.adicionaVizinhos(buxixo);
-		buxixo.adicionaVizinhos(laIsla);
-		buxixo.adicionaVizinhos(openLounge);
-		buxixo.adicionaVizinhos(casteloBonsucesso);
-		buxixo.adicionaVizinhos(laPassion);
 		//EndRegion adicionaVizinhos Zona Norte
 		
-		//Region adicionaVizinhos Zona Sul				
-		zeroZero.adicionaVizinhos(saoNunca);
-		zeroZero.adicionaVizinhos(baronetti);
-		baronetti.adicionaVizinhos(zeroZero);
-		baronetti.adicionaVizinhos(praia);
-		baronetti.adicionaVizinhos(mariuzzin);
-		praia.adicionaVizinhos(baronetti);
-		praia.adicionaVizinhos(mariuzzin);
-		praia.adicionaVizinhos(kalabria);
-		mariuzzin.adicionaVizinhos(baronetti);
-		mariuzzin.adicionaVizinhos(praia);
-		mariuzzin.adicionaVizinhos(kalabria);
-		mariuzzin.adicionaVizinhos(zozo);
-		kalabria.adicionaVizinhos(praia);
-		kalabria.adicionaVizinhos(mariuzzin);
-		kalabria.adicionaVizinhos(zozo);
-		kalabria.adicionaVizinhos(matriz);
-		zozo.adicionaVizinhos(kalabria);
-		zozo.adicionaVizinhos(mariuzzin);
-		matriz.adicionaVizinhos(laPassion);
-		matriz.adicionaVizinhos(pista3);
-		matriz.adicionaVizinhos(kalabria);
-		pista3.adicionaVizinhos(matriz);
-		pista3.adicionaVizinhos(laPassion);		
+		//Region adicionaVizinhos Zona Sul
 		//EndRegion adicionaVizinhos Zona Sul
 		
 		//Region adicionaVizinhos Zona Oeste
-		barraMusic.adicionaVizinhos(zax);
-		barraMusic.adicionaVizinhos(nuth);
-		barraMusic.adicionaVizinhos(casteloDasPedras);
-		zax.adicionaVizinhos(barraMusic);
-		zax.adicionaVizinhos(nuth);
-		zax.adicionaVizinhos(platinum);
-		platinum.adicionaVizinhos(zeroVinteUm);
-		platinum.adicionaVizinhos(nuth);
-		platinum.adicionaVizinhos(zax);
-		platinum.adicionaVizinhos(saoNunca);
-		platinum.adicionaVizinhos(capitonne);
-		saoNunca.adicionaVizinhos(zeroZero);
-		saoNunca.adicionaVizinhos(laIsla);
-		saoNunca.adicionaVizinhos(capitonne);
-		saoNunca.adicionaVizinhos(platinum);
-		nuth.adicionaVizinhos(barraMusic);
-		nuth.adicionaVizinhos(platinum);
-		nuth.adicionaVizinhos(casteloDasPedras);
-		nuth.adicionaVizinhos(zax);
-		nuth.adicionaVizinhos(zeroVinteUm);
-		zeroVinteUm.adicionaVizinhos(casteloDasPedras);
-		zeroVinteUm.adicionaVizinhos(nuth);
-		zeroVinteUm.adicionaVizinhos(zax);
-		zeroVinteUm.adicionaVizinhos(platinum);
-		zeroVinteUm.adicionaVizinhos(capitonne);
-		capitonne.adicionaVizinhos(kissEFly);
-		capitonne.adicionaVizinhos(casteloDasPedras);
-		capitonne.adicionaVizinhos(zeroVinteUm);
-		capitonne.adicionaVizinhos(platinum);
-		capitonne.adicionaVizinhos(saoNunca);
-		capitonne.adicionaVizinhos(laIsla);
-		laIsla.adicionaVizinhos(buxixo);
-		laIsla.adicionaVizinhos(capitonne);
-		laIsla.adicionaVizinhos(saoNunca);
-		casteloDasPedras.adicionaVizinhos(kissEFly);
-		casteloDasPedras.adicionaVizinhos(capitonne);
-		casteloDasPedras.adicionaVizinhos(zeroVinteUm);
-		casteloDasPedras.adicionaVizinhos(nuth);
-		casteloDasPedras.adicionaVizinhos(barraMusic);
-		kissEFly.adicionaVizinhos(simpatia);
-		kissEFly.adicionaVizinhos(casteloDasPedras);
-		kissEFly.adicionaVizinhos(capitonne);
 		//EndRegion adicionaVizinhos Zona Oeste
 		
 		//Region adicionaTerritorio Niteroi
@@ -312,7 +227,7 @@ public class Jogo {
 		//Region adicionaTerritorio Zona Sul
 		mapa.adicionaTerritorio(pista3);
 		mapa.adicionaTerritorio(matriz);
-		mapa.adicionaTerritorio(kalabria);
+		mapa.adicionaTerritorio(kallabria);
 		mapa.adicionaTerritorio(zozo);
 		mapa.adicionaTerritorio(praia);
 		mapa.adicionaTerritorio(mariuzzin);
@@ -333,64 +248,6 @@ public class Jogo {
 		mapa.adicionaTerritorio(barraMusic);
 		//EndRegion adicionaTerritorio Zona Oeste
 		
-	}
-	
-	/**
-	 * @param jogador Jogador que vai ganhar as tropas
-	 * @return inteiro que representa todas as tropas que vão ser ganhas
-	 */
-	public int ganhaTropa(Jogador jogador)	{
-		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);
-	}
-
-	/**
-	 * @param jogador que vai ganhar as tropas
-	 * @return inteiro que representa as tropas que vão ser ganhas por ter dominio de um ou mais continente
-	 */
-	private int ganhaBonusTerritorio(Jogador jogador) {
-		int quantBoatesPorContinente[]=new int[5];
-		int resposta=0,bonusZonaNorte=1,bonusZonaSul=2,bonusZonaOeste=3,bonusCentro=4,bonusNiteroi=5;
-		Set<Territorio>  boates = jogador.getConquistados();
-		Iterator<Territorio> it = boates.iterator();
-		while(it.hasNext()){
-			Territorio boate = it.next();
-			if(boate.getContinente()=="Zona Norte"){
-				quantBoatesPorContinente[0]++;
-			}
-			if(boate.getContinente()=="Zona Sul"){
-				quantBoatesPorContinente[1]++;
-			}
-			if(boate.getContinente()=="Zona Oeste"){
-				quantBoatesPorContinente[2]++;
-			}
-			if(boate.getContinente()=="Centro"){
-				quantBoatesPorContinente[3]++;
-			}
-			if(boate.getContinente()=="Niteroi"){
-				quantBoatesPorContinente[4]++;
-			}
-		}
-		if(quantBoatesPorContinente[0]==8)
-		{
-			resposta+=bonusZonaNorte;
-		}
-		if(quantBoatesPorContinente[1]==8)
-		{
-			resposta+=bonusZonaSul;
-		}
-		if(quantBoatesPorContinente[2]==10)
-		{
-			resposta+=bonusZonaOeste;
-		}
-		if(quantBoatesPorContinente[3]==5)
-		{
-			resposta+=bonusCentro;
-		}
-		if(quantBoatesPorContinente[4]==7)
-		{
-			resposta+=bonusNiteroi;
-		}
-		return resposta;
 	}
 	
 }
