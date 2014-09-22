@@ -1,7 +1,9 @@
 package br.uff.tcc.bcc.esii;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
@@ -393,4 +395,51 @@ public class Jogo {
 		return resposta;
 	}
 	
+	/**
+	 * @param conjunto Conjunto que vai ser convertido
+	 * @return Mapa desse conjunto  onde o valor da chaveée o nome do territorio e a entrada é o territorio
+	 */
+	public Map<String,Territorio> conjuntoParaMapa(Set<Territorio> conjunto){
+		Map<String, Territorio> mapa = new HashMap<>();
+		for(Territorio territorio:conjunto){
+			mapa.put(territorio.getNome(),territorio);
+		}
+		return mapa;
+	}
+	
+	/**
+	 * @param jogador que vai ser adiionado ao final da fila
+	 */
+	public void adicionaJogador(Jogador jogador){
+		jogadores.add(jogador);
+	}
+	
+	/**
+	 *  Metodo responsavel pela administração do jogo
+	 */
+	public void joga(){
+		Jogador jogador = jogadores.poll();
+		Set<Territorio> territorios=jogador.getConquistados();
+		Map<String, Territorio> mapa = conjuntoParaMapa(territorios);
+		if(faseAtual==TipoFase.FASE_1){
+			int quantidadeDeTropas=ganhaTropa(jogador);
+			while(quantidadeDeTropas<0){
+				//Função que pega o nome do territorio da visão
+				String nomeDoTerritorio = "";
+				Territorio territorio=mapa.get(nomeDoTerritorio);
+				
+				if(territorio!=null){
+					territorio.setQuantidadeTropa(territorio.getQuantidadeTropa()+1);
+					quantidadeDeTropas--;
+				}
+				else
+				{
+					//Mensagem de erro alertando o jogador
+				}
+				
+			}
+		}			
+		jogadores.add(jogador);
+		
+	}
 }
