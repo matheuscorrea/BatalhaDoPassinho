@@ -2,6 +2,7 @@ package br.uff.tcc.bcc.esii;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -19,9 +20,9 @@ import br.uff.tcc.bcc.esii.modelo.Territorio;
  */
 public class Jogo {
 	/**
-	 * Numero do turno atual
+	 * Numero da rodada atual
 	 */
-	int turno;
+	int rodada;
 	/**
 	 * Jogadores que estao atualmente jogando
 	 */
@@ -52,10 +53,12 @@ public class Jogo {
 	public TipoFase faseAtual; 
 		
 	/**
-	 * 
+	 * Construtor da classe jogo
 	 */
 	public Jogo() {
-		turno=0;
+		rodada=0;
+		faseAtual = TipoFase.FASE_1;
+		jogadores=new LinkedList<Jogador>();
 		mapa=new Mapa();
 	}
 
@@ -437,6 +440,7 @@ public class Jogo {
 					//Mensagem de erro alertando o jogador
 				}
 				
+				//Atualiza a visão
 			}
 		}			
 		jogadores.add(jogador);
