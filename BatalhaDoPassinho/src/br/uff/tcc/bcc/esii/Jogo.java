@@ -1,7 +1,6 @@
 package br.uff.tcc.bcc.esii;
 
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -341,6 +340,7 @@ public class Jogo {
 	}
 	
 	/**
+	 * Metodo que calcula a quantidade total de tropas a serem ganhas
 	 * @param jogador Jogador que vai ganhar as tropas
 	 * @return inteiro que representa todas as tropas que vão ser ganhas
 	 */
@@ -349,16 +349,15 @@ public class Jogo {
 	}
 
 	/**
+	 * Metodo que calcula a quantidade de tropas a serem ganhas por ter dominio de um ou mais continente
 	 * @param jogador que vai ganhar as tropas
 	 * @return inteiro que representa as tropas que vão ser ganhas por ter dominio de um ou mais continente
 	 */
 	private int ganhaBonusTerritorio(Jogador jogador) {
 		int quantBoatesPorContinente[]=new int[5];
 		int resposta=0,bonusZonaNorte=1,bonusZonaSul=2,bonusZonaOeste=3,bonusCentro=4,bonusNiteroi=5;
-		Set<Territorio>  boates = jogador.getConquistados();
-		Iterator<Territorio> it = boates.iterator();
-		while(it.hasNext()){
-			Territorio boate = it.next();
+		for(Map.Entry<String, Territorio> entry : jogador.getConquistados().entrySet()){
+			Territorio boate = entry.getValue();
 			if(boate.getContinente()=="Zona Norte"){
 				quantBoatesPorContinente[0]++;
 			}
@@ -399,22 +398,48 @@ public class Jogo {
 	}
 	
 	/**
-	 * @param conjunto Conjunto que vai ser convertido
-	 * @return Mapa desse conjunto  onde o valor da chaveée o nome do territorio e a entrada é o territorio
-	 */
-	public Map<String,Territorio> conjuntoParaMapa(Set<Territorio> conjunto){
-		Map<String, Territorio> mapa = new HashMap<>();
-		for(Territorio territorio:conjunto){
-			mapa.put(territorio.getNome(),territorio);
-		}
-		return mapa;
-	}
-	
-	/**
-	 * @param jogador que vai ser adiionado ao final da fila
+	 * Adiciona um jogador a fila de espera
+	 * @param jogador que vai ser adicionado ao final da fila
 	 */
 	public void adicionaJogador(Jogador jogador){
 		jogadores.add(jogador);
+	}
+	
+	/**
+	 * Redistribui as tropas entre os paises do jogador.
+	 * Os paises tem que ser vizinhos 
+	 * So sai uma vez o exercito de um pais 
+	 * @param jogador Jogador que redistribuira as tropas
+	 */
+	public void redistribuiTropa(Jogador jogador){
+		Map<String, Territorio> mapa=jogador.getConquistados();
+		Set<Territorio> jaUsados = new HashSet<>();
+		
+		//Função que pega o nome do territorio da visão
+		String nomeDoTerritorioOrigem = "";
+		Territorio territorioOrigem=mapa.get(nomeDoTerritorioOrigem);
+	
+		//Função que pega o nome do territorio da visão
+		String nomeDoTerritorioDestino = "";
+		Territorio territorioDestino=mapa.get(nomeDoTerritorioDestino);
+	
+		if(territorioOrigem.getVizinhos().contains(territorioDestino)){
+			if(!jaUsados.contains(territorioOrigem)){
+				//Função que pega a quantidade de tropas da visão
+				int quantidadeDeTropas=0;
+				if(territorioOrigem.getQuantidadeTropa()>=quantidadeDeTropas+1){
+					territorioDestino.setQuantidadeTropa(territorioDestino.getQuantidadeTropa()+quantidadeDeTropas);
+					territorioOrigem.setQuantidadeTropa(territorioOrigem.getQuantidadeTropa()-quantidadeDeTropas);
+					jaUsados.add(territorioOrigem);
+				}else{
+					//ERRO:Quantidade de tropas maior que o permitido
+				}				
+			}else{
+				//ERRO:Ja partiu tropas desse territorio
+			}
+		}else{
+			//ERRO:Territorios não são vizinhos
+		}
 	}
 	
 	/**
@@ -422,11 +447,10 @@ public class Jogo {
 	 */
 	public void joga(){
 		Jogador jogador = jogadores.poll();
-		Set<Territorio> territorios=jogador.getConquistados();
-		Map<String, Territorio> mapa = conjuntoParaMapa(territorios);
+		Map<String, Territorio> mapa=jogador.getConquistados();
 		if(faseAtual==TipoFase.FASE_1){
 			int quantidadeDeTropas=ganhaTropa(jogador);
-			while(quantidadeDeTropas<0){
+			while(quantidadeDeTropas>0){
 				//Função que pega o nome do territorio da visão
 				String nomeDoTerritorio = "";
 				Territorio territorio=mapa.get(nomeDoTerritorio);
@@ -437,7 +461,7 @@ public class Jogo {
 				}
 				else
 				{
-					//Mensagem de erro alertando o jogador
+					//ERRO:Territorio não encontrado
 				}
 				
 				//Atualiza a visão

@@ -1,9 +1,9 @@
 package br.uff.tcc.bcc.esii.modelo;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * @author Thadeu Jose
@@ -22,7 +22,7 @@ public class Jogador {
 	/**
 	 * Territorios que foram possuidos pelos jogador.
 	 */
-	private Set<Territorio> conquistados;//
+	private Map<String, Territorio> conquistados;//
 	/**
 	 * Cartas que o jogador possue.
 	 */
@@ -34,7 +34,7 @@ public class Jogador {
 	public Jogador(String nome, String cor) {
 		this.nome = nome;
 		this.cor = cor;
-		conquistados=new HashSet<>();
+		conquistados= new HashMap<>();
 		mao = new ArrayList<>();
 	}
 	/**
@@ -52,7 +52,7 @@ public class Jogador {
 	/**
 	 * @return os territorios conquistados por esse jogador
 	 */
-	public Set<Territorio> getConquistados() {
+	public Map<String,Territorio> getConquistados() {
 		return conquistados;
 	}
 	/**
@@ -79,7 +79,7 @@ public class Jogador {
 	 * @return se a inserção foi concluida com exito ou não.
 	 */
 	public boolean adicionadConquistados(Territorio territorio){
-		return conquistados.add(territorio);
+		return (conquistados.put(territorio.getNome(),territorio)!=null);
 	}
 			
 }

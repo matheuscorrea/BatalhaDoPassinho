@@ -31,6 +31,7 @@ public class Territorio {
 	private Set<Territorio> vizinhos;
 	
 	/**
+	 * Construtor da classe Territorio
 	 * @param nome Nome do territorio
 	 * @param continente Nome do continente ao qual o territorio faz parte
 	 */
@@ -41,27 +42,31 @@ public class Territorio {
 	}
 
 	/**
-	 * @return o jogador que e dono do territorio
+	 * Retorna o dono do Territorio
+	 * @return o jogador que e dono do Territorio
 	 */
 	public Jogador getDono() {
 		return dono;
 	}
 
 	/**
-	 * @param dono o jogador que e dono do territorio
+	 * Seta o dono do Territorio
+	 * @param dono o jogador que e dono do Territorio
 	 */
 	public void setDono(Jogador dono) {
 		this.dono = dono;
 	}
 
 	/**
-	 * @return a quantidade de tropas que se encontra naquele territorio 
+	 * Retorna a quantidade de tropas que se encontra naquele Territorio
+	 * @return a quantidade de tropas 
 	 */
 	public int getQuantidadeTropa() {
 		return quantidadeTropa;
 	}
 
 	/**
+	 * Seta a quantidade de tropas atualmente dentro daquele Territorio
 	 * @param quantidadeTropa a quantidade atual de tropas dentro daquele territorio
 	 */
 	public void setQuantidadeTropa(int quantidadeTropa) {
