@@ -2,6 +2,11 @@ package br.uff.tcc.bcc.visao;
 
 import javafx.scene.control.Button;
 
+/**
+ * Controlador responsável por realizar o intermédio entre o modelo e a visão.<P>
+ * É um Singleton
+ *
+ */
 public class ControladorTelaInicial {
 	
 	private static ControladorTelaInicial controlador;
@@ -18,9 +23,16 @@ public class ControladorTelaInicial {
 		return controlador;
 	}
 	
-	    
-	public void acao(Button botao){
-    	botao.setText("Clicado: "+ ++numeroDeCliques);
-
+	/**
+	 * Recebe um botão e identifica qual ação tomar quando este for apertado
+	 * @param botao
+	 */
+	public void acao(Botao botao){
+    	if(botao.getTipoBotao().equals(TipoBotao.OPCOES)){
+    		botao.setText("Clicado: "+ ++numeroDeCliques);
+    	}
+    	if(botao.getTipoBotao().equals(TipoBotao.NOVO_JOGO)){
+    		
+    	}
 	}
 }

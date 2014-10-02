@@ -27,3 +27,6 @@ https://www.burndownfortrello.com/
 
 Tutorial EGit
 http://eclipsesource.com/blogs/tutorials/egit-tutorial/
+
+Tutorial sobre o uso de eventos em javafx
+http://docs.oracle.com/javase/tutorial/uiswing/events/
