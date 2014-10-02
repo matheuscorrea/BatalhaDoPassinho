@@ -15,7 +15,7 @@ import br.uff.tcc.bcc.esii.modelo.Territorio;
 
 /**
  * @author Thadeu Jose
- *
+ * REVER
  */
 public class Jogo {
 	/**

@@ -1,0 +1,32 @@
+Link do Github
+https://github.com/matheuscorrea/BatalhaDoPassinho/
+
+Link de exemplos do JavaFx
+http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html
+
+Trello
+https://trello.com/b/t6tdZaCT/batalha-do-passinho
+
+Link do Scrumy
+http://scrumy.com/esWar
+
+Link do PointPoker
+https://www.pointingpoker.com/
+
+Link WBSTool
+http://www.wbstool.com/
+
+Link de guia de Branch e Merge
+http://git-scm.com/book/pt-br/Ramifica%C3%A7%C3%A3o-Branching-no-Git-B%C3%A1sico-de-Branch-e-Merge
+
+plugin do google chrome Scrum for trello:
+https://chrome.google.com/webstore/detail/scrum-for-trello/jdbcdblgjdpmfninkoogcfpnkjmndgje
+
+Burndown for Trello
+https://www.burndownfortrello.com/
+
+Tutorial EGit
+http://eclipsesource.com/blogs/tutorials/egit-tutorial/
+
+Tutorial sobre o uso de eventos em javafx
+http://docs.oracle.com/javase/tutorial/uiswing/events/

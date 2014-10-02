@@ -19,8 +19,7 @@ public class TelaInicial extends Application{
 	}    
 	
 	public void inicia(String... args){
-		launch(args);
-	
+		launch(args);	
 	}
     
     @Override
@@ -42,3 +41,15 @@ public class TelaInicial extends Application{
         primaryStage.show();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
