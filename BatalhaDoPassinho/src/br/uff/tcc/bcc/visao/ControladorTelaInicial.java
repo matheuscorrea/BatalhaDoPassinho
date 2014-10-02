@@ -1,5 +1,6 @@
 package br.uff.tcc.bcc.visao;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 /**
@@ -7,7 +8,7 @@ import javafx.scene.control.Button;
  * É um Singleton
  *
  */
-public class ControladorTelaInicial {
+public class ControladorTelaInicial implements Controlador {
 	
 	private static ControladorTelaInicial controlador;
 	private static int numeroDeCliques;
@@ -16,7 +17,7 @@ public class ControladorTelaInicial {
 		numeroDeCliques=0;
 	}
 	
-	public static ControladorTelaInicial getInstancia(){
+	public static Controlador getInstancia(){
 		if (controlador == null){
 			controlador = new ControladorTelaInicial();
 		}
@@ -34,5 +35,15 @@ public class ControladorTelaInicial {
     	if(botao.getTipoBotao().equals(TipoBotao.NOVO_JOGO)){
     		
     	}
+	}
+	
+	public void iniciaJogo(){
+		
+	}
+
+	@Override
+	public Scene getScene() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
