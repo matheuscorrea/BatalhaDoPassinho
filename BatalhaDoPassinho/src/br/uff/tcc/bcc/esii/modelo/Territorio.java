@@ -29,13 +29,42 @@ public class Territorio {
 	 * Todos os vizinhos desse territorio
 	 */
 	private Set<Territorio> vizinhos;
+
+	/**
+	 * A Coordenada horizontal correspondente no mapa do território
+	 */
+	private Integer coordenadaX;
+
+
+	/**
+	 * A Coordenada Vertical correspondente no mapa do território
+	 */
+	private Integer coordenadaY;
 	
 	/**
 	 * Construtor da classe Territorio
+	 * Remover todas ocorrencias desse construtor
+	 * Usar somente o que utiliza coordenadas
 	 * @param nome Nome do territorio
 	 * @param continente Nome do continente ao qual o territorio faz parte
 	 */
+	@Deprecated
 	public Territorio(String nome, String continente) {
+		this.nome = nome;
+		this.continente = continente;
+		vizinhos = new HashSet<>();
+	}
+	
+	/**
+	 * Construtor da classe Território
+	 * @param nome Nome do territorio
+	 * @param continente Nome do continente ao qual o territorio faz parte
+	 * @param coordenadaX Coordenada horizontal correspondente ao território
+	 * @param coordenadaY Coordenada vertical correspondentente ao território
+	 */
+	public Territorio(String nome, String continente, Integer coordenadaX, Integer coordenadaY) {
+		this.coordenadaX = coordenadaX;
+		this.coordenadaY = coordenadaY;
 		this.nome = nome;
 		this.continente = continente;
 		vizinhos = new HashSet<>();
@@ -94,6 +123,21 @@ public class Territorio {
 		return vizinhos;
 	}	
 		
+	/**
+	 * @return A coordenada Horizontal do território
+	 */
+	public Integer getCoordenadaX() {
+		return coordenadaX;
+	}
+
+	/**
+	 * @return A coordenada Vertical do território
+	 */
+	public Integer getCoordenadaY() {
+		return coordenadaY;
+	}
+	
+	
 	/**
 	 * @param territorio territorio que e vizinho desse territorio
 	 * @return se a inserção foi concluida com exito ou não. 

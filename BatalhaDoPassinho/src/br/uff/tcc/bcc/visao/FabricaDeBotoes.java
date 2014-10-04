@@ -27,8 +27,13 @@ public class FabricaDeBotoes {
 	 * @param acao
 	 * @return
 	 */
-	public static Botao criaBotaoTerritorio( String id, String texto, EventHandler<ActionEvent> acao, TerritorioBotao territorio){
-		return new Botao(id,texto,acao);
+	public static Botao criaBotaoTerritorio( String id, String texto, EventHandler<ActionEvent> acao, TipoDoTerritorio territorio, Integer coordenadaX, Integer coordenadaY){
+		Botao botao = new Botao(id,texto,acao);
+		botao.setMaxHeight(20);
+		botao.setMaxWidth(30);
+		botao.setLayoutX(coordenadaX);
+		botao.setLayoutY(coordenadaY);
+		return botao;
 	}
 	
 	

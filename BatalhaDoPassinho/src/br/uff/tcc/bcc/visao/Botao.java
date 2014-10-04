@@ -15,7 +15,7 @@ public class Botao extends Button{
 	/**
 	 * Atributo que indica o tipo do botão
 	 */
-	private TerritorioBotao tipoBotao;
+	private TipoDoTerritorio tipoBotao;
 	
 	/**
 	 * Construtor da classe que determina a ação do botão ao ser clicado
@@ -26,7 +26,6 @@ public class Botao extends Button{
 		this.setId(id);;
 		this.setOnAction(acao);
 		this.setText(texto);
-		//this.tipoBotao = tipoBotao;
 	}	
 	
 	/**
@@ -34,14 +33,14 @@ public class Botao extends Button{
 	 * e suas configurações
 	 * @param texto
 	 */
-	public Botao(TerritorioBotao territorio, String id, String texto, EventHandler<ActionEvent> acao){
+	public Botao(TipoDoTerritorio territorio, String id, String texto, EventHandler<ActionEvent> acao){
 		this.setId(id);;
 		this.setOnAction(acao);
 		this.setText(texto);
 		this.tipoBotao = territorio;
 	}
 	
-	public TerritorioBotao getTipoBotao(){
+	public TipoDoTerritorio getTipoBotao(){
 		return tipoBotao;
 	}
 }

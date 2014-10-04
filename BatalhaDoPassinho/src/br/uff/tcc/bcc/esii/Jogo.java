@@ -81,6 +81,7 @@ public class Jogo {
 	 * Inicializa o mapa.
 	 */
 	private void inicializaMapa() {
+		//TODO Adicionar a coordenada dos territórios
 		//Region Territorio Niteroi 
 		Territorio viradouro = new Territorio("Viradouro", "Niteroi");
 		Territorio waxy = new Territorio("Waxy", "Niteroi");

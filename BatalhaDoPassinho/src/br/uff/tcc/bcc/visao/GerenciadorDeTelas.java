@@ -1,8 +1,10 @@
 package br.uff.tcc.bcc.visao;
 
+import br.uff.tcc.bcc.controlador.ControladorJogo;
 import br.uff.tcc.bcc.visao.telas.ITela;
 import br.uff.tcc.bcc.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.visao.telas.TelaJogo;
+import br.uff.tcc.bcc.visao.telas.TelaOpcoes;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -50,6 +52,7 @@ public class GerenciadorDeTelas{
 	 */
 	public void setPrimaryStage(Stage stage){
 		this.stagePrincipal = stage;
+		this.stagePrincipal.setTitle("Batalha do Passinho");
 	}
 	
 	/**
@@ -65,24 +68,20 @@ public class GerenciadorDeTelas{
 			stagePrincipal.setScene(cena);
 			
 		}else if(TipoDaTela.jogo.equals(tela)){
-			ITela telaJogo= new TelaJogo();			
+			//Para iniciar a tela de jogo é preciso passar o mapa
+			ITela telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
+			
 			Scene cena = telaJogo.getScene();
 			stagePrincipal.setScene(cena);
 			
 		}else if(TipoDaTela.opcoes.equals(tela)){
+			ITela telaOpcoes= new TelaOpcoes();			
+			Scene cena = telaOpcoes.getScene();
+			stagePrincipal.setScene(cena);
 			
 		}
 	}
 
-//	@Override
-//	public void start(Stage primaryStage) throws Exception {
-//		this.primaryStage = primaryStage;
-//		Tela telaInicial = new TelaInicial();
-//		
-//		Scene cena = telaInicial.getScene();
-//		this.primaryStage.setScene(cena);
-//	};
-//	
 	/**
 	 * Enum que representa os tipos de tela da aplicação
 	 */

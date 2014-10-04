@@ -3,6 +3,7 @@ package br.uff.tcc.bcc.visao.telas;
 import br.uff.tcc.bcc.visao.Botao;
 import br.uff.tcc.bcc.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.visao.eventos.EventoNovoJogo;
+import br.uff.tcc.bcc.visao.eventos.EventoOpcoes;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,16 +28,20 @@ public class TelaInicial implements ITela {
 	@Override
 	public Scene getScene() {
 
-		Botao x = FabricaDeBotoes.criaBotao("NovoJogo", "Novo Jogo",
-				new EventoNovoJogo());
+        Botao botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoNovoJogo());
+        Botao botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
+        
+        
+        GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
 
-		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
-
-		grid.add(x, 0, 0);
+        grid.add(botaoNovoJogo, 0, 0);
+        grid.add(botaoOpcoes, 1, 0);
+        
+   
 		return new Scene(grid, 300, 250);
 
 	}

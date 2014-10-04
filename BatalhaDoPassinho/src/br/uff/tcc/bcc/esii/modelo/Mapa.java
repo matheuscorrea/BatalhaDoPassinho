@@ -1,6 +1,8 @@
 package br.uff.tcc.bcc.esii.modelo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,5 +35,10 @@ public class Mapa {
 	public Territorio getTerritorio(String nomeTerritorio)
 	{
 		return territorios.get(nomeTerritorio);
+	}
+	
+	public List<Territorio> getTerritorios(){
+		List<Territorio> listaDeTerritorios = new ArrayList<Territorio>(territorios.values());
+		return listaDeTerritorios;
 	}
 }
