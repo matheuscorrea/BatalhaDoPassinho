@@ -21,6 +21,7 @@ public class Jogador {
 	private String cor;
 	/**
 	 * Territorios que foram possuidos pelos jogador.
+	 * REVER
 	 */
 	private Map<String, Territorio> conquistados;//
 	/**
@@ -75,10 +76,11 @@ public class Jogador {
 		return conquistados.size();
 	}
 	/**
+	 * REVER
 	 * @param territorio territorio que o jogador conquistou
-	 * @return se a inserção foi concluida com exito ou não.
+	 * @return se a inserção foi concluida com exito ou não.	 * 
 	 */
-	public boolean adicionadConquistados(Territorio territorio){
+	public boolean adicionaConquistados(Territorio territorio){
 		return (conquistados.put(territorio.getNome(),territorio)!=null);
 	}
 			

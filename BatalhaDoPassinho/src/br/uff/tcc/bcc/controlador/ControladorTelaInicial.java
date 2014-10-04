@@ -1,7 +1,7 @@
 package br.uff.tcc.bcc.controlador;
 
 import br.uff.tcc.bcc.visao.Botao;
-import br.uff.tcc.bcc.visao.TipoBotao;
+import br.uff.tcc.bcc.visao.TerritorioBotao;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
@@ -31,10 +31,10 @@ public class ControladorTelaInicial implements Controlador {
 	 * @param botao
 	 */
 	public void acao(Botao botao){
-    	if(botao.getTipoBotao().equals(TipoBotao.OPCOES)){
+    	if(botao.getTipoBotao().equals(TerritorioBotao.OPCOES)){
     		botao.setText("Clicado: "+ ++numeroDeCliques);
     	}
-    	if(botao.getTipoBotao().equals(TipoBotao.NOVO_JOGO)){
+    	if(botao.getTipoBotao().equals(TerritorioBotao.NOVO_JOGO)){
     		
     	}
 	}

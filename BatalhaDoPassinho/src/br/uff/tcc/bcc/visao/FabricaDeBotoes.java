@@ -17,6 +17,19 @@ public class FabricaDeBotoes {
 	 * @return
 	 */
 	public static Botao criaBotao( String id, String texto, EventHandler<ActionEvent> acao){
-		return new Botao(TipoBotao.NOVO_JOGO,id,texto,acao);
+		return new Botao(id,texto,acao);
 	}
+	
+	/**
+	 * Método que retorna uma instância de Botao de acordo com os parâmetros passados
+	 * @param id 
+	 * @param texto
+	 * @param acao
+	 * @return
+	 */
+	public static Botao criaBotaoTerritorio( String id, String texto, EventHandler<ActionEvent> acao, TerritorioBotao territorio){
+		return new Botao(id,texto,acao);
+	}
+	
+	
 }
