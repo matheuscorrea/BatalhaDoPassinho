@@ -1,5 +1,7 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.controlador;
 
+import br.uff.tcc.bcc.visao.Botao;
+import br.uff.tcc.bcc.visao.TipoBotao;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
@@ -39,11 +41,5 @@ public class ControladorTelaInicial implements Controlador {
 	
 	public void iniciaJogo(){
 		
-	}
-
-	@Override
-	public Scene getScene() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

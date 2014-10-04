@@ -1,7 +1,6 @@
 package br.uff.tcc.bcc.visao;
 
 
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

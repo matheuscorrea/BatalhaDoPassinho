@@ -1,13 +1,24 @@
 package br.uff.tcc.bcc.esii;
 
-import br.uff.tcc.bcc.visao.TelaInicial;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import br.uff.tcc.bcc.visao.GerenciadorDeTelas;
+import br.uff.tcc.bcc.visao.GerenciadorDeTelas.TipoDaTela;
 
-public class BatalhaDoPassinho {
+public class BatalhaDoPassinho extends Application {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		TelaInicial telaInicial = new TelaInicial();
-		telaInicial.inicia();
+	public static void inicia(String ... args){
+		launch(args);
 	}
 	
+	@Override
+	public void start(Stage arg0) throws Exception {
+		GerenciadorDeTelas.getInstancia().setPrimaryStage(arg0);
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.inicio);
+		arg0.show();
+	}
+	
+	public static void main(String[] args) {
+		inicia();
+	}
 }

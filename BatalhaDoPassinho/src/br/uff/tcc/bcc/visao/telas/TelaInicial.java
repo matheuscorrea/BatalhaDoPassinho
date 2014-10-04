@@ -1,5 +1,8 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.visao.telas;
 
+import br.uff.tcc.bcc.visao.Botao;
+import br.uff.tcc.bcc.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.visao.eventos.EventoNovoJogo;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,15 +11,19 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**
- * Classe que distribui os botões na tela inicial
+ * Classe que implementa a distribuição dos botões na tela inicial
  *
  */
-public class TelaInicial implements Tela {
+public class TelaInicial implements ITela {
 
 	public TelaInicial() {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.uff.tcc.bcc.visao.telas.ITela#getScene()
+	 */
 	@Override
 	public Scene getScene() {
 

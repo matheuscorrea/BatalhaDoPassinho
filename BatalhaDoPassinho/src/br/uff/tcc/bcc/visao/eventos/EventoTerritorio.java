@@ -1,8 +1,14 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.visao.eventos;
 
+import br.uff.tcc.bcc.controlador.ControladorTelaInicial;
+import br.uff.tcc.bcc.visao.Botao;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/**
+ * Evento que descreve as ações do botão de Novo Jogo
+ *
+ */
 public class EventoTerritorio implements EventHandler<ActionEvent>{
 
 	@Override

@@ -1,12 +1,19 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.visao.telas;
 
+import br.uff.tcc.bcc.visao.Botao;
+import br.uff.tcc.bcc.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.visao.eventos.EventoNovoJogo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 
-public class TelaJogo implements Tela{
+public class TelaJogo implements ITela{
 
+	/*
+	 * (non-Javadoc)
+	 * @see br.uff.tcc.bcc.visao.telas.ITela#getScene()
+	 */
 	@Override
 	public Scene getScene() {
 		Botao x = FabricaDeBotoes.criaBotao("JOGO", "JOGO",

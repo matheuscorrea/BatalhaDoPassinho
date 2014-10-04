@@ -1,7 +1,8 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.controlador;
 
 import javafx.scene.Scene;
 import br.uff.tcc.bcc.esii.Jogo;
+import br.uff.tcc.bcc.visao.Botao;
 
 public class ControladorJogo implements Controlador {
 	
@@ -25,9 +26,4 @@ public class ControladorJogo implements Controlador {
 		
 	}
 
-	@Override
-	public Scene getScene() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
