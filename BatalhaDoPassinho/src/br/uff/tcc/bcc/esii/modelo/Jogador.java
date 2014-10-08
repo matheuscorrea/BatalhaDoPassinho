@@ -70,18 +70,34 @@ public class Jogador {
 		return mao.add(carta);
 	}
 	/**
+	 * Remove uma carta da mão do jogador
+	 * @param c Carta a ser removida
+	 */
+	public void removeCarta(Carta c){
+		mao.remove(c);		
+	}
+	/**
 	 * @return o numero de territorios conquistados
 	 */
 	public int numeroDeConquistados(){
 		return conquistados.size();
 	}
 	/**
-	 * REVER
-	 * @param territorio territorio que o jogador conquistou
-	 * @return se a inserção foi concluida com exito ou não.	 * 
+	 * Adiciona território conquistado
+	 * @param territorio territorio que o jogador conquistou  
 	 */
-	public boolean adicionaConquistados(Territorio territorio){
-		return (conquistados.put(territorio.getNome(),territorio)!=null);
+	public void adicionaConquistados(Territorio territorio){
+		territorio.setDono(this);
+		conquistados.put(territorio.getNome(),territorio);		
 	}
+	
+	/**
+	 * Remove território da lista de conquistados
+	 * @param territorio
+	 */
+	public void removeConquistados(Territorio territorio){
+		conquistados.remove(territorio.getNome());		
+	}
+	
 			
 }

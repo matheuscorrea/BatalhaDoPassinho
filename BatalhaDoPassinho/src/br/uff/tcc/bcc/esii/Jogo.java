@@ -1,5 +1,7 @@
 package br.uff.tcc.bcc.esii;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
+import sun.security.util.Length;
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
@@ -470,5 +473,81 @@ public class Jogo {
 		}			
 		jogadores.add(jogador);
 		
+	}
+	
+	/**
+	 * Método rensponsável pelos ataques
+	 * @param atacante Território de onde se origina o ataque
+	 * @param defensor Território sendo atacado
+	 */
+	public boolean ataque(Territorio atacante, Territorio defensor){
+		//Pode atacar
+		int qtd_tropas_atacante = Math.min(3, atacante.getQuantidadeTropa());
+		int qtd_tropas_defensor = Math.min(3, defensor.getQuantidadeTropa());
+		List<Integer>dados_atacante = new LinkedList<>();;
+		List<Integer>dados_defensor = new LinkedList<>();
+		for(int i = 0; i < qtd_tropas_atacante; i++){
+			dados_atacante.add(dado());
+		}
+		for(int i = 0; i < qtd_tropas_defensor; i++){
+			dados_defensor.add(dado());
+		}
+		Collections.sort(dados_atacante, Collections.reverseOrder());
+		Collections.sort(dados_defensor, Collections.reverseOrder());
+		
+		
+		for(int i = 0; i < dados_atacante.size() && i < dados_defensor.size(); i++){
+			if(dados_atacante.get(i) > dados_defensor.get(i)){
+				defensor.setQuantidadeTropa(defensor.getQuantidadeTropa()-1);
+			}else{
+				atacante.setQuantidadeTropa(atacante.getQuantidadeTropa()-1);
+			}
+		}			
+		
+		
+		//Jogador da vez conquistou territorio defensor					
+		if(defensor.getQuantidadeTropa() == 0){
+			jogadorDominouTerritorio = true;
+			return true;						
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Método que passa o território defensor para o dono do território atacante
+	 * @param atacante território de onde se originou o ataque que dominou o território
+	 * @param defensor território dominado pelo ataque
+	 * @param qtd_tropas quantidade de tropas a serem passadas do territorio atacante para o território defensor. Máx. 3 tropas 
+	 */
+	public void dominarTerritorio(Territorio atacante, Territorio defensor, int qtd_tropas){
+		Jogador perdeuT = defensor.getDono();
+		Jogador ganhouT = atacante.getDono();
+		perdeuT.removeConquistados(defensor);
+		ganhouT.adicionaConquistados(defensor);		
+		defensor.setQuantidadeTropa(qtd_tropas);
+		atacante.setQuantidadeTropa(atacante.getQuantidadeTropa() - qtd_tropas);
+		
+	}
+	
+	/**
+	 * Método responsável por eliminar um jogador do jogo
+	 * @param jogador Jogador eliminado do jogo
+	 */
+	public void eliminaJogador(Jogador jogador){
+		jogadores.remove(jogador);	
+	}
+	
+	/**
+	 * Método responsável por passar as cartas de um jogador eliminado para o jogador que o eliminou
+	 * @param eliminado Jogador eliminado
+	 * @param atacante Jogador que eliminou
+	 */
+	public void passaCartas(Jogador eliminado, Jogador atacante){
+		List<Carta> cartas = eliminado.getMao();
+		for(Carta c : cartas){
+			atacante.adicionaCarta(c);
+			eliminado.removeCarta(c);
+		}
 	}
 }
