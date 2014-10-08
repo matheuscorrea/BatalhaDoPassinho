@@ -1,7 +1,9 @@
 package br.uff.tcc.bcc.visao;
 
+import br.uff.tcc.bcc.esii.modelo.Territorio;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 
 /**
  * Fábrica responsável por criar objetos do tipo  {@link Botao}
@@ -16,8 +18,13 @@ public class FabricaDeBotoes {
 	 * @param acao
 	 * @return
 	 */
-	public static Botao criaBotao( String id, String texto, EventHandler<ActionEvent> acao){
-		return new Botao(id,texto,acao);
+	public static Button criaBotao(String id, String texto, EventHandler<ActionEvent> acao){
+		Button botao = new Button();
+		botao.setId(id);
+		botao.setText(texto);
+		botao.setOnAction(acao);
+		return botao;
+		
 	}
 	
 	/**
@@ -27,12 +34,13 @@ public class FabricaDeBotoes {
 	 * @param acao
 	 * @return
 	 */
-	public static Botao criaBotaoTerritorio( String id, String texto, EventHandler<ActionEvent> acao, TipoDoTerritorio territorio, Integer coordenadaX, Integer coordenadaY){
-		Botao botao = new Botao(id,texto,acao);
+	public static Button criaBotaoTerritorio(Territorio territorio,EventHandler<ActionEvent> acao){
+		Button botao = criaBotao(territorio.getNome(),territorio.getQuantidadeTropa()+"",acao);
 		botao.setMaxHeight(20);
 		botao.setMaxWidth(30);
-		botao.setLayoutX(coordenadaX);
-		botao.setLayoutY(coordenadaY);
+		ConstanteDoTerritorio constanteDoTerritorio = ConstanteDoTerritorio.fromString(territorio.getNome());
+		botao.setLayoutX(constanteDoTerritorio.getX());
+		botao.setLayoutY(constanteDoTerritorio.getY());
 		return botao;
 	}
 	

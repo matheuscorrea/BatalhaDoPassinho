@@ -1,6 +1,5 @@
-package br.uff.tcc.bcc.esii;
+package br.uff.tcc.bcc.esii.modelo;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -10,15 +9,11 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
-import sun.security.util.Length;
-import br.uff.tcc.bcc.esii.modelo.Carta;
-import br.uff.tcc.bcc.esii.modelo.Jogador;
-import br.uff.tcc.bcc.esii.modelo.Mapa;
-import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.visao.ConstanteDoTerritorio;
 
 /**
  * @author Thadeu Jose
- * REVER
+ * 
  */
 public class Jogo {
 	/**
@@ -73,69 +68,60 @@ public class Jogo {
 	}
 	
 	/**
-	 * Inicializa o jogo.
-	 */
-	public void inicializa()
-	{
-		inicializaMapa();
-	}
-
-	/**
 	 * Inicializa o mapa.
 	 */
-	private void inicializaMapa() {
-		//TODO Adicionar a coordenada dos territórios
+	public void inicializaMapa() {
 		//Region Territorio Niteroi 
-		Territorio viradouro = new Territorio("Viradouro", "Niteroi");
-		Territorio waxy = new Territorio("Waxy", "Niteroi");
-		Territorio touche = new Territorio("Touché", "Niteroi");
-		Territorio saoFirmino = new Territorio("São Firmino", "Niteroi");
-		Territorio casa = new Territorio("Casa", "Niteroi");
-		Territorio flamboyant = new Territorio("Flamboyant", "Niteroi");
-		Territorio woods = new Territorio("Woods", "Niteroi");
+		Territorio viradouro = new Territorio(ConstanteDoTerritorio.VIRADOURO.toString(), "Niteroi");
+		Territorio waxy = new Territorio(ConstanteDoTerritorio.WAXY.toString(), "Niteroi");
+		Territorio touche = new Territorio(ConstanteDoTerritorio.TOUCHE.toString(), "Niteroi");
+		Territorio saoFirmino = new Territorio(ConstanteDoTerritorio.SAO_FIRMINO.toString(), "Niteroi");
+		Territorio casa = new Territorio(ConstanteDoTerritorio.CASA.toString(), "Niteroi");
+		Territorio flamboyant = new Territorio(ConstanteDoTerritorio.FLAMBOYANT.toString(), "Niteroi");
+		Territorio woods = new Territorio(ConstanteDoTerritorio.WOODS.toString(), "Niteroi");
 		//EndRegion Territorio Niteroi
 		
 		//Region Territorio Centro
-		Territorio fundicao = new Territorio("Fundição", "Centro");
-		Territorio circo = new Territorio("Circo", "Centro");
-		Territorio six = new Territorio("Six", "Centro");
-		Territorio laPaz = new Territorio("La Paz", "Centro");
-		Territorio laPassion = new Territorio("La Passion", "Centro");
+		Territorio fundicao = new Territorio(ConstanteDoTerritorio.FUNDICAO.toString(), "Centro");
+		Territorio circo = new Territorio(ConstanteDoTerritorio.CIRCO.toString(), "Centro");
+		Territorio six = new Territorio(ConstanteDoTerritorio.SIX.toString(), "Centro");
+		Territorio laPaz = new Territorio(ConstanteDoTerritorio.LA_PAZ.toString(), "Centro");
+		Territorio laPassion = new Territorio(ConstanteDoTerritorio.LA_PASSION.toString(), "Centro");
 		//EndRegion Territorio Centro
 		
 		//Region Territorio Zona Norte
-		Territorio olimpo = new Territorio("Olimpo", "Zona Norte");
-		Territorio provisorioClub = new Territorio("Provisório Club", "Zona Norte");
-		Territorio casteloBonsucesso = new Territorio("Castelo Bonsucesso", "Zona Norte");
-		Territorio raioDeSol = new Territorio("Raio de Sol", "Zona Norte");
-		Territorio simpatia = new Territorio("Simpatia", "Zona Norte");
-		Territorio imperator = new Territorio("Imperator", "Zona Norte");
-		Territorio openLounge = new Territorio("Open Lounge", "Zona Norte");
-		Territorio buxixo = new Territorio("Buxixo", "Zona Norte");
+		Territorio olimpo = new Territorio(ConstanteDoTerritorio.OLIMPO.toString(), "Zona Norte");
+		Territorio provisorioClub = new Territorio(ConstanteDoTerritorio.PROVISORIO_CLUB.toString(), "Zona Norte");
+		Territorio casteloBonsucesso = new Territorio(ConstanteDoTerritorio.CASTELO_BONSUCESSO.toString(), "Zona Norte");
+		Territorio raioDeSol = new Territorio(ConstanteDoTerritorio.RAIO_DE_SOL.toString(), "Zona Norte");
+		Territorio simpatia = new Territorio(ConstanteDoTerritorio.SIMPATIA.toString(), "Zona Norte");
+		Territorio imperator = new Territorio(ConstanteDoTerritorio.IMPERATOR.toString(), "Zona Norte");
+		Territorio openLounge = new Territorio(ConstanteDoTerritorio.OPEN_LOUNGE.toString(), "Zona Norte");
+		Territorio buxixo = new Territorio(ConstanteDoTerritorio.BUXIXO.toString(), "Zona Norte");
 		//EndRegion Territorio Zona Norte
 		
 		//Region Territorio Zona Sul
-		Territorio pista3 = new Territorio("Pista 3", "Zona Sul");
-		Territorio matriz = new Territorio("Matriz", "Zona Sul");
-		Territorio kalabria = new Territorio("Kalabria", "Zona Sul");
-		Territorio zozo = new Territorio("Zozo", "Zona Sul");
-		Territorio praia = new Territorio("Praia", "Zona Sul");
-		Territorio mariuzzin = new Territorio("Mariuzzin", "Zona Sul");
-		Territorio baronetti = new Territorio("Baronetti", "Zona Sul");
-		Territorio zeroZero = new Territorio("00", "Zona Sul");
+		Territorio pista3 = new Territorio(ConstanteDoTerritorio.PISTA_3.toString(), "Zona Sul");
+		Territorio matriz = new Territorio(ConstanteDoTerritorio.MATRIZ.toString(), "Zona Sul");
+		Territorio kalabria = new Territorio(ConstanteDoTerritorio.KALABRIA.toString(), "Zona Sul");
+		Territorio zozo = new Territorio(ConstanteDoTerritorio.ZOZO.toString(), "Zona Sul");
+		Territorio praia = new Territorio(ConstanteDoTerritorio.PRAIA.toString(), "Zona Sul");
+		Territorio mariuzzin = new Territorio(ConstanteDoTerritorio.MARIUZZIN.toString(), "Zona Sul");
+		Territorio baronetti = new Territorio(ConstanteDoTerritorio.BARONETTI.toString(), "Zona Sul");
+		Territorio zeroZero = new Territorio(ConstanteDoTerritorio.ZEROZERO.toString(), "Zona Sul");
 		//EndRegion Territorio Zona Sul
 		
 		//Region Territorio Zona Oeste
-		Territorio saoNunca = new Territorio("São Nunca", "Zona Oeste");
-		Territorio laIsla = new Territorio("La Isla", "Zona Oeste");
-		Territorio capitonne = new Territorio("Capitonné", "Zona Oeste");
-		Territorio kissEFly = new Territorio("Kiss e Fly", "Zona Oeste");
-		Territorio casteloDasPedras = new Territorio("Castelo das Pedras", "Zona Oeste");
-		Territorio zeroVinteUm = new Territorio("021", "Zona Oeste");
-		Territorio platinum = new Territorio("Platinum", "Zona Oeste");
-		Territorio nuth = new Territorio("Nuth", "Zona Oeste");
-		Territorio zax = new Territorio("Zax", "Zona Oeste");
-		Territorio barraMusic = new Territorio("Barra Music", "Zona Oeste");
+		Territorio saoNunca = new Territorio(ConstanteDoTerritorio.SAO_NUNCA.toString(), "Zona Oeste");
+		Territorio laIsla = new Territorio(ConstanteDoTerritorio.LA_ISLA.toString(), "Zona Oeste");
+		Territorio capitonne = new Territorio(ConstanteDoTerritorio.CAPITONNE.toString(), "Zona Oeste");
+		Territorio kissEFly = new Territorio(ConstanteDoTerritorio.KISS_E_FLY.toString(), "Zona Oeste");
+		Territorio casteloDasPedras = new Territorio(ConstanteDoTerritorio.CASTELO_DAS_PEDRAS.toString(), "Zona Oeste");
+		Territorio zeroVinteUm = new Territorio(ConstanteDoTerritorio.ZEROVINTEUM.toString(), "Zona Oeste");
+		Territorio platinum = new Territorio(ConstanteDoTerritorio.PLATINUM.toString(), "Zona Oeste");
+		Territorio nuth = new Territorio(ConstanteDoTerritorio.NUTH.toString(), "Zona Oeste");
+		Territorio zax = new Territorio(ConstanteDoTerritorio.ZAX.toString(), "Zona Oeste");
+		Territorio barraMusic = new Territorio(ConstanteDoTerritorio.BARRA_MUSIC.toString(), "Zona Oeste");
 		//EndRegion Territorio Zona Oeste
 				
 		//Region adicionaVizinhos Niteroi
@@ -341,6 +327,11 @@ public class Jogo {
 		mapa.adicionaTerritorio(barraMusic);
 		//EndRegion adicionaTerritorio Zona Oeste
 		
+	}
+	
+	public Mapa getMapa()
+	{
+		return mapa;
 	}
 	
 	/**

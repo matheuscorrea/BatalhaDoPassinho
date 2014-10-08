@@ -1,6 +1,5 @@
 package br.uff.tcc.bcc.visao.telas;
 
-import br.uff.tcc.bcc.visao.Botao;
 import br.uff.tcc.bcc.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.visao.eventos.EventoOpcoes;
@@ -8,6 +7,7 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -28,8 +28,8 @@ public class TelaInicial implements ITela {
 	@Override
 	public Scene getScene() {
 
-        Botao botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoNovoJogo());
-        Botao botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
+        Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoNovoJogo());
+        Button botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
         
         
         GridPane grid = new GridPane();

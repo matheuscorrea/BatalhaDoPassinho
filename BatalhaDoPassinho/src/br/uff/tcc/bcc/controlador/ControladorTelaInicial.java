@@ -1,7 +1,5 @@
 package br.uff.tcc.bcc.controlador;
 
-import br.uff.tcc.bcc.visao.Botao;
-import br.uff.tcc.bcc.visao.TipoDoTerritorio;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
@@ -30,7 +28,7 @@ public class ControladorTelaInicial  {
 	 * Recebe um botão e identifica qual ação tomar quando este for apertado
 	 * @param botao
 	 */
-	public void acao(Botao botao){
+	public void acao(Button botao){
     	if(botao.getId().equals("NOVO_JOGO")){
     		iniciaJogo();
     	}

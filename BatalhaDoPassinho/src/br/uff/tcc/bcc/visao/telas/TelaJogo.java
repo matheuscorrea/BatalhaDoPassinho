@@ -5,11 +5,12 @@ import java.util.List;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
-import br.uff.tcc.bcc.visao.Botao;
 import br.uff.tcc.bcc.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.visao.TipoDoTerritorio;
 import br.uff.tcc.bcc.visao.eventos.EventoTerritorio;
 
 public class TelaJogo implements ITela{
@@ -31,34 +32,23 @@ public class TelaJogo implements ITela{
 	 */
 	@Override
 	public Scene getScene() {
-//		Botao x10y30 = FabricaDeBotoes.criaBotao(TipoDoTerritorio.nome1.name(), "25",
-//				new EventoTerritorio());
-//		x10y30.setMaxHeight(20);
-//		x10y30.setMaxWidth(30);
-//		x10y30.setLayoutX(10);
-//		x10y30.setLayoutY(30);
-//		Botao x0100y0 = FabricaDeBotoes.criaBotao("JOGO", "JOGO",
-//				new EventoTerritorio());
-//		x0100y0.setLayoutX(100);
-//		x0100y0.setLayoutY(0);
-//		Botao x200y200 = FabricaDeBotoes.criaBotao("JOGO", "JOGO",
-//				new EventoTerritorio());
-//		x200y200.setLayoutX(200);
-//		x200y200.setLayoutY(200);
+	
+		final String imagemURL = "imagens/mapa.jpg";
 		
-		List<Botao> listaDeBotoesTerritorios = new ArrayList<Botao>();
+		Image image = new Image(imagemURL);
+		ImageView imageView = new ImageView();
+		imageView.setImage(image);
+		
+		List<Button> listaDeBotoesTerritorios = new ArrayList<Button>();
 		for(Territorio territorio : mapa.getTerritorios()){
-			listaDeBotoesTerritorios.add(
-			FabricaDeBotoes.criaBotaoTerritorio(territorio.getNome(), 
-					""+territorio.getQuantidadeTropa(), new EventoTerritorio(),TipoDoTerritorio.nome1, 
-					territorio.getCoordenadaX(),territorio.getCoordenadaY()));
-
+			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(territorio,new EventoTerritorio()));
 		}
 		
-		Group grupo = new Group();		
+		Group grupo = new Group();
+		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(listaDeBotoesTerritorios);
 
-		return new Scene(grupo, 500, 500);	
+		return new Scene(grupo, 1123, 554);	
 	}
 
 }

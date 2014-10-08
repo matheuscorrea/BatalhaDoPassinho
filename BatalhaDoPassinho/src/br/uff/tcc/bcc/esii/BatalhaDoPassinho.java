@@ -12,10 +12,10 @@ public class BatalhaDoPassinho extends Application {
 	}
 	
 	@Override
-	public void start(Stage arg0) throws Exception {
-		GerenciadorDeTelas.getInstancia().setPrimaryStage(arg0);
+	public void start(Stage stage) throws Exception {
+		GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.inicio);
-		arg0.show();
+		stage.show();
 	}
 	
 	public static void main(String[] args) {
