@@ -67,6 +67,211 @@ public class Jogo {
 		return random.nextInt(6)+1; 
 	}
 	
+	public Mapa getMapa()
+	{
+		return mapa;
+	}
+	
+	/**
+	 * Metodo que calcula a quantidade total de tropas a serem ganhas
+	 * @param jogador Jogador que vai ganhar as tropas
+	 * @return inteiro que representa todas as tropas que vão ser ganhas
+	 */
+	public int ganhaTropa(Jogador jogador)	{
+		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);
+	}
+
+	/**
+	 * Metodo que calcula a quantidade de tropas a serem ganhas por ter dominio de um ou mais continente
+	 * @param jogador que vai ganhar as tropas
+	 * @return inteiro que representa as tropas que vão ser ganhas por ter dominio de um ou mais continente
+	 */
+	private int ganhaBonusTerritorio(Jogador jogador) {
+		int quantBoatesPorContinente[]=new int[5];
+		int resposta=0,bonusZonaNorte=1,bonusZonaSul=2,bonusZonaOeste=3,bonusCentro=4,bonusNiteroi=5;
+		for(Map.Entry<String, Territorio> entry : jogador.getConquistados().entrySet()){
+			Territorio boate = entry.getValue();
+			if(boate.getContinente()=="Zona Norte"){
+				quantBoatesPorContinente[0]++;
+			}
+			if(boate.getContinente()=="Zona Sul"){
+				quantBoatesPorContinente[1]++;
+			}
+			if(boate.getContinente()=="Zona Oeste"){
+				quantBoatesPorContinente[2]++;
+			}
+			if(boate.getContinente()=="Centro"){
+				quantBoatesPorContinente[3]++;
+			}
+			if(boate.getContinente()=="Niteroi"){
+				quantBoatesPorContinente[4]++;
+			}
+		}
+		if(quantBoatesPorContinente[0]==8)
+		{
+			resposta+=bonusZonaNorte;
+		}
+		if(quantBoatesPorContinente[1]==8)
+		{
+			resposta+=bonusZonaSul;
+		}
+		if(quantBoatesPorContinente[2]==10)
+		{
+			resposta+=bonusZonaOeste;
+		}
+		if(quantBoatesPorContinente[3]==5)
+		{
+			resposta+=bonusCentro;
+		}
+		if(quantBoatesPorContinente[4]==7)
+		{
+			resposta+=bonusNiteroi;
+		}
+		return resposta;
+	}
+	
+	/**
+	 * Adiciona um jogador a fila de espera
+	 * @param jogador que vai ser adicionado ao final da fila
+	 */
+	public void adicionaJogador(Jogador jogador){
+		jogadores.add(jogador);
+	}
+	
+	public Jogador getJogadorDaVez(){
+		return jogadores.peek();
+	}
+	
+	/**
+	 * Redistribui as tropas entre os paises do jogador.
+	 * Os paises tem que ser vizinhos 
+	 * So sai uma vez o exercito de um pais 
+	 * @param jogador Jogador que redistribuira as tropas
+	 */
+	public void redistribuiTropa(Jogador jogador){
+		Map<String, Territorio> mapa=jogador.getConquistados();
+		Set<Territorio> jaUsados = new HashSet<>();
+		
+		//Função que pega o nome do territorio da visão
+		String nomeDoTerritorioOrigem = "";
+		Territorio territorioOrigem=mapa.get(nomeDoTerritorioOrigem);
+	
+		//Função que pega o nome do territorio da visão
+		String nomeDoTerritorioDestino = "";
+		Territorio territorioDestino=mapa.get(nomeDoTerritorioDestino);
+	
+		if(territorioOrigem.getVizinhos().contains(territorioDestino)){
+			if(!jaUsados.contains(territorioOrigem)){
+				//Função que pega a quantidade de tropas da visão
+				int quantidadeDeTropas=0;
+				if(territorioOrigem.getQuantidadeTropa()>=quantidadeDeTropas+1){
+					territorioDestino.setQuantidadeTropa(territorioDestino.getQuantidadeTropa()+quantidadeDeTropas);
+					territorioOrigem.setQuantidadeTropa(territorioOrigem.getQuantidadeTropa()-quantidadeDeTropas);
+					jaUsados.add(territorioOrigem);
+				}else{
+					//ERRO:Quantidade de tropas maior que o permitido
+				}				
+			}else{
+				//ERRO:Ja partiu tropas desse territorio
+			}
+		}else{
+			//ERRO:Territorios não são vizinhos
+		}
+	}
+	
+	/**
+	 * Metodo responsavel pela distribuição das tropas
+	 * @param nometerritorio  Nome do Territorio que vai ser acrescentado as tropas
+	 * @param tropas          Numero de tropas que serão acrescentados
+	 */
+	public void distribuirTropas(String nomeTerritorio, int tropas){
+		Territorio territorio = mapa.getTerritorio(nomeTerritorio);
+		territorio.setQuantidadeTropa(territorio.getQuantidadeTropa()+tropas);		
+	}
+	
+	public int getTropas(String nomeTerritorio) {
+		Territorio territorio = mapa.getTerritorio(nomeTerritorio);
+		return territorio.getQuantidadeTropa();
+	}
+	
+	
+	/**
+	 * Método rensponsável pelos ataques
+	 * @param atacante Território de onde se origina o ataque
+	 * @param defensor Território sendo atacado
+	 * @return True se o territorio atacante conseguiu destruir todas as tropas do territorio atacante,falso senão.
+	 */
+	public boolean ataque(Territorio atacante, Territorio defensor){
+		//Pode atacar
+		int qtd_tropas_atacante = Math.min(3, atacante.getQuantidadeTropa());
+		int qtd_tropas_defensor = Math.min(3, defensor.getQuantidadeTropa());
+		List<Integer>dados_atacante = new LinkedList<>();;
+		List<Integer>dados_defensor = new LinkedList<>();
+		for(int i = 0; i < qtd_tropas_atacante; i++){
+			dados_atacante.add(dado());
+		}
+		for(int i = 0; i < qtd_tropas_defensor; i++){
+			dados_defensor.add(dado());
+		}
+		Collections.sort(dados_atacante, Collections.reverseOrder());
+		Collections.sort(dados_defensor, Collections.reverseOrder());
+		
+		
+		for(int i = 0; i < dados_atacante.size() && i < dados_defensor.size(); i++){
+			if(dados_atacante.get(i) > dados_defensor.get(i)){
+				defensor.setQuantidadeTropa(defensor.getQuantidadeTropa()-1);
+			}else{
+				atacante.setQuantidadeTropa(atacante.getQuantidadeTropa()-1);
+			}
+		}			
+		
+		
+		//Jogador da vez conquistou territorio defensor					
+		if(defensor.getQuantidadeTropa() == 0){
+			jogadorDominouTerritorio = true;
+			return true;						
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * Método que passa o território defensor para o dono do território atacante
+	 * @param atacante território de onde se originou o ataque que dominou o território
+	 * @param defensor território dominado pelo ataque
+	 * @param qtd_tropas quantidade de tropas a serem passadas do territorio atacante para o território defensor. Máx. 3 tropas 
+	 */
+	public void dominarTerritorio(Territorio atacante, Territorio defensor, int qtd_tropas){
+		Jogador perdeuT = defensor.getDono();
+		Jogador ganhouT = atacante.getDono();
+		perdeuT.removeConquistados(defensor);
+		ganhouT.adicionaConquistados(defensor);		
+		defensor.setQuantidadeTropa(qtd_tropas);
+		atacante.setQuantidadeTropa(atacante.getQuantidadeTropa() - qtd_tropas);
+		
+	}
+	
+	/**
+	 * Método responsável por eliminar um jogador do jogo
+	 * @param jogador Jogador eliminado do jogo
+	 */
+	public void eliminaJogador(Jogador jogador){
+		jogadores.remove(jogador);	
+	}
+	
+	/**
+	 * Método responsável por passar as cartas de um jogador eliminado para o jogador que o eliminou
+	 * @param eliminado Jogador eliminado
+	 * @param atacante Jogador que eliminou
+	 */
+	public void passaCartas(Jogador eliminado, Jogador atacante){
+		List<Carta> cartas = eliminado.getMao();
+		for(Carta c : cartas){
+			atacante.adicionaCarta(c);
+			eliminado.removeCarta(c);
+		}
+	}
+	
 	/**
 	 * Inicializa o mapa.
 	 */
@@ -328,217 +533,5 @@ public class Jogo {
 		//EndRegion adicionaTerritorio Zona Oeste
 		
 	}
-	
-	public Mapa getMapa()
-	{
-		return mapa;
-	}
-	
-	/**
-	 * Metodo que calcula a quantidade total de tropas a serem ganhas
-	 * @param jogador Jogador que vai ganhar as tropas
-	 * @return inteiro que representa todas as tropas que vão ser ganhas
-	 */
-	public int ganhaTropa(Jogador jogador)	{
-		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);
-	}
 
-	/**
-	 * Metodo que calcula a quantidade de tropas a serem ganhas por ter dominio de um ou mais continente
-	 * @param jogador que vai ganhar as tropas
-	 * @return inteiro que representa as tropas que vão ser ganhas por ter dominio de um ou mais continente
-	 */
-	private int ganhaBonusTerritorio(Jogador jogador) {
-		int quantBoatesPorContinente[]=new int[5];
-		int resposta=0,bonusZonaNorte=1,bonusZonaSul=2,bonusZonaOeste=3,bonusCentro=4,bonusNiteroi=5;
-		for(Map.Entry<String, Territorio> entry : jogador.getConquistados().entrySet()){
-			Territorio boate = entry.getValue();
-			if(boate.getContinente()=="Zona Norte"){
-				quantBoatesPorContinente[0]++;
-			}
-			if(boate.getContinente()=="Zona Sul"){
-				quantBoatesPorContinente[1]++;
-			}
-			if(boate.getContinente()=="Zona Oeste"){
-				quantBoatesPorContinente[2]++;
-			}
-			if(boate.getContinente()=="Centro"){
-				quantBoatesPorContinente[3]++;
-			}
-			if(boate.getContinente()=="Niteroi"){
-				quantBoatesPorContinente[4]++;
-			}
-		}
-		if(quantBoatesPorContinente[0]==8)
-		{
-			resposta+=bonusZonaNorte;
-		}
-		if(quantBoatesPorContinente[1]==8)
-		{
-			resposta+=bonusZonaSul;
-		}
-		if(quantBoatesPorContinente[2]==10)
-		{
-			resposta+=bonusZonaOeste;
-		}
-		if(quantBoatesPorContinente[3]==5)
-		{
-			resposta+=bonusCentro;
-		}
-		if(quantBoatesPorContinente[4]==7)
-		{
-			resposta+=bonusNiteroi;
-		}
-		return resposta;
-	}
-	
-	/**
-	 * Adiciona um jogador a fila de espera
-	 * @param jogador que vai ser adicionado ao final da fila
-	 */
-	public void adicionaJogador(Jogador jogador){
-		jogadores.add(jogador);
-	}
-	
-	/**
-	 * Redistribui as tropas entre os paises do jogador.
-	 * Os paises tem que ser vizinhos 
-	 * So sai uma vez o exercito de um pais 
-	 * @param jogador Jogador que redistribuira as tropas
-	 */
-	public void redistribuiTropa(Jogador jogador){
-		Map<String, Territorio> mapa=jogador.getConquistados();
-		Set<Territorio> jaUsados = new HashSet<>();
-		
-		//Função que pega o nome do territorio da visão
-		String nomeDoTerritorioOrigem = "";
-		Territorio territorioOrigem=mapa.get(nomeDoTerritorioOrigem);
-	
-		//Função que pega o nome do territorio da visão
-		String nomeDoTerritorioDestino = "";
-		Territorio territorioDestino=mapa.get(nomeDoTerritorioDestino);
-	
-		if(territorioOrigem.getVizinhos().contains(territorioDestino)){
-			if(!jaUsados.contains(territorioOrigem)){
-				//Função que pega a quantidade de tropas da visão
-				int quantidadeDeTropas=0;
-				if(territorioOrigem.getQuantidadeTropa()>=quantidadeDeTropas+1){
-					territorioDestino.setQuantidadeTropa(territorioDestino.getQuantidadeTropa()+quantidadeDeTropas);
-					territorioOrigem.setQuantidadeTropa(territorioOrigem.getQuantidadeTropa()-quantidadeDeTropas);
-					jaUsados.add(territorioOrigem);
-				}else{
-					//ERRO:Quantidade de tropas maior que o permitido
-				}				
-			}else{
-				//ERRO:Ja partiu tropas desse territorio
-			}
-		}else{
-			//ERRO:Territorios não são vizinhos
-		}
-	}
-	
-	/**
-	 *  Metodo responsavel pela administração do jogo
-	 */
-	public void joga(){
-		Jogador jogador = jogadores.poll();
-		Map<String, Territorio> mapa=jogador.getConquistados();
-		if(faseAtual==TipoFase.FASE_1){
-			int quantidadeDeTropas=ganhaTropa(jogador);
-			while(quantidadeDeTropas>0){
-				//Função que pega o nome do territorio da visão
-				String nomeDoTerritorio = "";
-				Territorio territorio=mapa.get(nomeDoTerritorio);
-				
-				if(territorio!=null){
-					territorio.setQuantidadeTropa(territorio.getQuantidadeTropa()+1);
-					quantidadeDeTropas--;
-				}
-				else
-				{
-					//ERRO:Territorio não encontrado
-				}
-				
-				//Atualiza a visão
-			}
-		}			
-		jogadores.add(jogador);
-		
-	}
-	
-	/**
-	 * Método rensponsável pelos ataques
-	 * @param atacante Território de onde se origina o ataque
-	 * @param defensor Território sendo atacado
-	 */
-	public boolean ataque(Territorio atacante, Territorio defensor){
-		//Pode atacar
-		int qtd_tropas_atacante = Math.min(3, atacante.getQuantidadeTropa());
-		int qtd_tropas_defensor = Math.min(3, defensor.getQuantidadeTropa());
-		List<Integer>dados_atacante = new LinkedList<>();;
-		List<Integer>dados_defensor = new LinkedList<>();
-		for(int i = 0; i < qtd_tropas_atacante; i++){
-			dados_atacante.add(dado());
-		}
-		for(int i = 0; i < qtd_tropas_defensor; i++){
-			dados_defensor.add(dado());
-		}
-		Collections.sort(dados_atacante, Collections.reverseOrder());
-		Collections.sort(dados_defensor, Collections.reverseOrder());
-		
-		
-		for(int i = 0; i < dados_atacante.size() && i < dados_defensor.size(); i++){
-			if(dados_atacante.get(i) > dados_defensor.get(i)){
-				defensor.setQuantidadeTropa(defensor.getQuantidadeTropa()-1);
-			}else{
-				atacante.setQuantidadeTropa(atacante.getQuantidadeTropa()-1);
-			}
-		}			
-		
-		
-		//Jogador da vez conquistou territorio defensor					
-		if(defensor.getQuantidadeTropa() == 0){
-			jogadorDominouTerritorio = true;
-			return true;						
-		}else{
-			return false;
-		}
-	}
-	
-	/**
-	 * Método que passa o território defensor para o dono do território atacante
-	 * @param atacante território de onde se originou o ataque que dominou o território
-	 * @param defensor território dominado pelo ataque
-	 * @param qtd_tropas quantidade de tropas a serem passadas do territorio atacante para o território defensor. Máx. 3 tropas 
-	 */
-	public void dominarTerritorio(Territorio atacante, Territorio defensor, int qtd_tropas){
-		Jogador perdeuT = defensor.getDono();
-		Jogador ganhouT = atacante.getDono();
-		perdeuT.removeConquistados(defensor);
-		ganhouT.adicionaConquistados(defensor);		
-		defensor.setQuantidadeTropa(qtd_tropas);
-		atacante.setQuantidadeTropa(atacante.getQuantidadeTropa() - qtd_tropas);
-		
-	}
-	
-	/**
-	 * Método responsável por eliminar um jogador do jogo
-	 * @param jogador Jogador eliminado do jogo
-	 */
-	public void eliminaJogador(Jogador jogador){
-		jogadores.remove(jogador);	
-	}
-	
-	/**
-	 * Método responsável por passar as cartas de um jogador eliminado para o jogador que o eliminou
-	 * @param eliminado Jogador eliminado
-	 * @param atacante Jogador que eliminou
-	 */
-	public void passaCartas(Jogador eliminado, Jogador atacante){
-		List<Carta> cartas = eliminado.getMao();
-		for(Carta c : cartas){
-			atacante.adicionaCarta(c);
-			eliminado.removeCarta(c);
-		}
-	}
 }

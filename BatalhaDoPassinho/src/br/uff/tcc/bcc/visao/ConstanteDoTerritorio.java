@@ -49,8 +49,8 @@ public enum ConstanteDoTerritorio {
 	CASTELO_DAS_PEDRAS("Castelo das Pedras",0,0),
 	ZEROVINTEUM("021",0,0),
 	PLATINUM("Platinum",0,0),
-	NUTH("Nuth",0,0),
-	ZAX("Zax",0,0),
+	NUTH("Nuth",0,300),
+	ZAX("Zax",0,400),
 	BARRA_MUSIC("Barra Music",0,500);
 
 	private final String nome;
