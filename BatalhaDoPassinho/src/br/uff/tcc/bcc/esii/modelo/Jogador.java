@@ -99,5 +99,8 @@ public class Jogador {
 		conquistados.remove(territorio.getNome());		
 	}
 	
+	public boolean conquistouTerritorio(String territorio){
+		return conquistados.containsKey(territorio);
+	}
 			
 }
