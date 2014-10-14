@@ -1,0 +1,280 @@
+1.1.1 IDE
+	Descrição:
+		Decidir a IDE utilizada
+	Estimativa: 1/2 hora
+
+1.1.2 Framework Gráfico
+	Descrição: 
+		Pesquisar framework gráfico e decidir qual será utilizado
+	Estimativa:	2 horas
+
+1.1.3 Ferramenta de Versionamento
+	Descrição:
+		Pesquisar e decidir a ferramenta de Versionamento
+	Estimativa:	1/2 hora
+
+1.1.4 Linguagem
+	Descrição:
+		Pesquisar e decidir a linguagem a ser implementado o projeto
+	Estimativa:	1/2 Hora
+
+1.1.5 Tutorial Trello
+	Descrição:
+		Pesquisar tutorial de utilização da ferramenta
+	Estimativa:	1 Hora
+	
+1.2.1 User Stories
+	Descrição:
+		Descrever as atividades definidas no WBS
+	Estimativa: 2 Horas
+
+1.2.2 JavaDoc
+	Descrição:
+		Conferir se todas classes estão utilizando Javadoc em todas classes e métodos.
+	Estimativa: 1 Hora
+
+1.2.3 Manual
+	Descrição:
+		Escrever o manual de utilização da aplicação
+	Estimativa: 3 Horas
+	
+1.2.4 Diagrama de classes
+	Descrição:
+		Fazer o diagrama UML contemplando todas as classes do projeto
+	Estimativa: 1 Hora
+
+1.2.5 Cronograma
+	Descrição:
+		Fazer o cronograma do projeto
+	Estimativa: 2 Horas
+
+1.2.6 Análise de riscos
+	Descrição
+		Fazer a análise de riscos
+	Estimativa: 2 Horas
+
+1.2.7 Orçamento
+	Descrição
+		Fazer o orçamento do projeto
+	Estimativa: 1 Hora
+
+1.2.8 Google Docs + agenda
+	Descrição
+		Criar Google Docs e Google Agenda do projeto.
+	Estimativa: 1 Hora
+	
+1.3 Reuniões (X vezes)
+	Descrição:
+		Reuniões realizadas semanalmente
+	Estimativa: 2 Horas
+
+1.4 Seminários (3 vezes)
+	Descrição:
+		Preparar a apresentação do andamento do projeto para o professor
+	Estimativa: 2 horas e meia 
+		
+1.5 Criar projeto no Git
+	Descrição:
+		Criar projeto no Git e achar tutorial
+	Estimativa: 1 Hora
+	
+1.6.1 Atualizar artefatos de gerenciamento do projeto
+	Descrição:
+		Atualizar tarefas, estimativas e cronograma
+	Estimativa: 4 Horas
+	
+1.6.2 Atualizar ferramenta de Versionamento
+	Descrição:
+		Trocar Scrummy por Trello
+	Estimativa: 2 Horas ?
+
+1.7.1 Atualizar Artefatos - Alessandro
+	Descrição:
+		Atualizar tarefas, estimativas e cronograma
+	Estimativa: 3 Horas
+	
+2.1 Mapa
+	Descrição:
+		Montar o Design do Mapa
+	Estimativa: Tomas
+
+2.2.1 Telas design
+	Descrição:
+		Organizar quais as telas do jogo, como ficarão os botões organizados nas fases do jogo
+	Estimativa: 4 Horas
+
+2.2.2 Telas implementação
+	Descrição:
+		Implementar as telas do jogo
+	Estimativa: 5 Horas
+	
+2.3.1 Botões design
+	Descrição:
+		Montar o Design dos botões
+	Estimativa: 2 Horas
+	
+2.4 Peões
+	Descrição:
+		Montar o design dos peões
+	Estimativa: 1 Hora
+
+2.5 Dado
+	Descrição:
+		Montar o design dos dados
+	Estimativa: 1/2 Hora
+
+3.1 Implementar classes da UML
+	Descrição:
+		Implementar na aplicação as classes do diagrama UML inicial
+	Estimativa: 1 Hora
+
+3.2 Inicializar mapa/territórios/Objetivos
+	Descrição:
+		Escrever no código os territórios com todos seus atributos, relacionamentos e os objetivos
+	Estimativa: 4 Horas
+
+3.3.1 Definir objetivos
+	Descrição:
+		Definir quais são os objetivos do jogo
+	Estimativa: 1 Hora
+
+3.3.2 Distribuir objetivos e verificar se está completo
+	Descrição:
+		Realizar a distribuição de objetivos entre os jogadores no início do jogo e tratar a verificação 
+	Estimativa: 1 Hora ??
+
+3.4 Distribuir Territórios
+	Descrição:
+		Realizar a distribuição de territórios entre os jogadores no início do jogo, inserindo uma tropa em cada território 
+	Estimativa: 3 Horas ?
+
+3.5.1 Distribuir Tropas
+	Descrição:
+		Calcular quantas tropas devem ser distribuidas para cada jogador (metade dos territórios + bonus de continente), 
+		Dar a opção de alocar as tropas nos próprios territórios 
+	Estimativa: 2 Horas e meia ??
+	
+3.5.2 Trocar Cartas
+	Descrição:
+		Verificar se o jogador pode trocar as cartas que tem na mão, 
+		Realizar a troca (remover as cartas, disponibilizar tropas)
+	Estimativa: 2 Horas e meia ?
+	
+3.6.1 Ataque
+	Descrição:
+		Selecionar um território (com mais de 1 tropa) e poder atacar os vizinhos inimigos. 
+		Calcular o resultado dos dados, retirar tropas dos territórios.
+		Dominar o território.
+	Estimativa: 5 Horas ?
+
+3.7.1 Receber carta
+	Descrição:
+		Caso tenha dominado pelo menos um território na fase 2, receber uma carta do monte.
+	Estimativa: 1 Hora ?
+
+3.7.2 Remanejar tropas
+	Descrição:
+		Mover as tropas dos territórios, podendo mover tropas de um território apenas uma vez
+	Estimativa: 2 Horas
+	
+3.7.2 Adaptar remanejar tropas para interface
+	Descrição:
+		Adaptar o algoritmo para o modelo utilizado
+	Estimativa: 3 Horas ??
+		
+3.8 Rodada 0
+	Descrição:
+		Implementar as particularidades da rodada 0 (Todos jogadores jogam somente a fase 1, depois todos jogadores jogam a fase 2 e 3)
+	Estimativa: 3 Horas ?
+
+3.9 Colocar territórios no mapa/código
+	Descrição:
+		Passar os territórios para o código e mapear
+	Estmativa: 3 Horas
+
+3.10 Criar Diagrama de Estados
+	Descrição:
+		Pensar nas ações que o jogo vai tomar no decorrer das rodadas
+	Estimativa: 2 Horas
+
+3.11.1 Revisão de código (bruninha-thadeu)
+	Descrição:
+		Revisão
+	Estimativa: 1 Horas
+
+3.12.1 Preparar Ambiente Dev Tomas
+	Descrição:
+		Preparar ambiente de desenvolvimento
+	Estimativa: 1 Horas
+	
+3.13 Salvar Jogo
+	Descrição:
+		Implementar a opção de salvar o jogo
+	Estimativa: ?? Horas
+	
+3.14.1 Pair Programing - Thadeu (com Bruna)
+	Descrição:
+		Programação em dupla com Thadeu e Bruna
+	Estimativa: 2 Horas
+
+(3.15 Implementar telas intermediarias)
+3.15.1 Escolher personagem
+	Descrição:
+		Implementar tela de escolha de MC e cor
+	Estimativa: ?? Horas
+
+3.15.2 Opções
+	Descrição:
+		Implementar tela de opções
+	Estimativa: ?? Horas
+	
+3.15.3 Mostrar dados (ataque)
+	Descrição:
+		Implementar tela de mostrar dados
+	Estimativa: ?? Horas
+
+3.15.4 Pausa
+	Descrição:
+		Implementar tela de pausa
+	Estimativa: ?? Horas
+	
+3.16.Implementar Design ao jogo
+	Descrição:
+		Adaptar o jogo com o design feito (incluindo procurar como fazer)
+	Estimativa: ?? Horas
+	
+4.1 Pesquisa de algoritmos IA
+	Descrição:
+		Pesquisar algoritmos a serem utilizados para a IA do jogo
+	Estimativa: 4 Horas
+
+4.2 Implementar heurísticas IA
+	Descrição:
+		Implementar heurísticas pesquisadas
+	Estimativa: ??4 Horas
+
+4.3 Associar IA com jogo
+	Descrição:
+		Pegar as heurísticas e botar no jogo
+	Estimativa: ?? Horas
+
+	
+5.1 Definição dos MC's
+	Descrição:
+		Definir os MC's que serão disponibilizados para o jogo
+	Estimativa: 1/2 Hora
+	
+5.2 Busca das músicas
+	Descrição:
+		Buscar as músicas que serão utilizadas no jogo
+	Estimativa: 2 Horas
+	
+5.3 Tocar Músicas
+	Descrição:
+		Verificar como implomentar musicas na aplicação
+	Estimativa 4 Horas
+
+5.4 Todas musicas tocando
+	Descrição:
+		Implementar todas musicas
+	Estimativa ? Horas
