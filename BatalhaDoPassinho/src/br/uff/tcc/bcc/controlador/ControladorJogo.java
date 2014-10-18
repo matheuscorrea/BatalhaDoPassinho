@@ -5,7 +5,6 @@ import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
-import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.visao.ConstanteDoTerritorio;
 import br.uff.tcc.bcc.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.visao.GerenciadorDeTelas.TipoDaTela;
@@ -27,31 +26,30 @@ public class ControladorJogo {
 		return controlador;
 	}
 
-	public void acao(Button botao) {
+	public void acaoTerritorio(Button botao) {
 		System.out.println(botao.getId());
 		if(jogo.faseAtual==TipoFase.FASE_1){
 			Jogador jogador = jogo.getJogadorDaVez();
 			if(jogador.conquistouTerritorio(botao.getId())){
-				int quantidadeDeTropas=jogo.ganhaTropa(jogador);
-				while(quantidadeDeTropas>0){				
-					
-						jogo.distribuirTropas(botao.getId(),1);
-						quantidadeDeTropas--;
-					
+				if(jogo.temTropas()){				
+					jogo.distribuirTropas(botao.getId(),1);
+					jogo.decrementaTropas();
 					//Atualiza a visão
 					botao.setText(jogo.getTropas(botao.getId())+"");
-					System.out.println(quantidadeDeTropas);
+					System.out.println(jogo.getQuantidadeDeTropas());
 				}
 			}else{
 				//ERRO:Territorio não encontrado
 			}
-		}
-		
+		}		
+	}	
+	
+	public void acaoIniciaTurno(){
+		jogo.proximaRodada();
 	}
 	
 	public void iniciaPartida(){
-		jogo.inicializaMapa();
-		
+				
 		Mapa mapa = jogo.getMapa();
 		
 		Jogador jogador =new Jogador("Catra","Preto");
@@ -63,13 +61,14 @@ public class ControladorJogo {
 		
 		jogo.adicionaJogador(jogador);
 		
+		jogo.calculaTropa(jogador);
+		
 		//Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.jogo);
 	}
 	
 	public Mapa getMapa(){
-		return jogo.getMapa();
-		
+		return jogo.getMapa();		
 	}
 
 }

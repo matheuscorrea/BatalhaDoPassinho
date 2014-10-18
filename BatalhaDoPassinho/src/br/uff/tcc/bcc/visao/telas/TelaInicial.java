@@ -3,7 +3,6 @@ package br.uff.tcc.bcc.visao.telas;
 import br.uff.tcc.bcc.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.visao.eventos.EventoOpcoes;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

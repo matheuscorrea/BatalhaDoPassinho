@@ -19,27 +19,31 @@ public class Jogo {
 	/**
 	 * Numero da rodada atual
 	 */
-	int rodada;
+	private int rodada;
 	/**
 	 * Jogadores que estao atualmente jogando
 	 */
-	Queue<Jogador> jogadores;
+	private Queue<Jogador> jogadores;
 	/**
 	 * Valor da troca de cartas
 	 */
-	int valorTrocaAtual;
+	private int valorTrocaAtual;
 	/**
 	 * Se o jogador dominou territorio essa rodada
 	 */
-	boolean jogadorDominouTerritorio;
+	private boolean jogadorDominouTerritorio;
+	/**
+	 *Quantidade de tropas ganhas nesse turno 
+	 */
+	private int quantidadeDeTropas;
 	/**
 	 * Mapa com todos os territorios do jogo
 	 */
-	Mapa mapa;
+	private Mapa mapa;
 	/**
 	 * Deck das carta do jogo
 	 */
-	List<Carta> deck;
+	private List<Carta> deck;
 	/**
 	 * Todos os tipos de fase que um jogo pode ter
 	 */
@@ -48,7 +52,6 @@ public class Jogo {
 	 * Marcador da fase atual
 	 */
 	public TipoFase faseAtual; 
-		
 	/**
 	 * Construtor da classe jogo
 	 */
@@ -57,10 +60,26 @@ public class Jogo {
 		faseAtual = TipoFase.FASE_1;
 		jogadores=new LinkedList<Jogador>();
 		mapa=new Mapa();
+		inicializaMapa();
 	}
 
 	/**
-	 * @return um inteiro de 1 a 6 correspondente ao lançamento de um dado
+	 * Inicia uma nova rodada
+	 */
+	public void proximaRodada()
+	{
+		rodada++;
+		faseAtual = TipoFase.FASE_1;
+		jogadorDominouTerritorio=false;
+		Jogador jogador = jogadores.poll();
+		calculaTropa(jogador);
+		jogadores.add(jogador);
+		
+	}
+	
+	/**
+	 * Metodo que simula o lançamento de um dado
+	 * @return um inteiro de 1 a 6 
 	 */
 	public int dado(){
 		Random random = new Random();
@@ -77,7 +96,7 @@ public class Jogo {
 	 * @param jogador Jogador que vai ganhar as tropas
 	 * @return inteiro que representa todas as tropas que vão ser ganhas
 	 */
-	public int ganhaTropa(Jogador jogador)	{
+	private int ganhaTropa(Jogador jogador)	{
 		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);
 	}
 
@@ -224,8 +243,7 @@ public class Jogo {
 				atacante.setQuantidadeTropa(atacante.getQuantidadeTropa()-1);
 			}
 		}			
-		
-		
+				
 		//Jogador da vez conquistou territorio defensor					
 		if(defensor.getQuantidadeTropa() == 0){
 			jogadorDominouTerritorio = true;
@@ -250,7 +268,6 @@ public class Jogo {
 		atacante.setQuantidadeTropa(atacante.getQuantidadeTropa() - qtd_tropas);
 		
 	}
-	
 	/**
 	 * Método responsável por eliminar um jogador do jogo
 	 * @param jogador Jogador eliminado do jogo
@@ -258,7 +275,6 @@ public class Jogo {
 	public void eliminaJogador(Jogador jogador){
 		jogadores.remove(jogador);	
 	}
-	
 	/**
 	 * Método responsável por passar as cartas de um jogador eliminado para o jogador que o eliminou
 	 * @param eliminado Jogador eliminado
@@ -270,6 +286,34 @@ public class Jogo {
 			atacante.adicionaCarta(c);
 			eliminado.removeCarta(c);
 		}
+	}
+	/**
+	 * Metodo que calcula quantidade de tropas que o jogador da vez vai ganhar
+	 * @param jogador Jogador da vez
+	 */
+	public void calculaTropa(Jogador jogador){
+		quantidadeDeTropas=ganhaTropa(jogador);
+	}
+	/**
+	 * Metodo que verifica se o jogador ainda tem tropas para distribuir
+	 * @return true se o jogador ainda tem tropas para distribuir e false se não
+	 */
+	public boolean temTropas(){
+		return (quantidadeDeTropas>0);
+	}
+	/**
+	 * Metodo que decrementa o numero de tropas para distribuir
+	 */
+	public void decrementaTropas(){
+		quantidadeDeTropas--;
+	}
+	
+	/**
+	 * Metodo que retorna a quantidade de tropas
+	 * @return quantidades de tropas que o jogador tem para distribuir
+	 */
+	public int getQuantidadeDeTropas(){
+		return quantidadeDeTropas;
 	}
 	
 	/**
