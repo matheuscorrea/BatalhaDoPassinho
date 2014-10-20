@@ -5,6 +5,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
+import br.uff.tcc.bcc.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.visao.ConstanteDoTerritorio;
 import br.uff.tcc.bcc.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.visao.GerenciadorDeTelas.TipoDaTela;
@@ -52,16 +53,14 @@ public class ControladorJogo {
 				
 		Mapa mapa = jogo.getMapa();
 		
-		Jogador jogador =new Jogador("Catra","Preto");
-		jogador.adicionaConquistados(mapa.getTerritorio(ConstanteDoTerritorio.BARRA_MUSIC.toString()));
-		jogador.adicionaConquistados(mapa.getTerritorio(ConstanteDoTerritorio.NUTH.toString()));
-		jogador.adicionaConquistados(mapa.getTerritorio(ConstanteDoTerritorio.ZAX.toString()));
+		jogo.adicionaJogador(new Jogador("Catra",ConstanteDaCor.CINZA));
+		jogo.adicionaJogador(new Jogador("Anitta",ConstanteDaCor.ROSA));
+		jogo.adicionaJogador(new Jogador("Nego Bam",ConstanteDaCor.VERDE));
+		jogo.adicionaJogador(new Jogador("Thadeu",ConstanteDaCor.VERMELHO));
+		
+		jogo.distribuiTerritorio();
 		
 		jogo.faseAtual = TipoFase.FASE_1;
-		
-		jogo.adicionaJogador(jogador);
-		
-		jogo.calculaTropa(jogador);
 		
 		//Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.jogo);

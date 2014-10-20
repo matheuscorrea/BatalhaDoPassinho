@@ -3,6 +3,8 @@ package br.uff.tcc.bcc.esii.modelo;
 import java.util.HashSet;
 import java.util.Set;
 
+import br.uff.tcc.bcc.visao.ConstanteDaCor;
+
 /**
  * @author Thadeu Jose
  *
@@ -100,6 +102,10 @@ public class Territorio {
 	 */
 	public boolean adicionaVizinhos(Territorio territorio){
 		return vizinhos.add(territorio);		
+	}
+	
+	public ConstanteDaCor getCor(){
+		return dono.getCor();
 	}
 
 	/* (non-Javadoc)

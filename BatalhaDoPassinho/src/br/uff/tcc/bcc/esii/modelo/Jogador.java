@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.uff.tcc.bcc.visao.ConstanteDaCor;
+
 /**
  * @author Thadeu Jose
  *
@@ -18,10 +20,9 @@ public class Jogador {
 	/**
 	 * Cor que identifica esse jogador.
 	 */
-	private String cor;
+	private ConstanteDaCor cor;
 	/**
 	 * Territorios que foram possuidos pelos jogador.
-	 * REVER
 	 */
 	private Map<String, Territorio> conquistados;//
 	/**
@@ -32,7 +33,7 @@ public class Jogador {
 	 * @param nome nome do jogador
 	 * @param cor  cor que identifica o jogador
 	 */
-	public Jogador(String nome, String cor) {
+	public Jogador(String nome, ConstanteDaCor cor) {
 		this.nome = nome;
 		this.cor = cor;
 		conquistados= new HashMap<>();
@@ -47,7 +48,7 @@ public class Jogador {
 	/**
 	 * @return a cor desse jogador
 	 */
-	public String getCor() {
+	public ConstanteDaCor getCor() {
 		return cor;
 	}
 	/**

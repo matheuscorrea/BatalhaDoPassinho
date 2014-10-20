@@ -39,8 +39,6 @@ public class TelaJogo implements ITela{
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 		
-		
-		
 		List<Button> listaDeBotoesTerritorios = new ArrayList<Button>();
 		for(Territorio territorio : mapa.getTerritorios()){
 			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(territorio,new EventoTerritorio()));

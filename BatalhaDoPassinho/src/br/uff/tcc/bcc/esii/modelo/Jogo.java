@@ -307,13 +307,22 @@ public class Jogo {
 	public void decrementaTropas(){
 		quantidadeDeTropas--;
 	}
-	
 	/**
 	 * Metodo que retorna a quantidade de tropas
 	 * @return quantidades de tropas que o jogador tem para distribuir
 	 */
 	public int getQuantidadeDeTropas(){
 		return quantidadeDeTropas;
+	}
+	
+	public void distribuiTerritorio(){
+		Object[] jogador = jogadores.toArray();
+		Random random = new Random();
+		for(Territorio t:mapa.territorios.values()){
+			int numSorteado = random.nextInt(jogadores.size());
+			t.setDono((Jogador)jogador[numSorteado]);
+			System.out.println(numSorteado+" "+((Jogador)jogador[numSorteado]).getNome());
+		}
 	}
 	
 	/**
