@@ -175,39 +175,22 @@ public class Jogo {
 	
 	/**
 	 * Redistribui as tropas entre os paises do jogador.
-	 * Os paises tem que ser vizinhos 
-	 * So sai uma vez o exercito de um pais 
+	 * Os paises tem que ser vizinhos 	 
+	 * (Supondo A,B,C) Se mover de A para B, não pode mais mover de B para ninguém. Ainda pode mover de C para A ou de A para C.
+	 * Considerando que os dois territorios passados são vizinhos. 
+	 * Considerando que o territorio destino ainda não recebeu tropas de outros territorios.
+	 * Considerando que a quantidade de tropas a serem movidas é menor que o total de tropas no territorio origem.
 	 * @param jogador Jogador que redistribuira as tropas
+	 * @param origem Territorio de onde sairão as tropas, pego pelo controlador
+	 * @param destino Territorio para onde irão as tropas, pego pelo controlador
+	 * @param quantidadeDeTropas quantas tropas serão movidas, deve ser pego pelo controlador.
 	 */
-	public void redistribuiTropa(Jogador jogador){
-		Map<String, Territorio> mapa=jogador.getConquistados();
-		Set<Territorio> jaUsados = new HashSet<>();
+	public void redistribuiTropa(Jogador jogador, Territorio origem, Territorio destino, int quantidadeDeTropas){			
+	
+		destino.setQuantidadeTropa(destino.getQuantidadeTropa()+quantidadeDeTropas);
+		origem.setQuantidadeTropa(origem.getQuantidadeTropa()-quantidadeDeTropas);						
+			
 		
-		//Função que pega o nome do territorio da visão
-		String nomeDoTerritorioOrigem = "";
-		Territorio territorioOrigem=mapa.get(nomeDoTerritorioOrigem);
-	
-		//Função que pega o nome do territorio da visão
-		String nomeDoTerritorioDestino = "";
-		Territorio territorioDestino=mapa.get(nomeDoTerritorioDestino);
-	
-		if(territorioOrigem.getVizinhos().contains(territorioDestino)){
-			if(!jaUsados.contains(territorioOrigem)){
-				//Função que pega a quantidade de tropas da visão
-				int quantidadeDeTropas=0;
-				if(territorioOrigem.getQuantidadeTropa()>=quantidadeDeTropas+1){
-					territorioDestino.setQuantidadeTropa(territorioDestino.getQuantidadeTropa()+quantidadeDeTropas);
-					territorioOrigem.setQuantidadeTropa(territorioOrigem.getQuantidadeTropa()-quantidadeDeTropas);
-					jaUsados.add(territorioOrigem);
-				}else{
-					//ERRO:Quantidade de tropas maior que o permitido
-				}				
-			}else{
-				//ERRO:Ja partiu tropas desse territorio
-			}
-		}else{
-			//ERRO:Territorios não são vizinhos
-		}
 	}
 	
 	/**
