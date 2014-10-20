@@ -1,4 +1,4 @@
-package br.uff.tcc.bcc.visao.telas;
+package br.uff.tcc.bcc.esii.visao.telas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,9 @@ import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
-import br.uff.tcc.bcc.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.visao.eventos.EventoProximaFase;
-import br.uff.tcc.bcc.visao.eventos.EventoTerritorio;
+import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
 public class TelaJogo implements ITela {
 

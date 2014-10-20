@@ -1,12 +1,12 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.esii.visao;
 
-import br.uff.tcc.bcc.controlador.ControladorJogo;
+import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
-import br.uff.tcc.bcc.visao.telas.ITela;
-import br.uff.tcc.bcc.visao.telas.TelaInicial;
-import br.uff.tcc.bcc.visao.telas.TelaJogo;
-import br.uff.tcc.bcc.visao.telas.TelaOpcoes;
+import br.uff.tcc.bcc.esii.visao.telas.ITela;
+import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
+import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
+import br.uff.tcc.bcc.esii.visao.telas.TelaOpcoes;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 

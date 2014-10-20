@@ -3,7 +3,7 @@ package br.uff.tcc.bcc.esii.modelo;
 import java.util.HashSet;
 import java.util.Set;
 
-import br.uff.tcc.bcc.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
 /**
  * @author Thadeu Jose

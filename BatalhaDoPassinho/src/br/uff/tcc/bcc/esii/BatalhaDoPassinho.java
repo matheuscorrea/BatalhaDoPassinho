@@ -2,8 +2,8 @@ package br.uff.tcc.bcc.esii;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import br.uff.tcc.bcc.visao.GerenciadorDeTelas;
-import br.uff.tcc.bcc.visao.GerenciadorDeTelas.TipoDaTela;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
 
 public class BatalhaDoPassinho extends Application {
 

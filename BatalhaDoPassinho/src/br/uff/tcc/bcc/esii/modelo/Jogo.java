@@ -9,7 +9,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
-import br.uff.tcc.bcc.visao.ConstanteDoTerritorio;
+import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 
 /**
  * @author Thadeu Jose

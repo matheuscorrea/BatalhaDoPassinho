@@ -1,4 +1,4 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.esii.visao;
 
 /**
  * Enum para representar as constantes envolvendo territorios possíveis da aplicação

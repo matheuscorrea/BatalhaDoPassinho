@@ -1,14 +1,14 @@
-package br.uff.tcc.bcc.controlador;
+package br.uff.tcc.bcc.esii.controlador;
 
 import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
-import br.uff.tcc.bcc.visao.ConstanteDaCor;
-import br.uff.tcc.bcc.visao.ConstanteDoTerritorio;
-import br.uff.tcc.bcc.visao.GerenciadorDeTelas;
-import br.uff.tcc.bcc.visao.GerenciadorDeTelas.TipoDaTela;
+import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
 
 public class ControladorJogo {
 	

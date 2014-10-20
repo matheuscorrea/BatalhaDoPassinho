@@ -1,9 +1,9 @@
-package br.uff.tcc.bcc.visao.eventos;
+package br.uff.tcc.bcc.esii.visao.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import br.uff.tcc.bcc.visao.GerenciadorDeTelas;
-import br.uff.tcc.bcc.visao.GerenciadorDeTelas.TipoDaTela;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
 
 public class EventoTelaInicial implements EventHandler<ActionEvent>{
 

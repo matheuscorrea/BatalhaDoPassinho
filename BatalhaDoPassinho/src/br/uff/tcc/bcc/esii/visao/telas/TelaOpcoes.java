@@ -1,4 +1,4 @@
-package br.uff.tcc.bcc.visao.telas;
+package br.uff.tcc.bcc.esii.visao.telas;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -6,8 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import br.uff.tcc.bcc.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.visao.eventos.EventoTelaInicial;
+import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
 
 public class TelaOpcoes implements ITela{
 

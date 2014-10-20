@@ -1,4 +1,4 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.esii.visao;
 
 public enum ConstanteDaCor {
 	

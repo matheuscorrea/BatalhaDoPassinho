@@ -1,8 +1,8 @@
-package br.uff.tcc.bcc.visao.telas;
+package br.uff.tcc.bcc.esii.visao.telas;
 
-import br.uff.tcc.bcc.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.visao.eventos.EventoNovoJogo;
-import br.uff.tcc.bcc.visao.eventos.EventoOpcoes;
+import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

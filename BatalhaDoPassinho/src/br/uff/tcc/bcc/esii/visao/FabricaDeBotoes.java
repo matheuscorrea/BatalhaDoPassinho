@@ -1,7 +1,7 @@
-package br.uff.tcc.bcc.visao;
+package br.uff.tcc.bcc.esii.visao;
 
 import br.uff.tcc.bcc.esii.modelo.Territorio;
-import br.uff.tcc.bcc.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
