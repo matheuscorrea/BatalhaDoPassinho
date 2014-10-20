@@ -230,7 +230,6 @@ public class Jogo {
 		Collections.sort(dados_atacante, Collections.reverseOrder());
 		Collections.sort(dados_defensor, Collections.reverseOrder());
 		
-		
 		for(int i = 0; i < dados_atacante.size() && i < dados_defensor.size(); i++){
 			if(dados_atacante.get(i) > dados_defensor.get(i)){
 				defensor.setQuantidadeTropa(defensor.getQuantidadeTropa()-1);
@@ -261,7 +260,6 @@ public class Jogo {
 		ganhouT.adicionaConquistados(defensor);		
 		defensor.setQuantidadeTropa(qtd_tropas);
 		atacante.setQuantidadeTropa(atacante.getQuantidadeTropa() - qtd_tropas);
-		
 	}
 	/**
 	 * Método responsável por eliminar um jogador do jogo

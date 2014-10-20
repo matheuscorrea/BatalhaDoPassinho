@@ -25,7 +25,7 @@ public class TelaJogo implements ITela {
 	private Mapa mapa;
 
 	private Group grupo;
-
+	private HBox barraInformacoes; 
 	/**
 	 * Construtor da classe TelaJogo <br>
 	 * Recebe o mapa como parametro para desenhar os botões
@@ -34,7 +34,7 @@ public class TelaJogo implements ITela {
 	 */
 	public TelaJogo(Mapa mapa) {
 		this.mapa = mapa;
-
+		this.barraInformacoes= new HBox(20);
 	}
 
 	/*
@@ -55,12 +55,11 @@ public class TelaJogo implements ITela {
 		for (Territorio territorio : mapa.getTerritorios()) {
 			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(territorio, new EventoTerritorio()));
 		}
-
+		
 		grupo = new Group();
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(listaDeBotoesTerritorios);
-
-		HBox barraInformacoes = new HBox(20);
+		
 		barraInformacoes.getChildren().addAll(new Label("Novo Jogo"));
 
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
@@ -69,9 +68,15 @@ public class TelaJogo implements ITela {
 	}
 
 	public Scene atualizaBarraInformacoes(Jogo jogo){
-		HBox barraInformacoes = new HBox(20);
+		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 1", new EventoProximaFase());;
-			
+		
+		if(jogo.faseAtual.equals(TipoFase.FASE_1)){
+			if(jogo.getQuantidadeDeTropas()>0)
+				botaoFase.setDisable(true);
+			else
+				botaoFase.setDisable(false);
+		}		
 		if(jogo.faseAtual.equals(TipoFase.FASE_2)){
 			botaoFase.setText("ACABAR FASE 2");			
 		}else if(jogo.faseAtual.equals(TipoFase.FASE_3)){
