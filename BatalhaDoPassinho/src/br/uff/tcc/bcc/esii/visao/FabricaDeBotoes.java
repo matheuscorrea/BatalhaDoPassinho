@@ -39,12 +39,12 @@ public class FabricaDeBotoes {
 	 */
 	public static Button criaBotaoTerritorio(Territorio territorio,EventHandler<ActionEvent> acao){
 		
-		final String imagemAzul = "imagens/PAWNBLUE.png";
-		final String imagemVerde = "imagens/PAWNGREEN.png";
-		final String imagemCinza = "imagens/PAWNGREY.png";
-		final String imagemRosa = "imagens/PAWNPINK.png";
-		final String imagemVermelha = "imagens/PAWNRED.png";
-		final String imagemAmarelo = "imagens/PAWNYELLOW.png";
+		final String imagemAzul =     "file:media/imagens/peoes/PAWNBLUE.png";
+		final String imagemVerde =    "file:media/imagens/peoes/PAWNGREEN.png";
+		final String imagemCinza =    "file:media/imagens/peoes/PAWNGREY.png";
+		final String imagemRosa =     "file:media/imagens/peoes/PAWNPINK.png";
+		final String imagemVermelha = "file:media/imagens/peoes/PAWNRED.png";
+		final String imagemAmarelo =  "file:media/imagens/peoes/PAWNYELLOW.png";
 		String imagemURL=imagemAzul;
 		
 		

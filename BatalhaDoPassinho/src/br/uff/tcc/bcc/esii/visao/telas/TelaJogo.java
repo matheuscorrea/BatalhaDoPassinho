@@ -44,7 +44,7 @@ public class TelaJogo implements ITela {
 	@Override
 	public Scene getScene() {
 
-		final String imagemURL = "imagens/mapa.jpg";
+		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
 
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
@@ -52,8 +52,7 @@ public class TelaJogo implements ITela {
 
 		List<Button> listaDeBotoesTerritorios = new ArrayList<Button>();
 		for (Territorio territorio : mapa.getTerritorios()) {
-			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(
-					territorio, new EventoTerritorio()));
+			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(territorio, new EventoTerritorio()));
 		}
 
 		grupo = new Group();
