@@ -2,6 +2,7 @@ package br.uff.tcc.bcc.esii.visao;
 
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
+import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.visao.telas.ITela;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
@@ -86,9 +87,9 @@ public class GerenciadorDeTelas{
 		}
 	}
 
-	public void atualizaBarraInformacoes(TipoFase fase, Jogador jogador){
+	public void atualizaBarraInformacoes(Jogo jogo){
 		
-		Scene cena = telaJogo.atualizaBarraInformacoes(fase, jogador);
+		Scene cena = telaJogo.atualizaBarraInformacoes(jogo);
 		stagePrincipal.setScene(cena);
 		
 	}

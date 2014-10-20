@@ -28,15 +28,19 @@ public class ControladorJogo {
 	}
 
 	public void acaoTerritorio(Button botao) {
-		System.out.println(botao.getId());
+		//System.out.println(botao.getId());
 		if(jogo.faseAtual==TipoFase.FASE_1){
+			System.out.println("OK1");
 			Jogador jogador = jogo.getJogadorDaVez();
 			if(jogador.conquistouTerritorio(botao.getId())){
-				if(jogo.temTropas()){				
+				System.out.println("OK2");
+				if(jogo.temTropas()){	
+					System.out.println("OK3");
 					jogo.distribuirTropas(botao.getId(),1);
 					jogo.decrementaTropas();
 					//Atualiza a visão
 					botao.setText(jogo.getTropas(botao.getId())+"");
+					GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 					System.out.println(jogo.getQuantidadeDeTropas());
 				}
 			}else{
@@ -52,13 +56,11 @@ public class ControladorJogo {
 	
 	public void proximaFase(){
 		jogo.proximaFase();
-		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo.faseAtual, jogo.getJogadorDaVez());
+		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 	}
 	
 	public void iniciaPartida(){
 				
-		Mapa mapa = jogo.getMapa();
-		
 		jogo.adicionaJogador(new Jogador("Catra",ConstanteDaCor.CINZA));
 		jogo.adicionaJogador(new Jogador("Anitta",ConstanteDaCor.ROSA));
 		jogo.adicionaJogador(new Jogador("Nego Bam",ConstanteDaCor.VERDE));
@@ -68,9 +70,11 @@ public class ControladorJogo {
 		
 		jogo.faseAtual = TipoFase.FASE_1;
 		
+		jogo.calculaTropa(jogo.getJogadorDaVez());
+		
 		//Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.jogo);
-		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo.faseAtual, jogo.getJogadorDaVez());
+		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 	}
 	
 	public Mapa getMapa(){

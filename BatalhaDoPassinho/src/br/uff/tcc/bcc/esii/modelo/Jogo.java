@@ -68,7 +68,7 @@ public class Jogo {
 	 */
 	public void proximaRodada()
 	{
-		rodada++;
+		//rodada++;
 		faseAtual = TipoFase.FASE_1;
 		jogadorDominouTerritorio=false;
 		Jogador jogador = jogadores.poll();
@@ -311,12 +311,15 @@ public class Jogo {
 	}
 	
 	public void distribuiTerritorio(){
-		Object[] jogador = jogadores.toArray();
+		Object[] vetorJogador = jogadores.toArray();
 		Random random = new Random();
 		for(Territorio t:mapa.territorios.values()){
 			int numSorteado = random.nextInt(jogadores.size());
-			t.setDono((Jogador)jogador[numSorteado]);
-			System.out.println(numSorteado+" "+((Jogador)jogador[numSorteado]).getNome());
+			Jogador jogador = (Jogador)vetorJogador[numSorteado]; 
+			t.setDono(jogador);
+			jogador.adicionaConquistados(t);
+			t.setQuantidadeTropa(1);
+			//System.out.println(numSorteado+" "+((Jogador)jogador[numSorteado]).getNome());
 		}
 	}
 	

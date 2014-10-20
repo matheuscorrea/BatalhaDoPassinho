@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
+import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
@@ -44,7 +45,7 @@ public class TelaJogo implements ITela {
 	@Override
 	public Scene getScene() {
 
-		final String imagemURL = "imagens/mapa.jpg";
+		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
 
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
@@ -52,8 +53,7 @@ public class TelaJogo implements ITela {
 
 		List<Button> listaDeBotoesTerritorios = new ArrayList<Button>();
 		for (Territorio territorio : mapa.getTerritorios()) {
-			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(
-					territorio, new EventoTerritorio()));
+			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(territorio, new EventoTerritorio()));
 		}
 
 		grupo = new Group();
@@ -68,26 +68,19 @@ public class TelaJogo implements ITela {
 		return new Scene(vBox, 1123, 600);
 	}
 
-	public Scene atualizaBarraInformacoes(TipoFase fase, Jogador jogador){
+	public Scene atualizaBarraInformacoes(Jogo jogo){
 		HBox barraInformacoes = new HBox(20);
-		Button botaoFase;
-		if(fase.equals(TipoFase.FASE_1)){
-			botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 1", new EventoProximaFase());			
-//			barraInformacoes.getChildren().addAll(new Label(fase.name()),new Label(jogador.getNome()));
+		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 1", new EventoProximaFase());;
 			
-		}else if(fase.equals(TipoFase.FASE_2)){
-			botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 2", new EventoProximaFase());			
-			
-//			barraInformacoes.getChildren().addAll(new Label(fase.name()),new Label(jogador.getNome()));
-
-		}else{// if(fase.equals(TipoFase.FASE_3)){
-
-			botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "PASSAR A VEZ", new EventoProximaFase());			
-			
-//			barraInformacoes.getChildren().addAll(new Label(fase.name()),new Label(jogador.getNome()));
-			
+		if(jogo.faseAtual.equals(TipoFase.FASE_2)){
+			botaoFase.setText("ACABAR FASE 2");			
+		}else if(jogo.faseAtual.equals(TipoFase.FASE_3)){
+			botaoFase.setText("PASSAR A VEZ");			
 		}
-		barraInformacoes.getChildren().addAll(new Label(fase.name()),new Label(jogador.getNome()),botaoFase);
+		if(jogo.faseAtual.equals(TipoFase.FASE_1))
+			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase);
+		else
+			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()),botaoFase);
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		return new Scene(vBox, 1123, 600);
 	}
