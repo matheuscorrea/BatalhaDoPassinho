@@ -77,6 +77,18 @@ public class Jogo {
 		
 	}
 	
+	public void proximaFase(){
+		if(faseAtual.equals(TipoFase.FASE_1)){
+			faseAtual = TipoFase.FASE_2;
+		}else if(faseAtual.equals(TipoFase.FASE_2)){
+			faseAtual = TipoFase.FASE_3;
+		}else if(faseAtual.equals(TipoFase.FASE_3)){
+			proximaRodada();
+		}
+			
+	}
+	
+	
 	/**
 	 * Metodo que simula o lançamento de um dado
 	 * @return um inteiro de 1 a 6 

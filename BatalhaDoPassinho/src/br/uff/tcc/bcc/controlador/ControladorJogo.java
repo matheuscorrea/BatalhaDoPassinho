@@ -45,8 +45,14 @@ public class ControladorJogo {
 		}		
 	}	
 	
+	@Deprecated
 	public void acaoIniciaTurno(){
 		jogo.proximaRodada();
+	}
+	
+	public void proximaFase(){
+		jogo.proximaFase();
+		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo.faseAtual, jogo.getJogadorDaVez());
 	}
 	
 	public void iniciaPartida(){
@@ -64,6 +70,7 @@ public class ControladorJogo {
 		
 		//Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.jogo);
+		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo.faseAtual, jogo.getJogadorDaVez());
 	}
 	
 	public Mapa getMapa(){

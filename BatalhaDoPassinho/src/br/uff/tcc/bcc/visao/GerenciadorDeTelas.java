@@ -1,6 +1,8 @@
 package br.uff.tcc.bcc.visao;
 
 import br.uff.tcc.bcc.controlador.ControladorJogo;
+import br.uff.tcc.bcc.esii.modelo.Jogador;
+import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.visao.telas.ITela;
 import br.uff.tcc.bcc.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.visao.telas.TelaJogo;
@@ -25,6 +27,8 @@ public class GerenciadorDeTelas{
 	 * Instância para o padrão Singleton.
 	 */
 	private static GerenciadorDeTelas gerenciador;
+	
+	private TelaJogo telaJogo;
 	
 	/**
 	 * Construtor privado para outras classes não instanciarem.
@@ -69,7 +73,7 @@ public class GerenciadorDeTelas{
 			
 		}else if(TipoDaTela.jogo.equals(tela)){
 			//Para iniciar a tela de jogo é preciso passar o mapa
-			ITela telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
+			telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
 			
 			Scene cena = telaJogo.getScene();
 			stagePrincipal.setScene(cena);
@@ -82,6 +86,13 @@ public class GerenciadorDeTelas{
 		}
 	}
 
+	public void atualizaBarraInformacoes(TipoFase fase, Jogador jogador){
+		
+		Scene cena = telaJogo.atualizaBarraInformacoes(fase, jogador);
+		stagePrincipal.setScene(cena);
+		
+	}
+	
 	/**
 	 * Enum que representa os tipos de tela da aplicação
 	 */
