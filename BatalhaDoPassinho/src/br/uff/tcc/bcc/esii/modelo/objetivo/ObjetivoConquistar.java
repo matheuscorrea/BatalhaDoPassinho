@@ -24,7 +24,7 @@ public class ObjetivoConquistar implements IObjetivo {
 	
 	}
 	
-	public ObjetivoConquistar(int outros){
+	public ObjetivoConquistar(int outros){ 
 		this.continente1 = "NaN";
 		this.qnt1 = 0;
 		this.continente2 = "NaN";
@@ -32,7 +32,7 @@ public class ObjetivoConquistar implements IObjetivo {
 		this.outros = outros;
 	}
 	@Override
-	public boolean concluido(Jogador jogador) {
+	public boolean concluido(Jogador jogador, Jogador semuso) {
 		int quantBoatesPorContinente[] = new int[2];
 		int outros= 0;
 		for (Map.Entry<String, Territorio> entry : jogador.getConquistados()

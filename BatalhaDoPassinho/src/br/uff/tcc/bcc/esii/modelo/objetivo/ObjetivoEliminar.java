@@ -1,8 +1,6 @@
 package br.uff.tcc.bcc.esii.modelo.objetivo;
 
-import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
-import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
 public class ObjetivoEliminar implements IObjetivo {
@@ -15,12 +13,16 @@ public class ObjetivoEliminar implements IObjetivo {
 	public ObjetivoEliminar(ConstanteDaCor cor){
 		this.cor = cor;
 	}
-	
+	//TODO 
 	@Override 
-	public boolean concluido(Jogador jogador){
-		// TODO Auto-generated method stub
-		//if(jogador.getCor().equals(cor))
+	public boolean concluido(Jogador atacante, Jogador alvo){
+		//Se meu objetivo for me eliminar
+		if(atacante.getCor().equals(this.cor))
+			return new  ObjetivoConquistar(20).concluido(atacante, alvo);	
 		
+		if(alvo.getCor().equals(cor)){
+			return alvo.getConquistados().size()==1;
+		}
 		
 		return false;
 	}
