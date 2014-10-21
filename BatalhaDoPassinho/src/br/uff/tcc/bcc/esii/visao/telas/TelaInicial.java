@@ -3,6 +3,7 @@ package br.uff.tcc.bcc.esii.visao.telas;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,7 +28,7 @@ public class TelaInicial implements ITela {
 	@Override
 	public Scene getScene() {
 
-        Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoNovoJogo());
+        Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoTelaCarregar());
         Button botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
         
         
