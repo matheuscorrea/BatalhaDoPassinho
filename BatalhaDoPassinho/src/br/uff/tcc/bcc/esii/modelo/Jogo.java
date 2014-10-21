@@ -1,5 +1,6 @@
 package br.uff.tcc.bcc.esii.modelo;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -307,17 +308,24 @@ public class Jogo {
 	public int getQuantidadeDeTropas(){
 		return quantidadeDeTropas;
 	}
-	
+
+
 	public void distribuiTerritorio(){
+		List<Territorio> lista = new ArrayList<Territorio>(mapa.territorios.values());		
 		Object[] vetorJogador = jogadores.toArray();
 		Random random = new Random();
-		for(Territorio t:mapa.territorios.values()){
-			int numSorteado = random.nextInt(jogadores.size());
-			Jogador jogador = (Jogador)vetorJogador[numSorteado]; 
-			t.setDono(jogador);
-			jogador.adicionaConquistados(t);
-			t.setQuantidadeTropa(1);
-			//System.out.println(numSorteado+" "+((Jogador)jogador[numSorteado]).getNome());
+		int i = 0;
+		while (!lista.isEmpty()){
+			int numSorteado = random.nextInt(lista.size());
+			lista.get(numSorteado).setDono((Jogador)vetorJogador[i]);
+			lista.get(numSorteado).setQuantidadeTropa(1);			
+			((Jogador)vetorJogador[i]).adicionaConquistados(lista.get(numSorteado));
+			lista.remove(numSorteado);
+			if(i==vetorJogador.length-1){
+				i=0;
+			}else{
+				i++;
+			}
 		}
 	}
 	
