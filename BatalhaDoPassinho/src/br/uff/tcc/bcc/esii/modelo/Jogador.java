@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.uff.tcc.bcc.esii.modelo.objetivo.IObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
 /**
@@ -24,6 +25,10 @@ public class Jogador {
 	/**
 	 * Territorios que foram possuidos pelos jogador.
 	 */
+	
+	private IObjetivo objetivo;
+	
+	
 	private Map<String, Territorio> conquistados;//
 	/**
 	 * Cartas que o jogador possue.
@@ -102,6 +107,14 @@ public class Jogador {
 	
 	public boolean conquistouTerritorio(String territorio){
 		return conquistados.containsKey(territorio);
+	}
+	
+	public Territorio getTerritorioConquistado(String territorio){
+		return conquistados.get(territorio);
+	}
+	
+	public IObjetivo getObjetivo(){
+		return objetivo;
 	}
 			
 }

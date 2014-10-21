@@ -262,25 +262,21 @@ public class Jogo {
 		defensor.setQuantidadeTropa(qtd_tropas);
 		atacante.setQuantidadeTropa(atacante.getQuantidadeTropa() - qtd_tropas);
 	}
+	
 	/**
-	 * Método responsável por eliminar um jogador do jogo
-	 * @param jogador Jogador eliminado do jogo
+	 * Método responsável por eliminar um jogador do jogo e passar suas cartas a quem o eliminou
+	 * @param atacante Jogador que eliminou o outro jogador
+	 * @param eliminado Jogador eliminado do jogo
 	 */
-	public void eliminaJogador(Jogador jogador){
-		jogadores.remove(jogador);	
-	}
-	/**
-	 * Método responsável por passar as cartas de um jogador eliminado para o jogador que o eliminou
-	 * @param eliminado Jogador eliminado
-	 * @param atacante Jogador que eliminou
-	 */
-	public void passaCartas(Jogador eliminado, Jogador atacante){
+	public void eliminaJogador(Jogador atacante, Jogador eliminado){
 		List<Carta> cartas = eliminado.getMao();
 		for(Carta c : cartas){
 			atacante.adicionaCarta(c);
 			eliminado.removeCarta(c);
 		}
+		jogadores.remove(eliminado);	
 	}
+	
 	/**
 	 * Metodo que calcula quantidade de tropas que o jogador da vez vai ganhar
 	 * @param jogador Jogador da vez
