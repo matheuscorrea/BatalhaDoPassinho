@@ -1,6 +1,10 @@
 package br.uff.tcc.bcc.esii.controlador;
 
-import java.util.Set;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
 
 import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
@@ -9,7 +13,6 @@ import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
-import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
 
@@ -39,11 +42,11 @@ public class ControladorJogo {
 		//System.out.println(botao.getId());
 		Jogador jogador = jogo.getJogadorDaVez();
 		if(jogo.faseAtual==TipoFase.FASE_1){
-			System.out.println("OK1");			
+//			System.out.println("OK1");			
 			if(jogador.conquistouTerritorio(botao.getId())){
-				System.out.println("OK2");
+//				System.out.println("OK2");
 				if(jogo.temTropas()){	
-					System.out.println("OK3");
+//					System.out.println("OK3");
 					jogo.distribuirTropas(botao.getId(),1);
 					jogo.decrementaTropas();
 					//Atualiza a visão
@@ -89,11 +92,13 @@ public class ControladorJogo {
 	}
 	
 	public void iniciaPartida(){
-				
-		jogo.adicionaJogador(new Jogador("Catra",ConstanteDaCor.CINZA));
-		jogo.adicionaJogador(new Jogador("Anitta",ConstanteDaCor.ROSA));
-		jogo.adicionaJogador(new Jogador("Nego Bam",ConstanteDaCor.VERDE));
-		jogo.adicionaJogador(new Jogador("Thadeu",ConstanteDaCor.VERMELHO));
+		
+		List<Jogador> listaJogadores = ControladorTelaEscolha.getInstancia().getListaJogadores();
+		Collections.shuffle(listaJogadores);
+		
+		for (Jogador jogador : listaJogadores) {
+			jogo.adicionaJogador(jogador);
+		}
 		
 		jogo.distribuiTerritorio();
 		

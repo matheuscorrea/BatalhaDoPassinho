@@ -1,18 +1,22 @@
 package br.uff.tcc.bcc.esii.visao.telas;
 
-import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoTrocaPersonagem;
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import br.uff.tcc.bcc.esii.controlador.ControladorTelaEscolha;
+import br.uff.tcc.bcc.esii.modelo.Jogador;
+import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTrocaPersonagem;
 
 public class TelaEscolha implements ITela  {
 
@@ -21,10 +25,12 @@ public class TelaEscolha implements ITela  {
 	private HBox hbSuperior;
 	private HBox hbInferior;
 	private HBox hbButoes;
-
 	
+
 	public TelaEscolha() {
 		this.avatar = new VBox[6];
+
+		
 	}
 	
 	@Override
@@ -76,7 +82,7 @@ public class TelaEscolha implements ITela  {
 		hbButoes = new HBox(100,voltar,iniciar);
 
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes); 
-		
+		atualizaListaJogadores();
 		
 		return new Scene(raiz);
 	}
@@ -95,7 +101,28 @@ public class TelaEscolha implements ITela  {
 		
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes); 
 		
+		atualizaListaJogadores();
+		
 		return new Scene(raiz);
 	}
+	
+	/**
+	 * Confere quais personagens estão selecionados e atualiza a lista de 
+	 * jogadores do ControladorTelaEscolha
+	 */
+	private void atualizaListaJogadores(){
+		List<Jogador> listaJogadores = new ArrayList<Jogador>();
+
+		ConstanteDaCor[] vetorConstanteDaCor = ConstanteDaCor.values();
+		for (int i = 0; i < avatar.length; i++) {
+			ComboBox comboBox = (ComboBox)avatar[i].getChildren().get(1);
+			String nomePersonagem = (String)comboBox.getSelectionModel().getSelectedItem();
+			if(!"-".equals(nomePersonagem)){
+				listaJogadores.add(new Jogador(nomePersonagem,vetorConstanteDaCor[i]));	
+			}
+		}
+		ControladorTelaEscolha.getInstancia().setListaJogadores(listaJogadores);
+	}
+	
 	
 }

@@ -1,11 +1,15 @@
 package br.uff.tcc.bcc.esii.controlador;
 
+import java.util.List;
+
+import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
-import javafx.scene.control.Button;
 
 public class ControladorTelaEscolha {
 
 	private static ControladorTelaEscolha controlador;
+	
+	private List<Jogador> listaJogadores;
 	
 	private ControladorTelaEscolha(){
 	}
@@ -18,11 +22,19 @@ public class ControladorTelaEscolha {
 	}
 	
 	/**
-	 * Recebe um botão e identifica qual ação tomar quando este for apertado
+	 * É chamado quando o usuário altera o personagem na tela de escolha
 	 * @param botao
 	 */
 	public void acao(String jogador,int index){
 		GerenciadorDeTelas.getInstancia().atualizaPersonagem(jogador, index);
+	}
+	
+	public void setListaJogadores(List<Jogador> listaJogadores){
+		this.listaJogadores = listaJogadores;
+	}
+	
+	public List<Jogador>  getListaJogadores(){
+		return this.listaJogadores;
 	}
 	
 }
