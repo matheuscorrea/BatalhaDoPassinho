@@ -89,5 +89,46 @@ public class FabricaDeBotoes {
 		return botao;
 	}
 	
+	public static ImageView criaImageView(Territorio t){
+		
+		final String imagemAzul =     "file:media/imagens/peoes/PAWNBLUE.png";
+		final String imagemVerde =    "file:media/imagens/peoes/PAWNGREEN.png";
+		final String imagemCinza =    "file:media/imagens/peoes/PAWNGREY.png";
+		final String imagemRosa =     "file:media/imagens/peoes/PAWNPINK.png";
+		final String imagemVermelha = "file:media/imagens/peoes/PAWNRED.png";
+		final String imagemAmarelo =  "file:media/imagens/peoes/PAWNYELLOW.png";
+		String imagemURL=imagemAzul;
+		
+		
+		
+		switch(t.getCor()){
+			case AZUL:
+				imagemURL=imagemAzul;
+				break;
+			case VERDE:
+				imagemURL=imagemVerde;				
+				break;
+			case CINZA:
+				imagemURL=imagemCinza;
+				break;
+			case ROSA:
+				imagemURL=imagemRosa;
+				break;
+			case VERMELHO:
+				imagemURL=imagemVermelha;
+				break;
+			case AMARELO:
+				imagemURL=imagemAmarelo;
+				break;
+		}
+		
+		Image image = new Image(imagemURL);
+		ImageView imageView = new ImageView();
+		imageView.setFitHeight(20);
+		imageView.setFitWidth(20);
+		imageView.setImage(image);
+
+		return imageView;
+	}
 	
 }

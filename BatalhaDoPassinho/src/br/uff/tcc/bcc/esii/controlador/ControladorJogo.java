@@ -13,8 +13,10 @@ import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
 public class ControladorJogo {
 	
@@ -37,6 +39,8 @@ public class ControladorJogo {
 	private boolean selecionouTerritorioInimigo = false;
 	private Territorio territorioAtacante;
 	private Territorio territorioDefensor;
+	private Button btAtacante;
+	private Button btDefensor;
 
 	public void acaoTerritorio(Button botao) {
 		//System.out.println(botao.getId());
@@ -62,11 +66,13 @@ public class ControladorJogo {
 				botao.setDisable(true);
 				selecionouTerritorioProprio = true;
 				territorioAtacante = jogador.getTerritorioConquistado(botao.getId());
+				btAtacante = botao;
 			}
 		}else if(jogo.faseAtual == TipoFase.FASE_2 && !selecionouTerritorioInimigo){
 			if(!jogador.conquistouTerritorio(botao.getId())){
 				if(territorioAtacante.getVizinhos().containsKey(botao.getId())){
 					botao.setDisable(true);
+					btDefensor = botao;
 					selecionouTerritorioInimigo = true;
 					territorioDefensor = territorioAtacante.getVizinhos().get(botao.getId());
 //					for(Territorio t: territorioAtacante.getVizinhos()){
@@ -120,20 +126,35 @@ public class ControladorJogo {
 	public void acaoAtaque(Button clickedBtn) {
 		if(selecionouTerritorioInimigo && selecionouTerritorioProprio){
 			boolean dominouTerrritorio = jogo.ataque(territorioAtacante, territorioDefensor);
+			btAtacante.setText(""+territorioAtacante.getQuantidadeTropa());
+			btDefensor.setText(""+territorioDefensor.getQuantidadeTropa());
 			selecionouTerritorioInimigo = false;
 			selecionouTerritorioProprio = false;
+			btAtacante.setDisable(false);
+			btDefensor.setDisable(false);
 			if(dominouTerrritorio){
 				
-				if(territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(), territorioDefensor.getDono())){
+				//if(territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(), territorioDefensor.getDono())){
 					//Ganhou
-				}
+				//}
 				//Jogador acabou de perder seu último território
 				if(territorioDefensor.getDono().numeroDeConquistados()==1){
 					jogo.eliminaJogador(territorioAtacante.getDono(), territorioDefensor.getDono());
 				}
+				//TODO Rever com cuidado
 				//TODO Pegar da visão quantas tropas passar para o territorio dominado
+				
 				jogo.dominarTerritorio(territorioAtacante, territorioDefensor, 1);
+				btAtacante.setText(territorioAtacante.getQuantidadeTropa()+"");
+				btDefensor.setText(territorioDefensor.getQuantidadeTropa()+"");
+				btDefensor.setGraphic(FabricaDeBotoes.criaImageView(territorioDefensor));
+				
+				
 			}
+			/*selecionouTerritorioProprio = false;
+			selecionouTerritorioInimigo = false;
+			btAtacante.setDisable(false);
+			btDefensor.setDisable(false);*/
 		}
 		
 	}
