@@ -116,5 +116,10 @@ public class Jogador {
 	public IObjetivo getObjetivo(){
 		return objetivo;
 	}
+	
+	public void setObjetivo(IObjetivo objetivo) {
+		this.objetivo = objetivo;
+	}
+
 			
 }

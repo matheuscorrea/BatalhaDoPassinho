@@ -63,7 +63,7 @@ public class ControladorJogo {
 					//Atualiza a visão
 					botao.setText(jogo.getTropas(botao.getId())+"");
 					GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
-					System.out.println(jogo.getQuantidadeDeTropas());
+					//System.out.println(jogo.getQuantidadeDeTropas());
 				}
 			}else{
 				//botao.setDisable(true);
@@ -134,6 +134,7 @@ public class ControladorJogo {
 		for (Jogador jogador : listaJogadores) {
 			jogo.adicionaJogador(jogador);
 		}
+		jogo.distribuiObjetivos(listaJogadores);
 		
 		jogo.distribuiTerritorio();
 		
@@ -161,9 +162,9 @@ public class ControladorJogo {
 			btDefensor.setDisable(false);
 			if(dominouTerrritorio){
 				
-				//if(territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(), territorioDefensor.getDono())){
-					//Ganhou
-				//}
+				if(territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(), territorioDefensor.getDono())){
+					System.out.print("GANHEI A PORRA DO JOGO!!");
+				}
 				//Jogador acabou de perder seu último território
 				if(territorioDefensor.getDono().numeroDeConquistados()==1){
 					jogo.eliminaJogador(territorioAtacante.getDono(), territorioDefensor.getDono());

@@ -10,6 +10,7 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Set;
 
+import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 
 /**
@@ -73,7 +74,7 @@ public class Jogo {
 		faseAtual = TipoFase.FASE_1;
 		jogadorDominouTerritorio=false;
 		Jogador jogador = jogadores.poll();
-		calculaTropa(jogador);
+		calculaTropa(getJogadorDaVez());
 		jogadores.add(jogador);
 		
 	}
@@ -110,7 +111,10 @@ public class Jogo {
 	 * @return inteiro que representa todas as tropas que vão ser ganhas
 	 */
 	private int ganhaTropa(Jogador jogador)	{
+		System.out.println("Num "+jogador.numeroDeConquistados()
+				+ "Ganha "+jogador.numeroDeConquistados()/2+" "+ganhaBonusTerritorio(jogador));
 		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);
+		
 	}
 
 	/**
@@ -218,7 +222,7 @@ public class Jogo {
 	 */
 	public boolean ataque(Territorio atacante, Territorio defensor){
 		//Pode atacar
-		int qtd_tropas_atacante = Math.min(3, atacante.getQuantidadeTropa());
+		int qtd_tropas_atacante = Math.min(3, atacante.getQuantidadeTropa()-1);
 		int qtd_tropas_defensor = Math.min(3, defensor.getQuantidadeTropa());
 		List<Integer>dados_atacante = new LinkedList<>();;
 		List<Integer>dados_defensor = new LinkedList<>();
@@ -322,6 +326,19 @@ public class Jogo {
 			}else{
 				i++;
 			}
+		}
+	}
+	
+	/**
+	 * Cria e distribui objetivos aleatórios, um para cada jogador da lista.
+	 * @param listaJogadores 
+	 */
+	public void distribuiObjetivos(List<Jogador> listaJogadores) {
+		int index = 0;
+		FabricaDeObjetivo fabricaObjetivo = new FabricaDeObjetivo();
+		for (Jogador jogador : listaJogadores) {
+			jogador.setObjetivo(fabricaObjetivo.criaObjetivo(index));
+			index++;
 		}
 	}
 	
@@ -587,4 +604,5 @@ public class Jogo {
 		
 	}
 
+	
 }

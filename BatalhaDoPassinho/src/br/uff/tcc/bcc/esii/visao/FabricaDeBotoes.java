@@ -98,9 +98,7 @@ public class FabricaDeBotoes {
 		final String imagemVermelha = "file:media/imagens/peoes/PAWNRED.png";
 		final String imagemAmarelo =  "file:media/imagens/peoes/PAWNYELLOW.png";
 		String imagemURL=imagemAzul;
-		
-		
-		
+				
 		switch(t.getCor()){
 			case AZUL:
 				imagemURL=imagemAzul;
