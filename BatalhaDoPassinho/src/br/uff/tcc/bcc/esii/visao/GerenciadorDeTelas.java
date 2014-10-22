@@ -5,6 +5,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.visao.telas.ITela;
+import br.uff.tcc.bcc.esii.visao.telas.TelaEscolha;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaOpcoes;
@@ -30,6 +31,7 @@ public class GerenciadorDeTelas{
 	private static GerenciadorDeTelas gerenciador;
 	
 	private TelaJogo telaJogo;
+	private TelaEscolha telaEscolha;
 	
 	/**
 	 * Construtor privado para outras classes não instanciarem.
@@ -71,34 +73,35 @@ public class GerenciadorDeTelas{
 			ITela telaInicial = new TelaInicial();			
 			Scene cena = telaInicial.getScene();
 			stagePrincipal.setScene(cena);
-			
 		}else if(TipoDaTela.jogo.equals(tela)){
 			//Para iniciar a tela de jogo é preciso passar o mapa
 			telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
-			
 			Scene cena = telaJogo.getScene();
 			stagePrincipal.setScene(cena);
-			
 		}else if(TipoDaTela.opcoes.equals(tela)){
 			ITela telaOpcoes= new TelaOpcoes();			
 			Scene cena = telaOpcoes.getScene();
 			stagePrincipal.setScene(cena);
-			
+		}else if(TipoDaTela.escolha.equals(tela)){
+			telaEscolha= new TelaEscolha();			
+			Scene cena = telaEscolha.getScene();
+			stagePrincipal.setScene(cena);
 		}
 	}
-
 	public void atualizaBarraInformacoes(Jogo jogo){
-		
 		Scene cena = telaJogo.atualizaBarraInformacoes(jogo);
 		stagePrincipal.setScene(cena);
-		
 	}
-	
+	public void atualizaPersonagem(String jogador,int index){
+		Scene cena = telaEscolha.atualizaPersonagem(jogador, index);
+		stagePrincipal.setScene(cena);
+	}
 	/**
 	 * Enum que representa os tipos de tela da aplicação
 	 */
 	public enum TipoDaTela{
 		inicio,
+		escolha,
 		jogo,
 		opcoes
 	}

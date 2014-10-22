@@ -65,7 +65,7 @@ public class TelaJogo implements ITela {
 
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		// 1123x554 mapa
-		return new Scene(vBox, 1123, 600);
+		return new Scene(vBox);
 	}
 
 	public Scene atualizaBarraInformacoes(Jogo jogo){
@@ -94,6 +94,6 @@ public class TelaJogo implements ITela {
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()),botaoFase);
 		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
-		return new Scene(vBox, 1123, 600);
+		return new Scene(vBox);
 	}
 }
