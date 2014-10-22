@@ -65,21 +65,23 @@ public class ControladorJogo {
 				//botao.setDisable(true);
 			}
 		}else if(jogo.faseAtual == TipoFase.FASE_2 && !selecionouTerritorioProprio){
-			if(jogador.conquistouTerritorio(botao.getId())){
-				//botao.setDisable(true);
+			if(jogador.conquistouTerritorio(botao.getId()) && jogador.getConquistados().get(botao.getId()).getQuantidadeTropa() > 1){
+				botao.setDisable(true);
 				selecionouTerritorioProprio = true;
 				territorioAtacante = jogador.getTerritorioConquistado(botao.getId());
 			}
 		}else if(jogo.faseAtual == TipoFase.FASE_2 && !selecionouTerritorioInimigo){
 			if(!jogador.conquistouTerritorio(botao.getId())){
-				if(territorioAtacante.getVizinhos().contains(botao.getId()));{
+				if(territorioAtacante.getVizinhos().containsKey(botao.getId())){
+					botao.setDisable(true);
 					selecionouTerritorioInimigo = true;
-					for(Territorio t: territorioAtacante.getVizinhos()){
-						if(t.getNome().equals(botao.getId())){
-							territorioDefensor = t;
-							break;
-						}
-					}					
+					territorioDefensor = territorioAtacante.getVizinhos().get(botao.getId());
+//					for(Territorio t: territorioAtacante.getVizinhos()){
+//						if(t.getNome().equals(botao.getId())){
+//							territorioDefensor = t;
+//							break;
+//						}
+//					}					
 				}				
 			}
 				

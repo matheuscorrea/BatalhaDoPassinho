@@ -1,6 +1,8 @@
 package br.uff.tcc.bcc.esii.modelo;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
@@ -30,7 +32,7 @@ public class Territorio {
 	/**
 	 * Todos os vizinhos desse territorio
 	 */
-	private Set<Territorio> vizinhos;
+	private Map<String, Territorio> vizinhos;
 	
 	/**
 	 * Construtor da classe Territorio
@@ -40,7 +42,7 @@ public class Territorio {
 	public Territorio(String nome, String continente) {
 		this.nome = nome;
 		this.continente = continente;
-		vizinhos = new HashSet<>();
+		vizinhos = new HashMap<>();
 	}
 	
 	/**
@@ -92,7 +94,7 @@ public class Territorio {
 	/**
 	 * @return o conjunto(Set) de vizinhos desse territorio
 	 */
-	public Set<Territorio> getVizinhos() {
+	public Map<String, Territorio> getVizinhos() {
 		return vizinhos;
 	}	
 		
@@ -100,8 +102,8 @@ public class Territorio {
 	 * @param territorio territorio que e vizinho desse territorio
 	 * @return se a inserção foi concluida com exito ou não. 
 	 */
-	public boolean adicionaVizinhos(Territorio territorio){
-		return vizinhos.add(territorio);		
+	public void adicionaVizinhos(Territorio territorio){
+		 vizinhos.put(territorio.nome, territorio);		
 	}
 	
 	public ConstanteDaCor getCor(){
