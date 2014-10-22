@@ -17,6 +17,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
@@ -70,6 +71,7 @@ public class TelaJogo implements ITela {
 	public Scene atualizaBarraInformacoes(Jogo jogo){
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 1", new EventoProximaFase());;
+		Button botaoAtaque = FabricaDeBotoes.criaBotao("Ataque", "Ataque", new EventoAtaque());;
 		
 		if(jogo.faseAtual.equals(TipoFase.FASE_1)){
 			if(jogo.getQuantidadeDeTropas()>0)
@@ -78,14 +80,19 @@ public class TelaJogo implements ITela {
 				botaoFase.setDisable(false);
 		}		
 		if(jogo.faseAtual.equals(TipoFase.FASE_2)){
-			botaoFase.setText("ACABAR FASE 2");			
+			botaoFase.setText("ACABAR FASE 2");
+			
 		}else if(jogo.faseAtual.equals(TipoFase.FASE_3)){
 			botaoFase.setText("PASSAR A VEZ");			
 		}
 		if(jogo.faseAtual.equals(TipoFase.FASE_1))
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase);
-		else
+		else if(jogo.faseAtual.equals(TipoFase.FASE_2)){
+			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome(),botaoFase),botaoAtaque);
+			//barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()),botaoAtaque);
+		}else {
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()),botaoFase);
+		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		return new Scene(vBox, 1123, 600);
 	}
