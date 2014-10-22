@@ -17,6 +17,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
@@ -25,7 +26,8 @@ public class TelaJogo implements ITela {
 	private Mapa mapa;
 
 	private Group grupo;
-	private HBox barraInformacoes; 
+	private HBox barraInformacoes;
+
 	/**
 	 * Construtor da classe TelaJogo <br>
 	 * Recebe o mapa como parametro para desenhar os botões
@@ -34,7 +36,7 @@ public class TelaJogo implements ITela {
 	 */
 	public TelaJogo(Mapa mapa) {
 		this.mapa = mapa;
-		this.barraInformacoes= new HBox(20);
+		this.barraInformacoes = new HBox(20);
 	}
 
 	/*
@@ -53,13 +55,14 @@ public class TelaJogo implements ITela {
 
 		List<Button> listaDeBotoesTerritorios = new ArrayList<Button>();
 		for (Territorio territorio : mapa.getTerritorios()) {
-			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(territorio, new EventoTerritorio()));
+			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(
+					territorio, new EventoTerritorio()));
 		}
-		
+
 		grupo = new Group();
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(listaDeBotoesTerritorios);
-		
+
 		barraInformacoes.getChildren().addAll(new Label("Novo Jogo"));
 
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
@@ -70,7 +73,7 @@ public class TelaJogo implements ITela {
 	public Scene atualizaBarraInformacoes(Jogo jogo){
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 1", new EventoProximaFase());;
-		
+		Button botaoMover = FabricaDeBotoes.criaBotao("Mover_tropas", "MOVER UMA TROPA", new EventoMove());
 		if(jogo.faseAtual.equals(TipoFase.FASE_1)){
 			if(jogo.getQuantidadeDeTropas()>0)
 				botaoFase.setDisable(true);
@@ -84,9 +87,12 @@ public class TelaJogo implements ITela {
 		}
 		if(jogo.faseAtual.equals(TipoFase.FASE_1))
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase);
+		else if(jogo.faseAtual.equals(TipoFase.FASE_3))
+				barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoMover,botaoFase);
 		else
-			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()),botaoFase);
+			 barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),new Label(jogo.getJogadorDaVez().getNome()),botaoFase);
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		return new Scene(vBox);
 	}
+
 }

@@ -2,6 +2,7 @@ package br.uff.tcc.bcc.esii.controlador;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.sun.java.swing.plaf.windows.WindowsTreeUI.CollapsedIcon;
@@ -35,8 +36,14 @@ public class ControladorJogo {
 	
 	private boolean selecionouTerritorioProprio = false;
 	private boolean selecionouTerritorioInimigo = false;
+	private boolean selecionouTerritorioFonte = false;
+	private boolean selecionouTerritorioDestino = false;
 	private Territorio territorioAtacante;
 	private Territorio territorioDefensor;
+	private Territorio territorioFonte;
+	private Territorio territorioDestino;
+	private List<Territorio> jaMovidos = new LinkedList<Territorio>();
+	int tropasMovendo;
 
 	public void acaoTerritorio(Button botao) {
 		//System.out.println(botao.getId());
@@ -75,8 +82,27 @@ public class ControladorJogo {
 					}					
 				}				
 			}
+				
+		}else if(jogo.faseAtual == TipoFase.FASE_3 && !selecionouTerritorioFonte){
+			if(jogador.conquistouTerritorio(botao.getId())){
+				if(!jaMovidos.contains(botao.getId())){
+						selecionouTerritorioFonte = true;
+						territorioFonte = jogador.getTerritorioConquistado(botao.getId());
+						System.out.println("escolheu fonte");
+					}
+				}
+			
+		}else if(jogo.faseAtual == TipoFase.FASE_3 && selecionouTerritorioFonte){
+			if(jogador.conquistouTerritorio(botao.getId())){
+				if(territorioFonte.getVizinhos().contains(botao.getId())){
+					selecionouTerritorioDestino = true;
+					territorioDestino = jogador.getTerritorioConquistado(botao.getId());
+					System.out.println("escolheu fonte");
+				}
+			}
 		}
-	}	
+	}
+		
 	
 	public void desabilitaBotoes(Jogador jogador, boolean meusTerritorios){		
 	}
@@ -87,6 +113,7 @@ public class ControladorJogo {
 	}
 	
 	public void proximaFase(){
+		
 		jogo.proximaFase();
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 	}
@@ -135,5 +162,27 @@ public class ControladorJogo {
 		}
 		
 	}
+	
+	public void acaoMover(Button moveBtn){
+		if(selecionouTerritorioFonte && selecionouTerritorioDestino){			
+			//ver se fonte tem pelo menos 2 tropas
+			if(territorioFonte.getQuantidadeTropa() > 1){
+				jogo.redistribuiTropa(territorioFonte, territorioDestino, 1);
+				System.out.println("moveu");
+			}
+			jaMovidos.add(territorioDestino);
+		}		
+	}
+	
+	public void terminaMover(Button endMoves){
+		selecionouTerritorioFonte = false;
+		selecionouTerritorioDestino = false;
+		jaMovidos.clear();		
+		proximaFase();
+	}
+	
+	
+
+	
 
 }
