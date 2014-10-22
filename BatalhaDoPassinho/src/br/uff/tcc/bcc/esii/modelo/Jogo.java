@@ -179,14 +179,14 @@ public class Jogo {
 	 * Os paises tem que ser vizinhos 	 
 	 * (Supondo A,B,C) Se mover de A para B, não pode mais mover de B para ninguém. Ainda pode mover de C para A ou de A para C.
 	 * Considerando que os dois territorios passados são vizinhos. 
-	 * Considerando que o territorio destino ainda não recebeu tropas de outros territorios.
+	 * Considerando que ele não recebeu tropas de ninguem
 	 * Considerando que a quantidade de tropas a serem movidas é menor que o total de tropas no territorio origem.
 	 * @param jogador Jogador que redistribuira as tropas
 	 * @param origem Territorio de onde sairão as tropas, pego pelo controlador
 	 * @param destino Territorio para onde irão as tropas, pego pelo controlador
 	 * @param quantidadeDeTropas quantas tropas serão movidas, deve ser pego pelo controlador.
 	 */
-	public void redistribuiTropa(Jogador jogador, Territorio origem, Territorio destino, int quantidadeDeTropas){			
+	public void redistribuiTropa(Territorio origem, Territorio destino, int quantidadeDeTropas){			
 	
 		destino.setQuantidadeTropa(destino.getQuantidadeTropa()+quantidadeDeTropas);
 		origem.setQuantidadeTropa(origem.getQuantidadeTropa()-quantidadeDeTropas);						
