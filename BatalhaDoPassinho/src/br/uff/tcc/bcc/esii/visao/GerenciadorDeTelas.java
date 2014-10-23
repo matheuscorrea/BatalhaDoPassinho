@@ -32,7 +32,8 @@ public class GerenciadorDeTelas{
 	
 	private TelaJogo telaJogo;
 	private TelaEscolha telaEscolha;
-	
+	private TelaOpcoes telaOpcoes;
+	private TelaInicial telaInicial;
 	/**
 	 * Construtor privado para outras classes não instanciarem.
 	 */
@@ -70,7 +71,7 @@ public class GerenciadorDeTelas{
 	 */
 	public void mudaTela(TipoDaTela tela){
 		if(TipoDaTela.inicio.equals(tela)){
-			ITela telaInicial = new TelaInicial();			
+			telaInicial = new TelaInicial();			
 			Scene cena = telaInicial.getScene();
 			stagePrincipal.setScene(cena);
 		}else if(TipoDaTela.jogo.equals(tela)){
@@ -79,7 +80,7 @@ public class GerenciadorDeTelas{
 			Scene cena = telaJogo.getScene();
 			stagePrincipal.setScene(cena);
 		}else if(TipoDaTela.opcoes.equals(tela)){
-			ITela telaOpcoes= new TelaOpcoes();			
+			telaOpcoes= new TelaOpcoes();			
 			Scene cena = telaOpcoes.getScene();
 			stagePrincipal.setScene(cena);
 		}else if(TipoDaTela.escolha.equals(tela)){

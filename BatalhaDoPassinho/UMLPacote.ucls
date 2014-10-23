@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <package id="1" language="java" name="br.uff.tcc.bcc.esii.visao.eventos" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii/visao/eventos" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="383" y="47"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="2" language="java" name="br.uff.tcc.bcc.esii" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="143" y="170"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="3" language="java" name="br.uff.tcc.bcc.esii.visao" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii/visao" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="477" y="153"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="4" language="java" name="br.uff.tcc.bcc.esii.visao.telas" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii/visao/telas" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="619" y="58"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="5" language="java" name="br.uff.tcc.bcc.esii.controlador" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii/controlador" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="240" y="486"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="6" language="java" name="br.uff.tcc.bcc.esii.modelo" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii/modelo" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="918" y="474"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <package id="7" language="java" name="br.uff.tcc.bcc.esii.modelo.objetivo" project="BatalhaDoPassinho" 
+    file="/BatalhaDoPassinho/src/br/uff/tcc/bcc/esii/modelo/objetivo" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="955" y="338"/>    
+    <display autosize="true" stereotype="true" accessors="true"/>  
+  </package>  
+  <dependency id="8">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="9">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="10">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="11">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="12">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="13">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="15">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="19">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="20">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false" static="false"/>    
+    <operations public="false" package="false" protected="false" private="false" static="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
