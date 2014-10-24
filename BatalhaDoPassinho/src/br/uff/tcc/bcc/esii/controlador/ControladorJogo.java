@@ -44,8 +44,10 @@ public class ControladorJogo {
 	private Territorio territorioDefensor;
 	private Button btAtacante;
 	private Button btDefensor;
-	private Territorio territorioFonte;
-	private Territorio territorioDestino;
+	private Button btFonte;
+	private Button btDestino;
+	public  Territorio territorioFonte;
+	public Territorio territorioDestino;
 	private List<Territorio> jaMovidos = new LinkedList<Territorio>();
 	int tropasMovendo;
 
@@ -96,7 +98,9 @@ public class ControladorJogo {
 				if(!jaMovidos.contains(botao.getId())){
 						selecionouTerritorioFonte = true;
 						territorioFonte = jogador.getTerritorioConquistado(botao.getId());
+						btFonte = botao;
 						System.out.println("escolheu fonte");
+						GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 					}
 				}
 			
@@ -105,10 +109,26 @@ public class ControladorJogo {
 				if(territorioFonte.getVizinhos().containsKey(botao.getId())){
 					selecionouTerritorioDestino = true;
 					territorioDestino = jogador.getTerritorioConquistado(botao.getId());
-					System.out.println("escolheu fonte");
+					btDestino = botao;
+					System.out.println("escolheu destino");
+					GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 				}
 			}
+		}else if(jogo.faseAtual == TipoFase.FASE_3 && selecionouTerritorioDestino){
+			selecionouTerritorioDestino=false;
+			selecionouTerritorioFonte=false;
+			if(jogador.conquistouTerritorio(botao.getId())){
+				if(!jaMovidos.contains(botao.getId())){
+						selecionouTerritorioFonte = true;
+						territorioFonte = jogador.getTerritorioConquistado(botao.getId());
+						btFonte = botao;
+						System.out.println("escolheu fonte");
+						GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+					}
+				}
+			
 		}
+		
 	}
 		
 	
@@ -122,7 +142,23 @@ public class ControladorJogo {
 	
 	public void proximaFase(){
 		
-		jogo.proximaFase();
+		if(jogo.faseAtual==TipoFase.FASE_2){
+			
+			if(selecionouTerritorioInimigo){
+				selecionouTerritorioInimigo = false;
+				btDefensor.setDisable(false);
+			}
+			if(selecionouTerritorioProprio){
+				selecionouTerritorioProprio = false;
+				btAtacante.setDisable(false);
+			}
+		}
+		if(jogo.faseAtual==TipoFase.FASE_3){
+			selecionouTerritorioFonte=false;
+			selecionouTerritorioDestino=false;
+			jaMovidos.clear();
+		}
+		jogo.proximaFase();		
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 	}
 	
@@ -192,18 +228,14 @@ public class ControladorJogo {
 			//ver se fonte tem pelo menos 2 tropas
 			if(territorioFonte.getQuantidadeTropa() > 1){
 				jogo.redistribuiTropa(territorioFonte, territorioDestino, 1);
+				btFonte.setText(territorioFonte.getQuantidadeTropa()+"");
+				btDestino.setText(territorioDestino.getQuantidadeTropa()+"");
 				System.out.println("moveu");
 			}
 			jaMovidos.add(territorioDestino);
 		}		
 	}
 	
-	public void terminaMover(Button endMoves){
-		selecionouTerritorioFonte = false;
-		selecionouTerritorioDestino = false;
-		jaMovidos.clear();		
-		proximaFase();
-	}
 	
 	
 
