@@ -48,7 +48,7 @@ public class ControladorJogo {
 	private Button btDestino;
 	public  Territorio territorioFonte;
 	public Territorio territorioDestino;
-	private List<Territorio> jaMovidos = new LinkedList<Territorio>();
+	private List<String> jaMovidos = new LinkedList<String>();
 	int tropasMovendo;
 
 	public void acaoTerritorio(Button botao) {
@@ -93,6 +93,21 @@ public class ControladorJogo {
 				}				
 			}
 				
+		}else if(jogo.faseAtual == TipoFase.FASE_3 && selecionouTerritorioDestino){
+			
+			selecionouTerritorioFonte=false;
+			selecionouTerritorioDestino=false;
+			
+			if(jogador.conquistouTerritorio(botao.getId())){
+				if(!jaMovidos.contains(botao.getId())){
+						selecionouTerritorioFonte = true;
+						territorioFonte = jogador.getTerritorioConquistado(botao.getId());
+						btFonte = botao;
+						System.out.println("escolheu fonte");
+						GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+					}
+			}
+			
 		}else if(jogo.faseAtual == TipoFase.FASE_3 && !selecionouTerritorioFonte){
 			if(jogador.conquistouTerritorio(botao.getId())){
 				if(!jaMovidos.contains(botao.getId())){
@@ -114,21 +129,7 @@ public class ControladorJogo {
 					GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 				}
 			}
-		}else if(jogo.faseAtual == TipoFase.FASE_3 && selecionouTerritorioDestino){
-			selecionouTerritorioDestino=false;
-			selecionouTerritorioFonte=false;
-			if(jogador.conquistouTerritorio(botao.getId())){
-				if(!jaMovidos.contains(botao.getId())){
-						selecionouTerritorioFonte = true;
-						territorioFonte = jogador.getTerritorioConquistado(botao.getId());
-						btFonte = botao;
-						System.out.println("escolheu fonte");
-						GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
-					}
-				}
-			
 		}
-		
 	}
 		
 	
@@ -232,7 +233,7 @@ public class ControladorJogo {
 				btDestino.setText(territorioDestino.getQuantidadeTropa()+"");
 				System.out.println("moveu");
 			}
-			jaMovidos.add(territorioDestino);
+			jaMovidos.add(territorioDestino.getNome());
 		}		
 	}
 	
