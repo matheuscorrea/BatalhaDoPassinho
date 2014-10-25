@@ -24,13 +24,10 @@ public class TelaEscolha implements ITela  {
 	
 	private HBox hbSuperior;
 	private HBox hbInferior;
-	private HBox hbButoes;
-	
+	private HBox hbButoes;	
 
 	public TelaEscolha() {
-		this.avatar = new VBox[6];
-
-		
+		this.avatar = new VBox[6];		
 	}
 	
 	@Override
@@ -97,10 +94,8 @@ public class TelaEscolha implements ITela  {
 					comboBox.getSelectionModel().select(0);					
 				}
 			}
-		}
-		
-		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes); 
-		
+		}		
+		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes);		
 		atualizaListaJogadores();
 		
 		return new Scene(raiz);
@@ -122,7 +117,5 @@ public class TelaEscolha implements ITela  {
 			}
 		}
 		ControladorTelaEscolha.getInstancia().setListaJogadores(listaJogadores);
-	}
-	
-	
+	}	
 }

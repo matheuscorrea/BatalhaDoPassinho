@@ -9,7 +9,6 @@ public class EventoOpcoes implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent arg0) {
-		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.opcoes);
-
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.OPCOES);
 	}
 }

@@ -16,7 +16,7 @@ public class BatalhaDoPassinho extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
-		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.inicio);
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);
 		stage.show();
 	}
 	

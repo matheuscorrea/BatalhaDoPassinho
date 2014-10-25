@@ -1,9 +1,7 @@
 package br.uff.tcc.bcc.esii.modelo;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 

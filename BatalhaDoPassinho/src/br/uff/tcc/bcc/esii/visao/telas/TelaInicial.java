@@ -17,10 +17,6 @@ import javafx.stage.Stage;
  */
 public class TelaInicial implements ITela {
 
-	public TelaInicial() {
-
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * @see br.uff.tcc.bcc.visao.telas.ITela#getScene()
@@ -31,7 +27,6 @@ public class TelaInicial implements ITela {
         Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoTelaCarregar());
         Button botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
         
-        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
@@ -39,10 +34,8 @@ public class TelaInicial implements ITela {
         grid.setPadding(new Insets(25, 25, 25, 25));
 
         grid.add(botaoNovoJogo, 0, 0);
-        grid.add(botaoOpcoes, 1, 0);
-        
+        grid.add(botaoOpcoes, 1, 0);        
    
 		return new Scene(grid, 300, 250);
-
 	}
 }

@@ -9,8 +9,6 @@ public class EventoTelaInicial implements EventHandler<ActionEvent>{
 
 	@Override
 	public void handle(ActionEvent arg0) {
-		   GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.inicio);
-		    
-		
+		   GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);		
 	}
 }

@@ -9,6 +9,6 @@ public class EventoTelaCarregar implements EventHandler<ActionEvent>{
 
 	@Override
 	public void handle(ActionEvent arg0) {
-		   GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.escolha);
+		   GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.ESCOLHA);
 	}
 }

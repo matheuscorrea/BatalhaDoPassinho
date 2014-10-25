@@ -20,8 +20,7 @@ public class ObjetivoConquistar implements IObjetivo {
 		this.qnt1 = qnt1;
 		this.continente2 = cont2;
 		this.qnt2 = qnt2;
-		this.outros = outros;
-	
+		this.outros = outros;	
 	}
 	
 	public ObjetivoConquistar(int outros){ 
@@ -31,6 +30,7 @@ public class ObjetivoConquistar implements IObjetivo {
 		this.qnt2 = 0;
 		this.outros = outros;
 	}
+	
 	@Override
 	public boolean concluido(Jogador jogador, Jogador semuso) {
 		int quantBoatesPorContinente[] = new int[2];
@@ -46,13 +46,8 @@ public class ObjetivoConquistar implements IObjetivo {
 				} else {
 					outros++;
 				}
-
 			}
-		}
-		
-		return (quantBoatesPorContinente[0]== qnt1
-				&& quantBoatesPorContinente[1] == qnt2 
-				&& outros >= this.outros);
+		}		
+		return (quantBoatesPorContinente[0]== qnt1 && quantBoatesPorContinente[1] == qnt2 && outros >= this.outros);
 	}
-
 }

@@ -2,13 +2,11 @@ package br.uff.tcc.bcc.esii.modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
-import java.util.Set;
 
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
@@ -21,6 +19,7 @@ public class Jogo {
 	/**
 	 * Numero da rodada atual
 	 */
+	//TODO Discutir se há a necessidade de contar as rodadas
 	private int rodada;
 	/**
 	 * Jogadores que estao atualmente jogando
@@ -29,15 +28,17 @@ public class Jogo {
 	/**
 	 * Valor da troca de cartas
 	 */
+	//TODO Implementar troca de cartas
 	private int valorTrocaAtual;
 	/**
 	 * Se o jogador dominou territorio essa rodada
 	 */
+	//TODO Atualizar na FASE2
 	private boolean jogadorDominouTerritorio;
 	/**
 	 *Quantidade de tropas ganhas nesse turno 
 	 */
-	private int quantidadeDeTropas;
+	private int quantidadeDeTropasADistribuir;
 	/**
 	 * Mapa com todos os territorios do jogo
 	 */
@@ -45,6 +46,7 @@ public class Jogo {
 	/**
 	 * Deck das carta do jogo
 	 */
+	//TODO Implementar lógica relativa às cartas
 	private List<Carta> deck;
 	/**
 	 * Todos os tipos de fase que um jogo pode ter
@@ -68,28 +70,28 @@ public class Jogo {
 	/**
 	 * Inicia uma nova rodada
 	 */
-	public void proximaRodada()
-	{
-		//rodada++;
+	public void proximaRodada()	{
+		//rodada++; ***Necessário?***
 		faseAtual = TipoFase.FASE_1;
 		jogadorDominouTerritorio=false;
 		Jogador jogador = jogadores.poll();
 		calculaTropa(getJogadorDaVez());
-		jogadores.add(jogador);
-		
+		jogadores.add(jogador);		
 	}
 	
 	public void proximaFase(){
-		if(faseAtual.equals(TipoFase.FASE_1)){
+		
+		switch (faseAtual) {
+		case FASE_1:
 			faseAtual = TipoFase.FASE_2;
-		}else if(faseAtual.equals(TipoFase.FASE_2)){
+			break;
+		case FASE_2:
 			faseAtual = TipoFase.FASE_3;
-		}else if(faseAtual.equals(TipoFase.FASE_3)){
+			break;
+		case FASE_3:
 			proximaRodada();
 		}
-			
-	}
-	
+	}	
 	
 	/**
 	 * Metodo que simula o lançamento de um dado
@@ -111,10 +113,7 @@ public class Jogo {
 	 * @return inteiro que representa todas as tropas que vão ser ganhas
 	 */
 	private int ganhaTropa(Jogador jogador)	{
-		System.out.println("Num "+jogador.numeroDeConquistados()
-				+ "Ganha "+jogador.numeroDeConquistados()/2+" "+ganhaBonusTerritorio(jogador));
-		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);
-		
+		return Math.max(3,jogador.numeroDeConquistados()/2)+ganhaBonusTerritorio(jogador);		
 	}
 
 	/**
@@ -143,24 +142,19 @@ public class Jogo {
 				quantBoatesPorContinente[4]++;
 			}
 		}
-		if(quantBoatesPorContinente[0]==8)
-		{
+		if(quantBoatesPorContinente[0]==8){
 			resposta+=bonusZonaNorte;
 		}
-		if(quantBoatesPorContinente[1]==8)
-		{
+		if(quantBoatesPorContinente[1]==8){
 			resposta+=bonusZonaSul;
 		}
-		if(quantBoatesPorContinente[2]==10)
-		{
+		if(quantBoatesPorContinente[2]==10){
 			resposta+=bonusZonaOeste;
 		}
-		if(quantBoatesPorContinente[3]==5)
-		{
+		if(quantBoatesPorContinente[3]==5){
 			resposta+=bonusCentro;
 		}
-		if(quantBoatesPorContinente[4]==7)
-		{
+		if(quantBoatesPorContinente[4]==7){
 			resposta+=bonusNiteroi;
 		}
 		return resposta;
@@ -191,11 +185,8 @@ public class Jogo {
 	 * @param quantidadeDeTropas quantas tropas serão movidas, deve ser pego pelo controlador.
 	 */
 	public void redistribuiTropa(Territorio origem, Territorio destino, int quantidadeDeTropas){			
-	
 		destino.setQuantidadeTropa(destino.getQuantidadeTropa()+quantidadeDeTropas);
-		origem.setQuantidadeTropa(origem.getQuantidadeTropa()-quantidadeDeTropas);						
-			
-		
+		origem.setQuantidadeTropa(origem.getQuantidadeTropa()-quantidadeDeTropas);		
 	}
 	
 	/**
@@ -211,8 +202,7 @@ public class Jogo {
 	public int getTropas(String nomeTerritorio) {
 		Territorio territorio = mapa.getTerritorio(nomeTerritorio);
 		return territorio.getQuantidadeTropa();
-	}
-	
+	}	
 	
 	/**
 	 * Método rensponsável pelos ataques
@@ -221,7 +211,6 @@ public class Jogo {
 	 * @return True se o territorio atacante conseguiu destruir todas as tropas do territorio atacante,falso senão.
 	 */
 	public boolean ataque(Territorio atacante, Territorio defensor){
-		//Pode atacar
 		int qtd_tropas_atacante = Math.min(3, atacante.getQuantidadeTropa()-1);
 		int qtd_tropas_defensor = Math.min(3, defensor.getQuantidadeTropa());
 		List<Integer>dados_atacante = new LinkedList<>();;
@@ -241,9 +230,8 @@ public class Jogo {
 			}else{
 				atacante.setQuantidadeTropa(atacante.getQuantidadeTropa()-1);
 			}
-		}			
-				
-		//Jogador da vez conquistou territorio defensor					
+		}				
+		//Jogador da vez conquistou territorio defensor	
 		if(defensor.getQuantidadeTropa() == 0){
 			jogadorDominouTerritorio = true;
 			return true;						
@@ -273,8 +261,7 @@ public class Jogo {
 	 * @param eliminado Jogador eliminado do jogo
 	 */
 	public void eliminaJogador(Jogador atacante, Jogador eliminado){
-		List<Carta> cartas = eliminado.getMao();
-		for(Carta c : cartas){
+		for(Carta c : eliminado.getMao()){
 			atacante.adicionaCarta(c);
 			eliminado.removeCarta(c);
 		}
@@ -286,27 +273,27 @@ public class Jogo {
 	 * @param jogador Jogador da vez
 	 */
 	public void calculaTropa(Jogador jogador){
-		quantidadeDeTropas=ganhaTropa(jogador);
+		quantidadeDeTropasADistribuir=ganhaTropa(jogador);
 	}
 	/**
 	 * Metodo que verifica se o jogador ainda tem tropas para distribuir
 	 * @return true se o jogador ainda tem tropas para distribuir e false se não
 	 */
 	public boolean temTropas(){
-		return (quantidadeDeTropas>0);
+		return (quantidadeDeTropasADistribuir>0);
 	}
 	/**
 	 * Metodo que decrementa o numero de tropas para distribuir
 	 */
 	public void decrementaTropas(){
-		quantidadeDeTropas--;
+		quantidadeDeTropasADistribuir--;
 	}
 	/**
 	 * Metodo que retorna a quantidade de tropas
 	 * @return quantidades de tropas que o jogador tem para distribuir
 	 */
 	public int getQuantidadeDeTropas(){
-		return quantidadeDeTropas;
+		return quantidadeDeTropasADistribuir;
 	}
 
 
@@ -604,5 +591,7 @@ public class Jogo {
 		
 	}
 
-	
+	public void ganharJogo(Jogador vencedor) {
+		// TODO Implementar lógica para ganhar o jogo		
+	}	
 }

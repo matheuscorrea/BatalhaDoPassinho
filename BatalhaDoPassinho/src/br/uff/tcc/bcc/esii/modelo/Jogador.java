@@ -105,7 +105,7 @@ public class Jogador {
 		conquistados.remove(territorio.getNome());		
 	}
 	
-	public boolean conquistouTerritorio(String territorio){
+	public boolean possuiTerritorio(String territorio){
 		return conquistados.containsKey(territorio);
 	}
 	
@@ -119,7 +119,5 @@ public class Jogador {
 	
 	public void setObjetivo(IObjetivo objetivo) {
 		this.objetivo = objetivo;
-	}
-
-			
+	}			
 }

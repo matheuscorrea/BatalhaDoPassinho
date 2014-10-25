@@ -15,5 +15,4 @@ public class EventoAtaque implements EventHandler<ActionEvent> {
 		    ControladorJogo.getInstancia().acaoAtaque(clickedBtn);
 		}
 	}
-
 }

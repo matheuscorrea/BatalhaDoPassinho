@@ -26,8 +26,7 @@ public class FabricaDeBotoes {
 		botao.setId(id);
 		botao.setText(texto);
 		botao.setOnAction(acao);
-		return botao;
-		
+		return botao;		
 	}
 	
 	/**
@@ -45,9 +44,7 @@ public class FabricaDeBotoes {
 		final String imagemRosa =     "file:media/imagens/peoes/PAWNPINK.png";
 		final String imagemVermelha = "file:media/imagens/peoes/PAWNRED.png";
 		final String imagemAmarelo =  "file:media/imagens/peoes/PAWNYELLOW.png";
-		String imagemURL=imagemAzul;
-		
-		
+		String imagemURL=imagemAzul;		
 		
 		switch(territorio.getCor()){
 			case AZUL:
@@ -68,15 +65,13 @@ public class FabricaDeBotoes {
 			case AMARELO:
 				imagemURL=imagemAmarelo;
 				break;
-		}
-		
+		}		
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
 		imageView.setFitHeight(20);
 		imageView.setFitWidth(20);
 		imageView.setImage(image);
-		
-		
+				
 		Button botao =new Button(territorio.getQuantidadeTropa()+"");
 		botao.setId(territorio.getNome());
 		botao.setGraphic(imageView);
@@ -118,8 +113,7 @@ public class FabricaDeBotoes {
 			case AMARELO:
 				imagemURL=imagemAmarelo;
 				break;
-		}
-		
+		}		
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
 		imageView.setFitHeight(20);
@@ -127,6 +121,5 @@ public class FabricaDeBotoes {
 		imageView.setImage(image);
 
 		return imageView;
-	}
-	
+	}	
 }

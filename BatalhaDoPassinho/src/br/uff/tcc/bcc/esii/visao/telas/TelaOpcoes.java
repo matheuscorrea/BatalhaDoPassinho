@@ -32,5 +32,4 @@ public class TelaOpcoes implements ITela{
 		  
 		return new Scene(raiz, 300, 250);	
 	}
-
 }

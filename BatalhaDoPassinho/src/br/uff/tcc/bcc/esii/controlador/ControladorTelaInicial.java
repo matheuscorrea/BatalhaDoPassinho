@@ -1,6 +1,5 @@
 package br.uff.tcc.bcc.esii.controlador;
 
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 
 /**
@@ -11,10 +10,9 @@ import javafx.scene.control.Button;
 public class ControladorTelaInicial  {
 	
 	private static ControladorTelaInicial controlador;
-	private static int numeroDeCliques;
 	
 	private ControladorTelaInicial(){
-		numeroDeCliques=0;
+		
 	}
 	
 	public static ControladorTelaInicial getInstancia(){

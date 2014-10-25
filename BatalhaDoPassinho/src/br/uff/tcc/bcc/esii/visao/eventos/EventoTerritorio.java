@@ -19,5 +19,4 @@ public class EventoTerritorio implements EventHandler<ActionEvent>{
 		    ControladorJogo.getInstancia().acaoTerritorio(clickedBtn);
 		}
 	}
-
 }

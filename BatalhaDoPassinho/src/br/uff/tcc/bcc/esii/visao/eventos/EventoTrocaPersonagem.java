@@ -16,5 +16,4 @@ public class EventoTrocaPersonagem implements ChangeListener{
 	public void changed(ObservableValue arg0, Object arg1, Object arg2) {
 			ControladorTelaEscolha.getInstancia().acao((String)arg2,index);
 	}
-
 }

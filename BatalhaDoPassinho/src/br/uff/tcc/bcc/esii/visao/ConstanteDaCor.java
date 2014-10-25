@@ -33,6 +33,5 @@ public enum ConstanteDaCor {
           }
         }
         return null;
-    }
- 
+    } 
 }

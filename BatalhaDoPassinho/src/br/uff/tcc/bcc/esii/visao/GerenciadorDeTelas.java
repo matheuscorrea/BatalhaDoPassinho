@@ -1,16 +1,13 @@
 package br.uff.tcc.bcc.esii.visao;
 
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
-import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
-import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
-import br.uff.tcc.bcc.esii.visao.telas.ITela;
 import br.uff.tcc.bcc.esii.visao.telas.TelaEscolha;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaOpcoes;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 /**
  * Classe que gerencia a troca de telas da aplicação.<br>
@@ -70,23 +67,29 @@ public class GerenciadorDeTelas{
 	 * @param tela Enum que informa o tipo da tela.
 	 */
 	public void mudaTela(TipoDaTela tela){
-		if(TipoDaTela.inicio.equals(tela)){
+		Scene cena;
+		switch (tela) {
+		case INICIO:
 			telaInicial = new TelaInicial();			
-			Scene cena = telaInicial.getScene();
+			cena = telaInicial.getScene();
 			stagePrincipal.setScene(cena);
-		}else if(TipoDaTela.jogo.equals(tela)){
+			break;
+		case JOGO:
 			//Para iniciar a tela de jogo é preciso passar o mapa
 			telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
-			Scene cena = telaJogo.getScene();
+			cena = telaJogo.getScene();
 			stagePrincipal.setScene(cena);
-		}else if(TipoDaTela.opcoes.equals(tela)){
+			break;
+		case OPCOES:
 			telaOpcoes= new TelaOpcoes();			
-			Scene cena = telaOpcoes.getScene();
+			cena = telaOpcoes.getScene();
 			stagePrincipal.setScene(cena);
-		}else if(TipoDaTela.escolha.equals(tela)){
+			break;
+		case ESCOLHA:
 			telaEscolha= new TelaEscolha();			
-			Scene cena = telaEscolha.getScene();
+			cena = telaEscolha.getScene();
 			stagePrincipal.setScene(cena);
+			break;
 		}
 	}
 	public void atualizaBarraInformacoes(Jogo jogo){
@@ -101,10 +104,9 @@ public class GerenciadorDeTelas{
 	 * Enum que representa os tipos de tela da aplicação
 	 */
 	public enum TipoDaTela{
-		inicio,
-		escolha,
-		jogo,
-		opcoes
+		INICIO,
+		ESCOLHA,
+		JOGO,
+		OPCOES
 	}
-
 }

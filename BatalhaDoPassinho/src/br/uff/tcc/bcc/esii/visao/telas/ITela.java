@@ -4,7 +4,7 @@ import javafx.scene.Scene;
 
 /**
  * Interface para todas telas do jogo
- * @author Visagio
+ * @author Alessandro Campello, Matheus Corrêa, Paulo Possas, Tomás Osório, Thadeu Neves, Victor Rempto
  *
  */
 public interface ITela {
