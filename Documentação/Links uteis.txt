@@ -30,3 +30,9 @@ http://eclipsesource.com/blogs/tutorials/egit-tutorial/
 
 Tutorial sobre o uso de eventos em javafx
 http://docs.oracle.com/javase/tutorial/uiswing/events/
+
+Tutorial de botões customizados em javafx
+http://stackoverflow.com/questions/10518458/javafx-create-custom-button-with-image
+
+Tutorial sound javaFX(precisa checar se funciona)
+http://carlfx.wordpress.com/2012/08/26/javafx-2-gametutorial-part-5/
