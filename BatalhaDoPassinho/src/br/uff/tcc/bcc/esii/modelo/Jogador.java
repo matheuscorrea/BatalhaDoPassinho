@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import br.uff.tcc.bcc.esii.modelo.objetivo.IObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
@@ -43,6 +44,7 @@ public class Jogador {
 		this.cor = cor;
 		conquistados= new HashMap<>();
 		mao = new ArrayList<>();
+		
 	}
 	/**
 	 * @return o nome desse jogador
@@ -119,5 +121,30 @@ public class Jogador {
 	
 	public void setObjetivo(IObjetivo objetivo) {
 		this.objetivo = objetivo;
-	}			
+	}
+	/**
+	 * Adiciona uma carta aleatoria à mão do jogador.
+	 */
+	public void ganhaCarta(){
+		
+		int random = 1 + ((int)Math.random()*44);
+		System.out.println(random);
+		
+		if(random <= 14 ){			
+			mao.add(new Carta(Carta.Tipo.TIRO));
+		}else if(random > 14 && random <= 28){		
+			mao.add(new Carta(Carta.Tipo.PORRADA));
+		}else if(random > 28 && random <= 42){
+			mao.add(new Carta(Carta.Tipo.BOMBA));
+		}else	
+			mao.add(new Carta(Carta.Tipo.VALESCA));		
+	}
+	/**
+	 * Descarta uma carta aleatória da mão do jogador.
+	 */
+	public void descartar(){
+		int descarte = 1 + (int)(Math.random()*mao.size());
+		mao.remove(descarte);
+	}
+	
 }

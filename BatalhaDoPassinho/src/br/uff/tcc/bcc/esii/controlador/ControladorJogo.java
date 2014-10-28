@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javafx.scene.control.Button;
+import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
@@ -36,6 +37,7 @@ public class ControladorJogo {
 	private boolean selecionouTerritorioInimigo = false;
 	private boolean selecionouTerritorioFonte = false;
 	private boolean selecionouTerritorioDestino = false;
+	private boolean dominouTerrritorio = false;
 	private Territorio territorioAtacante;
 	private Territorio territorioDefensor;
 	private Button btAtacante;
@@ -46,6 +48,7 @@ public class ControladorJogo {
 	public Territorio territorioDestino;
 	private List<String> jaMovidos = new LinkedList<String>();
 	int tropasMovendo;
+	
 	//Atributos criados para evento território
 	
 	public void acaoTerritorio(Button botao) {
@@ -137,6 +140,14 @@ public class ControladorJogo {
 			selecionouTerritorioFonte=false;
 			selecionouTerritorioDestino=false;
 			jaMovidos.clear();
+			if(dominouTerrritorio){
+				jogo.getJogadorDaVez().ganhaCarta();
+				if(jogo.getJogadorDaVez().getMao().size()>5){
+					do{
+						jogo.getJogadorDaVez().descartar();
+					}while(jogo.getJogadorDaVez().getMao().size() >5);
+				}
+			}
 			break;
 		}		
 		jogo.proximaFase();		
@@ -150,6 +161,7 @@ public class ControladorJogo {
 		
 		for (Jogador jogador : listaJogadores) {
 			jogo.adicionaJogador(jogador);
+			
 		}
 		jogo.distribuiObjetivos(listaJogadores);		
 		jogo.distribuiTerritorio();		
@@ -166,7 +178,7 @@ public class ControladorJogo {
 
 	public void acaoAtaque(Button clickedBtn) {
 		if(selecionouTerritorioInimigo && selecionouTerritorioProprio){
-			boolean dominouTerrritorio = jogo.ataque(territorioAtacante, territorioDefensor);
+			dominouTerrritorio = jogo.ataque(territorioAtacante, territorioDefensor);
 			btAtacante.setText(""+territorioAtacante.getQuantidadeTropa());
 			btDefensor.setText(""+territorioDefensor.getQuantidadeTropa());
 			selecionouTerritorioInimigo = false;
