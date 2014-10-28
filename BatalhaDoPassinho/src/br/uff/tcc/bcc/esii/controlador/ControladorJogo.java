@@ -217,4 +217,58 @@ public class ControladorJogo {
 			jaMovidos.add(territorioDestino.getNome());
 		}		
 	}	
+	
+	public void acaoTelaTroca(Button moveBtn){		
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.TROCA);
+	}
+
+	public void voltaAoJogo() {
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
+		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+	}
+
+	public int[] getNumeroCartasJogador() {
+		Jogador jogador = ControladorJogo.getInstancia().jogo.getJogadorDaVez();
+		int tiro = 0;
+		int porrada = 0;
+		int bomba = 0;
+		int valesca = 0;
+		for(Carta carta : jogador.getMao()){
+			switch(carta.getTipo()){
+			case TIRO:
+				tiro++;
+				break;
+			case PORRADA:
+				porrada++;
+				break;
+			case BOMBA:
+				bomba++;
+				break;
+			case VALESCA:
+				valesca++;
+				break;
+			}
+		}
+		
+		int [] resp = new int [4];
+		resp[0] = tiro;
+		resp[1] = porrada;
+		resp[2] = bomba;
+		resp[3] = valesca;
+		
+		return resp;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

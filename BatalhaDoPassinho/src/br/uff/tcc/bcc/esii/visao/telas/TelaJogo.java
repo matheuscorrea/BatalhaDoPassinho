@@ -11,15 +11,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
-import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
 public class TelaJogo implements ITela {
@@ -28,6 +27,9 @@ public class TelaJogo implements ITela {
 
 	private Group grupo;
 	private HBox barraInformacoes;
+	
+	//private static TelaJogo telaJogo;
+	
 
 	/**
 	 * Construtor da classe TelaJogo <br>
@@ -39,6 +41,13 @@ public class TelaJogo implements ITela {
 		this.mapa = mapa;
 		this.barraInformacoes = new HBox(20);
 	}
+	
+//	public static TelaJogo getInstancia(){
+//		if (telaJogo == null){
+//			telaJogo = new TelaJogo();
+//		}
+//		return telaJogo;
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -75,7 +84,8 @@ public class TelaJogo implements ITela {
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase", "ACABAR FASE 1", new EventoProximaFase());;
 		Button botaoMover = FabricaDeBotoes.criaBotao("Mover_tropas", "MOVER UMA TROPA", new EventoMove());
-		Button botaoAtaque = FabricaDeBotoes.criaBotao("Ataque", "Ataque", new EventoAtaque());;
+		Button botaoAtaque = FabricaDeBotoes.criaBotao("Ataque", "Ataque", new EventoAtaque());
+		Button botaoTroca = FabricaDeBotoes.criaBotao("Trocar_cartas", "TROCAR CARTAS", new EventoTelaCartas());
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
@@ -85,7 +95,7 @@ public class TelaJogo implements ITela {
 				botaoFase.setDisable(false);
 			
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase);
+					new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase,botaoTroca);
 			break;
 		case FASE_2:
 			botaoFase.setText("ACABAR FASE 2");

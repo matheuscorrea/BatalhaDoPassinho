@@ -8,6 +8,7 @@ import br.uff.tcc.bcc.esii.visao.telas.TelaEscolha;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaOpcoes;
+import br.uff.tcc.bcc.esii.visao.telas.TelaTroca;
 
 /**
  * Classe que gerencia a troca de telas da aplicação.<br>
@@ -31,6 +32,7 @@ public class GerenciadorDeTelas{
 	private TelaEscolha telaEscolha;
 	private TelaOpcoes telaOpcoes;
 	private TelaInicial telaInicial;
+	private TelaTroca telaTroca;
 	/**
 	 * Construtor privado para outras classes não instanciarem.
 	 */
@@ -90,6 +92,10 @@ public class GerenciadorDeTelas{
 			cena = telaEscolha.getScene();
 			stagePrincipal.setScene(cena);
 			break;
+		case TROCA:
+			telaTroca = new TelaTroca(ControladorJogo.getInstancia().getNumeroCartasJogador());
+			cena = telaTroca.getScene();
+			stagePrincipal.setScene(cena);
 		}
 	}
 	public void atualizaBarraInformacoes(Jogo jogo){
@@ -107,6 +113,7 @@ public class GerenciadorDeTelas{
 		INICIO,
 		ESCOLHA,
 		JOGO,
-		OPCOES
+		OPCOES,
+		TROCA
 	}
 }
