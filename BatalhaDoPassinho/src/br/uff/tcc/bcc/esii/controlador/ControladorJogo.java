@@ -148,6 +148,7 @@ public class ControladorJogo {
 					}while(jogo.getJogadorDaVez().getMao().size() >5);
 				}
 			}
+			dominouTerrritorio = false;
 			break;
 		}		
 		jogo.proximaFase();		

@@ -127,7 +127,7 @@ public class Jogador {
 	 */
 	public void ganhaCarta(){
 		
-		int random = 1 + ((int)Math.random()*44);
+		int random = 1 + (int)(Math.random()*44);
 		System.out.println(random);
 		
 		if(random <= 14 ){			
