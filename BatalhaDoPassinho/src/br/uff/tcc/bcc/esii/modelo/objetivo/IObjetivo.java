@@ -9,4 +9,6 @@ public interface IObjetivo {
 	 * @return se territorio foi conquistado
 	 */
 	public boolean concluido(Jogador atacante, Jogador defensor);
+	
+	public String getNomeObjetivo();
 }

@@ -16,6 +16,7 @@ import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoMostraObjetivo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
@@ -86,6 +87,7 @@ public class TelaJogo implements ITela {
 		Button botaoMover = FabricaDeBotoes.criaBotao("Mover_tropas", "MOVER UMA TROPA", new EventoMove());
 		Button botaoAtaque = FabricaDeBotoes.criaBotao("Ataque", "Ataque", new EventoAtaque());
 		Button botaoTroca = FabricaDeBotoes.criaBotao("Trocar_cartas", "TROCAR CARTAS", new EventoTelaCartas());
+		Button botaoObjetivo = FabricaDeBotoes.criaBotao("Ver_objetivo", "VER OBJETIVO", new EventoMostraObjetivo());
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
@@ -95,7 +97,7 @@ public class TelaJogo implements ITela {
 				botaoFase.setDisable(false);
 			
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase,botaoTroca);
+					new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoFase,botaoTroca,botaoObjetivo);
 			break;
 		case FASE_2:
 			botaoFase.setText("ACABAR FASE 2");
@@ -105,16 +107,16 @@ public class TelaJogo implements ITela {
 				botaoFase.setDisable(false);
 			
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome(),botaoFase),botaoAtaque);
+					new Label(jogo.getJogadorDaVez().getNome(),botaoFase),botaoAtaque,botaoObjetivo);
 			break;
 		case FASE_3:
 			botaoFase.setText("PASSAR A VEZ");
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoMover,botaoFase);
+					new Label(jogo.getJogadorDaVez().getNome()+" "+jogo.getQuantidadeDeTropas()),botaoMover,botaoFase,botaoObjetivo);
 			break;
 		default:
 			barraInformacoes.getChildren().addAll(new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome()),botaoFase);
+					new Label(jogo.getJogadorDaVez().getNome()),botaoFase,botaoObjetivo);
 			break;
 		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);

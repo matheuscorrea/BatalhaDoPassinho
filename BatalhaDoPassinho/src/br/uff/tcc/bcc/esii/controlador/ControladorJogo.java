@@ -219,8 +219,13 @@ public class ControladorJogo {
 		}		
 	}	
 	
+	//TODO Método realmente precisa receber o botão clicado?
 	public void acaoTelaTroca(Button moveBtn){		
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.TROCA);
+	}
+	
+	public void acaoTelaObjetivo(){
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.OBJETIVO);
 	}
 
 	public void voltaAoJogo() {
@@ -229,7 +234,7 @@ public class ControladorJogo {
 	}
 
 	public int[] getNumeroCartasJogador() {
-		Jogador jogador = ControladorJogo.getInstancia().jogo.getJogadorDaVez();
+		Jogador jogador = jogo.getJogadorDaVez();
 		int tiro = 0;
 		int porrada = 0;
 		int bomba = 0;
@@ -260,16 +265,9 @@ public class ControladorJogo {
 		return resp;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String objetivoDoJogadorAtual(){
+		Jogador jogador = jogo.getJogadorDaVez();
+		return jogador.getObjetivo().getNomeObjetivo();
+	}
 	
 }

@@ -50,4 +50,13 @@ public class ObjetivoConquistar implements IObjetivo {
 		}		
 		return (quantBoatesPorContinente[0]== qnt1 && quantBoatesPorContinente[1] == qnt2 && outros >= this.outros);
 	}
+	
+	@Override
+	public String getNomeObjetivo(){
+		if(qnt1 == 0){
+			return "Consquistar "+outros+" territórios.";
+		}else{
+			return "Consquistar os continentes: "+continente1+" e "+continente2;
+		}
+	}
 }
