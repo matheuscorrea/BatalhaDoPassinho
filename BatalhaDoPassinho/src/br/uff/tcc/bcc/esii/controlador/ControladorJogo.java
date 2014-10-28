@@ -223,12 +223,17 @@ public class ControladorJogo {
 			}
 			jaMovidos.add(territorioDestino.getNome());
 		}		
-	}	
+	}		
+
 	
-	public void acaoTelaTroca(Button moveBtn){
+	public void acaoTelaTroca(Button Btn){		
 		controleDeCartas = getNumeroCartasJogador();
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.TROCA);
 		
+	}
+	
+	public void acaoTelaObjetivo(){
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.OBJETIVO);
 	}
 
 	public void voltaAoJogo() {
@@ -272,6 +277,7 @@ public class ControladorJogo {
 		
 		return resp;
 	}
+
 
 	public void selecionouCartaTiro(Button moveBtn) {
 		if(controleDeCartas[0] > 0){
@@ -475,5 +481,12 @@ public class ControladorJogo {
 	
 	
 	
+
+	
+	public String objetivoDoJogadorAtual(){
+		Jogador jogador = jogo.getJogadorDaVez();
+		return jogador.getObjetivo().getNomeObjetivo();
+	}
+
 	
 }

@@ -7,6 +7,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaEscolha;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
+import br.uff.tcc.bcc.esii.visao.telas.TelaObjetivo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaOpcoes;
 import br.uff.tcc.bcc.esii.visao.telas.TelaTroca;
 
@@ -33,6 +34,8 @@ public class GerenciadorDeTelas{
 	private TelaOpcoes telaOpcoes;
 	private TelaInicial telaInicial;
 	private TelaTroca telaTroca;
+	private TelaObjetivo telaObjetivo;
+	
 	/**
 	 * Construtor privado para outras classes não instanciarem.
 	 */
@@ -96,6 +99,13 @@ public class GerenciadorDeTelas{
 			telaTroca = new TelaTroca(ControladorJogo.getInstancia().getNumeroCartasJogador());
 			cena = telaTroca.getScene();
 			stagePrincipal.setScene(cena);
+			break;
+		case OBJETIVO:
+			telaObjetivo = new TelaObjetivo(ControladorJogo.getInstancia().objetivoDoJogadorAtual());
+			cena = telaObjetivo.getScene();
+			stagePrincipal.setScene(cena);
+			break;
+		
 		}
 	}
 	public void atualizaBarraTroca(){
@@ -118,6 +128,7 @@ public class GerenciadorDeTelas{
 		ESCOLHA,
 		JOGO,
 		OPCOES,
-		TROCA
+		TROCA,
+		OBJETIVO
 	}
 }

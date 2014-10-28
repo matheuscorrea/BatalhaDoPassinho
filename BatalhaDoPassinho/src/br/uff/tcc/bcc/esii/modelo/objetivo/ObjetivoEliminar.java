@@ -24,4 +24,10 @@ public class ObjetivoEliminar implements IObjetivo {
 		}		
 		return false;
 	}
+	
+	@Override
+	public String getNomeObjetivo(){
+		return "Eliminar o jogador de cor "+cor.toString();
+	
+	}
 }
