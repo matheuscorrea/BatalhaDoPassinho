@@ -55,12 +55,15 @@ public class Jogo {
 	/**
 	 * Marcador da fase atual
 	 */
-	public TipoFase faseAtual; 
+	public TipoFase faseAtual;
+	
+	public int numeroDeTrocasRealizadas;
 	/**
 	 * Construtor da classe jogo
 	 */
 	public Jogo() {
 		rodada=0;
+		numeroDeTrocasRealizadas = 0;
 		faseAtual = TipoFase.FASE_1;
 		jogadores=new LinkedList<Jogador>();
 		mapa=new Mapa();
@@ -593,5 +596,10 @@ public class Jogo {
 
 	public void ganharJogo(Jogador vencedor) {
 		// TODO Implementar lógica para ganhar o jogo		
-	}	
+	}
+	
+	public void adicionaTropasTroca(){
+		quantidadeDeTropasADistribuir = quantidadeDeTropasADistribuir + 4 + (2*numeroDeTrocasRealizadas);
+		numeroDeTrocasRealizadas++;
+	}
 }

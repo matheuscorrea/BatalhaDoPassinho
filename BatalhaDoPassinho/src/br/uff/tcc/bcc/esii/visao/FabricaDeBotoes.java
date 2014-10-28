@@ -29,6 +29,13 @@ public class FabricaDeBotoes {
 		return botao;		
 	}
 	
+	public static Button criaBotaoComImagem(String id, String texto, EventHandler<ActionEvent> acao, Image imagem){
+		Button botao = new Button(texto, new ImageView(imagem));
+		botao.setId(id);
+		botao.setOnAction(acao);
+		return botao;		
+	}
+	
 	/**
 	 * Método que retorna uma instância de Botao de acordo com os parâmetros passados
 	 * @param id 

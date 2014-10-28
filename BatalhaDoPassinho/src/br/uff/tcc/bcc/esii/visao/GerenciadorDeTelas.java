@@ -98,6 +98,10 @@ public class GerenciadorDeTelas{
 			stagePrincipal.setScene(cena);
 		}
 	}
+	public void atualizaBarraTroca(){
+		Scene cena = telaTroca.atualizaBarraTroca();
+		stagePrincipal.setScene(cena);
+	}
 	public void atualizaBarraInformacoes(Jogo jogo){
 		Scene cena = telaJogo.atualizaBarraInformacoes(jogo);
 		stagePrincipal.setScene(cena);
