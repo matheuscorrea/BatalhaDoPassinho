@@ -8,6 +8,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
@@ -27,6 +29,16 @@ public class TelaInicial implements ITela {
         Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoTelaCarregar());
         Button botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
         
+        
+//        Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",200,200,true,true);
+//		ImageView imageView = new ImageView();
+//		//imageView.setFitHeight(214);
+//		//imageView.setFitWidth(132);
+//		imageView.setImage(image);
+//		Button botaoNovoJogo = new Button();
+//		botaoNovoJogo.setCenterShape(true);
+//        botaoNovoJogo.setGraphic(imageView);
+//        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

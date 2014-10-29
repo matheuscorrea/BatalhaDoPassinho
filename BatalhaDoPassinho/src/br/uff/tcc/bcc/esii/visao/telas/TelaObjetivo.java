@@ -19,8 +19,6 @@ public class TelaObjetivo implements ITela{
 		this.objetivo = objetivo;
 	}
 	
-	
-
 	@Override
 	public Scene getScene() {
 		Button voltar = FabricaDeBotoes.criaBotao("Voltar_Objetivo", "VOLTAR",new EventoTelaJogo());
@@ -29,17 +27,18 @@ public class TelaObjetivo implements ITela{
 		ImageView imageView = new ImageView();
 		imageView.setImage(cartaObjetivo);
 
-
-		//Group grupo = new Group();
-		Label textoObjetivo = new Label(objetivo);
+		Group grupo = new Group();
 		//TODO Coordenadas relativas
-		//textoObjetivo.setLayoutX(100);
-		//textoObjetivo.setLayoutY(100);
+		Label textoObjetivo = new Label(objetivo);
+		textoObjetivo.setMaxWidth(200);
+		textoObjetivo.setWrapText(true);
+		textoObjetivo.setLayoutX(25);
+		textoObjetivo.setLayoutY(120);
 		
-//		grupo.getChildren().addAll(imageView);
-//		grupo.getChildren().addAll(new Label(objetivo));
-		VBox raiz = new VBox(10, new Label("Objetivo:"),imageView,textoObjetivo, voltar); 	
-		
+		grupo.getChildren().addAll(imageView);
+		grupo.getChildren().addAll(textoObjetivo);
+		VBox raiz = new VBox(10, grupo, voltar); 	
+
 		return new Scene(raiz);
 	}
 
