@@ -131,4 +131,8 @@ public class GerenciadorDeTelas{
 		TROCA,
 		OBJETIVO
 	}
+	public void sair() {
+		stagePrincipal.close();
+		
+	}
 }

@@ -3,6 +3,7 @@ package br.uff.tcc.bcc.esii.visao.telas;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
  * Classe que implementa a distribuição dos botões na tela inicial
  *
  */
-public class TelaInicial implements ITela {
+public class TelaInicial implements ITela {	
 
 	/*
 	 * (non-Javadoc)
@@ -26,18 +27,26 @@ public class TelaInicial implements ITela {
 	@Override
 	public Scene getScene() {
 
-        Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoTelaCarregar());
-        Button botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
+        //Button botaoNovoJogo = FabricaDeBotoes.criaBotao("NOVO_JOGO", "Novo jogo", new EventoTelaCarregar());
+        //Button botaoOpcoes = FabricaDeBotoes.criaBotao("OPCOES", "Opcoes", new EventoOpcoes());
         
         
-//        Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",200,200,true,true);
+        Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",100,100,true,true);
+        Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
+        Image imageSair = new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true);
+        Button botaoSair = FabricaDeBotoes.criaBotaoComImagem("Botao_Sair", "", new EventoSair(), imageSair);
+        Image imageRegras = new Image("file:media/imagens/botoes/BTREGRAS.png",100,100,true,true);
+        Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Botao_Regras", "", new EventoOpcoes(), imageRegras);
 //		ImageView imageView = new ImageView();
 //		//imageView.setFitHeight(214);
 //		//imageView.setFitWidth(132);
 //		imageView.setImage(image);
-//		Button botaoNovoJogo = new Button();
+		
+		
+//		botaoNovoJogo.setStyle("-fx-focus-color: transparent");
+		
 //		botaoNovoJogo.setCenterShape(true);
-//        botaoNovoJogo.setGraphic(imageView);
+//      botaoNovoJogo.setGraphic(imageView);
 //        
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -45,9 +54,11 @@ public class TelaInicial implements ITela {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
-        grid.add(botaoNovoJogo, 0, 0);
-        grid.add(botaoOpcoes, 1, 0);        
+        
+        grid.add(botaoNovoJogo, 2, 1);
+        grid.add(botaoRegras, 2, 2);
+        grid.add(botaoSair,2, 3);
    
-		return new Scene(grid, 300, 250);
+		return new Scene(grid, 800, 600);
 	}
 }

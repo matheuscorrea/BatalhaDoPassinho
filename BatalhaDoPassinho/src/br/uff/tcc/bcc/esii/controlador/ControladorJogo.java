@@ -488,5 +488,10 @@ public class ControladorJogo {
 		return jogador.getObjetivo().getNomeObjetivo();
 	}
 
+	public void acaoSair(Button moveBtn) {
+		GerenciadorDeTelas.getInstancia().sair();
+		
+	}
+
 	
 }

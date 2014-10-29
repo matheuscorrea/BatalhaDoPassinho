@@ -22,7 +22,7 @@ public class TelaObjetivo implements ITela{
 	@Override
 	public Scene getScene() {
 		Button voltar = FabricaDeBotoes.criaBotao("Voltar_Objetivo", "VOLTAR",new EventoTelaJogo());
-		Image cartaObjetivo = new Image("file:media/imagens/cartas/valesca.png",320,320,true,true);	
+		Image cartaObjetivo = new Image("file:media/imagens/cartas/template.png",400,400,true,true);	
 		
 		ImageView imageView = new ImageView();
 		imageView.setImage(cartaObjetivo);
