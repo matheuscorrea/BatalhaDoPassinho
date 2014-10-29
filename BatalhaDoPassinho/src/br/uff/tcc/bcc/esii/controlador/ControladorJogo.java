@@ -1,5 +1,7 @@
 package br.uff.tcc.bcc.esii.controlador;
 
+import iA.JogadorIA;
+
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,22 +62,18 @@ public class ControladorJogo {
 	public void acaoTerritorio(Button botao) {
 	
 		Jogador jogador = jogo.getJogadorDaVez();
-		
+				
 		switch (jogo.faseAtual) {
 		case FASE_1:
-			if(jogador.possuiTerritorio(botao.getId())){
-				if(jogo.temTropas()){	
-					jogo.distribuirTropas(botao.getId(),1);
-					jogo.decrementaTropas();
-					//Atualiza a visão
-					botao.setText(jogo.getTropas(botao.getId())+"");
-					GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
-				}
+			if(distribuiTropa(jogador, botao.getId())){
+				//Atualiza a visão
+				botao.setText(jogo.getTropas(botao.getId())+"");
+				GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 			}
 			break;
 		case FASE_2:
 			if(!selecionouTerritorioProprio){
-				if(jogador.possuiTerritorio(botao.getId()) && jogador.getConquistados().get(botao.getId()).getQuantidadeTropa() > 1){
+				if(jogador.possuiTerritorio(botao.getId()) && jogador.getTerritorioConquistado(botao.getId()).getQuantidadeTropa() > 1){
 					botao.setDisable(true);
 					selecionouTerritorioProprio = true;
 					territorioAtacante = jogador.getTerritorioConquistado(botao.getId());
@@ -127,12 +125,60 @@ public class ControladorJogo {
 		}
 	}
 	
+	public boolean distribuiTropa(Jogador jogador, String nomeTerritorio){
+		if(jogador.possuiTerritorio(nomeTerritorio)){
+			if(jogo.temTropas()){	
+				jogo.distribuirTropas(nomeTerritorio,1);
+				jogo.decrementaTropas();
+				return true;
+			}			
+		}
+		return false;
+	}
+	
+	public boolean DominouTerritorio(Territorio territorioAtacante,Territorio territorioDefensor){
+		if(jogo.ataque(territorioAtacante,territorioDefensor)){
+			
+			if(territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(), territorioDefensor.getDono())){
+				//TODO Implementar lógica do método ganharJogo() e como o controlador deve se comportar nesse caso
+				jogo.ganharJogo(territorioAtacante.getDono());
+			}
+			//Jogador acabou de perder seu último território
+			if(territorioDefensor.getDono().numeroDeConquistados()==1){
+				jogo.eliminaJogador(territorioAtacante.getDono(), territorioDefensor.getDono());
+			}
+	
+			//TODO Rever com cuidado
+			//TODO Pegar da visão quantas tropas passar para o territorio dominado 
+			jogo.dominarTerritorio(territorioAtacante, territorioDefensor, 1);
+			return true;
+		}
+		return false;
+	}
+	
+	public void mover(Territorio territorioFonte,Territorio territorioDestino){
+		if(territorioFonte.getQuantidadeTropa() > 1){
+			jogo.redistribuiTropa(territorioFonte, territorioDestino, 1);
+			btFonte.setText(territorioFonte.getQuantidadeTropa()+"");
+			btDestino.setText(territorioDestino.getQuantidadeTropa()+"");
+		}
+		jaMovidos.add(territorioDestino.getNome());
+	}
+	
 	public void proximaFase(){
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
+			if(jogo.getJogadorDaVez() instanceof JogadorIA){
+				JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
+				jogadorIA.fase1();				
+			}
 			break;
 		case FASE_2:
+			if(jogo.getJogadorDaVez() instanceof JogadorIA){
+				JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
+				jogadorIA.fase2();				
+			}
 			if(selecionouTerritorioInimigo){
 				selecionouTerritorioInimigo = false;
 				btDefensor.setDisable(false);
@@ -143,6 +189,10 @@ public class ControladorJogo {
 			}
 			break;
 		case FASE_3:
+			if(jogo.getJogadorDaVez() instanceof JogadorIA){
+				JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
+				jogadorIA.fase3();				
+			}
 			selecionouTerritorioFonte=false;
 			selecionouTerritorioDestino=false;
 			jaMovidos.clear();
@@ -167,8 +217,7 @@ public class ControladorJogo {
 		Collections.shuffle(listaJogadores);
 		
 		for (Jogador jogador : listaJogadores) {
-			jogo.adicionaJogador(jogador);
-			
+			jogo.adicionaJogador(jogador);			
 		}
 		jogo.distribuiObjetivos(listaJogadores);		
 		jogo.distribuiTerritorio();		
@@ -216,12 +265,7 @@ public class ControladorJogo {
 	public void acaoMover(Button moveBtn){
 		if(selecionouTerritorioFonte && selecionouTerritorioDestino){			
 			//ver se fonte tem pelo menos 2 tropas
-			if(territorioFonte.getQuantidadeTropa() > 1){
-				jogo.redistribuiTropa(territorioFonte, territorioDestino, 1);
-				btFonte.setText(territorioFonte.getQuantidadeTropa()+"");
-				btDestino.setText(territorioDestino.getQuantidadeTropa()+"");
-			}
-			jaMovidos.add(territorioDestino.getNome());
+			mover(territorioFonte, territorioDestino);
 		}		
 	}		
 
