@@ -15,7 +15,9 @@ public class JogadorIA extends Jogador {
 	 * Metodo da IA que tomas as decisões da fase 1 
 	 * Usa o controladorJogo para interagir com o jogo
 	 */
-	public void fase1(){}
+	public void fase1(){
+		
+	}
 	/**
 	 * Metodo da IA que tomas as decisões da fase 2 
 	 * Usa o controladorJogo para interagir com o jogo

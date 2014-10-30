@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.hamcrest.core.IsInstanceOf;
+
 import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
@@ -14,6 +16,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
@@ -169,16 +172,10 @@ public class ControladorJogo {
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
-			if(jogo.getJogadorDaVez() instanceof JogadorIA){
-				JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
-				jogadorIA.fase1();				
-			}
+			
 			break;
 		case FASE_2:
-			if(jogo.getJogadorDaVez() instanceof JogadorIA){
-				JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
-				jogadorIA.fase2();				
-			}
+			
 			if(selecionouTerritorioInimigo){
 				selecionouTerritorioInimigo = false;
 				btDefensor.setDisable(false);
@@ -189,10 +186,7 @@ public class ControladorJogo {
 			}
 			break;
 		case FASE_3:
-			if(jogo.getJogadorDaVez() instanceof JogadorIA){
-				JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
-				jogadorIA.fase3();				
-			}
+			
 			selecionouTerritorioFonte=false;
 			selecionouTerritorioDestino=false;
 			jaMovidos.clear();
@@ -208,12 +202,29 @@ public class ControladorJogo {
 			break;
 		}		
 		jogo.proximaFase();		
+		if(jogo.getJogadorDaVez() instanceof JogadorIA){
+			JogadorIA jogadorIA = (JogadorIA)jogo.getJogadorDaVez();
+			switch (jogo.faseAtual) {
+			case FASE_1:
+				jogadorIA.fase1();
+				break;
+			case FASE_2:
+				jogadorIA.fase2();
+				break;
+			case FASE_3:
+				jogadorIA.fase3();
+				break;
+			}		
+
+			
+		}
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 	}
 	
 	public void iniciaPartida(){
 		
 		List<Jogador> listaJogadores = ControladorTelaEscolha.getInstancia().getListaJogadores();
+		listaJogadores.add(new JogadorIA("Mc PocaIAhontas", ConstanteDaCor.ROSA));
 		Collections.shuffle(listaJogadores);
 		
 		for (Jogador jogador : listaJogadores) {
@@ -226,6 +237,9 @@ public class ControladorJogo {
 		//Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+		if(jogo.getJogadorDaVez() instanceof JogadorIA ){
+			((JogadorIA) jogo.getJogadorDaVez()).fase1();
+		}
 	}
 	
 	public Mapa getMapa(){

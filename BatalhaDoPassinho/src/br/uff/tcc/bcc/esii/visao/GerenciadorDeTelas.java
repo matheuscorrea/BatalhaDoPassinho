@@ -1,6 +1,9 @@
 package br.uff.tcc.bcc.esii.visao;
 
+import java.util.List;
+
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
@@ -134,5 +137,13 @@ public class GerenciadorDeTelas{
 	public void sair() {
 		stagePrincipal.close();
 		
+	}
+	
+	public List<Button> getListaDeBotoesTerritorios(){
+		if(telaJogo != null){
+			return telaJogo.getListaDeBotoesTerritorios();		
+		}else{
+			return null;
+		}
 	}
 }
