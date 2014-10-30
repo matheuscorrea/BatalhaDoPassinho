@@ -10,7 +10,7 @@ public class Carta {
 	/**
 	 * Tipo de cartas possiveis.
 	 */	
-	public enum Tipo{TIRO,PORRADA,BOMBA,VALESCA}; 
+	public enum Tipo{TIRO,PORRADA,BOMBA,VALESCA,BLANK}; 
 	
 	/**
 	 * Tipo da carta.

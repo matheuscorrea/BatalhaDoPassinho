@@ -86,6 +86,7 @@ public class TelaTroca implements ITela{
 		Button cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
 		Button trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
 		
+		
 		inferior.getChildren().addAll(new Label("Cartas selecionadas: Tiro x"+controleDeCartas[0]
                 +"  Porrada x"+controleDeCartas[1]
                 +"  Bomba x"+controleDeCartas[2]

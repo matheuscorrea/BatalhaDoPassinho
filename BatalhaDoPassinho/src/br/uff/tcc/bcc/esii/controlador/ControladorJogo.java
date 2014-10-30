@@ -48,12 +48,14 @@ public class ControladorJogo {
 	public  Territorio territorioFonte;
 	public Territorio territorioDestino;
 	private List<String> jaMovidos = new LinkedList<String>();
-	int tropasMovendo;
-	int [] controleDeCartas;
-	int cartasTiroSelecionadas = 0;
-	int cartasPorradaSelecionadas = 0;
-	int cartasBombaSelecionadas = 0;
-	int cartasValescaSelecionadas = 0;
+	private int tropasMovendo;
+	private int [] controleDeCartas;
+	private int cartasTiroSelecionadas = 0;
+	private int cartasPorradaSelecionadas = 0;
+	private int cartasBombaSelecionadas = 0;
+	private int cartasValescaSelecionadas = 0;
+	private int totalCartasSelecionadas = cartasTiroSelecionadas + cartasPorradaSelecionadas + cartasBombaSelecionadas + cartasValescaSelecionadas;
+	
 	
 	//Atributos criados para evento território
 	
@@ -143,6 +145,7 @@ public class ControladorJogo {
 			}
 			break;
 		case FASE_3:
+			
 			selecionouTerritorioFonte=false;
 			selecionouTerritorioDestino=false;
 			jaMovidos.clear();
@@ -237,10 +240,10 @@ public class ControladorJogo {
 	}
 
 	public void voltaAoJogo() {
-		int cartasTiroSelecionadas = 0;
-		int cartasPorradaSelecionadas = 0;
-		int cartasBombaSelecionadas = 0;
-		int cartasValescaSelecionadas = 0;
+		cartasTiroSelecionadas = 0;
+		cartasPorradaSelecionadas = 0;
+		cartasBombaSelecionadas = 0;
+		cartasValescaSelecionadas = 0;
 		controleDeCartas = new int [4];
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
@@ -280,7 +283,8 @@ public class ControladorJogo {
 
 
 	public void selecionouCartaTiro(Button moveBtn) {
-		if(controleDeCartas[0] > 0){
+		 
+		if(controleDeCartas[0] > 0 && totalCartasSelecionadas <= 3){
 			cartasTiroSelecionadas++;
 			System.out.println("selecionou tiro");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
@@ -288,7 +292,7 @@ public class ControladorJogo {
 		}
 	}
 	public void selecionouCartaPorrada(Button moveBtn) {
-		if(controleDeCartas[1] > 0){ 
+		if(controleDeCartas[1] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasPorradaSelecionadas++;
 			System.out.println("selecionou porrada");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
@@ -296,7 +300,7 @@ public class ControladorJogo {
 		}
 	}
 	public void selecionouCartaBomba(Button moveBtn) {
-		if(controleDeCartas[2] > 0){ 
+		if(controleDeCartas[2] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasBombaSelecionadas++;
 			System.out.println("selecionou bomba");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
@@ -304,7 +308,7 @@ public class ControladorJogo {
 		}
 	}
 	public void selecionouCartaValesca(Button moveBtn) {
-		if(controleDeCartas[3] > 0){
+		if(controleDeCartas[3] > 0 && totalCartasSelecionadas <= 3){
 			cartasValescaSelecionadas++;
 			System.out.println("selecionou valesca");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
@@ -325,150 +329,40 @@ public class ControladorJogo {
 
 	public void acaoRealizaTroca(Button moveBtn) {
 		int [] selecionadas = getCartasSelecionadas();
+		int [] aux = selecionadas;
 		
+		boolean valido = checaValidade(selecionadas);
 		
-//		if(selecionadas[3] == 0){
-//			
-//			if(selecionadas[0] == 3){
-//				jogo.adicionaTropasTroca();
-//				int counter = 3;				
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counter >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counter--;
-//					}
-//				}
-//			}
-//			
-//			else if(selecionadas[1] == 3){
-//				jogo.adicionaTropasTroca();
-//				int counter = 3;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counter >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counter--;
-//					}
-//				}
-//			}
-//			
-//			else if(selecionadas[2] == 3){
-//				jogo.adicionaTropasTroca();
-//				int counter = 3;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counter >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counter--;
-//					}
-//				}
-//			}
-//			
-//			else if(selecionadas[0] == 1 && selecionadas[1] == 1 && selecionadas[2] == 1){
-//				jogo.adicionaTropasTroca();
-//				int counterTiro = 1;
-//				int counterPorrada = 1;
-//				int counterBomba = 1;
-//				
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counterTiro >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counterTiro--;
-//					}
-//					if(carta.getTipo().equals(Tipo.PORRADA) && counterPorrada >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counterPorrada--;
-//					}
-//					if(carta.getTipo().equals(Tipo.BOMBA) && counterBomba >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counterBomba--;
-//					}
-//				}
-//			}
-//			
-//		}else if(selecionadas[3] == 1){
-//			
-//			if(selecionadas[0] == 2 ){
-//				jogo.adicionaTropasTroca();
-//				int counter = 2;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counter >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counter--;
-//					}
-//				}
-//			}
-//			
-//			else if(selecionadas[1] == 2){
-//				jogo.adicionaTropasTroca();
-//				int counter = 2;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.PORRADA) && counter >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counter--;
-//					}
-//				}
-//			}
-//			
-//			else if(selecionadas[2] == 2){
-//				jogo.adicionaTropasTroca();
-//				int counter = 2;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.BOMBA) && counter >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counter--;
-//					}
-//				}
-//			}
-//			else if(selecionadas[0] == 1 && (selecionadas[1]==1 || selecionadas[2] ==1 )){
-//				jogo.adicionaTropasTroca();
-//				int counterTiro = 1;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counterTiro >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counterTiro--;
-//					}
-//				}
-//				if(selecionadas[1]==1){
-//					int counterPorrada = 1;
-//					for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//						if(carta.getTipo().equals(Tipo.TIRO) && counterPorrada >0){
-//							jogo.getJogadorDaVez().getMao().remove(carta);
-//							counterPorrada--;
-//						}
-//					}	
-//				}else{
-//					int counterBomba = 1;
-//					for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//						if(carta.getTipo().equals(Tipo.TIRO) && counterBomba >0){
-//							jogo.getJogadorDaVez().getMao().remove(carta);
-//							counterBomba--;
-//						}
-//					}
-//				}
-//			}else if(selecionadas[1] == 0 && selecionadas[2] == 0){
-//				int counterPorrada = 1;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counterPorrada >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counterPorrada--;
-//					}
-//				}
-//				int counterBomba = 1;
-//				for(Carta carta : jogo.getJogadorDaVez().getMao()){
-//					if(carta.getTipo().equals(Tipo.TIRO) && counterBomba >0){
-//						jogo.getJogadorDaVez().getMao().remove(carta);
-//						counterBomba--;
-//					}
-//				}
-//			}
-//		}
-		
-		jogo.adicionaTropasTroca();
+		if(valido){
+			for(int i = aux[0]; i>0;i--){
+				jogo.getJogadorDaVez().removeCartaTiro();
+			}
+			for(int i = aux[1]; i>0;i--){
+				jogo.getJogadorDaVez().removeCartaPorrada();
+			}
+			for(int i = aux[2]; i>0;i--){
+				jogo.getJogadorDaVez().removeCartaBomba();
+			}
+			for(int i = aux[0]; i>0;i--){
+				jogo.getJogadorDaVez().removeCartaValesca();
+			}
+			
+			jogo.adicionaTropasTroca();
+			cartasTiroSelecionadas = 0;
+			cartasPorradaSelecionadas = 0;
+			cartasBombaSelecionadas  = 0;
+			cartasValescaSelecionadas = 0;
+			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();		
+			
+		}else{	
+			
 		cartasTiroSelecionadas = 0;
 		cartasPorradaSelecionadas = 0;
 		cartasBombaSelecionadas  = 0;
 		cartasValescaSelecionadas = 0;
 		GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
 		
+		}		
 	}
 	
 	
@@ -483,6 +377,32 @@ public class ControladorJogo {
 	
 
 	
+	private boolean checaValidade(int[] selecionadas) {
+		if(selecionadas[3]==0){
+			
+			if(selecionadas[0]==3 || selecionadas[1]==3 || selecionadas[2]==3){
+				return true;
+			}else if(selecionadas[0]==1 && selecionadas[1]==1 && selecionadas[2]==1){
+				return true;
+			}else return false;
+		
+		}else if(selecionadas[3]==1){
+			
+			if(selecionadas[0]+selecionadas[1]+selecionadas[2] == 2){
+				return true;
+			}else return false;
+			
+		}else if(selecionadas[3]==2){
+			
+			if(selecionadas[0]+selecionadas[1]+selecionadas[2] == 1){
+				return true;
+			}else return false;
+			
+		}else return true;
+		
+		
+	}
+
 	public String objetivoDoJogadorAtual(){
 		Jogador jogador = jogo.getJogadorDaVez();
 		return jogador.getObjetivo().getNomeObjetivo();

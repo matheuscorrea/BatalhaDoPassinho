@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.objetivo.IObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
@@ -145,6 +146,47 @@ public class Jogador {
 	public void descartar(){
 		int descarte = 1 + (int)(Math.random()*mao.size());
 		mao.remove(descarte);
+		System.out.println("descartou " + descarte);
+	}
+	public void removeCartaTiro() {
+		Carta remove = new Carta(Tipo.BLANK);
+		for (Carta c : mao){
+			if(c.getTipo().equals(Carta.Tipo.TIRO)){
+				remove = c;
+			}
+		}
+		mao.remove(remove);
+		
+	}
+	public void removeCartaPorrada() {
+		Carta remove = new Carta(Tipo.BLANK);
+		for (Carta c : mao){
+			if(c.getTipo().equals(Carta.Tipo.PORRADA)){
+				remove = c;
+			}
+		}
+		mao.remove(remove);
+		
+	}
+	public void removeCartaBomba() {
+		Carta remove = new Carta(Tipo.BLANK);
+		for (Carta c : mao){
+			if(c.getTipo().equals(Carta.Tipo.BOMBA)){
+				remove = c;
+			}
+		}
+		mao.remove(remove);
+		
+	}
+	public void removeCartaValesca() {
+		Carta remove = new Carta(Tipo.BLANK);
+		for (Carta c : mao){
+			if(c.getTipo().equals(Carta.Tipo.VALESCA)){
+				remove = c;
+			}
+		}
+		mao.remove(remove);
+		
 	}
 	
 }
