@@ -273,7 +273,7 @@ public class ControladorJogo {
 				btDefensor.setText(territorioDefensor.getQuantidadeTropa()+"");
 				btDefensor.setGraphic(FabricaDeBotoes.criaImageView(territorioDefensor));				
 			}
-		}		
+		}
 	}
 	
 	public void acaoMover(Button moveBtn){
@@ -530,17 +530,6 @@ public class ControladorJogo {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
 	public String objetivoDoJogadorAtual(){
 		Jogador jogador = jogo.getJogadorDaVez();
 		return jogador.getObjetivo().getNomeObjetivo();
@@ -551,5 +540,7 @@ public class ControladorJogo {
 		
 	}
 
-	
+	public List<Button> getListaDeBotoesTerritorios(){
+		return GerenciadorDeTelas.getInstancia().getListaDeBotoesTerritorios();
+	}
 }
