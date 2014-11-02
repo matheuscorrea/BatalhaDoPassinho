@@ -2,6 +2,7 @@ package br.uff.tcc.bcc.esii.visao;
 
 import java.util.List;
 
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -118,11 +119,18 @@ public class GerenciadorDeTelas{
 	public void atualizaBarraInformacoes(Jogo jogo){
 		Scene cena = telaJogo.atualizaBarraInformacoes(jogo);
 		stagePrincipal.setScene(cena);
+          
 	}
 	public void atualizaPersonagem(String jogador,int index){
 		Scene cena = telaEscolha.atualizaPersonagem(jogador, index);
 		stagePrincipal.setScene(cena);
 	}
+	
+	public void atualizaCheckBox() {
+		Scene cena = telaEscolha.atualizaCheckBox();
+		stagePrincipal.setScene(cena);
+	}
+	
 	/**
 	 * Enum que representa os tipos de tela da aplicação
 	 */
@@ -146,4 +154,6 @@ public class GerenciadorDeTelas{
 			return null;
 		}
 	}
+
+	
 }

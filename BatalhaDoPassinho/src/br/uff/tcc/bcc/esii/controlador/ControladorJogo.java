@@ -1,6 +1,8 @@
 package br.uff.tcc.bcc.esii.controlador;
 
 import iA.JogadorIA;
+import iA.ProcessaFaseIa;
+import iA.TaskProcessaFaseIA;
 
 import java.util.Collections;
 import java.util.LinkedList;
@@ -261,6 +263,16 @@ public class ControladorJogo {
 			JogadorIA jogadorIA = (JogadorIA) jogo.getJogadorDaVez();
 			switch (jogo.faseAtual) {
 			case FASE_1:
+//				ProcessaFaseIa processa = new ProcessaFaseIa(jogadorIA, TipoFase.FASE_1);
+//				processa.run();
+				
+//				TaskProcessaFaseIA task = new TaskProcessaFaseIA(jogadorIA, TipoFase.FASE_1);
+//				Thread th = new Thread(task);
+//		         th.setDaemon(true);
+//		         th.start();
+
+//				new Thread(task).start();
+				
 				jogadorIA.fase1();
 				break;
 			case FASE_2:
@@ -279,8 +291,8 @@ public class ControladorJogo {
 
 		List<Jogador> listaJogadores = ControladorTelaEscolha.getInstancia()
 				.getListaJogadores();
-		listaJogadores
-				.add(new JogadorIA("Mc PocaIAhontas", ConstanteDaCor.ROSA));
+//		listaJogadores
+//				.add(new JogadorIA("Mc PocaIAhontas", ConstanteDaCor.ROSA));
 		Collections.shuffle(listaJogadores);
 
 		for (Jogador jogador : listaJogadores) {
@@ -627,4 +639,5 @@ public class ControladorJogo {
 			btDestino.setDisable(false);
 		}
 	}
+	
 }

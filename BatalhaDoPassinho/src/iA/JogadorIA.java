@@ -3,6 +3,9 @@ package iA;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Platform;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
@@ -24,36 +27,44 @@ public class JogadorIA extends Jogador {
 	 * interagir com o jogo
 	 */
 	public void fase1() {
-		float maiorNota = 0;
-		Territorio territorioAlvo = null;
-		
+	
+		//Territorio territorioAlvo = null;
 		while (ControladorJogo.getInstancia().FaseUmTemTropasParaDistribuir()) {
-			//TODO disparar uma thread para fazer esses calculos
-			maiorNota = 0;
-			territorioAlvo = null;
-			List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
-					.getConquistados().values());
-			//Escolhe a maior nota
-			for (Territorio territorioProprio : meusTerritorios) {
-				int nota = calculaNotaFaseUm(territorioProprio);
-				if (nota > maiorNota) {
-					maiorNota = nota;
-					territorioAlvo = territorioProprio;
-				}					
-			}
-			
-			// Simula o clique do botão para distribuir a tropa
-			if (territorioAlvo != null) {
-				for (Button botao : ControladorJogo.getInstancia()
-						.getListaDeBotoesTerritorios()) {
-					if (botao.getId().equals(territorioAlvo.getNome())) {
-						ControladorJogo.getInstancia().acaoTerritorio(botao);
-					}
-				}
-			}
+			Territorio territorioAlvo = obtemTerritorio();
+        	chamaControlador(territorioAlvo);
 		} 
 		//Simula o clique na proxima fase
 		ControladorJogo.getInstancia().proximaFase();
+	}
+
+	private Territorio obtemTerritorio() {
+		float maiorNota;
+		Territorio territorioAlvo;
+		maiorNota = 0;
+		territorioAlvo = null;
+		List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
+				.getConquistados().values());
+		//Escolhe a maior nota
+		for (Territorio territorioProprio : meusTerritorios) {
+			int nota = calculaNotaFaseUm(territorioProprio);
+			if (nota > maiorNota) {
+				maiorNota = nota;
+				territorioAlvo = territorioProprio;
+			}					
+		}
+		return territorioAlvo;
+	}
+
+	private void chamaControlador(Territorio territorioAlvo) {
+		// Simula o clique do botão para distribuir a tropa
+		if (territorioAlvo != null) {
+			for (Button botao : ControladorJogo.getInstancia()
+					.getListaDeBotoesTerritorios()) {
+				if (botao.getId().equals(territorioAlvo.getNome())) {
+					ControladorJogo.getInstancia().acaoTerritorio(botao);
+				}
+			}
+		}
 	}
 
 	/**
