@@ -9,11 +9,6 @@ public class EventoAtaque implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		//TODO O botão nao precisa ser passado para o controlador
-		Object source = event.getSource();
-		if (source instanceof Button) { //should always be true in your example
-		    Button clickedBtn = (Button) source; // that's the button that was clicked
-		    ControladorJogo.getInstancia().acaoAtaque(clickedBtn);
-		}
+	    ControladorJogo.getInstancia().acaoAtaque();
 	}
 }
