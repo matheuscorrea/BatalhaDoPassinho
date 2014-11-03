@@ -3,12 +3,15 @@ package br.uff.tcc.bcc.esii.visao.telas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
@@ -16,9 +19,12 @@ import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMostraObjetivo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoPausaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
@@ -28,6 +34,9 @@ public class TelaJogo implements ITela {
 	private List<Button> listaDeBotoesTerritorios;
 	private Group grupo;
 	private HBox barraInformacoes;
+	
+	private enum Estado{JOGANDO,PAUSADO};
+	private Estado estadoAtual;
 
 	/**
 	 * Construtor da classe TelaJogo <br>
@@ -38,12 +47,23 @@ public class TelaJogo implements ITela {
 	public TelaJogo(Mapa mapa) {
 		this.mapa = mapa;
 		this.barraInformacoes = new HBox(20);
+		this.grupo = new Group();
 		listaDeBotoesTerritorios = new ArrayList<Button>();
+		estadoAtual=Estado.JOGANDO;
 	}
 	
 	public List<Button> getListaDeBotoesTerritorios() {
 		return listaDeBotoesTerritorios;
 	}
+	
+	public void pausaJogo(){
+		estadoAtual=Estado.PAUSADO;
+	}
+	
+	public void continuaJogo(){
+		estadoAtual=Estado.JOGANDO;
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -51,6 +71,45 @@ public class TelaJogo implements ITela {
 	 */
 	@Override
 	public Scene getScene() {
+
+		if(estadoAtual==Estado.JOGANDO){
+			return getSceneJogo();
+		}
+		else{
+			return getScenePausa();
+		}
+			
+	}
+
+	private Scene getScenePausa(){
+		final String imagemURL = "file:media/imagens/fundo.png";
+
+		Image image = new Image(imagemURL);
+		ImageView imageView = new ImageView();
+		imageView.setImage(image);
+
+		Button botaoContinua = FabricaDeBotoes.criaBotao("Continua", "Continua", new EventoContinuaJogo());
+		
+		GridPane grid = new GridPane();
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setPadding(new Insets(25, 25, 25, 25));
+
+        
+        grid.add(botaoContinua, 2, 1);
+		
+        Group grupoPausa = new Group();
+        
+        grupoPausa.getChildren().addAll(imageView);
+		grupoPausa.getChildren().addAll(grid);
+
+        
+		return new Scene(grupoPausa);
+		
+	}
+	
+	private Scene getSceneJogo(){
 
 		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
 
@@ -63,7 +122,9 @@ public class TelaJogo implements ITela {
 					territorio, new EventoTerritorio()));
 		}
 
-		grupo = new Group();
+		
+		grupo.getChildren().clear();
+		
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(listaDeBotoesTerritorios);
 
@@ -72,8 +133,8 @@ public class TelaJogo implements ITela {
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		// 1123x554 mapa
 		return new Scene(vBox);
+		
 	}
-
 	public Scene atualizaBarraInformacoes(Jogo jogo) {
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase",
@@ -87,6 +148,9 @@ public class TelaJogo implements ITela {
 				"TROCAR CARTAS", new EventoTelaCartas());
 		Button botaoObjetivo = FabricaDeBotoes.criaBotao("Ver_objetivo",
 				"VER OBJETIVO", new EventoMostraObjetivo());
+		
+		Button botaoPausar = FabricaDeBotoes.criaBotao("Pausar",
+				"Pausar", new EventoPausaJogo());
 
 		switch (jogo.faseAtual) {
 		case FASE_1:
@@ -99,7 +163,7 @@ public class TelaJogo implements ITela {
 					new Label(jogo.faseAtual.name()),
 					new Label(jogo.getJogadorDaVez().getNome() + " "
 							+ jogo.getQuantidadeDeTropas()), botaoFase,
-					botaoTroca, botaoObjetivo);
+					botaoTroca, botaoObjetivo,botaoPausar);
 			break;
 		case FASE_2:
 			botaoFase.setText("ACABAR FASE 2");
@@ -110,8 +174,8 @@ public class TelaJogo implements ITela {
 
 			barraInformacoes.getChildren().addAll(
 					new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome(), botaoFase),
-					botaoAtaque, botaoObjetivo);
+					new Label(jogo.getJogadorDaVez().getNome()), botaoFase,
+					botaoAtaque, botaoObjetivo,botaoPausar);
 			break;
 		case FASE_3:
 			botaoFase.setText("PASSAR A VEZ");
@@ -119,17 +183,22 @@ public class TelaJogo implements ITela {
 					new Label(jogo.faseAtual.name()),
 					new Label(jogo.getJogadorDaVez().getNome() + " "
 							+ jogo.getQuantidadeDeTropas()), botaoMover,
-					botaoFase, botaoObjetivo);
+					botaoFase, botaoObjetivo,botaoPausar);
 			break;
 		default:
 			barraInformacoes.getChildren().addAll(
 					new Label(jogo.faseAtual.name()),
 					new Label(jogo.getJogadorDaVez().getNome()), botaoFase,
-					botaoObjetivo);
+					botaoObjetivo,botaoPausar);
 			break;
 		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
-		return new Scene(vBox);
+		if(estadoAtual==Estado.JOGANDO){
+			return new Scene(vBox);
+		}
+		else{
+			return new Scene(new VBox(10,grupo));
+		}
 	}
 	
 	
