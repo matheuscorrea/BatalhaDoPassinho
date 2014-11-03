@@ -11,6 +11,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import br.uff.tcc.bcc.esii.modelo.Carta;
+import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
@@ -87,7 +89,23 @@ public class TelaJogo implements ITela {
 				"TROCAR CARTAS", new EventoTelaCartas());
 		Button botaoObjetivo = FabricaDeBotoes.criaBotao("Ver_objetivo",
 				"VER OBJETIVO", new EventoMostraObjetivo());
-
+		
+		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",32,32,true,true);	
+		Image iPorrada = new Image("file:media/imagens/cartas/porrada.png",32,32,true,true);		
+		Image iBomba = new Image("file:media/imagens/cartas/bomba.png",32,32,true,true);
+		Image iValesca = new Image("file:media/imagens/cartas/valesca.png",32,32,true,true);		
+		int[] vetorCartas = new int[4];		
+		List<Carta> listaCartasDoJogador = jogo.getJogadorDaVez().getMao();
+		atualizaVetorCartas(vetorCartas, listaCartasDoJogador);
+		
+		HBox cartas = new HBox(new ImageView(iTiro), new Label("x"+vetorCartas[0]+"  "), 
+				new ImageView(iPorrada), new Label("x"+vetorCartas[1]+"  "), 
+				new ImageView(iBomba), new Label("x"+vetorCartas[2]+"  "), 
+				new ImageView(iValesca), new Label("x"+vetorCartas[3]+"  "));
+		
+		Image corJogador;
+		corJogador = obtemImageCorJogador(jogo);
+		
 		switch (jogo.faseAtual) {
 		case FASE_1:
 			if (jogo.getQuantidadeDeTropas() > 0)
@@ -95,11 +113,14 @@ public class TelaJogo implements ITela {
 			else
 				botaoFase.setDisable(false);
 
-			barraInformacoes.getChildren().addAll(
+			barraInformacoes.getChildren().addAll(new ImageView(corJogador),
+					new Label(jogo.getJogadorDaVez().getNome()),
 					new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome() + " "
-							+ jogo.getQuantidadeDeTropas()), botaoFase,
-					botaoTroca, botaoObjetivo);
+					new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
+					botaoFase,
+					botaoObjetivo,
+					botaoTroca, 
+					cartas);
 			break;
 		case FASE_2:
 			botaoFase.setText("ACABAR FASE 2");
@@ -109,27 +130,75 @@ public class TelaJogo implements ITela {
 				botaoFase.setDisable(false);
 
 			barraInformacoes.getChildren().addAll(
+					new ImageView(corJogador),
+					new Label(jogo.getJogadorDaVez().getNome()),
 					new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome(), botaoFase),
-					botaoAtaque, botaoObjetivo);
+					botaoFase,
+					botaoAtaque, 
+					botaoObjetivo,
+					cartas);
 			break;
 		case FASE_3:
 			botaoFase.setText("PASSAR A VEZ");
 			barraInformacoes.getChildren().addAll(
+					new ImageView(corJogador),
+					new Label(jogo.getJogadorDaVez().getNome()),
 					new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome() + " "
-							+ jogo.getQuantidadeDeTropas()), botaoMover,
-					botaoFase, botaoObjetivo);
+					botaoFase,			
+					botaoMover,
+					botaoObjetivo,
+					cartas);
 			break;
 		default:
 			barraInformacoes.getChildren().addAll(
+					new ImageView(corJogador),
+					new Label(jogo.getJogadorDaVez().getNome()),
 					new Label(jogo.faseAtual.name()),
-					new Label(jogo.getJogadorDaVez().getNome()), botaoFase,
-					botaoObjetivo);
+					botaoFase,			
+					botaoObjetivo,
+					cartas);
 			break;
 		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		return new Scene(vBox);
+	}
+
+	private void atualizaVetorCartas(int[] vetorCartas,
+			List<Carta> listaCartasDoJogador) {
+		for(Carta carta : listaCartasDoJogador){
+			switch (carta.getTipo()){
+			case TIRO:
+				vetorCartas[0]++;
+				break;
+			case PORRADA:
+				vetorCartas[1]++;
+				break;
+			case BOMBA:
+				vetorCartas[2]++;
+				break;
+			case VALESCA:
+				vetorCartas[3]++;
+				break;
+			}			
+		}
+	}
+
+	private Image obtemImageCorJogador(Jogo jogo) {
+		Image corJogador;
+		switch (jogo.getJogadorDaVez().getCor()){
+			case AZUL: corJogador = new Image("file:media/imagens/peoes/PAWNBLUE.png",20,20,true,true);
+				break;
+			case VERDE: corJogador = new Image("file:media/imagens/peoes/PAWNGREEN.png",20,20,true,true);	
+				break;
+			case CINZA: corJogador = new Image("file:media/imagens/peoes/PAWNGREY.png",20,20,true,true);	
+				break;
+			case ROSA: corJogador = new Image("file:media/imagens/peoes/PAWNPINK.png",20,20,true,true);	
+				break;
+			case VERMELHO: corJogador = new Image("file:media/imagens/peoes/PAWNRED.png",20,20,true,true);	
+				break;
+			default: corJogador = new Image("file:media/imagens/peoes/PAWNYELLOW.png",20,20,true,true);				
+		}
+		return corJogador;
 	}
 	
 	
