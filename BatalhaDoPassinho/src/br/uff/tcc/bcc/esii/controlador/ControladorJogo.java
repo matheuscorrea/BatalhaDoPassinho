@@ -4,20 +4,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.hamcrest.core.IsInstanceOf;
-
 import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.modelo.Carta;
-import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
-import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
-import br.uff.tcc.bcc.esii.modelo.ia.ProcessaFaseIa;
-import br.uff.tcc.bcc.esii.modelo.ia.TaskProcessaFaseIA;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
-import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
@@ -260,17 +254,7 @@ public class ControladorJogo {
 		if (jogo.getJogadorDaVez() instanceof JogadorIA) {
 			JogadorIA jogadorIA = (JogadorIA) jogo.getJogadorDaVez();
 			switch (jogo.faseAtual) {
-			case FASE_1:
-//				ProcessaFaseIa processa = new ProcessaFaseIa(jogadorIA, TipoFase.FASE_1);
-//				processa.run();
-				
-//				TaskProcessaFaseIA task = new TaskProcessaFaseIA(jogadorIA, TipoFase.FASE_1);
-//				Thread th = new Thread(task);
-//		         th.setDaemon(true);
-//		         th.start();
-
-//				new Thread(task).start();
-				
+			case FASE_1:				
 				jogadorIA.fase1();
 				break;
 			case FASE_2:
@@ -289,8 +273,6 @@ public class ControladorJogo {
 
 		List<Jogador> listaJogadores = ControladorTelaEscolha.getInstancia()
 				.getListaJogadores();
-//		listaJogadores
-//				.add(new JogadorIA("Mc PocaIAhontas", ConstanteDaCor.ROSA));
 		Collections.shuffle(listaJogadores);
 
 		for (Jogador jogador : listaJogadores) {
