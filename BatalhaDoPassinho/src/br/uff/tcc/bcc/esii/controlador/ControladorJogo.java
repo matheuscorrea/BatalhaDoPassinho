@@ -1,9 +1,5 @@
 package br.uff.tcc.bcc.esii.controlador;
 
-import iA.JogadorIA;
-import iA.ProcessaFaseIa;
-import iA.TaskProcessaFaseIA;
-
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +12,9 @@ import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
+import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
+import br.uff.tcc.bcc.esii.modelo.ia.ProcessaFaseIa;
+import br.uff.tcc.bcc.esii.modelo.ia.TaskProcessaFaseIA;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;

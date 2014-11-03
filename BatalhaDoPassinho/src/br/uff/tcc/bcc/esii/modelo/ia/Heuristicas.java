@@ -1,4 +1,4 @@
-package iA;
+package br.uff.tcc.bcc.esii.modelo.ia;
 
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 
@@ -7,8 +7,21 @@ import java.util.List;
 
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 
+/**
+ * Classe que possui as heurísticas que serão utilizadas pela IA
+ * para determinar uma nota para uma determinada situação do jogo.
+ *
+ */
 public class Heuristicas {
 
+	/**
+	 * Método que calcula a nota de um determinado ataque de um território 
+	 * atacante em um território atacado baseando-se somente na quantidade de tropas
+	 * de ambos.
+	 * @param atacante
+	 * @param atacado
+	 * @return nota de 0 a 10
+	 */
 	protected static int ataquePorTropas(Territorio atacante, Territorio atacado) {
 		int tropasAtacante = atacante.getQuantidadeTropa();
 		int tropasAtacado = atacado.getQuantidadeTropa();
@@ -54,6 +67,14 @@ public class Heuristicas {
 		return 0;
 	}
 
+	/**
+	 * Método que calcula a nota de um determinado território para 
+	 * receber tropas, baseando-se na quantidade de tropas dos territórios vizinhos.
+	 * <p>A nota será maior se, ao incrementar tropas no território, a chance de
+	 * conquistar um território vizinho aumente.
+	 * @param territorioProprio
+	 * @return nota de 0 a 10
+	 */
 	public static int faseUmPorChanceDeAtaque(Territorio territorioProprio) {
 		List<Territorio> territoriosVizinhos = new ArrayList<Territorio>(
 				territorioProprio.getVizinhos().values());
@@ -83,6 +104,14 @@ public class Heuristicas {
 		return (int) Math.round(notaMedia);
 	}
 	
+	/**
+	 * Método que calcula a nota de um determinado território para 
+	 * receber tropas, baseando-se na quantidade de tropas dos territórios vizinhos.
+	 * <p>A nota será maior se, ao incrementar tropas no território, a chance de
+	 * defender o próprio território dos vizinhos aumente.
+	 * @param territorioProprio
+	 * @return nota de 0 a 10.
+	 */
 	public static int faseUmPorDefesaDeTerritorio(Territorio territorioProprio) {
 		List<Territorio> territoriosVizinhos = new ArrayList<Territorio>(
 				territorioProprio.getVizinhos().values());
@@ -112,6 +141,16 @@ public class Heuristicas {
 		return (int) Math.round(notaMedia);
 	}
 	
+	/**
+	 * Método que calcula a nota de um território destino para 
+	 * receber tropas de um território fonte, baseando-se na quantidade de tropas dos 
+	 * territórios vizinhos.
+	 * <p>A nota será maior se, ao incrementar tropas no território destino, a chance de
+	 * defender seja maior que a nota do território fonte decrementando o mesmo número de tropas.
+	 * @param territorioFonte
+	 * @param territorioDestino
+	 * @returnnota de 0 a 10.
+	 */
 	public static int faseTresPorDefesaDeTerritorio(Territorio territorioFonte, Territorio territorioDestino) {
 		if (territorioFonte.getQuantidadeTropa() > 1){
 			int diferenca = faseUmPorDefesaDeTerritorio(territorioDestino) - faseUmPorDefesaDeTerritorio(territorioFonte);

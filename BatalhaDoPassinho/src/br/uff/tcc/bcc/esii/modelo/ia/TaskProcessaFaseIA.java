@@ -1,4 +1,4 @@
-package iA;
+package br.uff.tcc.bcc.esii.modelo.ia;
 
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import javafx.concurrent.Task;

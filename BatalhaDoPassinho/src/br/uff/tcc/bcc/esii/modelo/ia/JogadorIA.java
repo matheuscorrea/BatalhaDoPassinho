@@ -1,22 +1,32 @@
-package iA;
+package br.uff.tcc.bcc.esii.modelo.ia;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.application.Platform;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
 import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
-
+/**
+ * Classe que controla as ações da Inteligência Artificial (IA) do jogo.<P>
+ * A classe possui 3 métodos principais, que contém os algoritmos para
+ * as 3 fases do jogo.<br>
+ * Os algoritmos consistem em verificar todas opções de movimentos que a IA
+ * pode fazer, e dar uma nota para cada movimento possível, baseando-se em
+ * diferentes heurísticas.
+ */
 public class JogadorIA extends Jogador {
 
+	/**
+	 * Nota mínima para ataque
+	 */
 	private int notaDeCorteAtaque = 6;
-	private int notaDeCorteRemanejamento = 1;
 	
+	/**
+	 * Nota mínima para mover tropas
+	 */
+	private int notaDeCorteRemanejamento = 1;
 	
 	public JogadorIA(String nome, ConstanteDaCor cor) {
 		super(nome, cor);
@@ -24,20 +34,29 @@ public class JogadorIA extends Jogador {
 
 	/**
 	 * Metodo da IA que toma as decisões da fase 1. Usa o controladorJogo para
-	 * interagir com o jogo
+	 * interagir com o jogo.<p>
+	 * O método fica em um loop, que cada iteração é uma ação da IA,
+	 * ele ve todas possibilidades de distribuição de tropas do JogadorIa atual, e
+	 * baseando-se nas heurísticas da fase 3, escolhe o território com maior
+	 * nota para distribuir uma tropa. <br>
 	 */
 	public void fase1() {
 	
 		//Territorio territorioAlvo = null;
 		while (ControladorJogo.getInstancia().FaseUmTemTropasParaDistribuir()) {
-			Territorio territorioAlvo = obtemTerritorio();
-        	chamaControlador(territorioAlvo);
+			Territorio territorioAlvo = obtemTerritorioFase1();
+        	chamaControladorFase1(territorioAlvo);
 		} 
 		//Simula o clique na proxima fase
 		ControladorJogo.getInstancia().proximaFase();
 	}
 
-	private Territorio obtemTerritorio() {
+	/**
+	 * Obtém o território com melhor nota na fase 1 com base
+	 * nas heurísticas.
+	 * @return
+	 */
+	private Territorio obtemTerritorioFase1() {
 		float maiorNota;
 		Territorio territorioAlvo;
 		maiorNota = 0;
@@ -55,7 +74,11 @@ public class JogadorIA extends Jogador {
 		return territorioAlvo;
 	}
 
-	private void chamaControlador(Territorio territorioAlvo) {
+	/**
+	 * Método que simula o clique no território escolhido
+	 * @param territorioAlvo
+	 */
+	private void chamaControladorFase1(Territorio territorioAlvo) {
 		// Simula o clique do botão para distribuir a tropa
 		if (territorioAlvo != null) {
 			for (Button botao : ControladorJogo.getInstancia()
@@ -71,8 +94,8 @@ public class JogadorIA extends Jogador {
 	 * Metodo da IA que toma as decisões da fase 2 <p>
 	 * O método fica em um loop, que cada iteração é uma ação da IA,
 	 * ele ve todas possibilidades de ataque do JogadorIa atual, e
-	 * baseando-se nas heurísticas de ataque, escolhe a maior nota. <br>Caso
-	 * essa nota seja maior que a nota de corte, ele faz o ataque, simulando 
+	 * baseando-se nas heurísticas de ataque, escolhe a maior nota. <br>
+	 * Caso essa nota seja maior que a nota de corte, ele faz o ataque, simulando 
 	 * o clique nos botões que são obtidos pelo controlador. No final,
 	 * simula o clique no botão de passar a fase.
 	 */
@@ -104,6 +127,7 @@ public class JogadorIA extends Jogador {
 					}
 				}
 			}
+			
 			// Simula o clique dos botões para o ataque
 			if (alvo != null && maiorNota >= notaDeCorteAtaque) {
 				//Para o atacante
@@ -131,7 +155,10 @@ public class JogadorIA extends Jogador {
 
 	/**
 	 * Metodo da IA que toma as decisões da fase 3 Usa o controladorJogo para
-	 * interagir com o jogo
+	 * interagir com o jogo<p>
+	 * O método fica em um loop, que cada iteração é uma ação da IA,
+	 * ele ve todas possibilidades de movimento de tropas do JogadorIa atual, e
+	 * baseando-se nas heurísticas da fase 3, escolhe o território com maior nota. 
 	 */
 	public void fase3() {
 		//TODO disparar uma thread para fazer esses calculos
@@ -195,7 +222,13 @@ public class JogadorIA extends Jogador {
 	public void rodada0() {
 	}
 
-
+	/**
+	 * Método que utiliza as Heurísticas para calcular a nota de 
+	 * um ataque de um território próprio para um inimigo.
+	 * @param territorioProprio
+	 * @param territorioInimigo
+	 * @return nota de 0 a 10.
+	 */
 	private int calculaNotaFaseDois(Territorio territorioProprio,
 			Territorio territorioInimigo) {
 		int nota = Heuristicas.ataquePorTropas(
@@ -203,11 +236,24 @@ public class JogadorIA extends Jogador {
 		return nota;
 	}
 	
+	/**
+	 * Método que utiliza as Heurísticas para calcular a nota de 
+	 * de um território próprio para receber tropas.
+	 * @param territorioProprio
+	 * @return nota de 0 a 10.
+	 */
 	private int calculaNotaFaseUm(Territorio territorioProprio) {
 		int nota = Heuristicas.faseUmPorChanceDeAtaque(territorioProprio) + Heuristicas.faseUmPorDefesaDeTerritorio(territorioProprio) ;
 		return nota;
 	}
 	
+	/**
+	 * Método que utiliza as Heurísticas para calcular a nota de 
+	 * um remanejamento de um território fonte para um destino.
+	 * @param territorioFonte
+	 * @param territorioDestino
+	 * @return nota de 0 a 10.
+	 */
 	private int calculaNotaFaseTres(Territorio territorioFonte, Territorio territorioDestino) {
 		int nota = Heuristicas.faseTresPorDefesaDeTerritorio(territorioFonte, territorioDestino);
 		return nota;
