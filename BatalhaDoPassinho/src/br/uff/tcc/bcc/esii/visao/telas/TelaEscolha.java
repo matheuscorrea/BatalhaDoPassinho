@@ -1,10 +1,13 @@
 package br.uff.tcc.bcc.esii.visao.telas;
 
+import iA.JogadorIA;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +17,7 @@ import br.uff.tcc.bcc.esii.controlador.ControladorTelaEscolha;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoCheckBoxIA;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTrocaPersonagem;
@@ -55,12 +59,15 @@ public class TelaEscolha implements ITela  {
 		}
 		
 		ComboBox vetorComboBox[] = new ComboBox[6];
-		String nomePersonagem[]={"-","Jogador","Catra","Anitta","Nego Bam","Claudinho&Buchecha","Mc Koringa","PerLla"};
-		
+		String nomePersonagem[]={"-","Jogador","Catra","Anitta","Nego Bam","Claudinho&Buchecha","Mc Koringa","Perla"};
+		CheckBox vetorCheckBox[] = new CheckBox[6];
+		 
 		for (int i = 0; i < vetorComboBox.length; i++) {
 			vetorComboBox[i] = new ComboBox();
+			vetorCheckBox[i] = new CheckBox("IA");
+			vetorCheckBox[i].setSelected(false);			
 			vetorComboBox[i].getItems().addAll(nomePersonagem);
-			avatar[i] = new VBox(5,imageView[i],vetorComboBox[i]);
+			avatar[i] = new VBox(5,imageView[i],vetorComboBox[i],vetorCheckBox[i]);
 		}
 		
 		vetorComboBox[0].getSelectionModel().select(1);
@@ -71,7 +78,8 @@ public class TelaEscolha implements ITela  {
 		vetorComboBox[5].getSelectionModel().select(0);
 		
 		for (int i = 0; i < vetorComboBox.length; i++) {
-			vetorComboBox[i].getSelectionModel().selectedItemProperty().addListener(new EventoTrocaPersonagem(i));			
+			vetorComboBox[i].getSelectionModel().selectedItemProperty().addListener(new EventoTrocaPersonagem(i));	
+			vetorCheckBox[i].selectedProperty().addListener(new EventoCheckBoxIA());	
 		}
 		
 		hbSuperior = new HBox(10,avatar[0],avatar[1],avatar[2]);
@@ -101,6 +109,12 @@ public class TelaEscolha implements ITela  {
 		return new Scene(raiz);
 	}
 	
+	public Scene atualizaCheckBox(){
+		atualizaListaJogadores();
+		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes);		
+		return new Scene(raiz);
+	}
+	
 	/**
 	 * Confere quais personagens estão selecionados e atualiza a lista de 
 	 * jogadores do ControladorTelaEscolha
@@ -111,11 +125,18 @@ public class TelaEscolha implements ITela  {
 		ConstanteDaCor[] vetorConstanteDaCor = ConstanteDaCor.values();
 		for (int i = 0; i < avatar.length; i++) {
 			ComboBox comboBox = (ComboBox)avatar[i].getChildren().get(1);
+			CheckBox checkBox = (CheckBox)avatar[i].getChildren().get(2);
+			
 			String nomePersonagem = (String)comboBox.getSelectionModel().getSelectedItem();
 			if(!"-".equals(nomePersonagem)){
-				listaJogadores.add(new Jogador(nomePersonagem,vetorConstanteDaCor[i]));	
+				if(checkBox.selectedProperty().get())
+					listaJogadores.add(new JogadorIA(nomePersonagem,vetorConstanteDaCor[i]));	
+				else	
+					listaJogadores.add(new Jogador(nomePersonagem,vetorConstanteDaCor[i]));	
 			}
 		}
 		ControladorTelaEscolha.getInstancia().setListaJogadores(listaJogadores);
 	}	
+	
+	
 }

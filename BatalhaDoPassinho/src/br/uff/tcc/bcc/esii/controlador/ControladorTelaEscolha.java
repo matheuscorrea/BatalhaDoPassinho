@@ -29,6 +29,10 @@ public class ControladorTelaEscolha {
 		GerenciadorDeTelas.getInstancia().atualizaPersonagem(jogador, index);
 	}
 	
+	public void mudaCheckBox(){
+		GerenciadorDeTelas.getInstancia().atualizaCheckBox();
+	}
+	
 	public void setListaJogadores(List<Jogador> listaJogadores){
 		this.listaJogadores = listaJogadores;
 	}
