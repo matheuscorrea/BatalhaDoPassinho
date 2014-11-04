@@ -155,5 +155,13 @@ public class GerenciadorDeTelas{
 		}
 	}
 
+	public void pausaJogo(){
+		telaJogo.pausaJogo();
+		stagePrincipal.setScene(telaJogo.getScene());
+	}
 	
+	public void continuaJogo(){
+		telaJogo.continuaJogo();
+		stagePrincipal.setScene(telaJogo.getScene());
+	}
 }
