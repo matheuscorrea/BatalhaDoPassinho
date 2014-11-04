@@ -33,10 +33,16 @@ public class TelaInicial implements ITela {
         
         Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",100,100,true,true);
         Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
+        botaoNovoJogo.setStyle("-fx-background-color: transparent");
+        
         Image imageSair = new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true);
         Button botaoSair = FabricaDeBotoes.criaBotaoComImagem("Botao_Sair", "", new EventoSair(), imageSair);
+        botaoSair.setStyle("-fx-background-color: transparent");
+        
         Image imageRegras = new Image("file:media/imagens/botoes/BTREGRAS.png",100,100,true,true);
         Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Botao_Regras", "", new EventoOpcoes(), imageRegras);
+        botaoRegras.setStyle("-fx-background-color: transparent");
+        
 //		ImageView imageView = new ImageView();
 //		//imageView.setFitHeight(214);
 //		//imageView.setFitWidth(132);
