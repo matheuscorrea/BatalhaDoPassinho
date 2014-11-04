@@ -28,6 +28,7 @@ import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoPausaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoSalvar;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
@@ -172,6 +173,10 @@ public class TelaJogo implements ITela {
 		Button botaoPausar = FabricaDeBotoes.criaBotao("Pausar",
 				"Pausar", new EventoPausaJogo());
 		
+		Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
+				"Salvar", new EventoSalvar());
+		
+		
 		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",32,32,true,true);	
 		Image iPorrada = new Image("file:media/imagens/cartas/porrada.png",32,32,true,true);		
 		Image iBomba = new Image("file:media/imagens/cartas/bomba.png",32,32,true,true);
@@ -202,7 +207,8 @@ public class TelaJogo implements ITela {
 					botaoFase,
 					botaoObjetivo,
 					botaoPausar,
-					botaoTroca, 
+					botaoTroca,
+					botaoSalvar,
 					cartas);
 			break;
 		case FASE_2:

@@ -3,9 +3,10 @@ package br.uff.tcc.bcc.esii.modelo.objetivo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
-public class ObjetivoEliminar implements IObjetivo {
+public class ObjetivoEliminar extends Objetivo {
 
 	ConstanteDaCor cor;
+	private int index;
 	
 	/**
 	 * @param corOponente a cor do jogador a ser eliminado
@@ -29,5 +30,11 @@ public class ObjetivoEliminar implements IObjetivo {
 	public String getNomeObjetivo(){
 		return "Eliminar o jogador de cor "+cor.toString();
 	
+	}
+	public int getIndex() {
+		return index;
+	}
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }

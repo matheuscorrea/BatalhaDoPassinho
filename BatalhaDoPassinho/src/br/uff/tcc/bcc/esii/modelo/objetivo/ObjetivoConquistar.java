@@ -10,10 +10,11 @@ import br.uff.tcc.bcc.esii.modelo.Territorio;
  * @author Rempto
  */
 
-public class ObjetivoConquistar implements IObjetivo {
+public class ObjetivoConquistar extends Objetivo {
 
 	String continente1, continente2;
 	int outros, qnt1, qnt2;
+	private int index;
 	
 	public ObjetivoConquistar(String cont1, int qnt1, String cont2, int qnt2 , int outros){
 		this.continente1 = cont1;
@@ -58,5 +59,13 @@ public class ObjetivoConquistar implements IObjetivo {
 		}else{
 			return "Consquistar os continentes: "+continente1+" e "+continente2;
 		}
+	}
+
+	public int getIndex() {
+		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
 }

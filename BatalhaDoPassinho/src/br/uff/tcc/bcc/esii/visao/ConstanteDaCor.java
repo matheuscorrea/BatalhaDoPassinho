@@ -24,9 +24,9 @@ public enum ConstanteDaCor {
        return nome;
     }
     
-    public static ConstanteDoTerritorio fromString(String text) {
+    public static ConstanteDaCor fromString(String text) {
         if (text != null) {
-          for (ConstanteDoTerritorio b : ConstanteDoTerritorio.values()) {
+          for (ConstanteDaCor b : ConstanteDaCor.values()) {
             if (text.equalsIgnoreCase(b.toString())) {
               return b;
             }

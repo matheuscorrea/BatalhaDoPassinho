@@ -12,6 +12,7 @@ import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
+import br.uff.tcc.bcc.esii.save.Save;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
@@ -294,6 +295,10 @@ public class ControladorJogo {
 		return jogo.getMapa();
 	}
 
+	public List<Jogador> getJogadores() {
+		return jogo.getJogadores();
+	}
+	
 	public void acaoAtaque() {
 		if (selecionouTerritorioInimigo && selecionouTerritorioProprio) {
 			dominouTerrritorio = jogo.ataque(territorioAtacante,
@@ -540,6 +545,11 @@ public class ControladorJogo {
 			selecionouTerritorioDestino = false;
 			btDestino.setDisable(false);
 		}
+	}
+
+	public void acaoSalvar() {
+		Save save = new Save();
+		save.save();
 	}
 	
 }

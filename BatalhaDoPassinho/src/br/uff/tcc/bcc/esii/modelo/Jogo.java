@@ -110,6 +110,10 @@ public class Jogo {
 		return mapa;
 	}
 	
+	public List<Jogador> getJogadores(){
+		return new LinkedList<Jogador>(jogadores);
+	}
+	
 	/**
 	 * Metodo que calcula a quantidade total de tropas a serem ganhas
 	 * @param jogador Jogador que vai ganhar as tropas

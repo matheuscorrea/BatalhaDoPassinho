@@ -31,6 +31,38 @@ public class Carta {
 		return tipo;
 	}
 
+	public static Carta fromString(String string){
+		switch(string){
+			case "Tiro":
+				return new Carta(Tipo.TIRO);
+			case "Porrada":
+				return new Carta(Tipo.PORRADA);
+			case "Bomba":
+				return new Carta(Tipo.BOMBA);
+			case "Valesca":
+				return new Carta(Tipo.VALESCA);
+			default:
+				return new Carta(Tipo.BLANK);
+		}
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		switch(this.tipo){
+		case TIRO:
+			return "Tiro";
+		case PORRADA:
+			return "Porrada";
+		case BOMBA:
+			return "Bomba";
+		case VALESCA:
+			return "Valesca";
+		default:
+			return "Blank";
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
 	 */

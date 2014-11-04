@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
-import br.uff.tcc.bcc.esii.modelo.objetivo.IObjetivo;
+import br.uff.tcc.bcc.esii.modelo.objetivo.Objetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
 /**
@@ -28,7 +27,7 @@ public class Jogador {
 	 * Territorios que foram possuidos pelos jogador.
 	 */
 	
-	private IObjetivo objetivo;
+	private Objetivo objetivo;
 	
 	
 	private Map<String, Territorio> conquistados;//
@@ -116,11 +115,11 @@ public class Jogador {
 		return conquistados.get(territorio);
 	}
 	
-	public IObjetivo getObjetivo(){
+	public Objetivo getObjetivo(){
 		return objetivo;
 	}
 	
-	public void setObjetivo(IObjetivo objetivo) {
+	public void setObjetivo(Objetivo objetivo) {
 		this.objetivo = objetivo;
 	}
 	/**
