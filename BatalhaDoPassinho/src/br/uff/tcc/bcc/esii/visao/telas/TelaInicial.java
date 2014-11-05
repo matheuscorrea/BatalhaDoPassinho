@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoCarregaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
@@ -28,13 +29,15 @@ public class TelaInicial implements ITela {
         Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
         botaoNovoJogo.setStyle("-fx-background-color: transparent");
         
-        Image imageSair = new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true);
-        Button botaoSair = FabricaDeBotoes.criaBotaoComImagem("Botao_Sair", "", new EventoSair(), imageSair);
-        botaoSair.setStyle("-fx-background-color: transparent");
+        Button botaoOpcoes = FabricaDeBotoes.criaBotao("Carrega_Partida", "Carrega", new EventoCarregaJogo());
         
         Image imageRegras = new Image("file:media/imagens/botoes/BTREGRAS.png",100,100,true,true);
         Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Botao_Regras", "", new EventoOpcoes(), imageRegras);
         botaoRegras.setStyle("-fx-background-color: transparent");
+                
+        Image imageSair = new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true);
+        Button botaoSair = FabricaDeBotoes.criaBotaoComImagem("Botao_Sair", "", new EventoSair(), imageSair);
+        botaoSair.setStyle("-fx-background-color: transparent");
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -44,8 +47,9 @@ public class TelaInicial implements ITela {
 		
         grid.add(botaoNovoJogo, 2, 1);
         grid.add(botaoRegras, 2, 2);
-        grid.add(botaoSair,2, 3);
-   
+        grid.add(botaoOpcoes,2, 3);
+        grid.add(botaoSair,2, 4);
+        
 		return new Scene(grid, 800, 600);
 	}
 }

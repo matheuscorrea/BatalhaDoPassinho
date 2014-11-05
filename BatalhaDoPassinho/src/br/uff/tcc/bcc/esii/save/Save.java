@@ -20,6 +20,8 @@ import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 
 public class Save {
 
+	private final String NOME_ARQ="save.txt";
+	
 	public void save() throws JSONException {
 		
 		JSONObject meuArq = new JSONObject();
@@ -73,19 +75,18 @@ public class Save {
 		System.out.println();
 		
 		try {
-			PrintWriter arquivo = new PrintWriter("save.txt");
+			PrintWriter arquivo = new PrintWriter(NOME_ARQ);
 			arquivo.print(jsonString);
 			arquivo.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		carregaJogo("save");
 	}
 
-	public void carregaJogo(String nomeArq){
+	public void carregaJogo(){
 		try {
-			Scanner arquivo = new Scanner(new File(nomeArq+".txt"));
+			Scanner arquivo = new Scanner(new File(NOME_ARQ));
 			String jogo = arquivo.nextLine();
 			//System.out.println(jogo);
 			JSONObject jogoJson = new JSONObject(jogo);
@@ -95,7 +96,8 @@ public class Save {
 			e.printStackTrace();
 		}
 	}
-	public void carregaJogo(JSONObject jsonObjeto){
+	
+	private void carregaJogo(JSONObject jsonObjeto){
 		JSONArray jsonJogadores = jsonObjeto.getJSONArray("jogadores");
 		for(int i=0;i<jsonJogadores.length();i++){
 			JSONObject jsonJogador = jsonJogadores.getJSONObject(i);
@@ -106,6 +108,7 @@ public class Save {
 			}
 			FabricaDeObjetivo fabrica = new FabricaDeObjetivo();
 			jogador.setObjetivo(fabrica.carregaObjetivo(jsonJogador.getInt("objetivo")));
+			ControladorJogo.getInstancia().AdicionaJogador(jogador);
 			
 		}
 		

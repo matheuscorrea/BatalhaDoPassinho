@@ -551,9 +551,18 @@ public class ControladorJogo {
 		}
 	}
 
+	public void AdicionaJogador(Jogador jogador){
+		jogo.adicionaJogador(jogador);
+	}
+	
 	public void acaoSalvar() {
 		Save save = new Save();
 		save.save();
+	}
+	
+	public void acaoCarregar() {
+		Save save = new Save();
+		save.carregaJogo();
 	}
 	
 }
