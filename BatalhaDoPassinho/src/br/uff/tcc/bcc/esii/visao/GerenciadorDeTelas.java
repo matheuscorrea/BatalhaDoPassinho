@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaEscolha;
+import br.uff.tcc.bcc.esii.visao.telas.TelaFimJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaObjetivo;
@@ -39,6 +40,8 @@ public class GerenciadorDeTelas{
 	private TelaInicial telaInicial;
 	private TelaTroca telaTroca;
 	private TelaObjetivo telaObjetivo;
+	private TelaFimJogo telaFimJogo;
+	
 	
 	/**
 	 * Construtor privado para outras classes não instanciarem.
@@ -81,6 +84,7 @@ public class GerenciadorDeTelas{
 		case INICIO:
 			telaInicial = new TelaInicial();			
 			cena = telaInicial.getScene();
+			ControladorJogo.getInstancia().recomecaAtributos();
 			stagePrincipal.setScene(cena);
 			break;
 		case JOGO:
@@ -109,7 +113,11 @@ public class GerenciadorDeTelas{
 			cena = telaObjetivo.getScene();
 			stagePrincipal.setScene(cena);
 			break;
-		
+		case FIM_JOGO:
+			telaFimJogo = new TelaFimJogo(ControladorJogo.getInstancia().jogadorVencedor());
+			cena = telaFimJogo.getScene();
+			stagePrincipal.setScene(cena);
+			break;
 		}
 	}
 	public void atualizaBarraTroca(){
@@ -140,7 +148,8 @@ public class GerenciadorDeTelas{
 		JOGO,
 		OPCOES,
 		TROCA,
-		OBJETIVO
+		OBJETIVO,
+		FIM_JOGO
 	}
 	public void sair() {
 		stagePrincipal.close();

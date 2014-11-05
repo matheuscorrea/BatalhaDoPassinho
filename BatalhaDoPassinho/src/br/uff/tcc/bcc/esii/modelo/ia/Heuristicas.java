@@ -22,7 +22,7 @@ public class Heuristicas {
 	 * @param atacado
 	 * @return nota de 0 a 10
 	 */
-	protected static int ataquePorTropas(Territorio atacante, Territorio atacado) {
+	public static int faseDoisPorTropas(Territorio atacante, Territorio atacado) {
 		int tropasAtacante = atacante.getQuantidadeTropa();
 		int tropasAtacado = atacado.getQuantidadeTropa();
 		double calculo;
@@ -86,7 +86,7 @@ public class Heuristicas {
 		for (Territorio territorioInimigo : territoriosVizinhos) {
 			if (!dono.possuiTerritorio(territorioInimigo.getNome())) {
 				vizinhosInimigos++;
-				int diferenca = ataquePorTropas(territorioComMaisTropas,territorioInimigo) - ataquePorTropas(territorioProprio,territorioInimigo);
+				int diferenca = faseDoisPorTropas(territorioComMaisTropas,territorioInimigo) - faseDoisPorTropas(territorioProprio,territorioInimigo);
 				if(diferenca>=1){
 					if(diferenca >3){
 						notaMedia += 10;
@@ -123,7 +123,7 @@ public class Heuristicas {
 		for (Territorio territorioInimigo : territoriosVizinhos) {
 			if (!dono.possuiTerritorio(territorioInimigo.getNome())) {
 				vizinhosInimigos++;
-				int diferenca = ataquePorTropas(territorioInimigo,territorioComMaisTropas) - ataquePorTropas(territorioInimigo,territorioProprio) ;
+				int diferenca = faseDoisPorTropas(territorioInimigo,territorioComMaisTropas) - faseDoisPorTropas(territorioInimigo,territorioProprio) ;
 				if(diferenca >= 1){
 					if(diferenca > 3){
 						notaMedia += 10;

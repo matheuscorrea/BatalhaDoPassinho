@@ -147,11 +147,15 @@ public class JogadorIA extends Jogador {
 				//Botão ataque
 				ControladorJogo.getInstancia().acaoAtaque();
 			}
-		} while (maiorNota >= notaDeCorteAtaque);
-		//Simula o clique na proxima fase
-		ControladorJogo.getInstancia().proximaFase();
-	}
+		} while (maiorNota >= notaDeCorteAtaque && !ControladorJogo.getInstancia().acabouJogo());
 
+		if(ControladorJogo.getInstancia().acabouJogo()){
+			ControladorJogo.getInstancia().fimDeJogo();
+		}else{
+			//Simula o clique na proxima fase
+			ControladorJogo.getInstancia().proximaFase();
+		}
+	}
 
 	/**
 	 * Metodo da IA que toma as decisões da fase 3 Usa o controladorJogo para
@@ -231,7 +235,7 @@ public class JogadorIA extends Jogador {
 	 */
 	private int calculaNotaFaseDois(Territorio territorioProprio,
 			Territorio territorioInimigo) {
-		int nota = Heuristicas.ataquePorTropas(
+		int nota = Heuristicas.faseDoisPorTropas(
 				territorioProprio, territorioInimigo);
 		return nota;
 	}

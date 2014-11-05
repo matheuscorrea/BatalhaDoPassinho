@@ -108,10 +108,6 @@ public class TelaJogo implements ITela {
 		botaoSalvar.setStyle("-fx-background-color: transparent");
 		botaoSairInGame.setStyle("-fx-background-color: transparent");
 		
-		
-		
-		
-		
 		GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);

@@ -58,6 +58,11 @@ public class Jogo {
 	public TipoFase faseAtual;
 	
 	public int numeroDeTrocasRealizadas;
+	
+	/**
+	 * Jogador que venceu o jogo
+	 */
+	private Jogador jogadorVencedor;
 	/**
 	 * Construtor da classe jogo
 	 */
@@ -68,6 +73,7 @@ public class Jogo {
 		jogadores=new LinkedList<Jogador>();
 		mapa=new Mapa();
 		inicializaMapa();
+		jogadorVencedor=null;
 	}
 
 	/**
@@ -601,7 +607,19 @@ public class Jogo {
 	}
 
 	public void ganharJogo(Jogador vencedor) {
-		// TODO Implementar lógica para ganhar o jogo		
+		this.jogadorVencedor = vencedor;
+	}
+	
+	public boolean jogoAcabou(){
+		if(jogadorVencedor==null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+	public Jogador getJogadorVencedor(){
+		return jogadorVencedor;
 	}
 	
 	public void adicionaTropasTroca(){
