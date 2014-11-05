@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
+import br.uff.tcc.bcc.esii.visao.telas.TelaAtaque;
 import br.uff.tcc.bcc.esii.visao.telas.TelaEscolha;
 import br.uff.tcc.bcc.esii.visao.telas.TelaFimJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
@@ -42,6 +43,7 @@ public class GerenciadorDeTelas{
 	private TelaObjetivo telaObjetivo;
 	private TelaFimJogo telaFimJogo;
 	
+	private TelaAtaque telaAtaque;
 	
 	/**
 	 * Construtor privado para outras classes não instanciarem.
@@ -113,6 +115,11 @@ public class GerenciadorDeTelas{
 			cena = telaObjetivo.getScene();
 			stagePrincipal.setScene(cena);
 			break;
+		case ATAQUE:
+			//telaAtaque = new TelaAtaque(ControladorJogo.getInstancia().territorioAtacante,ControladorJogo.getInstancia().territorioDefensor);
+			cena = telaAtaque.getScene();
+			stagePrincipal.setScene(cena);
+			break;
 		case FIM_JOGO:
 			telaFimJogo = new TelaFimJogo(ControladorJogo.getInstancia().jogadorVencedor());
 			cena = telaFimJogo.getScene();
@@ -149,7 +156,8 @@ public class GerenciadorDeTelas{
 		OPCOES,
 		TROCA,
 		OBJETIVO,
-		FIM_JOGO
+		FIM_JOGO,
+		ATAQUE
 	}
 	public void sair() {
 		stagePrincipal.close();

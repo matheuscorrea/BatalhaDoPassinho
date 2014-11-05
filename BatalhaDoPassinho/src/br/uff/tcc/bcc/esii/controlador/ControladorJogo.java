@@ -40,9 +40,9 @@ public class ControladorJogo {
 	private boolean selecionouTerritorioInimigo = false;
 	private boolean selecionouTerritorioFonte = false;
 	private boolean selecionouTerritorioDestino = false;
-	private boolean dominouTerrritorio = false;
-	private Territorio territorioAtacante;
-	private Territorio territorioDefensor;
+	public boolean dominouTerrritorio = false;
+	public Territorio territorioAtacante;
+	public Territorio territorioDefensor;
 	private Button btAtacante;
 	private Button btDefensor;
 	private Button btFonte;
@@ -57,7 +57,7 @@ public class ControladorJogo {
 	private int cartasBombaSelecionadas = 0;
 	private int cartasValescaSelecionadas = 0;
 	private int totalCartasSelecionadas = cartasTiroSelecionadas + cartasPorradaSelecionadas + cartasBombaSelecionadas + cartasValescaSelecionadas;
-	
+
 	// Atributos criados para evento território
 
 	public void acaoTerritorio(Button botao) {

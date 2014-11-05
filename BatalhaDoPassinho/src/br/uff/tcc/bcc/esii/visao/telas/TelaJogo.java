@@ -108,12 +108,12 @@ public class TelaJogo implements ITela {
 		botaoSalvar.setStyle("-fx-background-color: transparent");
 		botaoSairInGame.setStyle("-fx-background-color: transparent");
 		
+				
 		GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
-
         
         grid.add(botaoContinua, 2, 1);
         grid.add(botaoMenuPricipal, 2,2);
@@ -125,10 +125,8 @@ public class TelaJogo implements ITela {
         
         grupoPausa.getChildren().addAll(imageView);
 		grupoPausa.getChildren().addAll(grid);
-
         
 		return new Scene(grupoPausa);
-		
 	}
 	
 	public void atualizaImageNoBotao(String idBotao,ImageView imageView){
@@ -162,7 +160,6 @@ public class TelaJogo implements ITela {
 		}
 		
 		
-		
 		grupo.getChildren().clear();
 		
 		grupo.getChildren().addAll(imageView);
@@ -175,6 +172,7 @@ public class TelaJogo implements ITela {
 		return new Scene(vBox);
 		
 	}
+
 	public Scene atualizaBarraInformacoes(Jogo jogo) {
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase",
