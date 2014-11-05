@@ -2,9 +2,9 @@ package br.uff.tcc.bcc.esii.visao;
 
 import java.util.List;
 
-import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
@@ -163,5 +163,9 @@ public class GerenciadorDeTelas{
 	public void continuaJogo(){
 		telaJogo.continuaJogo();
 		stagePrincipal.setScene(telaJogo.getScene());
+	}
+	
+	public void atualizaImageBotao(String idBotao, ImageView imageView){
+		telaJogo.atualizaImageNoBotao(idBotao, imageView);
 	}
 }

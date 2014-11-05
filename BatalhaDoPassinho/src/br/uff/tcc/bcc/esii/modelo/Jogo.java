@@ -425,6 +425,8 @@ public class Jogo {
 		circo.adicionaVizinhos(six);
 		circo.adicionaVizinhos(laPaz);
 		circo.adicionaVizinhos(laPassion);
+		circo.adicionaVizinhos(fundicao);
+		circo.adicionaVizinhos(woods);
 		laPaz.adicionaVizinhos(circo);
 		laPaz.adicionaVizinhos(six);
 		six.adicionaVizinhos(laPaz);

@@ -19,6 +19,7 @@ import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
@@ -38,6 +39,7 @@ public class TelaJogo implements ITela {
 
 	private Mapa mapa;
 	private List<Button> listaDeBotoesTerritorios;
+	private List<Group> listaDeGroupTerritorios;
 	private Group grupo;
 	private HBox barraInformacoes;
 	
@@ -55,6 +57,7 @@ public class TelaJogo implements ITela {
 		this.barraInformacoes = new HBox(20);
 		this.grupo = new Group();
 		listaDeBotoesTerritorios = new ArrayList<Button>();
+		listaDeGroupTerritorios = new ArrayList<Group>();
 		estadoAtual=Estado.JOGANDO;
 	}
 	
@@ -132,6 +135,18 @@ public class TelaJogo implements ITela {
 		
 	}
 	
+	public void atualizaImageNoBotao(String idBotao,ImageView imageView){
+		for (Group gTerritorio:listaDeGroupTerritorios){
+			Object[] vetorElementoGroup =  gTerritorio.getChildren().toArray();
+			if (vetorElementoGroup[1] instanceof Button) {
+				if(idBotao.equals(((Button)vetorElementoGroup[1]).getId())){
+					gTerritorio.getChildren().clear();
+					gTerritorio.getChildren().addAll(imageView,(Button)vetorElementoGroup[1]);
+				}
+			}
+		}	
+	}
+	
 	private Scene getSceneJogo(){
 
 		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
@@ -144,12 +159,20 @@ public class TelaJogo implements ITela {
 			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(
 					territorio, new EventoTerritorio()));
 		}
-
+		
+		for (Territorio territorio : mapa.getTerritorios()) {
+			listaDeGroupTerritorios.add(FabricaDeBotoes.criaGroupTerritorio(
+					territorio, new EventoTerritorio()));
+		}
+		
+		
 		
 		grupo.getChildren().clear();
 		
 		grupo.getChildren().addAll(imageView);
-		grupo.getChildren().addAll(listaDeBotoesTerritorios);
+		//grupo.getChildren().addAll(listaDeBotoesTerritorios);
+		grupo.getChildren().addAll(listaDeGroupTerritorios);
+		
 
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		// 1123x554 mapa
@@ -175,7 +198,7 @@ public class TelaJogo implements ITela {
 		
 		Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
 				"Salvar", new EventoSalvar());
-		
+	
 		
 		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",32,32,true,true);	
 		Image iPorrada = new Image("file:media/imagens/cartas/porrada.png",32,32,true,true);		

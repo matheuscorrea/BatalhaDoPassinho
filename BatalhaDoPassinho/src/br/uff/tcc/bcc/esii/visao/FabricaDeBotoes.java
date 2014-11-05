@@ -4,7 +4,9 @@ import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -91,6 +93,72 @@ public class FabricaDeBotoes {
 		return botao;
 	}
 	
+	
+	
+	/**
+	 * Método que retorna uma instância de Botao de acordo com os parâmetros passados
+	 * @param id 
+	 * @param texto
+	 * @param acao
+	 * @return
+	 */
+	public static Group criaGroupTerritorio(Territorio territorio,EventHandler<ActionEvent> acao){
+		
+		final String imagemAzul =     "file:media/imagens/peoes/PAWNBLUE.png";
+		final String imagemVerde =    "file:media/imagens/peoes/PAWNGREEN.png";
+		final String imagemCinza =    "file:media/imagens/peoes/PAWNGREY.png";
+		final String imagemRosa =     "file:media/imagens/peoes/PAWNPINK.png";
+		final String imagemVermelha = "file:media/imagens/peoes/PAWNRED.png";
+		final String imagemAmarelo =  "file:media/imagens/peoes/PAWNYELLOW.png";
+		String imagemURL=imagemAzul;		
+		
+		switch(territorio.getCor()){
+			case AZUL:
+				imagemURL=imagemAzul;
+				break;
+			case VERDE:
+				imagemURL=imagemVerde;				
+				break;
+			case CINZA:
+				imagemURL=imagemCinza;
+				break;
+			case ROSA:
+				imagemURL=imagemRosa;
+				break;
+			case VERMELHO:
+				imagemURL=imagemVermelha;
+				break;
+			case AMARELO:
+				imagemURL=imagemAmarelo;
+				break;
+		}		
+		Image image = new Image(imagemURL);
+		ImageView imageView = new ImageView();
+		imageView.setFitHeight(20);
+		imageView.setFitWidth(20);
+		imageView.setLayoutX(4);
+		imageView.setLayoutY(2);
+		
+		imageView.setImage(image);
+				
+		Button botao =new Button(territorio.getQuantidadeTropa()+"");
+		botao.setId(territorio.getNome());
+		botao.setOnAction(acao);
+		botao.setMaxHeight(20);
+		botao.setMaxWidth(100);
+		ConstanteDoTerritorio constanteDoTerritorio = ConstanteDoTerritorio.fromString(territorio.getNome());
+		
+		botao.setStyle("-fx-background-color: transparent");
+
+		Group g = new Group();
+		g.getChildren().addAll(imageView,botao);
+		
+		g.setLayoutX(constanteDoTerritorio.getX());
+		g.setLayoutY(constanteDoTerritorio.getY());		
+		g.setId(territorio.getNome());
+		
+		return g;
+	}
 	public static ImageView criaImageView(Territorio t){
 		
 		final String imagemAzul =     "file:media/imagens/peoes/PAWNBLUE.png";
@@ -126,6 +194,8 @@ public class FabricaDeBotoes {
 		imageView.setFitHeight(20);
 		imageView.setFitWidth(20);
 		imageView.setImage(image);
+		imageView.setLayoutX(4);
+		imageView.setLayoutY(2);
 
 		return imageView;
 	}	

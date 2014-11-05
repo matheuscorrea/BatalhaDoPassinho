@@ -16,6 +16,7 @@ import br.uff.tcc.bcc.esii.save.Save;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
 public class ControladorJogo {
 
@@ -68,8 +69,9 @@ public class ControladorJogo {
 			if (distribuiTropa(jogador, botao.getId())) {
 				// Atualiza a visão
 				botao.setText(jogo.getTropas(botao.getId()) + "");
+
 				GerenciadorDeTelas.getInstancia()
-						.atualizaBarraInformacoes(jogo);
+				.atualizaBarraInformacoes(jogo);
 			}
 			break;
 		case FASE_2:
@@ -335,8 +337,10 @@ public class ControladorJogo {
 						.setText(territorioAtacante.getQuantidadeTropa() + "");
 				btDefensor
 						.setText(territorioDefensor.getQuantidadeTropa() + "");
-				btDefensor.setGraphic(FabricaDeBotoes
-						.criaImageView(territorioDefensor));
+				
+				GerenciadorDeTelas.getInstancia()
+					.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
+							.criaImageView(territorioDefensor));
 			}
 		}		
 	}
