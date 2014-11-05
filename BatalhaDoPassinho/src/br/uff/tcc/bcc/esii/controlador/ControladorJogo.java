@@ -40,9 +40,9 @@ public class ControladorJogo {
 	private boolean selecionouTerritorioInimigo = false;
 	private boolean selecionouTerritorioFonte = false;
 	private boolean selecionouTerritorioDestino = false;
-	private boolean dominouTerrritorio = false;
-	private Territorio territorioAtacante;
-	private Territorio territorioDefensor;
+	public boolean dominouTerrritorio = false;
+	public Territorio territorioAtacante;
+	public Territorio territorioDefensor;
 	private Button btAtacante;
 	private Button btDefensor;
 	private Button btFonte;
@@ -175,33 +175,33 @@ public class ControladorJogo {
 		return jogo.temTropas();
 	}
 
-	public boolean DominouTerritorio(Territorio territorioAtacante,
-			Territorio territorioDefensor) {
-		if (jogo.ataque(territorioAtacante, territorioDefensor)) {
-
-			if (territorioAtacante
-					.getDono()
-					.getObjetivo()
-					.concluido(territorioAtacante.getDono(),
-							territorioDefensor.getDono())) {
-				// TODO Implementar lógica do método ganharJogo() e como o
-				// controlador deve se comportar nesse caso
-				jogo.ganharJogo(territorioAtacante.getDono());
-			}
-			// Jogador acabou de perder seu último território
-			if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
-				jogo.eliminaJogador(territorioAtacante.getDono(),
-						territorioDefensor.getDono());
-			}
-
-			// TODO Rever com cuidado
-			// TODO Pegar da visão quantas tropas passar para o territorio
-			// dominado
-			jogo.dominarTerritorio(territorioAtacante, territorioDefensor, 1);
-			return true;
-		}
-		return false;
-	}
+//	public boolean DominouTerritorio(Territorio territorioAtacante,
+//			Territorio territorioDefensor) {
+//		if (jogo.ataque(territorioAtacante, territorioDefensor)) {
+//
+//			if (territorioAtacante
+//					.getDono()
+//					.getObjetivo()
+//					.concluido(territorioAtacante.getDono(),
+//							territorioDefensor.getDono())) {
+//				// TODO Implementar lógica do método ganharJogo() e como o
+//				// controlador deve se comportar nesse caso
+//				jogo.ganharJogo(territorioAtacante.getDono());
+//			}
+//			// Jogador acabou de perder seu último território
+//			if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
+//				jogo.eliminaJogador(territorioAtacante.getDono(),
+//						territorioDefensor.getDono());
+//			}
+//
+//			// TODO Rever com cuidado
+//			// TODO Pegar da visão quantas tropas passar para o territorio
+//			// dominado
+//			jogo.dominarTerritorio(territorioAtacante, territorioDefensor, 1);
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public void mover(Territorio territorioFonte, Territorio territorioDestino) {
 		if (territorioFonte.getQuantidadeTropa() > 1) {
@@ -303,45 +303,45 @@ public class ControladorJogo {
 	
 	public void acaoAtaque() {
 		if (selecionouTerritorioInimigo && selecionouTerritorioProprio) {
-			dominouTerrritorio = jogo.ataque(territorioAtacante,
-					territorioDefensor);
+//			dominouTerrritorio = jogo.ataque(territorioAtacante,territorioDefensor);
 			btAtacante.setText("" + territorioAtacante.getQuantidadeTropa());
 			btDefensor.setText("" + territorioDefensor.getQuantidadeTropa());
 			selecionouTerritorioInimigo = false;
 			selecionouTerritorioProprio = false;
 			btAtacante.setDisable(false);
 			btDefensor.setDisable(false);
-			if (dominouTerrritorio) {
-
-				if (territorioAtacante
-						.getDono()
-						.getObjetivo()
-						.concluido(territorioAtacante.getDono(),
-								territorioDefensor.getDono())) {
-					// TODO Implementar lógica do método ganharJogo() e como o
-					// controlador deve se comportar nesse caso
-					jogo.ganharJogo(territorioAtacante.getDono());
-				}
-				// Jogador acabou de perder seu último território
-				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
-					jogo.eliminaJogador(territorioAtacante.getDono(),
-							territorioDefensor.getDono());
-				}
-
-				// TODO Rever com cuidado
-				// TODO Pegar da visão quantas tropas passar para o territorio
-				// dominado
-				jogo.dominarTerritorio(territorioAtacante, territorioDefensor,
-						1);
-				btAtacante
-						.setText(territorioAtacante.getQuantidadeTropa() + "");
-				btDefensor
-						.setText(territorioDefensor.getQuantidadeTropa() + "");
-				
-				GerenciadorDeTelas.getInstancia()
-					.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
-							.criaImageView(territorioDefensor));
-			}
+			GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.ATAQUE);
+//			if (dominouTerrritorio) {
+//
+//				if (territorioAtacante
+//						.getDono()
+//						.getObjetivo()
+//						.concluido(territorioAtacante.getDono(),
+//								territorioDefensor.getDono())) {
+//					// TODO Implementar lógica do método ganharJogo() e como o
+//					// controlador deve se comportar nesse caso
+//					jogo.ganharJogo(territorioAtacante.getDono());
+//				}
+//				// Jogador acabou de perder seu último território
+//				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
+//					jogo.eliminaJogador(territorioAtacante.getDono(),
+//							territorioDefensor.getDono());
+//				}
+//
+//				// TODO Rever com cuidado
+//				// TODO Pegar da visão quantas tropas passar para o territorio
+//				// dominado
+//				jogo.dominarTerritorio(territorioAtacante, territorioDefensor,
+//						1);
+//				btAtacante
+//						.setText(territorioAtacante.getQuantidadeTropa() + "");
+//				btDefensor
+//						.setText(territorioDefensor.getQuantidadeTropa() + "");
+//				
+//				GerenciadorDeTelas.getInstancia()
+//					.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
+//							.criaImageView(territorioDefensor));
+//			}
 		}		
 	}
 
