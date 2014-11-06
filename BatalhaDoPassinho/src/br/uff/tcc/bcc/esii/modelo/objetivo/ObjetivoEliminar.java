@@ -28,7 +28,7 @@ public class ObjetivoEliminar extends Objetivo {
 	
 	@Override
 	public String getNomeObjetivo(){
-		return "Eliminar o jogador de cor "+cor.toString();
+		return "Seu Objetivo é:\nEliminar o jogador de cor "+cor.toString()+"\nOu conquistar 20 territórios.";
 	
 	}
 	public int getIndex() {
