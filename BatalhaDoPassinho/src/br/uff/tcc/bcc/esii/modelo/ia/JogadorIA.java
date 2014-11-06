@@ -59,7 +59,7 @@ public class JogadorIA extends Jogador {
 	private Territorio obtemTerritorioFase1() {
 		float maiorNota;
 		Territorio territorioAlvo;
-		maiorNota = 0;
+		maiorNota = -1;
 		territorioAlvo = null;
 		List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
 				.getConquistados().values());
@@ -101,6 +101,8 @@ public class JogadorIA extends Jogador {
 	 */
 	public void fase2() {
 		//TODO disparar uma thread para fazer esses calculos
+		System.out.println(getObjetivo().getNomeObjetivo());
+		
 		float maiorNota = 0;
 		Territorio alvo = null;
 		Territorio atacante = null;

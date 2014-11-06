@@ -56,10 +56,10 @@ public class ObjetivoConquistar extends Objetivo {
 	public String getNomeObjetivo(){
 		String objetivoTexto="Seu objetivo é:\n";
 		if(qnt1 != 0){
-			objetivoTexto += "Conquistar o território "+continente1+"\n";
+			objetivoTexto += "Conquistar o continente "+continente1+"\n";
 		}
 		if(qnt2 != 0){
-			objetivoTexto += "Conquistar o território "+continente2+"\n";
+			objetivoTexto += "Conquistar o continente "+continente2+"\n";
 		}
 		if(outros != 0){
 			objetivoTexto += "Conquistar mais "+outros+" territórios a sua escolha";

@@ -16,7 +16,6 @@ import br.uff.tcc.bcc.esii.save.Save;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
 public class ControladorJogo {
 
@@ -307,9 +306,10 @@ public class ControladorJogo {
 				jogadorIA.fase3();
 				break;
 			}
-
 		}
-		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+		if(!acabouJogo()){
+			GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+		}
 	}
 
 	public void iniciaPartida() {
@@ -325,6 +325,7 @@ public class ControladorJogo {
 		jogo.distribuiTerritorio();
 		jogo.faseAtual = TipoFase.FASE_1;
 		jogo.calculaTropa(jogo.getJogadorDaVez());
+				
 		// Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
@@ -358,8 +359,10 @@ public class ControladorJogo {
 						.getObjetivo()
 						.concluido(territorioAtacante.getDono(),
 								territorioDefensor.getDono())) {
-					if(!(jogo.getJogadorDaVez() instanceof JogadorIA)){
+				 	if(!(jogo.getJogadorDaVez() instanceof JogadorIA)){
 							fimDeJogo();
+					}else{
+						jogo.ganharJogo(jogo.getJogadorDaVez());
 					}
 				}
 				// Jogador acabou de perder seu último território
