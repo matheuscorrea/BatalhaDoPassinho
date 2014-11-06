@@ -28,16 +28,19 @@ public class TelaEscolha implements ITela  {
 	private HBox hbSuperior;
 	private HBox hbInferior;
 	private HBox hbButoes;	
-
+	private int numJogadores;
+	private Button iniciar;
+	
 	public TelaEscolha() {
-		this.avatar = new VBox[6];		
+		numJogadores = 0;
+		this.avatar = new VBox[6];
+		iniciar = FabricaDeBotoes.criaBotao("Iniciar", "Iniciar",new EventoNovoJogo());
 	}
 	
 	@Override
 	public Scene getScene() {
-		Button iniciar = FabricaDeBotoes.criaBotao("Iniciar", "Iniciar",new EventoNovoJogo());
 		Button voltar = FabricaDeBotoes.criaBotao("Voltar", "Voltar",new EventoTelaInicial());
-		
+	
 		String imagemAvatar[] = new String[6];
 		Image image[] = new Image[6];
 		ImageView imageView[] = new ImageView[6];
@@ -87,12 +90,12 @@ public class TelaEscolha implements ITela  {
 
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes); 
 		atualizaListaJogadores();
+		numJogadores = 3;
 		
 		return new Scene(raiz);
 	}
 
 	public Scene atualizaPersonagem(String jogador,int index){
-		
 		for (int i = 0; i < avatar.length; i++) {
 			if(i!=index){
 				ComboBox comboBox = (ComboBox)avatar[i].getChildren().get(1);
@@ -101,7 +104,7 @@ public class TelaEscolha implements ITela  {
 					comboBox.getSelectionModel().select(0);					
 				}
 			}
-		}		
+		}	
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes);		
 		atualizaListaJogadores();
 		
@@ -120,7 +123,7 @@ public class TelaEscolha implements ITela  {
 	 */
 	private void atualizaListaJogadores(){
 		List<Jogador> listaJogadores = new ArrayList<Jogador>();
-
+		numJogadores=0;
 		ConstanteDaCor[] vetorConstanteDaCor = ConstanteDaCor.values();
 		for (int i = 0; i < avatar.length; i++) {
 			ComboBox comboBox = (ComboBox)avatar[i].getChildren().get(1);
@@ -128,11 +131,17 @@ public class TelaEscolha implements ITela  {
 			
 			String nomePersonagem = (String)comboBox.getSelectionModel().getSelectedItem();
 			if(!"-".equals(nomePersonagem)){
+				numJogadores++;
 				if(checkBox.selectedProperty().get())
 					listaJogadores.add(new JogadorIA(nomePersonagem,vetorConstanteDaCor[i]));	
 				else	
 					listaJogadores.add(new Jogador(nomePersonagem,vetorConstanteDaCor[i]));	
 			}
+		}
+		if(numJogadores > 1){		
+			iniciar.setDisable(false);
+		}else{
+			iniciar.setDisable(true);
 		}
 		ControladorTelaEscolha.getInstancia().setListaJogadores(listaJogadores);
 	}	

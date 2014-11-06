@@ -69,8 +69,6 @@ public class TelaAtaque implements ITela{
 			botaoAtaque.setStyle("-fx-background-color: transparent");
 			Button botaoSair = FabricaDeBotoes.criaBotao("Sair", "Sair",new EventoTelaJogo());
 			
-			
-			
 			GridPane grid = new GridPane();
 	        grid.setAlignment(Pos.CENTER_LEFT);
 	        grid.setHgap(10);

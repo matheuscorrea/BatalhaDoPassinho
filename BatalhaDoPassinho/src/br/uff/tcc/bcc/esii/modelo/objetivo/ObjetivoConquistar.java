@@ -54,11 +54,17 @@ public class ObjetivoConquistar extends Objetivo {
 	
 	@Override
 	public String getNomeObjetivo(){
-		if(qnt1 == 0){
-			return "Consquistar "+outros+" territórios.";
-		}else{
-			return "Consquistar os continentes: "+continente1+" e "+continente2;
+		String objetivoTexto="Seu objetivo é:\n";
+		if(qnt1 != 0){
+			objetivoTexto += "Conquistar o território "+continente1+"\n";
 		}
+		if(qnt2 != 0){
+			objetivoTexto += "Conquistar o território "+continente2+"\n";
+		}
+		if(outros != 0){
+			objetivoTexto += "Conquistar mais "+outros+" territórios a sua escolha";
+		}
+		return objetivoTexto;
 	}
 
 	public int getIndex() {
