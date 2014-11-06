@@ -130,6 +130,8 @@ public class TelaAtaque implements ITela{
 									territorioDefensor.getDono())) {
 						if(!(ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA)){
 								ControladorJogo.getInstancia().fimDeJogo();
+						}else{
+							ControladorJogo.getInstancia().ganharJogo();
 						}
 					}
 					// Jogador acabou de perder seu último território

@@ -307,9 +307,10 @@ public class ControladorJogo {
 				jogadorIA.fase3();
 				break;
 			}
-
 		}
-		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+		if(!acabouJogo()){
+			GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+		}
 	}
 
 	public void iniciaPartida() {
@@ -325,6 +326,7 @@ public class ControladorJogo {
 		jogo.distribuiTerritorio();
 		jogo.faseAtual = TipoFase.FASE_1;
 		jogo.calculaTropa(jogo.getJogadorDaVez());
+				
 		// Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
@@ -650,5 +652,9 @@ public class ControladorJogo {
 	
 	public boolean acabouJogo(){
 		return jogo.jogoAcabou();
+	}
+
+	public void ganharJogo() {
+		jogo.ganharJogo(territorioAtacante.getDono());
 	}
 }
