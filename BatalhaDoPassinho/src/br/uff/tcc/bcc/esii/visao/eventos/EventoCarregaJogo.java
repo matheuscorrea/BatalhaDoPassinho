@@ -8,6 +8,6 @@ public class EventoCarregaJogo implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		ControladorJogo.getInstancia().acaoCarregar();
+		ControladorJogo.getInstancia().acaoCarregar();		
 	}
 }

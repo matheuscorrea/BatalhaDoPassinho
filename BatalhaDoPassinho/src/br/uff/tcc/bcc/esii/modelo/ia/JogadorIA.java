@@ -8,6 +8,7 @@ import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 /**
  * Classe que controla as ações da Inteligência Artificial (IA) do jogo.<P>
  * A classe possui 3 métodos principais, que contém os algoritmos para
@@ -146,6 +147,7 @@ public class JogadorIA extends Jogador {
 				}
 				//Botão ataque
 				ControladorJogo.getInstancia().acaoAtaque();
+				GerenciadorDeTelas.getInstancia().ataque();
 			}
 		} while (maiorNota >= notaDeCorteAtaque && !ControladorJogo.getInstancia().acabouJogo());
 

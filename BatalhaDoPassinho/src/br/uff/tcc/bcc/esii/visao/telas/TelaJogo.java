@@ -21,7 +21,7 @@ import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMostraObjetivo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
@@ -181,7 +181,7 @@ public class TelaJogo implements ITela {
 		Button botaoMover = FabricaDeBotoes.criaBotao("Mover_tropas",
 				"MOVER UMA TROPA", new EventoMove());
 		Button botaoAtaque = FabricaDeBotoes.criaBotao("Ataque", "Ataque",
-				new EventoAtaque());
+				new EventoChamaTelaAtaque());
 		Button botaoTroca = FabricaDeBotoes.criaBotao("Trocar_cartas",
 				"TROCAR CARTAS", new EventoTelaCartas());
 		Button botaoObjetivo = FabricaDeBotoes.criaBotao("Ver_objetivo",

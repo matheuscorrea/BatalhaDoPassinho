@@ -116,7 +116,7 @@ public class GerenciadorDeTelas{
 			stagePrincipal.setScene(cena);
 			break;
 		case ATAQUE:
-			//telaAtaque = new TelaAtaque(ControladorJogo.getInstancia().territorioAtacante,ControladorJogo.getInstancia().territorioDefensor);
+			telaAtaque = new TelaAtaque(ControladorJogo.getInstancia().territorioAtacante,ControladorJogo.getInstancia().territorioDefensor);
 			cena = telaAtaque.getScene();
 			stagePrincipal.setScene(cena);
 			break;
@@ -184,5 +184,10 @@ public class GerenciadorDeTelas{
 	
 	public void atualizaImageBotao(String idBotao, ImageView imageView){
 		telaJogo.atualizaImageNoBotao(idBotao, imageView);
+	}
+	
+	public void ataque(){
+		telaAtaque.ataque();
+		stagePrincipal.setScene(telaAtaque.getScene());
 	}
 }

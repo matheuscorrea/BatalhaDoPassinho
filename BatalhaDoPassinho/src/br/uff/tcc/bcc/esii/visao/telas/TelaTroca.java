@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaBomba;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaPorrada;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaTiro;

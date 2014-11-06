@@ -10,7 +10,11 @@ import com.sun.xml.internal.ws.api.pipe.NextAction;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
@@ -34,6 +38,11 @@ public class TelaAtaque implements ITela{
 	Jogador jogadorAtacante;
 	Jogador jogadorDefensor;
 	
+	List<Integer>dados_atacante;
+	List<Integer>dados_defensor;
+	
+	Button botaoAtaque;
+	
 	public TelaAtaque(Territorio territorioAtacante,Territorio territorioDefensor) {
 		this.territorioAtacante = territorioAtacante;
 		this.territorioDefensor = territorioDefensor;
@@ -55,17 +64,14 @@ public class TelaAtaque implements ITela{
 			
 			Label nomeJogadorAtacante = new Label(jogadorAtacante.getNome());
 			Label qtdTropasJogadorAtacante = new Label(territorioAtacante.getQuantidadeTropa()+"");
-			
+						
 			Label nomeJogadorDefensor = new Label(jogadorDefensor.getNome());
 			Label qtdTropasJogadorDefensor = new Label(territorioDefensor.getQuantidadeTropa()+"");
-			
-			List<Integer>dados_atacante = calculaDado(territorioAtacante.getQuantidadeTropa()-1);
-			List<Integer>dados_defensor = calculaDado(territorioDefensor.getQuantidadeTropa());
-			
+						
 			int indiceDaColuna=1;
 			int indiceDaLinha=1; 
 			
-			Button botaoAtaque = FabricaDeBotoes.criaBotaoComImagem("Ataque", "", new EventoSair(), new Image("file:media/imagens/botoes/BTATACAR.png",100,100,true,true));
+			botaoAtaque = FabricaDeBotoes.criaBotaoComImagem("Ataque", "", new EventoAtaque(), new Image("file:media/imagens/botoes/BTATACAR.png",100,100,true,true));
 			botaoAtaque.setStyle("-fx-background-color: transparent");
 			Button botaoSair = FabricaDeBotoes.criaBotao("Sair", "Sair",new EventoTelaJogo());
 			
@@ -77,9 +83,11 @@ public class TelaAtaque implements ITela{
 	        
 	        grid.add(nomeJogadorAtacante, indiceDaColuna, indiceDaLinha);
 	        grid.add(qtdTropasJogadorAtacante, indiceDaColuna, ++indiceDaLinha);
-	        
-	        for(Integer i:dados_atacante){
-	        	grid.add(intToDadoAtq(i.intValue()), indiceDaColuna, ++indiceDaLinha);
+	    
+	        if(dados_atacante!=null){
+		        for(Integer i:dados_atacante){
+		        	grid.add(intToDadoAtq(i.intValue()), indiceDaColuna, ++indiceDaLinha);
+		        }
 	        }
 	        
 	        indiceDaColuna=2;
@@ -92,8 +100,10 @@ public class TelaAtaque implements ITela{
 	        grid.add(nomeJogadorDefensor, indiceDaColuna, indiceDaLinha++);
 	        grid.add(qtdTropasJogadorDefensor, indiceDaColuna, indiceDaLinha++);
 	        
-	        for(Integer i:dados_defensor){
-	        	grid.add(intToDadoDef(i.intValue()), indiceDaColuna, indiceDaLinha++);
+	        if(dados_defensor!=null){
+		        for(Integer i:dados_defensor){
+		        	grid.add(intToDadoDef(i.intValue()), indiceDaColuna, indiceDaLinha++);
+		        }
 	        }
 	        
 	        Group grupo = new Group();
@@ -104,6 +114,55 @@ public class TelaAtaque implements ITela{
 			return new Scene(grupo);
 	}
 	
+	public void ataque(){
+		
+		if(validaAtaque()){
+		
+			dados_atacante = calculaDado(territorioAtacante.getQuantidadeTropa()-1);
+			dados_defensor = calculaDado(territorioDefensor.getQuantidadeTropa());
+			
+			if(ataque(territorioAtacante,territorioDefensor,dados_atacante,dados_defensor)){
+							
+					if (territorioAtacante
+							.getDono()
+							.getObjetivo()
+							.concluido(territorioAtacante.getDono(),
+									territorioDefensor.getDono())) {
+						if(!(ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA)){
+								ControladorJogo.getInstancia().fimDeJogo();
+						}
+					}
+					// Jogador acabou de perder seu último território
+					if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
+						ControladorJogo.getInstancia().eliminaJogador();
+					}
+	
+					// TODO Rever com cuidado
+					// TODO Pegar da visão quantas tropas passar para o territorio
+					// dominado
+					ControladorJogo.getInstancia().dominarTerritorio();
+					
+					GerenciadorDeTelas.getInstancia()
+						.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
+								.criaImageView(territorioDefensor));
+				}
+		}
+		else
+		{
+			botaoAtaque.setDisable(true);
+		}
+		
+	}
+	
+	private boolean validaAtaque() {
+		if(territorioAtacante.getDono()!=territorioDefensor.getDono()){
+			if(territorioAtacante.getQuantidadeTropa()>1){
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private List<Integer> calculaDado(int qtdTropas){
 		int qtd_dados = Math.min(3, qtdTropas);
 		List<Integer>dados = new LinkedList<>();
@@ -119,7 +178,7 @@ public class TelaAtaque implements ITela{
 		return random.nextInt(6)+1; 
 	}
 	
-	public boolean ataque(Territorio atacante, Territorio defensor,List<Integer> dados_atacante, List<Integer> dados_defensor){
+	private boolean ataque(Territorio atacante, Territorio defensor,List<Integer> dados_atacante, List<Integer> dados_defensor){
 		for(int i = 0; i < dados_atacante.size() && i < dados_defensor.size(); i++){
 			if(dados_atacante.get(i) > dados_defensor.get(i)){
 				defensor.setQuantidadeTropa(defensor.getQuantidadeTropa()-1);

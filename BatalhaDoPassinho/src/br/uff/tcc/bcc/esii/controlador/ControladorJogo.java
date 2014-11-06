@@ -343,45 +343,46 @@ public class ControladorJogo {
 	
 	public void acaoAtaque() {
 		if (selecionouTerritorioInimigo && selecionouTerritorioProprio) {
-			dominouTerrritorio = jogo.ataque(territorioAtacante,
-					territorioDefensor);
+//			dominouTerrritorio = jogo.ataque(territorioAtacante,
+//					territorioDefensor);
 			btAtacante.setText("" + territorioAtacante.getQuantidadeTropa());
 			btDefensor.setText("" + territorioDefensor.getQuantidadeTropa());
 			selecionouTerritorioInimigo = false;
 			selecionouTerritorioProprio = false;
 			btAtacante.setDisable(false);
 			btDefensor.setDisable(false);
-			if (dominouTerrritorio) {
-
-				if (territorioAtacante
-						.getDono()
-						.getObjetivo()
-						.concluido(territorioAtacante.getDono(),
-								territorioDefensor.getDono())) {
-					if(!(jogo.getJogadorDaVez() instanceof JogadorIA)){
-							fimDeJogo();
-					}
-				}
-				// Jogador acabou de perder seu último território
-				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
-					jogo.eliminaJogador(territorioAtacante.getDono(),
-							territorioDefensor.getDono());
-				}
-
-				// TODO Rever com cuidado
-				// TODO Pegar da visão quantas tropas passar para o territorio
-				// dominado
-				jogo.dominarTerritorio(territorioAtacante, territorioDefensor,
-						1);
-				btAtacante
-						.setText(territorioAtacante.getQuantidadeTropa() + "");
-				btDefensor
-						.setText(territorioDefensor.getQuantidadeTropa() + "");
-				
-				GerenciadorDeTelas.getInstancia()
-					.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
-							.criaImageView(territorioDefensor));
-			}
+			GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.ATAQUE);
+//			if (dominouTerrritorio) {
+//
+//				if (territorioAtacante
+//						.getDono()
+//						.getObjetivo()
+//						.concluido(territorioAtacante.getDono(),
+//								territorioDefensor.getDono())) {
+//					if(!(jogo.getJogadorDaVez() instanceof JogadorIA)){
+//							fimDeJogo();
+//					}
+//				}
+//				// Jogador acabou de perder seu último território
+//				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
+//					jogo.eliminaJogador(territorioAtacante.getDono(),
+//							territorioDefensor.getDono());
+//				}
+//
+//				// TODO Rever com cuidado
+//				// TODO Pegar da visão quantas tropas passar para o territorio
+//				// dominado
+//				jogo.dominarTerritorio(territorioAtacante, territorioDefensor,
+//						1);
+//				btAtacante
+//						.setText(territorioAtacante.getQuantidadeTropa() + "");
+//				btDefensor
+//						.setText(territorioDefensor.getQuantidadeTropa() + "");
+//				
+//				GerenciadorDeTelas.getInstancia()
+//					.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
+//							.criaImageView(territorioDefensor));
+//			}
 		}		
 	}
 
@@ -402,6 +403,21 @@ public class ControladorJogo {
 		}		
 	}		
 
+	public void dominarTerritorio(){ 
+		jogo.dominarTerritorio(territorioAtacante, territorioDefensor,1);
+		btAtacante.setText(territorioAtacante.getQuantidadeTropa() + "");
+		btDefensor.setText(territorioDefensor.getQuantidadeTropa() + "");
+
+	}
+	
+	public Jogador getJogadorDaVez()
+	{
+		return jogo.getJogadorDaVez();
+	}
+	
+	public void eliminaJogador(){
+		jogo.eliminaJogador(territorioAtacante.getDono(),territorioDefensor.getDono());
+	}
 	
 	public void acaoTelaTroca(Button Btn){		
 		controleDeCartas = getNumeroCartasJogador();
