@@ -31,11 +31,13 @@ public class TelaInicial implements ITela {
         Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
         botaoNovoJogo.setStyle("-fx-background-color: transparent");
         
+
         Button botaoCarrega = FabricaDeBotoes.criaBotaoComImagem("Carrega_Partida", "", new EventoCarregaJogo(), new Image("file:media/imagens/botoes/BTCARREGAR.png",100,100,true,true));
         botaoCarrega.setStyle("-fx-background-color: transparent");
         
         Button botaoOpcoes = FabricaDeBotoes.criaBotaoComImagem("Opcoes", "", new EventoOpcoes(), new Image("file:media/imagens/botoes/BTOPCOES.png",100,100,true,true));
         botaoOpcoes.setStyle("-fx-background-color: transparent");
+
         
         Image imageRegras = new Image("file:media/imagens/botoes/BTREGRAS.png",100,100,true,true);
         Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Botao_Regras", "", new EventoOpcoes(), imageRegras);
@@ -54,6 +56,7 @@ public class TelaInicial implements ITela {
         grid.setPadding(new Insets(25, 25, 25, 25));        
 		
         grid.add(botaoNovoJogo, 2, 1);
+
         grid.add(botaoCarrega, 2, 2);
         grid.add(botaoRegras, 2, 3);
         grid.add(botaoOpcoes,2, 4);
@@ -65,7 +68,7 @@ public class TelaInicial implements ITela {
         ImageView imv = new ImageView(telaInicial);
         grupo.getChildren().addAll(imv);
 		grupo.getChildren().addAll(grid);
-		
+
         
 		return new Scene(grupo, 1048,580);
 	}
