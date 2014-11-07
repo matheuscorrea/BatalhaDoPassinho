@@ -229,8 +229,7 @@ public class TelaJogo implements ITela {
 				botaoFase.setDisable(false);
 
 			barraInformacoes.getChildren().addAll(new ImageView(corJogador),
-					new Label(jogo.getJogadorDaVez().getNome()),
-					new Label(jogo.faseAtual.name()),
+					jogo.getJogadorDaVez().getFoto(),
 					new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
 					botaoFase,
 					botaoObjetivo,
@@ -245,8 +244,7 @@ public class TelaJogo implements ITela {
 
 			barraInformacoes.getChildren().addAll(
 					new ImageView(corJogador),
-					new Label(jogo.getJogadorDaVez().getNome()),
-					new Label(jogo.faseAtual.name()),
+					jogo.getJogadorDaVez().getFoto(),
 					botaoFase,
 					botaoAtaque, 
 					botaoObjetivo,
@@ -259,8 +257,7 @@ public class TelaJogo implements ITela {
 			botaoFase.setStyle("-fx-background-color: transparent");
 			barraInformacoes.getChildren().addAll(
 					new ImageView(corJogador),
-					new Label(jogo.getJogadorDaVez().getNome()),
-					new Label(jogo.faseAtual.name()),
+					jogo.getJogadorDaVez().getFoto(),
 					botaoFase,			
 					botaoMover,
 					botaoObjetivo,

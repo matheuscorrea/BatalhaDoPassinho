@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
@@ -60,21 +61,26 @@ public class TelaAtaque implements ITela {
 		Label nomeJogadorAtacante = new Label(jogadorAtacante.getNome());
 		Label qtdTropasJogadorAtacante = new Label(
 				territorioAtacante.getQuantidadeTropa() + "");
+		nomeJogadorAtacante.setTextFill(Color.WHITE);
+		qtdTropasJogadorAtacante.setTextFill(Color.WHITE);
 
 		Label nomeJogadorDefensor = new Label(jogadorDefensor.getNome());
 		Label qtdTropasJogadorDefensor = new Label(
 				territorioDefensor.getQuantidadeTropa() + "");
+		nomeJogadorDefensor.setTextFill(Color.WHITE);
+		qtdTropasJogadorDefensor.setTextFill(Color.WHITE);
 
 		int indiceDaColuna = 1;
 		int indiceDaLinha = 1;
 
 		botaoAtaque = FabricaDeBotoes.criaBotaoComImagem("Ataque", "",
 				new EventoAtaque(), new Image(
-						"file:media/imagens/botoes/BTATACAR.png", 100, 100,
+						"file:media/imagens/botoes/BTROLL.png", 100, 100,
 						true, true));
 		botaoAtaque.setStyle("-fx-background-color: transparent");
-		Button botaoSair = FabricaDeBotoes.criaBotao("Sair", "Sair",
-				new EventoTelaJogo());
+		Button botaoSair = FabricaDeBotoes.criaBotaoComImagem("Sair", "",
+				new EventoTelaJogo(), new Image("file:media/imagens/botoes/BTRECUAR.png", 100,100,true,true));
+		botaoSair.setStyle("-fx-background-color: transparent");
 
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER_LEFT);
