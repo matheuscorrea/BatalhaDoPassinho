@@ -15,11 +15,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.modelo.Carta;
-import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
-import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
@@ -30,7 +28,6 @@ import br.uff.tcc.bcc.esii.visao.eventos.EventoPausaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSalvar;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
@@ -245,10 +242,6 @@ public class TelaJogo implements ITela {
 			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
 					"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTFINALIZARATAQUE.png",125,125,true,true));
 			botaoFase.setStyle("-fx-background-color: transparent");
-			if (jogo.getQuantidadeDeTropas() > 0)
-				botaoFase.setDisable(true);
-			else
-				botaoFase.setDisable(false);
 
 			barraInformacoes.getChildren().addAll(
 					new ImageView(corJogador),

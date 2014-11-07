@@ -1,14 +1,12 @@
 package br.uff.tcc.bcc.esii.visao;
 
-import br.uff.tcc.bcc.esii.modelo.Territorio;
-import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import br.uff.tcc.bcc.esii.modelo.Territorio;
 
 /**
  * Fábrica responsável por criar objetos do tipo {@link Botao}

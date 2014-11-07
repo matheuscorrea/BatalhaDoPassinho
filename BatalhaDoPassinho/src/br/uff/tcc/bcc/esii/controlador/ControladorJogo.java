@@ -16,7 +16,6 @@ import br.uff.tcc.bcc.esii.save.Save;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoTerritorio;
 
 public class ControladorJogo {
 
@@ -50,7 +49,6 @@ public class ControladorJogo {
 	public Territorio territorioFonte;
 	public Territorio territorioDestino;
 	private List<String> jaMovidos = new LinkedList<String>();
-	private int tropasMovendo;
 	private int [] controleDeCartas;
 	private int cartasTiroSelecionadas = 0;
 	private int cartasPorradaSelecionadas = 0;
@@ -110,7 +108,7 @@ public class ControladorJogo {
 					}
 				//clicou no proprio territorio
 				}else{
-					btAtacante.setDisable(false);
+					//btAtacante.setDisable(false);
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
 							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
 					//se poder atacar
@@ -153,8 +151,8 @@ public class ControladorJogo {
 					
 					
 				}else{
-					btAtacante.setDisable(false);
-					btDefensor.setDisable(false);
+//					btAtacante.setDisable(false);
+//					btDefensor.setDisable(false);
 					selecionouTerritorioProprio = false;
 					selecionouTerritorioInimigo = false;
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
@@ -312,7 +310,7 @@ public class ControladorJogo {
 
 		switch (jogo.faseAtual) {
 		case FASE_1:
-
+			
 			break;
 		case FASE_2:
 
@@ -421,6 +419,12 @@ public class ControladorJogo {
 			selecionouTerritorioProprio = false;
 			btAtacante.setDisable(false);
 			btDefensor.setDisable(false);
+			GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+					FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
+		
+			GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
+					FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
+		
 			GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.ATAQUE);
 //			if (dominouTerrritorio) {
 //
@@ -674,11 +678,18 @@ public class ControladorJogo {
 	public void limpaBotoesFase3(){
 		if (selecionouTerritorioFonte) {
 			selecionouTerritorioFonte = false;
-			btFonte.setDisable(false);
+			//btFonte.setDisable(false);
+			GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+					FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
+			
+			
 		}
 		if (selecionouTerritorioDestino) {
 			selecionouTerritorioDestino = false;
-			btDestino.setDisable(false);
+			//btDestino.setDisable(false);
+			GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
+					FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDestino));
+			
 		}
 	}
 
@@ -704,7 +715,6 @@ public class ControladorJogo {
 		selecionouTerritorioDestino = false;
 		dominouTerrritorio = false;
 		jaMovidos = new LinkedList<String>();
-		tropasMovendo=0;
 		controleDeCartas = new int [4];
 		cartasTiroSelecionadas = 0;
 		cartasPorradaSelecionadas = 0;
@@ -724,5 +734,11 @@ public class ControladorJogo {
 
 	public void ganharJogo() {
 		jogo.ganharJogo(territorioAtacante.getDono());
+	}
+	
+	public void atualizaTela(){
+		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
+		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
+		
 	}
 }

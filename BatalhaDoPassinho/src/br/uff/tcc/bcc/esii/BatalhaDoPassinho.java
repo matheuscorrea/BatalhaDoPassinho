@@ -1,7 +1,6 @@
 package br.uff.tcc.bcc.esii;
 
 import javafx.application.Application;
-import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;

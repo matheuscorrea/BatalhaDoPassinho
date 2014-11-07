@@ -17,10 +17,10 @@ import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
  */
 public class Jogo {
 	/**
-	 * Numero da rodada atual
+	 * Numero da jogada atual
 	 */
 	//TODO Discutir se há a necessidade de contar as rodadas
-	private int rodada;
+	private int jogada;
 	/**
 	 * Jogadores que estao atualmente jogando
 	 */
@@ -63,11 +63,12 @@ public class Jogo {
 	 * Jogador que venceu o jogo
 	 */
 	private Jogador jogadorVencedor;
+	
 	/**
 	 * Construtor da classe jogo
 	 */
 	public Jogo() {
-		rodada=0;
+		jogada=1;
 		numeroDeTrocasRealizadas = 0;
 		faseAtual = TipoFase.FASE_1;
 		jogadores=new LinkedList<Jogador>();
@@ -80,19 +81,48 @@ public class Jogo {
 	 * Inicia uma nova rodada
 	 */
 	public void proximaRodada()	{
-		//rodada++; ***Necessário?***
-		faseAtual = TipoFase.FASE_1;
+		jogada++;
+		
+		if(ehFaseDoisETresRodada0()){
+			faseAtual = TipoFase.FASE_2;
+		}else{
+			faseAtual = TipoFase.FASE_1;
+			
+		}
 		jogadorDominouTerritorio=false;
 		Jogador jogador = jogadores.poll();
-		calculaTropa(getJogadorDaVez());
 		jogadores.add(jogador);		
+		//if(faseAtual == TipoFase.FASE_1){
+			calculaTropa(getJogadorDaVez());
+		//}
+	}
+	
+	public boolean ehFaseUmRodada0(){
+		if(jogada <= jogadores.size()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public boolean ehFaseDoisETresRodada0(){
+		if((jogada <= jogadores.size()*2)&&
+				((jogada > jogadores.size()))){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void proximaFase(){
 		
 		switch (faseAtual) {
 		case FASE_1:
-			faseAtual = TipoFase.FASE_2;
+			if(ehFaseUmRodada0()){
+				proximaRodada();
+			}else{
+				faseAtual = TipoFase.FASE_2;
+			}
 			break;
 		case FASE_2:
 			faseAtual = TipoFase.FASE_3;
@@ -492,13 +522,11 @@ public class Jogo {
 		mariuzzin.adicionaVizinhos(baronetti);
 		mariuzzin.adicionaVizinhos(praia);
 		mariuzzin.adicionaVizinhos(kalabria);
-		mariuzzin.adicionaVizinhos(zozo);
 		kalabria.adicionaVizinhos(praia);
 		kalabria.adicionaVizinhos(mariuzzin);
 		kalabria.adicionaVizinhos(zozo);
 		kalabria.adicionaVizinhos(matriz);
 		zozo.adicionaVizinhos(kalabria);
-		zozo.adicionaVizinhos(mariuzzin);
 		matriz.adicionaVizinhos(laPassion);
 		matriz.adicionaVizinhos(pista3);
 		matriz.adicionaVizinhos(kalabria);

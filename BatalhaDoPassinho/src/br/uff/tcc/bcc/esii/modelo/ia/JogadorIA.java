@@ -50,6 +50,8 @@ public class JogadorIA extends Jogador {
 		} 
 		//Simula o clique na proxima fase
 		ControladorJogo.getInstancia().proximaFase();
+		ControladorJogo.getInstancia().atualizaTela();
+
 	}
 
 	/**
