@@ -100,7 +100,7 @@ public class TelaJogo implements ITela {
 		Button botaoContinua = FabricaDeBotoes.criaBotaoComImagem("Continua", "", new EventoContinuaJogo(),new Image("file:media/imagens/botoes/BTVOLTARPAUSA.png",100,100,true,true));
 		Button botaoMenuPricipal = FabricaDeBotoes.criaBotaoComImagem("Menu_Principal","",new EventoTelaInicial(),new Image("file:media/imagens/botoes/BTMAINMENU.png",100,100,true,true));
 		Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Regras_In_Game", "", new EventoOpcoes(), new Image("file:media/imagens/botoes/BTREGRASINGAME.png",100,100,true,true));
-		Button botaoSalvar = FabricaDeBotoes.criaBotaoComImagem("Salvar_Jogo", "", new EventoOpcoes(), new Image("file:media/imagens/botoes/BTSALVAR.png",100,100,true,true));
+		Button botaoSalvar = FabricaDeBotoes.criaBotaoComImagem("Salvar_Jogo", "", new EventoSalvar(), new Image("file:media/imagens/botoes/BTSALVAR.png",100,100,true,true));
 		Button botaoSairInGame = FabricaDeBotoes.criaBotaoComImagem("Sair_In_Game", "", new EventoSair(), new Image("file:media/imagens/botoes/BTEXIT2.png",100,100,true,true));
 		botaoContinua.setStyle("-fx-background-color: transparent");
 		botaoMenuPricipal.setStyle("-fx-background-color: transparent");
@@ -176,22 +176,33 @@ public class TelaJogo implements ITela {
 	public Scene atualizaBarraInformacoes(Jogo jogo) {
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase",
-				"ACABAR FASE 1", new EventoProximaFase());
+				"", new EventoProximaFase());
 		;
-		Button botaoMover = FabricaDeBotoes.criaBotao("Mover_tropas",
-				"MOVER UMA TROPA", new EventoMove());
-		Button botaoAtaque = FabricaDeBotoes.criaBotao("Ataque", "Ataque",
-				new EventoChamaTelaAtaque());
-		Button botaoTroca = FabricaDeBotoes.criaBotao("Trocar_cartas",
-				"TROCAR CARTAS", new EventoTelaCartas());
-		Button botaoObjetivo = FabricaDeBotoes.criaBotao("Ver_objetivo",
-				"VER OBJETIVO", new EventoMostraObjetivo());
 		
-		Button botaoPausar = FabricaDeBotoes.criaBotao("Pausar",
-				"Pausar", new EventoPausaJogo());
 		
-		Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
-				"Salvar", new EventoSalvar());
+		
+		Button botaoMover = FabricaDeBotoes.criaBotaoComImagem("Mover_tropas",
+				"", new EventoMove(),new Image("file:media/imagens/botoes/BTMOVE.png",125,125,true,true));
+		botaoMover.setStyle("-fx-background-color: transparent");
+		
+		Button botaoAtaque = FabricaDeBotoes.criaBotaoComImagem("Ataque", "",
+				new EventoChamaTelaAtaque(),new Image("file:media/imagens/botoes/BTATACAR.png",125,125,true,true) );
+		botaoAtaque.setStyle("-fx-background-color: transparent");
+		
+		Button botaoTroca = FabricaDeBotoes.criaBotaoComImagem("Trocar_cartas",
+				"", new EventoTelaCartas(),new Image("file:media/imagens/botoes/BTCARTAS.png",125,125,true,true) );
+		botaoTroca.setStyle("-fx-background-color: transparent");
+		
+		Button botaoObjetivo = FabricaDeBotoes.criaBotaoComImagem("Ver_objetivo",
+				"", new EventoMostraObjetivo(), new Image("file:media/imagens/botoes/BTOBJETIVO.png",125,125,true,true));
+		botaoObjetivo.setStyle("-fx-background-color: transparent");
+		
+		Button botaoPausar = FabricaDeBotoes.criaBotaoComImagem("Pausar",
+				"", new EventoPausaJogo(), new Image("file:media/imagens/botoes/BTMENU.png",125,40,true,true));
+		botaoPausar.setStyle("-fx-background-color: transparent");
+		
+		//Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
+		//		"Salvar", new EventoSalvar());
 	
 		
 		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",32,32,true,true);	
@@ -212,6 +223,9 @@ public class TelaJogo implements ITela {
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
+			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
+				"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTTROPASDISTRIBUIDAS.png",125,125,true,true));
+			botaoFase.setStyle("-fx-background-color: transparent");
 			if (jogo.getQuantidadeDeTropas() > 0)
 				botaoFase.setDisable(true);
 			else
@@ -223,13 +237,14 @@ public class TelaJogo implements ITela {
 					new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
 					botaoFase,
 					botaoObjetivo,
-					botaoPausar,
 					botaoTroca,
-					botaoSalvar,
+					botaoPausar,
 					cartas);
 			break;
 		case FASE_2:
-			botaoFase.setText("ACABAR FASE 2");
+			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
+					"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTFINALIZARATAQUE.png",125,125,true,true));
+			botaoFase.setStyle("-fx-background-color: transparent");
 			if (jogo.getQuantidadeDeTropas() > 0)
 				botaoFase.setDisable(true);
 			else
@@ -246,7 +261,9 @@ public class TelaJogo implements ITela {
 					cartas);
 			break;
 		case FASE_3:
-			botaoFase.setText("PASSAR A VEZ");
+			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
+					"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTMOVIMENTOS COMPLETOS.png",135,125,true,true));
+			botaoFase.setStyle("-fx-background-color: transparent");
 			barraInformacoes.getChildren().addAll(
 					new ImageView(corJogador),
 					new Label(jogo.getJogadorDaVez().getNome()),
@@ -269,6 +286,7 @@ public class TelaJogo implements ITela {
 			break;
 		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
+		vBox.setStyle("-fx-background-color: grey");
 		if(estadoAtual==Estado.JOGANDO){
 			return new Scene(vBox);
 		}
