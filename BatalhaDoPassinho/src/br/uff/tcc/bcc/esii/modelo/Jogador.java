@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import br.uff.tcc.bcc.esii.modelo.Carta.Tipo;
 import br.uff.tcc.bcc.esii.modelo.objetivo.Objetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
@@ -23,18 +25,25 @@ public class Jogador {
 	 * Cor que identifica esse jogador.
 	 */
 	private ConstanteDaCor cor;
-	/**
-	 * Territorios que foram possuidos pelos jogador.
-	 */
+	
 	
 	private Objetivo objetivo;
 	
-	
+	/**
+	 * Territorios que foram possuidos pelos jogador.
+	 */
 	private Map<String, Territorio> conquistados;//
 	/**
-	 * Cartas que o jogador possue.
+	 * Cartas que o jogador possui.
 	 */
 	private List<Carta> mao;//
+	/**
+	 * 
+	 */
+	private ImageView foto;
+	
+	
+	
 	/**
 	 * @param nome nome do jogador
 	 * @param cor  cor que identifica o jogador
@@ -44,6 +53,8 @@ public class Jogador {
 		this.cor = cor;
 		conquistados= new HashMap<>();
 		mao = new ArrayList<>();
+		String caminho = "file:media/imagens/mcs/"+nome+".png";
+		foto = new ImageView(new Image(caminho, 110,110,true,true));
 		
 	}
 	/**
@@ -105,6 +116,10 @@ public class Jogador {
 	 */
 	public void removeConquistados(Territorio territorio){
 		conquistados.remove(territorio.getNome());		
+	}
+	
+	public ImageView getFoto(){
+		return foto;
 	}
 	
 	public boolean possuiTerritorio(String territorio){

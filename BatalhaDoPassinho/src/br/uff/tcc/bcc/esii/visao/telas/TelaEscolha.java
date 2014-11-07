@@ -61,7 +61,7 @@ public class TelaEscolha implements ITela  {
 		}
 		
 		ComboBox vetorComboBox[] = new ComboBox[6];
-		String nomePersonagem[]={"-","Jogador","Catra","Anitta","Nego Bam","Claudinho&Buchecha","Mc Koringa","Perla"};
+		String nomePersonagem[]={"-","Jogador","Catra","Anitta","Nego Bam","Claudinho & Buchecha","Mc Koringa","Perlla"};
 		CheckBox vetorCheckBox[] = new CheckBox[6];
 		 
 		for (int i = 0; i < vetorComboBox.length; i++) {
