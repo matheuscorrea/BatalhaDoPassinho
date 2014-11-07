@@ -79,11 +79,14 @@ public class ControladorJogo {
 				if (jogador.possuiTerritorio(botao.getId())
 						&& jogador.getTerritorioConquistado(botao.getId())
 								.getQuantidadeTropa() > 1) {
-					botao.setDisable(true);
 					selecionouTerritorioProprio = true;
 					territorioAtacante = jogador.getTerritorioConquistado(botao
 							.getId());
+					
 					btAtacante = botao;
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioAtacante));
+					
 				}
 			//Já selecionou 1 
 			} else if (!selecionouTerritorioInimigo) {
@@ -91,25 +94,35 @@ public class ControladorJogo {
 				if (!jogador.possuiTerritorio(botao.getId())) {
 					if (territorioAtacante.getVizinhos().containsKey(
 							botao.getId())) {
-						botao.setDisable(true);
 						btDefensor = botao;
 						selecionouTerritorioInimigo = true;
 						territorioDefensor = territorioAtacante.getVizinhos()
 								.get(botao.getId());
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioDefensor));
+						
 					}else{
-						btAtacante.setDisable(false);
+						//btAtacante.setDisable(false);
 						selecionouTerritorioProprio = false;
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
+						
 					}
 				//clicou no proprio territorio
 				}else{
 					btAtacante.setDisable(false);
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
 					//se poder atacar
 					if(jogador.getTerritorioConquistado(botao.getId())
 								.getQuantidadeTropa() > 1){
-						botao.setDisable(true);
+						//botao.setDisable(true);
 						territorioAtacante = jogador.getTerritorioConquistado(botao
 								.getId());
 						btAtacante = botao;
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioAtacante));
+						
 					}else{
 						selecionouTerritorioProprio=false;
 					}
@@ -120,20 +133,35 @@ public class ControladorJogo {
 				if (jogador.possuiTerritorio(botao.getId())
 						&& jogador.getTerritorioConquistado(botao.getId())
 								.getQuantidadeTropa() > 1) {
-					btAtacante.setDisable(false);
-					btDefensor.setDisable(false);
+					//btAtacante.setDisable(false);
+					//btDefensor.setDisable(false);
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
+					
+					
 					selecionouTerritorioInimigo = false;
 					
-					botao.setDisable(true);
+					//botao.setDisable(true);
 					selecionouTerritorioProprio = true;
 					territorioAtacante = jogador.getTerritorioConquistado(botao
 							.getId());
 					btAtacante = botao;
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioAtacante));
+					
+					
 				}else{
 					btAtacante.setDisable(false);
 					btDefensor.setDisable(false);
 					selecionouTerritorioProprio = false;
 					selecionouTerritorioInimigo = false;
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
+				
 				}
 			}
 			break;
@@ -141,28 +169,42 @@ public class ControladorJogo {
 			if (selecionouTerritorioDestino) {
 				selecionouTerritorioFonte = false;
 				selecionouTerritorioDestino = false;
-				btDestino.setDisable(false);
-				btFonte.setDisable(false);
+				
+				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
+						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDestino));
+				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
+				
+				//btDestino.setDisable(false);
+				//btFonte.setDisable(false);
 				if (jogador.possuiTerritorio(botao.getId())) {
-					if (!jaMovidos.contains(botao.getId())) {
+					if ((!jaMovidos.contains(botao.getId()))&&(jogador
+							.getTerritorioConquistado(botao.getId()).getQuantidadeTropa()>1)) {
 						selecionouTerritorioFonte = true;
 						territorioFonte = jogador
 								.getTerritorioConquistado(botao.getId());
 						btFonte = botao;
-						btFonte.setDisable(true);
+						//btFonte.setDisable(true);
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioFonte));
+						
 						GerenciadorDeTelas.getInstancia()
 								.atualizaBarraInformacoes(jogo);
 					}
 				}
 			} else if (!selecionouTerritorioFonte) {
 				if (jogador.possuiTerritorio(botao.getId())) {
-					if (!jaMovidos.contains(botao.getId())) {
+					if ((!jaMovidos.contains(botao.getId()))&&(jogador
+							.getTerritorioConquistado(botao.getId()).getQuantidadeTropa()>1)) {
 						
 						selecionouTerritorioFonte = true;
 						territorioFonte = jogador
 								.getTerritorioConquistado(botao.getId());
 						btFonte = botao;
-						btFonte.setDisable(true);
+						//btFonte.setDisable(true);
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioFonte));
+						
 						GerenciadorDeTelas.getInstancia()
 								.atualizaBarraInformacoes(jogo);
 					}
@@ -174,22 +216,36 @@ public class ControladorJogo {
 						territorioDestino = jogador
 								.getTerritorioConquistado(botao.getId());
 						btDestino = botao;
-						btDestino.setDisable(true);
+						//btDestino.setDisable(true);
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioDestino));
+						
 						GerenciadorDeTelas.getInstancia()
 								.atualizaBarraInformacoes(jogo);
 					}else{
-						btFonte.setDisable(false);
-						if (!jaMovidos.contains(botao.getId())) {
+						
+						//btFonte.setDisable(false);
+						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+								FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
+						
+						if ((!jaMovidos.contains(botao.getId()))&&
+								(jogador.getTerritorioConquistado(botao.getId()).getQuantidadeTropa()>1)) {
 							territorioFonte = jogador
 									.getTerritorioConquistado(botao.getId());
 							btFonte = botao;
-							btFonte.setDisable(true);
+							//btFonte.setDisable(true);
+							GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+									FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioFonte));
+							
 							GerenciadorDeTelas.getInstancia()
 									.atualizaBarraInformacoes(jogo);
 						}					
 					}
 				}else{
-					btFonte.setDisable(false);
+					//btFonte.setDisable(false);
+					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
+					
 					selecionouTerritorioFonte = false;
 					GerenciadorDeTelas.getInstancia()
 								.atualizaBarraInformacoes(jogo);
@@ -262,22 +318,34 @@ public class ControladorJogo {
 
 			if (selecionouTerritorioInimigo) {
 				selecionouTerritorioInimigo = false;
-				btDefensor.setDisable(false);
+				//btDefensor.setDisable(false);
+				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
+						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
+				
 			}
 			if (selecionouTerritorioProprio) {
 				selecionouTerritorioProprio = false;
-				btAtacante.setDisable(false);
+				//btAtacante.setDisable(false);
+				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
+						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
+				
 			}
 			break;
 		case FASE_3:
 
 			if (selecionouTerritorioFonte) {
 				selecionouTerritorioFonte = false;
-				btFonte.setDisable(false);
+				//btFonte.setDisable(false);
+				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
+						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
+				
 			}
 			if (selecionouTerritorioDestino) {
 				selecionouTerritorioDestino = false;
-				btDestino.setDisable(false);
+				//btDestino.setDisable(false);
+				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
+						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDestino));
+				
 			}
 			
 			jaMovidos.clear();
