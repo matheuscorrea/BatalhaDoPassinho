@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCarregaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
@@ -24,8 +25,8 @@ public class TelaInicial implements ITela {
 	 */
 	@Override
 	public Scene getScene() {
-
-        Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",100,100,true,true);
+		
+		Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",100,100,true,true);
         Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
         botaoNovoJogo.setStyle("-fx-background-color: transparent");
         

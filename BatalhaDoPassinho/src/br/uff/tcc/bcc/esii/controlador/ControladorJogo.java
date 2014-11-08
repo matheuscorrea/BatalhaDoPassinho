@@ -13,6 +13,7 @@ import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.save.Save;
+import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
@@ -314,7 +315,6 @@ public class ControladorJogo {
 	}
 
 	public void iniciaPartida() {
-
 		List<Jogador> listaJogadores = ControladorTelaEscolha.getInstancia()
 				.getListaJogadores();
 		Collections.shuffle(listaJogadores);
