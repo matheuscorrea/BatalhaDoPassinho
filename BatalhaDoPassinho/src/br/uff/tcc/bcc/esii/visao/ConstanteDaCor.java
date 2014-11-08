@@ -19,6 +19,11 @@ public enum ConstanteDaCor {
         return (otherName == null)? false:nome.equals(otherName);
     }
     
+    public static boolean equalsConstante(ConstanteDaCor cor1, ConstanteDaCor cor2){
+    	return (cor1 == null || cor2 ==null)? false:cor1.equalsName(cor2.toString());
+    	
+    }
+    
     @Override
     public String toString(){
        return nome;

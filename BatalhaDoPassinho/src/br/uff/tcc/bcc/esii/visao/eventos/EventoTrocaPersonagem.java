@@ -3,6 +3,7 @@ package br.uff.tcc.bcc.esii.visao.eventos;
 import br.uff.tcc.bcc.esii.controlador.ControladorTelaEscolha;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.scene.image.ImageView;
 
 public class EventoTrocaPersonagem implements ChangeListener{
 

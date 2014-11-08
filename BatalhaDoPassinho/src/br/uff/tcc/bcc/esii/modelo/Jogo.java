@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
+import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
+import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 
 /**
@@ -51,7 +53,18 @@ public class Jogo {
 	/**
 	 * Todos os tipos de fase que um jogo pode ter
 	 */
-	public enum TipoFase{FASE_1,FASE_2,FASE_3};
+	public enum TipoFase{FASE_1,FASE_2,FASE_3;
+
+	public static TipoFase FromString(String text) {
+	        if (text != null) {
+	          for (TipoFase b : TipoFase.values()) {
+	            if (text.equalsIgnoreCase(b.toString())) {
+	              return b;
+	            }
+	          }
+	    } 
+		return null;
+	}};
 	/**
 	 * Marcador da fase atual
 	 */
@@ -653,5 +666,9 @@ public class Jogo {
 	public void adicionaTropasTroca(){
 		quantidadeDeTropasADistribuir = quantidadeDeTropasADistribuir + 4 + (2*numeroDeTrocasRealizadas);
 		numeroDeTrocasRealizadas++;
+	}
+
+	public void setQuantidadeDeTropas(int tropas) {
+		quantidadeDeTropasADistribuir = tropas;
 	}
 }

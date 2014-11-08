@@ -3,20 +3,21 @@ package br.uff.tcc.bcc.esii.save;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
+import br.uff.tcc.bcc.esii.modelo.Jogo;
+import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
-import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 
 public class Save {
 
@@ -28,6 +29,7 @@ public class Save {
 		JSONArray jogadores = new JSONArray();
 		JSONArray mapaJson = new JSONArray();
 
+		meuArq.put("fase", ControladorJogo.getInstancia().getFase());
 
 		for(Jogador jogador:ControladorJogo.getInstancia().getJogadores()){
 			
@@ -39,6 +41,7 @@ public class Save {
 			jogadorJson.put("cor",jogador.getCor());
 			jogadorJson.put("nome",jogador.getNome());
 			jogadorJson.put("objetivo",jogador.getObjetivo().getIndex());
+			jogadorJson.put("tropas", ControladorJogo.getInstancia().getTropasADitribuir(jogador));
 		
 			//Preenche a mao do jogador		
 			for(Carta c:jogador.getMao()){
@@ -99,6 +102,7 @@ public class Save {
 	
 	private void carregaJogo(JSONObject jsonObjeto){
 		JSONArray jsonJogadores = jsonObjeto.getJSONArray("jogadores");
+		ControladorJogo.getInstancia().setFase(TipoFase.FromString(jsonObjeto.getString("fase")));
 		for(int i=0;i<jsonJogadores.length();i++){
 			JSONObject jsonJogador = jsonJogadores.getJSONObject(i);
 			Jogador jogador = new Jogador(jsonJogador.getString("nome"),ConstanteDaCor.fromString(jsonJogador.getString("cor")));
@@ -106,17 +110,27 @@ public class Save {
 			for (int j = 0; j < mao.length(); j++) {
 				jogador.adicionaCarta(Carta.fromString(mao.getString(j)));
 			}
+			if(jsonJogador.getInt("tropas")>0){
+				ControladorJogo.getInstancia().setQuantidadeDeTropas(jsonJogador.getInt("tropas"));
+			}
 			FabricaDeObjetivo fabrica = new FabricaDeObjetivo();
 			jogador.setObjetivo(fabrica.carregaObjetivo(jsonJogador.getInt("objetivo")));
 			ControladorJogo.getInstancia().AdicionaJogador(jogador);
-			
 		}
 		
 		JSONArray jsonMapa = jsonObjeto.getJSONArray("mapa");
 		for(int i=0;i<jsonMapa.length();i++){
 			JSONObject jsonTerritorio = jsonMapa.getJSONObject(i);
-			ControladorJogo.getInstancia().getMapa().getTerritorio(jsonTerritorio.getString("nome")).setQuantidadeTropa(jsonTerritorio.getInt("qtdTropas"));
-			System.out.println(jsonTerritorio.toString(1));
+			Territorio territorio = ControladorJogo.getInstancia().getMapa().getTerritorio(jsonTerritorio.getString("nome"));
+			territorio.setQuantidadeTropa(jsonTerritorio.getInt("qtdTropas"));
+			//System.out.println(jsonTerritorio.toString(1));
+			List<Jogador> jogadores = ControladorJogo.getInstancia().getJogadores();
+			for (Jogador jogador : jogadores) {
+				if(ConstanteDaCor.equalsConstante(jogador.getCor(), ConstanteDaCor.fromString(jsonTerritorio.getString("cor")))){
+					territorio.setDono(jogador);
+					jogador.adicionaConquistados(territorio);
+				}
+			}
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package br.uff.tcc.bcc.esii.controlador;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -705,6 +706,7 @@ public class ControladorJogo {
 	public void acaoCarregar() {
 		Save save = new Save();
 		save.carregaJogo();
+		atualizaTela();
 	}
 
 	public void recomecaAtributos() {
@@ -740,5 +742,28 @@ public class ControladorJogo {
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 		
+	}
+
+	public TipoFase getFase() {
+		return jogo.faseAtual;
+	}
+
+	public void setFase(TipoFase fase) {
+		jogo.faseAtual = fase;
+	}
+
+	/**
+	 * @param jogador
+	 * @return 
+	 * Se o jogador Passado for a da vez retorna a quantidade de tropas dele se não retorna 0
+	 */
+	public int getTropasADitribuir(Jogador jogador) {
+		if(jogador.getNome().equals(getJogadorDaVez().getNome()))
+			return jogo.getQuantidadeDeTropas();
+		return 0;
+	}
+
+	public void setQuantidadeDeTropas(int tropas) {
+		jogo.setQuantidadeDeTropas(tropas);
 	}
 }

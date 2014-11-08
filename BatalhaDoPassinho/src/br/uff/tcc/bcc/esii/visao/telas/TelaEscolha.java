@@ -55,8 +55,8 @@ public class TelaEscolha implements ITela  {
 		for (int i = 0; i < imagemAvatar.length; i++) {
 			image[i] = new Image(imagemAvatar[i]);
 			imageView[i] = new ImageView();
-			imageView[i].setFitHeight(100);
-			imageView[i].setFitWidth(100);
+			imageView[i].setFitHeight(150);
+			imageView[i].setFitWidth(150);
 			imageView[i].setImage(image[i]);
 		}
 		
@@ -72,9 +72,9 @@ public class TelaEscolha implements ITela  {
 			avatar[i] = new VBox(5,imageView[i],vetorComboBox[i],vetorCheckBox[i]);
 		}
 		
-		vetorComboBox[0].getSelectionModel().select(1);
-		vetorComboBox[1].getSelectionModel().select(2);
-		vetorComboBox[2].getSelectionModel().select(3);
+		vetorComboBox[0].getSelectionModel().select(0);
+		vetorComboBox[1].getSelectionModel().select(0);
+		vetorComboBox[2].getSelectionModel().select(0);
 		vetorComboBox[3].getSelectionModel().select(0);
 		vetorComboBox[4].getSelectionModel().select(0);
 		vetorComboBox[5].getSelectionModel().select(0);
@@ -103,7 +103,14 @@ public class TelaEscolha implements ITela  {
 				if(jogador.equals(nomePersonagem)){
 					comboBox.getSelectionModel().select(0);					
 				}
+			}else{
+				ComboBox comboBox = (ComboBox)avatar[i].getChildren().get(1);
+				String nomePersonagem = (String)comboBox.getSelectionModel().getSelectedItem();
+				ImageView imageView =(ImageView) avatar[i].getChildren().get(0);
+				Image image = new Image("file:media/imagens/mcs/"+nomePersonagem+".png");
+				imageView.setImage(image);
 			}
+			
 		}	
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes);		
 		atualizaListaJogadores();
