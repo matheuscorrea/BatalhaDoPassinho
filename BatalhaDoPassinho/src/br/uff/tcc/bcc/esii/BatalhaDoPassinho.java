@@ -1,7 +1,11 @@
 package br.uff.tcc.bcc.esii;
 
+import java.net.URL;
+
 import javafx.application.Application;
 import javafx.concurrent.Task;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
@@ -15,10 +19,17 @@ public class BatalhaDoPassinho extends Application {
 	
 	@Override
 	public void start(Stage stage) throws Exception {
-		Som som = new Som();
+//	    final URL resource = getClass().getResource("Zen.mp3");
+//	    final Media media = new Media(resource.toString());
+//	    final MediaPlayer mediaPlayer = new MediaPlayer(media);
+//	    
+//	    mediaPlayer.play();
+//	    mediaPlayer.setCycleCount(2);
+		
+		Som som =new Som();
 		som.toca();
 		
-		GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
+	    GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
  		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);
  		stage.show();
 	}

@@ -9,24 +9,21 @@ import javafx.scene.media.MediaView;
 
 public class Som {
 	
-//	//final String musicURL = "file:///media/audio/Anitta/Zen.mp3";
-//	//Media media;
-//	final URL resource = getClass().getResource("Carrapato.mp3");
-//    final Media media = new Media(resource.toString());
-//	
-//	MediaPlayer mediaPlayer;
-//	MediaView mediaView;
-//	
+	final URL resource;
+    final Media media;
+    final MediaPlayer mediaPlayer;
+	
 	public Som(){
-		//media = new Media(musicURL);
-	    //mediaPlayer = new MediaPlayer(media);
-	    //mediaView = new MediaView(mediaPlayer);
+	    resource = getClass().getResource("Zen.mp3");
+	    media = new Media(resource.toString());
+	    mediaPlayer = new MediaPlayer(media);
+	    
+	    
+		
 	}
     
     public void toca(){
-   	 AudioClip plonkSound = new AudioClip("file:BatalhaDoPassinho/BatalhaDoPassinho/media/audio/Anitta/Zen.mp3");
-    	 plonkSound.play();
-//    	mediaPlayer.play();
-//    	return mediaView;
+    	mediaPlayer.play();
+	    mediaPlayer.setCycleCount(2);
     }
 }
