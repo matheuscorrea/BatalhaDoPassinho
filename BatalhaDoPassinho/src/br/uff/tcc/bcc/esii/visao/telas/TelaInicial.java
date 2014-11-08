@@ -26,6 +26,8 @@ public class TelaInicial implements ITela {
 	@Override
 	public Scene getScene() {
 		
+		Som.getInstancia().toca(1);
+		
 		Image image = new Image("file:media/imagens/botoes/BTINICIAR.png",100,100,true,true);
         Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
         botaoNovoJogo.setStyle("-fx-background-color: transparent");

@@ -26,9 +26,8 @@ public class BatalhaDoPassinho extends Application {
 //	    mediaPlayer.play();
 //	    mediaPlayer.setCycleCount(2);
 		
-		Som som =new Som();
-		som.toca();
-		
+		Som.getInstancia().toca();
+				
 	    GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
  		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);
  		stage.show();
