@@ -1,11 +1,16 @@
 package br.uff.tcc.bcc.esii.controlador;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
@@ -773,5 +778,36 @@ public class ControladorJogo {
 
 	public void setJogada(int jogada) {
 		jogo.setJogada(jogada);
+	}
+
+	public File salvarArquivo() {
+		String myDocuments = ""; 
+		FileChooser fileChooser = new FileChooser();
+		try {
+		     Process p =  Runtime.getRuntime().exec("reg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\" /v personal");
+		     p.waitFor();
+
+		     InputStream in = p.getInputStream();
+		     byte[] b = new byte[in.available()];
+		     in.read(b);
+		     in.close();
+
+		     myDocuments = new String(b);
+		     myDocuments = myDocuments.split("\\s\\s+")[4];
+		     File diretorio = new File(myDocuments+"\\BatalhaDoPassinho");
+		     diretorio.mkdirs();
+			 fileChooser.setInitialDirectory(diretorio); 
+
+         //Set extension filter
+			 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+			 fileChooser.getExtensionFilters().add(extFilter);
+			 //Show save file dialog
+			 return fileChooser.showSaveDialog(GerenciadorDeTelas.getInstancia().getStagePrincipal());		
+		}catch(Exception e){
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro ao salvar Arquivo");
+			return fileChooser.getInitialDirectory();
+		}
+     
 	}
 }

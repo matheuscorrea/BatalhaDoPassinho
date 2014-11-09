@@ -30,6 +30,8 @@ public class GerenciadorDeTelas{
 	 */
 	private Stage stagePrincipal;
 	
+	
+
 	/**
 	 * Instância para o padrão Singleton.
 	 */
@@ -162,6 +164,10 @@ public class GerenciadorDeTelas{
 	public void sair() {
 		stagePrincipal.close();
 		
+	}
+	
+	public Stage getStagePrincipal() {
+		return stagePrincipal;
 	}
 	
 	public List<Button> getListaDeBotoesTerritorios(){

@@ -6,24 +6,35 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+
+import javax.swing.JOptionPane;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
+import br.uff.tcc.bcc.esii.controlador.ControladorTelaInicial;
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
-import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 
 public class Save {
 
-	private final String NOME_ARQ="save.txt";
+	//private final String NOME_ARQ="save.txt";
 	
 	public void save() throws JSONException {
+		String nomeArq = "";
+		do {
+			nomeArq = obterNomeArq();
+			System.out.print(nomeArq);
+		} while ("".equals(nomeArq));
 		
 		JSONObject meuArq = new JSONObject();
 		JSONArray jogadores = new JSONArray();
@@ -79,7 +90,7 @@ public class Save {
 		System.out.println();
 		
 		try {
-			PrintWriter arquivo = new PrintWriter(NOME_ARQ);
+			PrintWriter arquivo = new PrintWriter(nomeArq);
 			arquivo.print(jsonString);
 			arquivo.close();
 		} catch (FileNotFoundException e) {
@@ -88,16 +99,23 @@ public class Save {
 		}
 	}
 
+	private String obterNomeArq() {	
+		return ControladorJogo.getInstancia().salvarArquivo().getAbsolutePath();
+		
+	}
+
 	public void carregaJogo(){
 		try {
-			Scanner arquivo = new Scanner(new File(NOME_ARQ));
+			String caminho = "";
+			caminho = ControladorTelaInicial.getInstancia().obtemArquivo();
+			Scanner arquivo = new Scanner(new File(caminho));
 			String jogo = arquivo.nextLine();
-			//System.out.println(jogo);
 			JSONObject jogoJson = new JSONObject(jogo);
 			carregaJogo(jogoJson);
+			arquivo.close();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Jogo não Encontrado", "", 0);
 		}
 	}
 	

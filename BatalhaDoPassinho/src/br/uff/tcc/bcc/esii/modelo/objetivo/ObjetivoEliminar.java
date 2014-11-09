@@ -19,6 +19,7 @@ public class ObjetivoEliminar extends Objetivo {
 	@Override 
 	public boolean concluido(Jogador atacante, Jogador alvo){
 		for (Jogador jogador : ControladorJogo.getInstancia().getJogadores()) {
+			//Se Existir Jogador com a cor que deve ser eliminada ele faz a lógica antiga de conclusão.
 			if(ConstanteDaCor.equalsConstante(this.cor, jogador.getCor())){
 				//Se meu objetivo for me eliminar
 				if(atacante.getCor().equals(this.cor))
