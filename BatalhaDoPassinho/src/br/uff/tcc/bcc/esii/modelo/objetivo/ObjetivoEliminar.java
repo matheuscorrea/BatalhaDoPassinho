@@ -1,5 +1,6 @@
 package br.uff.tcc.bcc.esii.modelo.objetivo;
 
+import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 
@@ -17,13 +18,18 @@ public class ObjetivoEliminar extends Objetivo {
 	//TODO 
 	@Override 
 	public boolean concluido(Jogador atacante, Jogador alvo){
-		//Se meu objetivo for me eliminar
-		if(atacante.getCor().equals(this.cor))
-			return new  ObjetivoConquistar(20).concluido(atacante, alvo);		
-		if(alvo.getCor().equals(cor)){
-			return alvo.getConquistados().size()==1;
-		}		
-		return false;
+		for (Jogador jogador : ControladorJogo.getInstancia().getJogadores()) {
+			if(ConstanteDaCor.equalsConstante(this.cor, jogador.getCor())){
+				//Se meu objetivo for me eliminar
+				if(atacante.getCor().equals(this.cor))
+					return new  ObjetivoConquistar(20).concluido(atacante, alvo);		
+				if(alvo.getCor().equals(cor)){
+					return alvo.getConquistados().size()==1;
+				}
+				return false;
+			}
+		}
+		return new ObjetivoConquistar(20).concluido(atacante, alvo);
 	}
 	
 	@Override
