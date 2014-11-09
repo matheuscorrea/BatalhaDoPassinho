@@ -30,6 +30,7 @@ public class Save {
 		JSONArray mapaJson = new JSONArray();
 
 		meuArq.put("fase", ControladorJogo.getInstancia().getFase());
+		meuArq.put("jogada", ControladorJogo.getInstancia().getJogada());
 
 		for(Jogador jogador:ControladorJogo.getInstancia().getJogadores()){
 			
@@ -103,6 +104,8 @@ public class Save {
 	private void carregaJogo(JSONObject jsonObjeto){
 		JSONArray jsonJogadores = jsonObjeto.getJSONArray("jogadores");
 		ControladorJogo.getInstancia().setFase(TipoFase.FromString(jsonObjeto.getString("fase")));
+		ControladorJogo.getInstancia().setJogada(jsonObjeto.getInt("jogada"));
+		
 		for(int i=0;i<jsonJogadores.length();i++){
 			JSONObject jsonJogador = jsonJogadores.getJSONObject(i);
 			Jogador jogador = new Jogador(jsonJogador.getString("nome"),ConstanteDaCor.fromString(jsonJogador.getString("cor")));

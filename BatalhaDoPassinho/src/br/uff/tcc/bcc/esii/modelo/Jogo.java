@@ -81,7 +81,7 @@ public class Jogo {
 	 * Construtor da classe jogo
 	 */
 	public Jogo() {
-		jogada=1;
+		setJogada(1);
 		numeroDeTrocasRealizadas = 0;
 		faseAtual = TipoFase.FASE_1;
 		jogadores=new LinkedList<Jogador>();
@@ -94,7 +94,7 @@ public class Jogo {
 	 * Inicia uma nova rodada
 	 */
 	public void proximaRodada()	{
-		jogada++;
+		setJogada(getJogada() + 1);
 		
 		if(ehFaseDoisETresRodada0()){
 			faseAtual = TipoFase.FASE_2;
@@ -111,7 +111,7 @@ public class Jogo {
 	}
 	
 	public boolean ehFaseUmRodada0(){
-		if(jogada <= jogadores.size()){
+		if(getJogada() <= jogadores.size()){
 			return true;
 		}else{
 			return false;
@@ -119,8 +119,8 @@ public class Jogo {
 	}
 	
 	public boolean ehFaseDoisETresRodada0(){
-		if((jogada <= jogadores.size()*2)&&
-				((jogada > jogadores.size()))){
+		if((getJogada() <= jogadores.size()*2)&&
+				((getJogada() > jogadores.size()))){
 			return true;
 		}else{
 			return false;
@@ -670,5 +670,13 @@ public class Jogo {
 
 	public void setQuantidadeDeTropas(int tropas) {
 		quantidadeDeTropasADistribuir = tropas;
+	}
+
+	public int getJogada() {
+		return jogada;
+	}
+
+	public void setJogada(int jogada) {
+		this.jogada = jogada;
 	}
 }

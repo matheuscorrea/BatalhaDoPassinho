@@ -766,4 +766,12 @@ public class ControladorJogo {
 	public void setQuantidadeDeTropas(int tropas) {
 		jogo.setQuantidadeDeTropas(tropas);
 	}
+
+	public int getJogada() {
+		return jogo.getJogada();
+	}
+
+	public void setJogada(int jogada) {
+		jogo.setJogada(jogada);
+	}
 }
