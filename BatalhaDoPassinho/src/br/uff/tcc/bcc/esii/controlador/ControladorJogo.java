@@ -784,7 +784,8 @@ public class ControladorJogo {
 		String myDocuments = ""; 
 		FileChooser fileChooser = new FileChooser();
 		try {
-		     Process p =  Runtime.getRuntime().exec("reg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\" /v personal");
+		     //Pega caminho para Meus Documentos
+			 Process p =  Runtime.getRuntime().exec("reg query \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders\" /v personal");
 		     p.waitFor();
 
 		     InputStream in = p.getInputStream();
@@ -794,14 +795,16 @@ public class ControladorJogo {
 
 		     myDocuments = new String(b);
 		     myDocuments = myDocuments.split("\\s\\s+")[4];
+		     //Adiciona diretorio para saves do jogo
 		     File diretorio = new File(myDocuments+"\\BatalhaDoPassinho");
+		     //Caso não exista ele cria e seta como default
 		     diretorio.mkdirs();
 			 fileChooser.setInitialDirectory(diretorio); 
 
-         //Set extension filter
+			 //Seleciona o filtro para a extenção
 			 FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
 			 fileChooser.getExtensionFilters().add(extFilter);
-			 //Show save file dialog
+			 //Mostra o painel de Salvar que retorna o path aonde o arquivo vai ser salvo
 			 return fileChooser.showSaveDialog(GerenciadorDeTelas.getInstancia().getStagePrincipal());		
 		}catch(Exception e){
 			e.printStackTrace();

@@ -27,13 +27,11 @@ import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 
 public class Save {
 
-	//private final String NOME_ARQ="save.txt";
 	
 	public void save() throws JSONException {
 		String nomeArq = "";
 		do {
 			nomeArq = obterNomeArq();
-			System.out.print(nomeArq);
 		} while ("".equals(nomeArq));
 		
 		JSONObject meuArq = new JSONObject();
@@ -86,7 +84,6 @@ public class Save {
 		
 		//serializa para uma string e imprime
 		String jsonString = meuArq.toString();
-		//System.out.println("objeto original -> " + jsonString);
 		System.out.println();
 		
 		try {
@@ -94,14 +91,12 @@ public class Save {
 			arquivo.print(jsonString);
 			arquivo.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	private String obterNomeArq() {	
-		return ControladorJogo.getInstancia().salvarArquivo().getAbsolutePath();
-		
+		return ControladorJogo.getInstancia().salvarArquivo().getAbsolutePath();	
 	}
 
 	public void carregaJogo(){
@@ -144,7 +139,6 @@ public class Save {
 			JSONObject jsonTerritorio = jsonMapa.getJSONObject(i);
 			Territorio territorio = ControladorJogo.getInstancia().getMapa().getTerritorio(jsonTerritorio.getString("nome"));
 			territorio.setQuantidadeTropa(jsonTerritorio.getInt("qtdTropas"));
-			//System.out.println(jsonTerritorio.toString(1));
 			List<Jogador> jogadores = ControladorJogo.getInstancia().getJogadores();
 			for (Jogador jogador : jogadores) {
 				if(ConstanteDaCor.equalsConstante(jogador.getCor(), ConstanteDaCor.fromString(jsonTerritorio.getString("cor")))){
