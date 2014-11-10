@@ -34,6 +34,8 @@ public class TelaAtaque implements ITela {
 	List<Integer> dados_atacante;
 	List<Integer> dados_defensor;
 
+	boolean venceu=false;
+	
 	Button botaoAtaque;
 
 	public TelaAtaque(Territorio territorioAtacante,
@@ -58,6 +60,9 @@ public class TelaAtaque implements ITela {
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 
+		Label msgVitoria = new Label("Você venceu");
+		msgVitoria.setTextFill(Color.WHITE);
+		
 		Label nomeJogadorAtacante = new Label(jogadorAtacante.getNome());
 		Label qtdTropasJogadorAtacante = new Label(
 				territorioAtacante.getQuantidadeTropa() + "");
@@ -100,6 +105,11 @@ public class TelaAtaque implements ITela {
 
 		indiceDaColuna = 2;
 		indiceDaLinha = 1;
+		
+		if(venceu){
+			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);
+		}
+		
 		grid.add(botaoAtaque, indiceDaColuna, ++indiceDaLinha);
 		grid.add(botaoSair, indiceDaColuna, ++indiceDaLinha);
 
@@ -162,6 +172,7 @@ public class TelaAtaque implements ITela {
 			}
 		} else {
 			botaoAtaque.setDisable(true);
+			venceu=true;
 		}
 
 	}
