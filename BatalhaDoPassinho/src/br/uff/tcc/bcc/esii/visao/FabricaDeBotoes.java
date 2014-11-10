@@ -211,12 +211,12 @@ public class FabricaDeBotoes {
 
 	public static ImageView criaImagemDoBotaoTerritorioComHighLight(Territorio t) {
 
-		final String imagemAzul = "file:media/imagens/peoes/HL-PAWNBLUE.png";
-		final String imagemVerde = "file:media/imagens/peoes/HL-PAWNGREEN.png";
-		final String imagemCinza = "file:media/imagens/peoes/HL-PAWNGREY.png";
-		final String imagemRosa = "file:media/imagens/peoes/HL-PAWNPINK.png";
-		final String imagemVermelha = "file:media/imagens/peoes/HL-PAWNRED.png";
-		final String imagemAmarelo = "file:media/imagens/peoes/HL-PAWNYELLOW.png";
+		final String imagemAzul = "file:media/imagens/peoes/PAWNBLUEGLOWHITE.png";
+		final String imagemVerde = "file:media/imagens/peoes/PAWNGREENGLOWHITE.png";
+		final String imagemCinza = "file:media/imagens/peoes/PAWNGREYGLOWHITE.png";
+		final String imagemRosa = "file:media/imagens/peoes/PAWNPINKGLOWHITE.png";
+		final String imagemVermelha = "file:media/imagens/peoes/PAWNREDGLOWHITE.png";
+		final String imagemAmarelo = "file:media/imagens/peoes/PAWNYELLOWGLOWHITE.png";
 		String imagemURL = imagemAzul;
 
 		switch (t.getCor()) {
