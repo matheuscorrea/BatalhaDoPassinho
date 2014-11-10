@@ -2,6 +2,7 @@ package br.uff.tcc.bcc.esii.visao.telas;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,6 +19,7 @@ import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
@@ -78,7 +80,13 @@ public class TelaJogo implements ITela {
 	 */
 	@Override
 	public Scene getScene() {
-		Som.getInstancia().toca(0);
+		Random random = new Random();
+		int rand = random.nextInt(Musicas.ULTIMO_JOGO.getID()-Musicas.JOGO1.getID()+1)+Musicas.JOGO1.getID();
+		System.out.println(rand+"");
+		Som.getInstancia().toca(rand);
+		rand = random.nextInt(Musicas.ULTIMA_BATIDA.getID()-Musicas.BATIDA1.getID()+1)+Musicas.BATIDA1.getID();
+		System.out.println(rand+"");
+		Som.getInstancia().tocaBatida(rand);
 		if(estadoAtual==Estado.JOGANDO){
 			return getSceneJogo();
 		}

@@ -1,0 +1,303 @@
+-----------------------------------------------------------------------------
+Caminho Windows (\)
+
+---Anitta---
+audio\Anitta\Meiga_e_Abusada
+audio\Anitta\Menina_Ma
+audio\Anitta\Na_Batida
+audio\Anitta\Nao_Para
+audio\Anitta\Show_das_Poderosas
+audio\Anitta\Zen
+
+---Batidas---
+audio\Batidas\batida01
+audio\Batidas\batida02
+audio\Batidas\batida03
+audio\Batidas\batida04
+audio\Batidas\batida05
+audio\Batidas\batida06
+audio\Batidas\batida07
+audio\Batidas\batida08
+audio\Batidas\batida09
+audio\Batidas\batida10
+audio\Batidas\batida11
+audio\Batidas\batida12
+
+---Cidinho e Doca---
+audio\Cidinho_e_Doca\Rap_da_Felicidade
+audio\Cidinho_e_Doca\Rap_das_Armas
+
+---Claudinho e Buchecha---
+audio\Claudinho_e_Buchecha\Conquista
+audio\Claudinho_e_Buchecha\Enquanto_eu_viver
+audio\Claudinho_e_Buchecha\Nosso_Sonho
+audio\Claudinho_e_Buchecha\Quero_te_encontrar
+audio\Claudinho_e_Buchecha\So_love
+audio\Claudinho_e_Buchecha\Xereta
+
+---Efeitos---
+audio\Efeitos\Combo_Breaker
+audio\Efeitos\Fatality
+audio\Efeitos\Finish_Him
+audio\Efeitos\Poxa_vida_hein
+audio\Efeitos\Poxa_vida_hein_uol
+audio\Efeitos\Risada_Catra
+audio\Efeitos\Tipo_Colombia
+audio\Efeitos\Toasty
+
+---Funk da Antiga---
+audio\Funk_da_Antiga\A_distancia
+audio\Funk_da_Antiga\Estrada_da_Posse
+audio\Funk_da_Antiga\Rap_da_Diferença
+audio\Funk_da_Antiga\Rap_da_Morena
+audio\Funk_da_Antiga\Senhorita
+
+---Mc Andinho---
+audio\Mc_Andinho\Balada_boa
+audio\Mc_Andinho\Corpo_nu
+audio\Mc_Andinho\Falsidade
+audio\Mc_Andinho\Ja_e_Sensacao
+
+---Mc Bob Rum---
+audio\Mc_Bob_Rum\Rap_do_Silva
+
+---Mc Bola---
+audio\Mc_Bola\Ela_e_top
+audio\Mc_Bola\Soltinha
+
+---Mc Danda e Mc Tafarel---
+audio\Mc_Danda_e_Mc_Tafarel\Rap_do_Festival
+
+---Mc Dede---
+audio\Mc_Dede\Bumbum_na_agua
+
+---Mc Koringa---
+audio\Mc_Koringa\Danada_vem_que_vem
+audio\Mc_Koringa\Danca_sensual
+audio\Mc_Koringa\Dance_mais_um_pouco
+audio\Mc_Koringa\Deixa_a_gatinha_dançar
+audio\Mc_Koringa\Joga_o_tambor_pro_alto
+audio\Mc_Koringa\Kika_no_calcanhar
+audio\Mc_Koringa\O_tamborzao_ta_rolando
+audio\Mc_Koringa\Pra_me_provocar
+
+---Mc Leozinho---
+audio\Mc_Leozinho\Se_ela_danca_eu_danco
+audio\Mc_Leozinho\Toda_gostosa
+
+---Mc Magalhães---
+audio\Mc_Magalhaes\Rap_do_trabalhador
+
+---Mc Marcinho---
+audio\Mc_Marcinho\Garota_nota_100
+audio\Mc_Marcinho\Glamourosa
+audio\Mc_Marcinho\Princesa
+audio\Mc_Marcinho\Zona_Oeste
+
+---Mc Orelha---
+audio\Mc_Orelha\Faixa_de_Gaza
+
+---Mc Pedrinho---
+audio\Mc_Pedrinho\Dom_dom_dom
+
+---Mc Primo---
+audio\Mc_Primo\Diretoria
+
+---Mc Romeu---
+audio\Mc_Romeu\A_te_esperar
+audio\Mc_Romeu\Dois_manos
+audio\Mc_Romeu\Judas
+audio\Mc_Romeu\Rainha
+
+---Mc Sapao---
+audio\Mc_Sapao\Eu_to_tranquilao
+
+---Mc Smith---
+audio\Mc_Smith\Apaixonado
+audio\Mc_Smith\Apaixonado_Bossa_Nova
+audio\Mc_Smith\Coracao_de_ouro
+
+---Mr. Catra---
+audio\Mr_Catra\Adulterio
+audio\Mr_Catra\O_Papai_chegou
+audio\Mr_Catra\Vai_comecar
+
+---Naldo---
+audio\Naldo\Amor_de_chocolate
+audio\Naldo\Caipfruta
+audio\Naldo\Chantily
+audio\Naldo\Exagerado
+audio\Naldo\Na_veia
+audio\Naldo\Se_joga
+
+---Perlla---
+audio\Perlla\Carrapato
+audio\Perlla\Menina_chapa_quente
+audio\Perlla\Totalmente_demais
+audio\Perlla\Tremendo_vacilao
+
+---Robinho da Prata---
+audio\Robinho_da_Prata\A_mais_gelada
+audio\Robinho_da_Prata\Cesta_de_cafe_da_manha
+audio\Robinho_da_Prata\Copo_de_Vinho
+audio\Robinho_da_Prata\Copo_de_Vinho_intro
+audio\Robinho_da_Prata\Envolvente
+audio\Robinho_da_Prata\Patricinha
+
+---Valesca---
+audio\Valesca\Beijinho_no_ombro
+
+End Caminho Windows (\)
+-----------------------------------------------------------------------------
+
+-----------------------------------------------------------------------------
+Caminho Hierárquico (/)
+
+---Anitta---
+audio/Anitta/Meiga_e_Abusada
+audio/Anitta/Menina_Ma
+audio/Anitta/Na_Batida
+audio/Anitta/Nao_Para
+audio/Anitta/Show_das_Poderosas
+audio/Anitta/Zen
+
+---Batidas---
+audio/Batidas/batida01
+audio/Batidas/batida02
+audio/Batidas/batida03
+audio/Batidas/batida04
+audio/Batidas/batida05
+audio/Batidas/batida06
+audio/Batidas/batida07
+audio/Batidas/batida08
+audio/Batidas/batida09
+audio/Batidas/batida10
+audio/Batidas/batida11
+audio/Batidas/batida12
+
+---Cidinho e Doca---
+audio/Cidinho_e_Doca/Rap_da_Felicidade
+audio/Cidinho_e_Doca/Rap_das_Armas
+
+---Claudinho e Buchecha---
+audio/Claudinho_e_Buchecha/Conquista
+audio/Claudinho_e_Buchecha/Enquanto_eu_viver
+audio/Claudinho_e_Buchecha/Nosso_Sonho
+audio/Claudinho_e_Buchecha/Quero_te_encontrar
+audio/Claudinho_e_Buchecha/So_love
+audio/Claudinho_e_Buchecha/Xereta
+
+---Efeitos---
+audio/Efeitos/Combo_Breaker
+audio/Efeitos/Fatality
+audio/Efeitos/Finish_Him
+audio/Efeitos/Poxa_vida_hein
+audio/Efeitos/Poxa_vida_hein_uol
+audio/Efeitos/Risada_Catra
+audio/Efeitos/Tipo_Colombia
+audio/Efeitos/Toasty
+
+---Funk da Antiga---
+audio/Funk_da_Antiga/A_distancia
+audio/Funk_da_Antiga/Estrada_da_Posse
+audio/Funk_da_Antiga/Rap_da_Diferença
+audio/Funk_da_Antiga/Rap_da_Morena
+audio/Funk_da_Antiga/Senhorita
+
+---Mc Andinho---
+audio/Mc_Andinho/Balada_boa
+audio/Mc_Andinho/Corpo_nu
+audio/Mc_Andinho/Falsidade
+audio/Mc_Andinho/Ja_e_Sensacao
+
+---Mc Bob Rum---
+audio/Mc_Bob_Rum/Rap_do_Silva
+
+---Mc Bola---
+audio/Mc_Bola/Ela_e_top
+audio/Mc_Bola/Soltinha
+
+---Mc Danda e Mc Tafarel---
+audio/Mc_Danda_e_Mc_Tafarel/Rap_do_Festival
+
+---Mc Dede---
+audio/Mc_Dede/Bumbum_na_agua
+
+---Mc Koringa---
+audio/Mc_Koringa/Danada_vem_que_vem
+audio/Mc_Koringa/Danca_sensual
+audio/Mc_Koringa/Dance_mais_um_pouco
+audio/Mc_Koringa/Deixa_a_gatinha_dançar
+audio/Mc_Koringa/Joga_o_tambor_pro_alto
+audio/Mc_Koringa/Kika_no_calcanhar
+audio/Mc_Koringa/O_tamborzao_ta_rolando
+audio/Mc_Koringa/Pra_me_provocar
+
+---Mc Leozinho---
+audio/Mc_Leozinho/Se_ela_danca_eu_danco
+audio/Mc_Leozinho/Toda_gostosa
+
+---Mc Magalhães---
+audio/Mc_Magalhaes/Rap_do_trabalhador
+
+---Mc Marcinho---
+audio/Mc_Marcinho/Garota_nota_100
+audio/Mc_Marcinho/Glamourosa
+audio/Mc_Marcinho/Princesa
+audio/Mc_Marcinho/Zona_Oeste
+
+---Mc Orelha---
+audio/Mc_Orelha/Faixa_de_Gaza
+
+---Mc Pedrinho---
+audio/Mc_Pedrinho/Dom_dom_dom
+
+---Mc Primo---
+audio/Mc_Primo/Diretoria
+
+---Mc Romeu---
+audio/Mc_Romeu/A_te_esperar
+audio/Mc_Romeu/Dois_manos
+audio/Mc_Romeu/Judas
+audio/Mc_Romeu/Rainha
+
+---Mc Sapao---
+audio/Mc_Sapao/Eu_to_tranquilao
+
+---Mc Smith---
+audio/Mc_Smith/Apaixonado
+audio/Mc_Smith/Apaixonado_Bossa_Nova
+audio/Mc_Smith/Coracao_de_ouro
+
+---Mr. Catra---
+audio/Mr_Catra/Adulterio
+audio/Mr_Catra/O_Papai_chegou
+audio/Mr_Catra/Vai_comecar
+
+---Naldo---
+audio/Naldo/Amor_de_chocolate
+audio/Naldo/Caipfruta
+audio/Naldo/Chantily
+audio/Naldo/Exagerado
+audio/Naldo/Na_veia
+audio/Naldo/Se_joga
+
+---Perlla---
+audio/Perlla/Carrapato
+audio/Perlla/Menina_chapa_quente
+audio/Perlla/Totalmente_demais
+audio/Perlla/Tremendo_vacilao
+
+---Robinho da Prata---
+audio/Robinho_da_Prata/A_mais_gelada
+audio/Robinho_da_Prata/Cesta_de_cafe_da_manha
+audio/Robinho_da_Prata/Copo_de_Vinho
+audio/Robinho_da_Prata/Copo_de_Vinho_intro
+audio/Robinho_da_Prata/Envolvente
+audio/Robinho_da_Prata/Patricinha
+
+---Valesca---
+audio/Valesca/Beijinho_no_ombro
+
+End Caminho Hierárquico (/)
+-----------------------------------------------------------------------------
