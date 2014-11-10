@@ -11,6 +11,7 @@ import javafx.stage.FileChooser.ExtensionFilter;
 
 import javax.swing.JOptionPane;
 
+import org.hamcrest.core.IsInstanceOf;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +22,7 @@ import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
@@ -52,6 +54,7 @@ public class Save {
 			jogadorJson.put("nome",jogador.getNome());
 			jogadorJson.put("objetivo",jogador.getObjetivo().getIndex());
 			jogadorJson.put("tropas", ControladorJogo.getInstancia().getTropasADitribuir(jogador));
+			jogadorJson.put("ia", jogador instanceof JogadorIA);
 		
 			//Preenche a mao do jogador		
 			for(Carta c:jogador.getMao()){
@@ -121,7 +124,14 @@ public class Save {
 		
 		for(int i=0;i<jsonJogadores.length();i++){
 			JSONObject jsonJogador = jsonJogadores.getJSONObject(i);
-			Jogador jogador = new Jogador(jsonJogador.getString("nome"),ConstanteDaCor.fromString(jsonJogador.getString("cor")));
+			
+			Jogador jogador;
+			if(jsonJogador.getBoolean("ia")){
+				jogador = new JogadorIA(jsonJogador.getString("nome"),ConstanteDaCor.fromString(jsonJogador.getString("cor")));
+			}else{
+				jogador= new Jogador(jsonJogador.getString("nome"),ConstanteDaCor.fromString(jsonJogador.getString("cor")));
+			}
+			
 			JSONArray mao = jsonJogador.getJSONArray("mao");
 			for (int j = 0; j < mao.length(); j++) {
 				jogador.adicionaCarta(Carta.fromString(mao.getString(j)));

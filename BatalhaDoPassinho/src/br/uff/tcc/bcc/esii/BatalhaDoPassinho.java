@@ -2,6 +2,7 @@ package br.uff.tcc.bcc.esii;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import br.uff.tcc.bcc.esii.save.Save;
 import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
@@ -25,7 +26,13 @@ public class BatalhaDoPassinho extends Application {
 		Som.getInstancia().toca(Musicas.INICIAL.getID());
 				
 	    GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
- 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);
+ 		try {
+ 			GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);			
+		} catch (Exception e) {
+			// TODO: handle exception
+			Save save = new Save();
+			save.save();
+		}
  		stage.show();
 	}
 	
