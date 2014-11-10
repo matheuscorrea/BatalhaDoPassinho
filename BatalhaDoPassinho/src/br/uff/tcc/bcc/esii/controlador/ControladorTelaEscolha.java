@@ -15,6 +15,9 @@ public class ControladorTelaEscolha {
 	private ControladorTelaEscolha(){
 	}
 	
+	/**Singleton do controlador tela escolha
+	 * @return Instância de tela escolha
+	 */
 	public static ControladorTelaEscolha getInstancia(){
 		if (controlador == null){
 			controlador = new ControladorTelaEscolha();

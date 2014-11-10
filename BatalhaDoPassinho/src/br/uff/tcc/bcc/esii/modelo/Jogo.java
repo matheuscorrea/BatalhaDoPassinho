@@ -647,10 +647,16 @@ public class Jogo {
 		
 	}
 
+	/**Método responsável pelas regras de vencer o jogo
+	 * @param vencedor Jogador que venceu o jogo
+	 */
 	public void ganharJogo(Jogador vencedor) {
 		this.jogadorVencedor = vencedor;
 	}
 	
+	/**Verifica se o jogo acabou
+	 * @return true caso o jogo já tenha um vencedor, false caso contrário
+	 */
 	public boolean jogoAcabou(){
 		if(jogadorVencedor==null){
 			return false;

@@ -2,15 +2,15 @@ package br.uff.tcc.bcc.esii.controlador;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
+
+import javax.swing.JOptionPane;
+
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
@@ -19,7 +19,6 @@ import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.save.Save;
-import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
@@ -65,6 +64,9 @@ public class ControladorJogo {
 
 	// Atributos criados para evento território
 
+	/**Método responsável pelas ações relacionadas ao clique de um botão de território
+	 * @param botao Botão do território clicado
+	 */
 	public void acaoTerritorio(Button botao) {
 
 		Jogador jogador = jogo.getJogadorDaVez();
@@ -259,7 +261,12 @@ public class ControladorJogo {
 			break;
 		}
 	}
-
+	
+	/**Método responsável pela distribuição de tropas (Fase 1) 
+	 * @param jogador Jogador que está distribuindo as tropas
+	 * @param nomeTerritorio Território para o qual o jogador está tentando distribuir suas tropas
+	 * @return True se o jogador possuir o terriório para o qual quer distribuir suas tropas, false caso contrário.
+	 */
 	public boolean distribuiTropa(Jogador jogador, String nomeTerritorio) {
 		if (jogador.possuiTerritorio(nomeTerritorio)) {
 			if (jogo.temTropas()) {
@@ -271,6 +278,9 @@ public class ControladorJogo {
 		return false;
 	}
 
+	/** Método responsável por verificar se um dado jogador já acabou de distribuir suas tropas na Fase 1
+	 * @return True se o jogador da vez tem tropas a distribuir, false caso contrário
+	 */
 	public boolean FaseUmTemTropasParaDistribuir() {
 		return jogo.temTropas();
 	}
@@ -304,6 +314,10 @@ public class ControladorJogo {
 //		return false;
 //	}
 
+	/**Método responsável por mover tropas de um território para outro território dominados por um mesmo jogador
+	 * @param territorioFonte Território do qual as tropas se originam
+	 * @param territorioDestino Território para onde se destinam as tropas
+	 */
 	public void mover(Territorio territorioFonte, Territorio territorioDestino) {
 		if (territorioFonte.getQuantidadeTropa() > 1) {
 			jogo.redistribuiTropa(territorioFonte, territorioDestino, 1);
@@ -313,6 +327,9 @@ public class ControladorJogo {
 		jaMovidos.add(territorioDestino.getNome());
 	}
 
+	/**Método responsável por passar as fases do jogo
+	 * 
+	 */
 	public void proximaFase() {
 
 		switch (jogo.faseAtual) {
@@ -386,6 +403,9 @@ public class ControladorJogo {
 		}
 	}
 
+	/**Método responsável pelo início da Partida
+	 * 
+	 */
 	public void iniciaPartida() {
 		List<Jogador> listaJogadores = ControladorTelaEscolha.getInstancia()
 				.getListaJogadores();
@@ -415,6 +435,9 @@ public class ControladorJogo {
 		return jogo.getJogadores();
 	}
 	
+	/**Método responsável pelas ações relacionadas ao clique do botão Ataque
+	 * 
+	 */
 	public void acaoAtaque() {
 		if (selecionouTerritorioInimigo && selecionouTerritorioProprio) {
 //			dominouTerrritorio = jogo.ataque(territorioAtacante,
@@ -466,11 +489,17 @@ public class ControladorJogo {
 		}		
 	}
 
+	/**Método responsável pela exibição da tela de fim de jogo
+	 * 
+	 */
 	public void fimDeJogo() {
 		jogo.ganharJogo(territorioAtacante.getDono());
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.FIM_JOGO);
 	}
 
+	/**Método responsável pelas ações relacionadas ao clique do botão Mover
+	 * 
+	 */
 	public void acaoMover(){
 		if(selecionouTerritorioFonte && selecionouTerritorioDestino){			
 			//ver se fonte tem pelo menos 2 tropas
@@ -483,6 +512,9 @@ public class ControladorJogo {
 		}		
 	}		
 
+	/**Método responsável por tornar um jogador que tenha conquistado um dado território o dono do mesmo 
+	 * 
+	 */
 	public void dominarTerritorio(){ 
 		jogo.dominarTerritorio(territorioAtacante, territorioDefensor,1);
 		btAtacante.setText(territorioAtacante.getQuantidadeTropa() + "");
@@ -495,20 +527,33 @@ public class ControladorJogo {
 		return jogo.getJogadorDaVez();
 	}
 	
+	
+	/**Método responsável pela eliminação de um dado jogador
+	 * 
+	 */
 	public void eliminaJogador(){
 		jogo.eliminaJogador(territorioAtacante.getDono(),territorioDefensor.getDono());
 	}
 	
+	/**Método responsável pelas ações relacionadas ao clique do botão Trocar na tela de troca
+	 * @param Btn ?????
+	 */
 	public void acaoTelaTroca(Button Btn){		
 		controleDeCartas = getNumeroCartasJogador();
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.TROCA);
 
 	}
 
+	/**Método responsável pelas ações relacionadas ao clique do botão Objetivo
+	 * 
+	 */
 	public void acaoTelaObjetivo() {
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.OBJETIVO);
 	}
 
+	/**Método responsável por voltar ao jogo a partir da tela de troca
+	 * 
+	 */
 	public void voltaAoJogo() {
 		cartasTiroSelecionadas = 0;
 		cartasPorradaSelecionadas = 0;
@@ -551,6 +596,9 @@ public class ControladorJogo {
 		return resp;
 	}
 
+	/**Método responsável pela seleção da carta tiro na tela de troca
+	 * @param moveBtn ????
+	 */
 	public void selecionouCartaTiro(Button moveBtn) {
 		 
 		if(controleDeCartas[0] > 0 && totalCartasSelecionadas <= 3){
@@ -561,6 +609,9 @@ public class ControladorJogo {
 		}
 	}
 
+	/**Método responsável pela seleção da carta porrada na tela de troca
+	 * @param moveBtn ????
+	 */
 	public void selecionouCartaPorrada(Button moveBtn) {
 		if(controleDeCartas[1] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasPorradaSelecionadas++;
@@ -570,6 +621,9 @@ public class ControladorJogo {
 		}
 	}
 
+	/**Método responsável pela seleção da carta bomba na tela de troca
+	 * @param moveBtn
+	 */
 	public void selecionouCartaBomba(Button moveBtn) {
 		if(controleDeCartas[2] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasBombaSelecionadas++;
@@ -579,6 +633,9 @@ public class ControladorJogo {
 		}
 	}
 
+	/**Método responsável pela seleção da carta Valesca na tela de troca
+	 * @param moveBtn
+	 */
 	public void selecionouCartaValesca(Button moveBtn) {
 		if(controleDeCartas[3] > 0 && totalCartasSelecionadas <= 3){
 			cartasValescaSelecionadas++;
@@ -599,6 +656,9 @@ public class ControladorJogo {
 		return resp;
 	}
 
+	/**Método responsável pelas ações relacionadas ao clique do botão Realiza Troca
+	 * @param moveBtn
+	 */
 	public void acaoRealizaTroca(Button moveBtn) {
 		int [] selecionadas = getCartasSelecionadas();
 		int [] aux = selecionadas;
@@ -637,6 +697,10 @@ public class ControladorJogo {
 		}		
 	}
 	
+	/**Método responsável por verificar se o conjunto de cartas selecionadas configura uma troca válida
+	 * @param selecionadas Vetor das cartas selecionadas
+	 * @return True se a troca for válida, false caso contrário
+	 */
 	private boolean checaValidade(int[] selecionadas) {
 		if(selecionadas[3]==0){
 			
@@ -663,11 +727,17 @@ public class ControladorJogo {
 		
 	}
 
+	/**Retorna o objetivo do jogador da vez
+	 * @return A string com o nome do objetivo do jogador da vez
+	 */
 	public String objetivoDoJogadorAtual(){
 		Jogador jogador = jogo.getJogadorDaVez();
 		return jogador.getObjetivo().getNomeObjetivo();
 	}
 
+	/**Método responsável pelas ações relacionadas ao clique do botão Sair
+	 * @param moveBtn
+	 */
 	public void acaoSair(Button moveBtn) {
 		GerenciadorDeTelas.getInstancia().sair();
 
@@ -677,10 +747,17 @@ public class ControladorJogo {
 		return GerenciadorDeTelas.getInstancia().getListaDeBotoesTerritorios();
 	}
 	
+	/**Método que verifica se já foram movidas tropas para um dado território
+	 * @param nomeTerritorio Nome do território 
+	 * @return true caso já tenha sido movida alguma tropas para o território de nome nomeTerritório, false caso contrário
+	 */
 	public boolean jaMoveuTerritorio(String nomeTerritorio){
 		return jaMovidos.contains(nomeTerritorio);
 	}
 	
+	/**Método responsável por resetar os botões durante a fase 3
+	 * 
+	 */
 	public void limpaBotoesFase3(){
 		if (selecionouTerritorioFonte) {
 			selecionouTerritorioFonte = false;
@@ -714,6 +791,9 @@ public class ControladorJogo {
 		atualizaTela();
 	}
 
+	/**Método responsável por resetar os atributos de controlador jogo
+	 * 
+	 */
 	public void recomecaAtributos() {
 		this.jogo = new Jogo();
 		selecionouTerritorioProprio = false;
@@ -757,10 +837,9 @@ public class ControladorJogo {
 		jogo.faseAtual = fase;
 	}
 
-	/**
+	/** Método responsável por descobrir quantas tropas um dado jogador ainda tem a distribuir
 	 * @param jogador
-	 * @return 
-	 * Se o jogador Passado for a da vez retorna a quantidade de tropas dele se não retorna 0
+	 * @return Se o jogador passado for a da vez retorna a quantidade de tropas dele senão retorna 0
 	 */
 	public int getTropasADitribuir(Jogador jogador) {
 		if(jogador.getNome().equals(getJogadorDaVez().getNome()))
