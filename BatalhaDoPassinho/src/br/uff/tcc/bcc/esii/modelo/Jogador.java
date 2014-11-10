@@ -158,7 +158,7 @@ public class Jogador {
 	 * Descarta uma carta aleatória da mão do jogador.
 	 */
 	public void descartar(){
-		int descarte = 1 + (int)(Math.random()*mao.size());
+		int descarte = (int)(Math.random()*mao.size());
 		mao.remove(descarte);
 		System.out.println("descartou " + descarte);
 	}

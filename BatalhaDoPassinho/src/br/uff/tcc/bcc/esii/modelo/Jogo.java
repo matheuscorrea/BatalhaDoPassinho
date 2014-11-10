@@ -10,6 +10,7 @@ import java.util.Random;
 
 import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
+import br.uff.tcc.bcc.esii.save.Save;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 
@@ -317,11 +318,17 @@ public class Jogo {
 	 * @param eliminado Jogador eliminado do jogo
 	 */
 	public void eliminaJogador(Jogador atacante, Jogador eliminado){
-		for(Carta c : eliminado.getMao()){
-			atacante.adicionaCarta(c);
-			eliminado.removeCarta(c);
+		try {
+			for(Carta c : eliminado.getMao()){
+				atacante.adicionaCarta(c);
+			}
+			eliminado.getMao().clear();
+			jogadores.remove(eliminado);				
+		} catch (Exception e) {
+			Save save = new Save();
+			save.save();
+			// TODO: handle exception
 		}
-		jogadores.remove(eliminado);	
 	}
 	
 	/**
