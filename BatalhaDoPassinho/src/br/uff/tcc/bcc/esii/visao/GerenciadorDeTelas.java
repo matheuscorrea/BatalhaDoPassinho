@@ -196,4 +196,8 @@ public class GerenciadorDeTelas{
 		telaAtaque.ataque();
 		stagePrincipal.setScene(telaAtaque.getScene());
 	}
+	
+	public void fim(){
+		stagePrincipal.setScene(telaFimJogo.getScene());
+	}
 }

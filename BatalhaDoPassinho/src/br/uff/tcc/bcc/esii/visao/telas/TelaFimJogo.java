@@ -41,8 +41,7 @@ public class TelaFimJogo implements ITela {
 		}
 		labelGanhou.setLayoutX(10);
 		labelGanhou.setLayoutY(0);
-        
-		
+        		
 		Group grupoFimJogo = new Group();
 		
 		grupoFimJogo.getChildren().addAll(imageView);

@@ -130,6 +130,19 @@ public class TelaAtaque implements ITela {
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(grid);
 
+		if (territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(),territorioDefensor.getDono())) {
+
+			if (!(ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA)) {
+				//ControladorJogo.getInstancia().fimDeJogo();
+				TelaFimJogo telaFimJogo = new TelaFimJogo(jogadorAtacante);
+				return telaFimJogo.getScene();
+			} else {
+				//ControladorJogo.getInstancia().ganharJogo();
+				TelaFimJogo telaFimJogo = new TelaFimJogo(jogadorAtacante);
+				return telaFimJogo.getScene();
+			}
+		}
+		
 		return new Scene(grupo);
 	}
 
@@ -151,9 +164,9 @@ public class TelaAtaque implements ITela {
 						.concluido(territorioAtacante.getDono(),
 								territorioDefensor.getDono())) {
 					if (!(ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA)) {
-						ControladorJogo.getInstancia().fimDeJogo();
+						//ControladorJogo.getInstancia().fimDeJogo();
 					} else {
-						ControladorJogo.getInstancia().ganharJogo();
+						//ControladorJogo.getInstancia().ganharJogo();
 					}
 				}
 				// Jogador acabou de perder seu último território
@@ -169,10 +182,13 @@ public class TelaAtaque implements ITela {
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(
 						territorioDefensor.getNome(),
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
+				if(territorioAtacante.getQuantidadeTropa()>1){
+					venceu=true;
+				}
 			}
 		} else {
 			botaoAtaque.setDisable(true);
-			venceu=true;
+			
 		}
 
 	}
