@@ -18,6 +18,7 @@ import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
@@ -77,7 +78,7 @@ public class TelaJogo implements ITela {
 	 */
 	@Override
 	public Scene getScene() {
-
+		Som.getInstancia().toca(0);
 		if(estadoAtual==Estado.JOGANDO){
 			return getSceneJogo();
 		}
