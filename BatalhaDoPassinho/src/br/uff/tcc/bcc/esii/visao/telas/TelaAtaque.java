@@ -19,6 +19,7 @@ import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
+import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
@@ -106,9 +107,11 @@ public class TelaAtaque implements ITela {
 
 		indiceDaColuna = 2;
 		indiceDaLinha = 1;
-		
-		if(venceu){
-			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);			
+					
+		if(venceu){			
+			Som.getInstancia().tocaEfeito(2);
+			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);
+
 		}
 		
 		grid.add(botaoAtaque, indiceDaColuna, ++indiceDaLinha);
@@ -208,8 +211,7 @@ public class TelaAtaque implements ITela {
 				}
 			}
 		} else {
-			botaoAtaque.setDisable(true);
-			
+			botaoAtaque.setDisable(true);			
 		}
 
 	}

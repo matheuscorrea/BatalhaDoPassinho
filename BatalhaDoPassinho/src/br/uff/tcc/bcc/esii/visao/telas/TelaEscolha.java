@@ -14,6 +14,8 @@ import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.controlador.ControladorTelaEscolha;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
+import br.uff.tcc.bcc.esii.som.Musicas;
+import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCheckBoxIA;
@@ -39,6 +41,8 @@ public class TelaEscolha implements ITela  {
 	
 	@Override
 	public Scene getScene() {
+		Som.getInstancia().toca(Musicas.ESCOLHA.getID());
+		
 		Button voltar = FabricaDeBotoes.criaBotao("Voltar", "Voltar",new EventoTelaInicial());
 	
 		String imagemAvatar[] = new String[6];
