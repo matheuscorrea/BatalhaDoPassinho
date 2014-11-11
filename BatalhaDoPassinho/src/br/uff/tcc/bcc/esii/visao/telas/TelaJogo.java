@@ -19,6 +19,7 @@ import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
@@ -211,6 +212,9 @@ public class TelaJogo implements ITela {
 				"", new EventoPausaJogo(), new Image("file:media/imagens/botoes/BTMENU.png",125,40,true,true));
 		botaoPausar.setStyle("-fx-background-color: transparent");
 		
+		Button botaoJogadaIA = FabricaDeBotoes.criaBotaoComImagem("DICA",
+				"", new EventoJogadaIA(), new Image("file:media/imagens/botoes/BTDICA.png",125,40,true,true));
+		
 		//Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
 		//		"Salvar", new EventoSalvar());
 	
@@ -230,6 +234,12 @@ public class TelaJogo implements ITela {
 		
 		Image corJogador;
 		corJogador = obtemImageCorJogador(jogo);
+		
+		if(jogo.getJogadorDaVez() instanceof JogadorIA){
+			barraInformacoes.getChildren().addAll(new ImageView(corJogador),
+					jogo.getJogadorDaVez().getFoto(),
+					botaoJogadaIA);
+		}else{
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
@@ -287,6 +297,7 @@ public class TelaJogo implements ITela {
 					botaoPausar,
 					cartas);
 			break;
+		}
 		}
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		vBox.setStyle("-fx-background-color: grey");
