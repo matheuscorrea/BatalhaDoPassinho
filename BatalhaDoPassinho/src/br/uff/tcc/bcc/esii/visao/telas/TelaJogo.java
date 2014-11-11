@@ -175,7 +175,7 @@ public class TelaJogo implements ITela {
 		grupo.getChildren().addAll(listaDeGroupTerritorios);
 		
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
-		//vBox.setStyle("-fx-background-color: grey");
+		vBox.setStyle("-fx-background-color: grey");
 
 		// 1123x554 mapa
 		return new Scene(vBox);
@@ -214,7 +214,8 @@ public class TelaJogo implements ITela {
 		
 		Button botaoJogadaIA = FabricaDeBotoes.criaBotaoComImagem("DICA",
 				"", new EventoJogadaIA(), new Image("file:media/imagens/botoes/BTDICA.png",125,40,true,true));
-		
+		botaoJogadaIA.setStyle("-fx-background-color: transparent");
+
 		//Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
 		//		"Salvar", new EventoSalvar());
 	
@@ -235,44 +236,57 @@ public class TelaJogo implements ITela {
 		Image corJogador;
 		corJogador = obtemImageCorJogador(jogo);
 		
-		if(jogo.getJogadorDaVez() instanceof JogadorIA){
-			barraInformacoes.getChildren().addAll(new ImageView(corJogador),
-					jogo.getJogadorDaVez().getFoto(),
-					botaoJogadaIA);
-		}else{
+		
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
 			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
 				"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTTROPASDISTRIBUIDAS.png",125,125,true,true));
 			botaoFase.setStyle("-fx-background-color: transparent");
-			if (jogo.getQuantidadeDeTropas() > 0)
-				botaoFase.setDisable(true);
-			else
-				botaoFase.setDisable(false);
 
-			barraInformacoes.getChildren().addAll(new ImageView(corJogador),
-					jogo.getJogadorDaVez().getFoto(),
-					new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
-					botaoFase,
-					botaoObjetivo,
-					botaoTroca,
-					botaoPausar,
-					cartas);
+			if(jogo.getJogadorDaVez() instanceof JogadorIA){
+				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
+						jogo.getJogadorDaVez().getFoto(),
+						new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
+						botaoJogadaIA,
+						botaoPausar);
+			}else{
+				
+				if (jogo.getQuantidadeDeTropas() > 0)
+					botaoFase.setDisable(true);
+				else
+					botaoFase.setDisable(false);
+	
+				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
+						jogo.getJogadorDaVez().getFoto(),
+						new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
+						botaoFase,
+						botaoObjetivo,
+						botaoTroca,
+						botaoPausar,
+						cartas);
+			}
 			break;
 		case FASE_2:
 			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
 					"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTFINALIZARATAQUE.png",125,125,true,true));
 			botaoFase.setStyle("-fx-background-color: transparent");
-
-			barraInformacoes.getChildren().addAll(
-					new ImageView(corJogador),
-					jogo.getJogadorDaVez().getFoto(),
-					botaoFase,
-					botaoAtaque, 
-					botaoObjetivo,
-					botaoPausar,
-					cartas);
+			
+			if(jogo.getJogadorDaVez() instanceof JogadorIA){
+				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
+						jogo.getJogadorDaVez().getFoto(),
+						botaoJogadaIA,
+						botaoPausar);
+			}else{
+				barraInformacoes.getChildren().addAll(
+						new ImageView(corJogador),
+						jogo.getJogadorDaVez().getFoto(),
+						botaoFase,
+						botaoAtaque, 
+						botaoObjetivo,
+						botaoPausar,
+						cartas);
+			}
 			break;
 		case FASE_3:
 			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
@@ -298,7 +312,7 @@ public class TelaJogo implements ITela {
 					cartas);
 			break;
 		}
-		}
+	
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
 		vBox.setStyle("-fx-background-color: grey");
 		if(estadoAtual==Estado.JOGANDO){

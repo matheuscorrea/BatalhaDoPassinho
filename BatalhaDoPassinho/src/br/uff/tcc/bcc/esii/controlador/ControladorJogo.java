@@ -392,7 +392,7 @@ public class ControladorJogo {
 //				jogadorIA.fase1();
 				break;
 			case FASE_2:
-				jogadorIA.fase2();
+				//jogadorIA.fase2();
 				break;
 			case FASE_3:
 				jogadorIA.fase3();
@@ -424,7 +424,7 @@ public class ControladorJogo {
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 		if (jogo.getJogadorDaVez() instanceof JogadorIA) {
-			((JogadorIA) jogo.getJogadorDaVez()).fase1();
+		//	((JogadorIA) jogo.getJogadorDaVez()).fase1();
 		}
 	}
 
@@ -905,7 +905,17 @@ public class ControladorJogo {
 	public void jogadaIA() {
 		if (jogo.getJogadorDaVez() instanceof JogadorIA) {
 			JogadorIA jogadorIA = (JogadorIA) jogo.getJogadorDaVez();
-			jogadorIA.acaoFase1();
+			switch (jogo.faseAtual) {
+			case FASE_1:				
+				jogadorIA.acaoFase1();
+				break;
+			case FASE_2:
+				jogadorIA.acaoFase2();
+				break;
+			case FASE_3:
+				//jogadorIA.fase3();
+				break;
+			}
 		}
 	}
 }

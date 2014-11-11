@@ -31,6 +31,7 @@ public class JogadorIA extends Jogador {
 	
 	public JogadorIA(String nome, ConstanteDaCor cor) {
 		super(nome, cor);
+		estadoFase2 = EstadoFase2.PARADO;
 	}
 
 	/**
@@ -174,6 +175,82 @@ public class JogadorIA extends Jogador {
 		}
 	}
 
+	private enum EstadoFase2{PARADO,SELECIONOU_TERRITORIOS};
+	private EstadoFase2 estadoFase2;
+	
+	private float maiorNota = 0;
+	private Territorio alvo = null;
+	private Territorio atacante = null;
+	
+	public void acaoFase2(){
+
+		switch (estadoFase2){
+		case PARADO:
+		
+			maiorNota = 0;
+			alvo = null;
+			atacante = null;
+			List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
+					.getConquistados().values());
+			//Escolhe a maior nota
+			for (Territorio territorioProprio : meusTerritorios) {
+				List<Territorio> territoriosVizinhos = new ArrayList<Territorio>(
+						territorioProprio.getVizinhos().values());
+				for (Territorio territorioInimigo : territoriosVizinhos) {
+					if (!this.possuiTerritorio(territorioInimigo.getNome())) {
+						int nota = calculaNotaFaseDois(territorioProprio,
+								territorioInimigo);
+						if (nota > maiorNota) {
+							maiorNota = nota;
+							alvo = territorioInimigo;
+							atacante = territorioProprio;
+						}
+					}
+				}
+			}
+			
+			// Se não tem mais oque atacar
+			if (alvo == null || maiorNota < notaDeCorteAtaque) {
+				//Simula o clique na proxima fase
+				ControladorJogo.getInstancia().proximaFase();
+			//Se ainda pode atacar
+			}else{
+				//Para o atacante
+				for (Button botao : ControladorJogo.getInstancia()
+						.getListaDeBotoesTerritorios()) {
+					if (botao.getId().equals(atacante.getNome())) {
+						ControladorJogo.getInstancia().acaoTerritorio(botao);
+					}
+				}
+				//Para o alvo
+				for (Button botao : ControladorJogo.getInstancia()
+						.getListaDeBotoesTerritorios()) {
+					if (botao.getId().equals(alvo.getNome())) {
+						ControladorJogo.getInstancia().acaoTerritorio(botao);
+					}
+				}
+				estadoFase2 = EstadoFase2.SELECIONOU_TERRITORIOS;
+			}			
+			break;
+			
+		case SELECIONOU_TERRITORIOS:
+			//Botão ataque
+			ControladorJogo.getInstancia().acaoAtaque();
+			GerenciadorDeTelas.getInstancia().ataque();
+		
+			if(ControladorJogo.getInstancia().acabouJogo()){
+				ControladorJogo.getInstancia().fimDeJogo();
+			}
+			
+			ControladorJogo.getInstancia().voltaAoJogo();
+			estadoFase2 = EstadoFase2.PARADO;
+
+			break;
+		}
+		
+		
+	}
+	
 	/**
 	 * Metodo da IA que toma as decisões da fase 3 Usa o controladorJogo para
 	 * interagir com o jogo<p>
