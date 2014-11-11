@@ -195,11 +195,6 @@ public class TelaAtaque implements ITela {
 				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
 					ControladorJogo.getInstancia().eliminaJogador();
 				}
-
-				// TODO Rever com cuidado
-				// TODO Pegar da visão quantas tropas passar para o territorio
-				// dominado
-				
 				
 				//ControladorJogo.getInstancia().dominarTerritorio(1);
 				if (ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA){

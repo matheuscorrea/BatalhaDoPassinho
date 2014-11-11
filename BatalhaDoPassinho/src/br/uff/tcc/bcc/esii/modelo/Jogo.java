@@ -22,7 +22,6 @@ public class Jogo {
 	/**
 	 * Numero da jogada atual
 	 */
-	//TODO Discutir se há a necessidade de contar as rodadas
 	private int jogada;
 	/**
 	 * Jogadores que estao atualmente jogando
@@ -31,12 +30,10 @@ public class Jogo {
 	/**
 	 * Valor da troca de cartas
 	 */
-	//TODO Implementar troca de cartas
 	private int valorTrocaAtual;
 	/**
 	 * Se o jogador dominou territorio essa rodada
 	 */
-	//TODO Atualizar na FASE2
 	private boolean jogadorDominouTerritorio;
 	/**
 	 *Quantidade de tropas ganhas nesse turno 
@@ -49,7 +46,6 @@ public class Jogo {
 	/**
 	 * Deck das carta do jogo
 	 */
-	//TODO Implementar lógica relativa às cartas
 	private List<Carta> deck;
 	/**
 	 * Todos os tipos de fase que um jogo pode ter
@@ -327,7 +323,6 @@ public class Jogo {
 		} catch (Exception e) {
 			Save save = new Save();
 			save.save();
-			// TODO: handle exception
 		}
 	}
 	
