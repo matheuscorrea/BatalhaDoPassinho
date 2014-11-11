@@ -36,8 +36,14 @@ public class TelaTroca implements ITela{
 	private Button cartaPorrada;
 	private Button cartaBomba;
 	private Button cartaValesca;
-	private int [] controleDeCartas;
+	private Button trocar;
+	private Button cancelar;
+	private GridPane grid;
+	private ImageView fundo;
 	private int tiro,porrada,bomba,valesca;
+	private Label cartasSelecionadas;
+	private Image image = new Image("file:media/imagens/mapa/mapaSemBrilho.png");
+	
 	
 	
 	private HBox botoes;
@@ -55,16 +61,16 @@ public class TelaTroca implements ITela{
 
 	@Override
 	public Scene getScene() {
-		final String imagemURL = "file:media/imagens/mapa/mapaSemBrilho.png";
+		
 
-		Image image = new Image(imagemURL);
-		ImageView imageView = new ImageView();
-		imageView.setImage(image);
+		
+		fundo = new ImageView();
+		fundo.setImage(image);
 		
 		inferior = new HBox(40);
 		botoes = new HBox(40);
 		
-		controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
+		
 		
 		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",300,300,true,true);	
 		cartaTiro = FabricaDeBotoes.criaBotaoComImagem("Botao_Tiro", ""+this.tiro, new EventoCartaTiro(), iTiro);		
@@ -79,21 +85,22 @@ public class TelaTroca implements ITela{
 		cartaValesca = FabricaDeBotoes.criaBotaoComImagem("Botao_Tiro", ""+this.valesca, new EventoCartaValesca(), iValesca);
 		cartaValesca.setStyle("-fx-background-color: gold;");
 		
-		
-		Button trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
-		Button cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
+		int [] controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
+		trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
+		cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
 		trocar.setStyle("-fx-border-color: red;");
 		cancelar.setStyle("-fx-border-color: red;");
 		botoes.getChildren().addAll(cartaTiro, cartaPorrada, cartaBomba, cartaValesca);
-		Label cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+controleDeCartas[0]+"  Porrada x"+controleDeCartas[1]+"  Bomba x"+controleDeCartas[2]+"  Valesca x"+controleDeCartas[3]);
+		
+		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);
 		cartasSelecionadas.setStyle("-fx-background-color: greenyellow;");
 		inferior.getChildren().addAll(cartasSelecionadas,trocar, cancelar);
 		inferior.setStyle("-fx-background-color: cornsilk;");
 		
 		
 		botoes.setAlignment(Pos.BASELINE_CENTER);
-		GridPane grid = new GridPane();
-		grid.add(imageView,2,1);
+		grid = new GridPane();
+		grid.add(fundo,2,1);
 		grid.add(botoes, 2, 1);
 		grid.add(inferior, 2, 2);
         
@@ -103,19 +110,24 @@ public class TelaTroca implements ITela{
 	public Scene atualizaBarraTroca(){
 		inferior.getChildren().clear();
 		
-		controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
-		Button cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
-		Button trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
+		int [] controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
+		trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
+		cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
+		trocar.setStyle("-fx-border-color: red;");
+		cancelar.setStyle("-fx-border-color: red;");
+		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);
+		cartasSelecionadas.setStyle("-fx-background-color: greenyellow;");
 		
 		
-		inferior.getChildren().addAll(new Label("Cartas selecionadas: Tiro x"+controleDeCartas[0]
-                +"  Porrada x"+controleDeCartas[1]
-                +"  Bomba x"+controleDeCartas[2]
-                +"  Valesca x"+controleDeCartas[3]),trocar, cancelar);	
+		inferior.getChildren().addAll(cartasSelecionadas,trocar, cancelar);	
+		inferior.setStyle("-fx-background-color: cornsilk;");
 		
-		
-		VBox vBox = new VBox(10, botoes, inferior);
-		return new Scene(vBox);
+		grid = new GridPane();
+		grid.add(fundo,2,1);
+		grid.add(botoes, 2, 1);
+		grid.add(inferior, 2, 2);
+        
+		return new Scene(grid);
 	}
 
 }
