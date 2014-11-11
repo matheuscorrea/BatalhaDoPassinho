@@ -36,6 +36,9 @@ audio\Claudinho_e_Buchecha\So_love
 audio\Claudinho_e_Buchecha\Xereta
 
 ---Efeitos---
+audio\Efeitos\Ah_eu_vou_gostar
+audio\Efeitos\Ah_eu_vou_gostar_extendida
+audio\Efeitos\Ah_lelek_lek_lek
 audio\Efeitos\Combo_Breaker
 audio\Efeitos\Fatality
 audio\Efeitos\Finish_Him
@@ -188,6 +191,9 @@ audio/Claudinho_e_Buchecha/So_love
 audio/Claudinho_e_Buchecha/Xereta
 
 ---Efeitos---
+audio/Efeitos/Ah_eu_vou_gostar
+audio/Efeitos/Ah_eu_vou_gostar_extendida
+audio/Efeitos/Ah_lelek_lek_lek
 audio/Efeitos/Combo_Breaker
 audio/Efeitos/Fatality
 audio/Efeitos/Finish_Him
