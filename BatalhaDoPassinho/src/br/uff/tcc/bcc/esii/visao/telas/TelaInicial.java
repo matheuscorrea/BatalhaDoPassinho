@@ -12,6 +12,7 @@ import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCarregaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoRegrasInicio;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCarregar;
 
@@ -43,7 +44,7 @@ public class TelaInicial implements ITela {
 
         
         Image imageRegras = new Image("file:media/imagens/botoes/BTREGRAS.png",100,100,true,true);
-        Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Botao_Regras", "", new EventoOpcoes(), imageRegras);
+        Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Regras1", "", new EventoRegrasInicio(), imageRegras);
         botaoRegras.setStyle("-fx-background-color: transparent");
                 
         Image imageSair = new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true);

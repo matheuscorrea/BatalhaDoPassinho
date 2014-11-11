@@ -18,6 +18,7 @@ import br.uff.tcc.bcc.esii.visao.telas.TelaInicial;
 import br.uff.tcc.bcc.esii.visao.telas.TelaJogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaObjetivo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaOpcoes;
+import br.uff.tcc.bcc.esii.visao.telas.TelaRegras;
 import br.uff.tcc.bcc.esii.visao.telas.TelaTroca;
 
 /**
@@ -47,6 +48,7 @@ public class GerenciadorDeTelas{
 	private TelaTroca telaTroca;
 	private TelaObjetivo telaObjetivo;
 	private TelaFimJogo telaFimJogo;
+	private TelaRegras telaRegras;
 	
 	private TelaAtaque telaAtaque;
 	
@@ -122,6 +124,16 @@ public class GerenciadorDeTelas{
 			cena = telaEscolha.getScene();
 			stagePrincipal.setScene(cena);
 			break;
+		case REGRASINICIO:
+			telaRegras = new TelaRegras(false);
+			cena= telaRegras.getScene();
+			stagePrincipal.setScene(cena);
+			break;
+		case REGRASJOGO:
+			telaRegras = new TelaRegras(true);
+			cena= telaRegras.getScene();
+			stagePrincipal.setScene(cena);
+			break;
 		case TROCA:
 			telaTroca = new TelaTroca(ControladorJogo.getInstancia().getNumeroCartasJogador());
 			cena = telaTroca.getScene();
@@ -174,7 +186,9 @@ public class GerenciadorDeTelas{
 		TROCA,
 		OBJETIVO,
 		FIM_JOGO,
-		ATAQUE
+		ATAQUE,
+		REGRASINICIO,
+		REGRASJOGO
 	}
 	public void sair() {
 		stagePrincipal.close();
@@ -214,5 +228,11 @@ public class GerenciadorDeTelas{
 	
 	public void fim(){
 		stagePrincipal.setScene(telaFimJogo.getScene());
+	}
+	public void proximaPaginaRegras(){
+		stagePrincipal.setScene(telaRegras.proximaPagina());
+	}
+	public void voltaPaginaRegras(){
+		stagePrincipal.setScene(telaRegras.paginaAnterior());
 	}
 }
