@@ -1,6 +1,8 @@
 package br.uff.tcc.bcc.esii.visao.telas;
 
 
+import java.util.List;
+
 import com.sun.prism.paint.Color;
 
 import javafx.geometry.Pos;
@@ -17,6 +19,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
+import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
@@ -110,6 +113,8 @@ public class TelaTroca implements ITela{
 	public Scene atualizaBarraTroca(){
 		inferior.getChildren().clear();
 		
+		atualizarValores();
+		
 		int [] controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
 		trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
 		cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
@@ -117,7 +122,6 @@ public class TelaTroca implements ITela{
 		cancelar.setStyle("-fx-border-color: red;");
 		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);
 		cartasSelecionadas.setStyle("-fx-background-color: greenyellow;");
-		
 		
 		inferior.getChildren().addAll(cartasSelecionadas,trocar, cancelar);	
 		inferior.setStyle("-fx-background-color: cornsilk;");
@@ -128,6 +132,18 @@ public class TelaTroca implements ITela{
 		grid.add(inferior, 2, 2);
         
 		return new Scene(grid);
+	}
+
+
+
+	private void atualizarValores() {
+		int[] mao = ControladorJogo.getInstancia().getNumeroCartasJogador();
+		cartaTiro.setText(""+mao[0]);
+		cartaPorrada.setText(""+mao[1]);
+		cartaBomba.setText(""+mao[2]);
+		cartaValesca.setText(""+mao[3]);
+		
+		
 	}
 
 }
