@@ -33,6 +33,7 @@ public class Som {
 		}    
 	    mediaPlayerAtual = mediaPlayer[0];
 	    mediaPlayerBatida = mediaPlayer[0];
+	    mediaPlayerEfeito = mediaPlayer[0];
 	}
 
 	public static Som getInstancia() {
@@ -50,7 +51,7 @@ public class Som {
     	if(id>=0&&id<TOTAL_MUSICA){
 	    	mediaPlayerAtual.stop();
 	    	mediaPlayerAtual=mediaPlayer[id];
-	    	mediaPlayerAtual.setVolume(1.0);
+	    	mediaPlayerAtual.setVolume(0.8);
 	    	mediaPlayerAtual.play();
 		    mediaPlayerAtual.setCycleCount(1);
     	}
@@ -58,6 +59,7 @@ public class Som {
     
     public void tocaEfeito(int id){
     	if(id>=0&&id<TOTAL_MUSICA){
+    		mediaPlayerEfeito.stop();
 	    	mediaPlayerEfeito=mediaPlayer[id];
 	    	mediaPlayerEfeito.setVolume(1.0);
 	    	mediaPlayerEfeito.play();
