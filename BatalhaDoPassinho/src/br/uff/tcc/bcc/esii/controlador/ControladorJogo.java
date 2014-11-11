@@ -76,9 +76,10 @@ public class ControladorJogo {
 			if (distribuiTropa(jogador, botao.getId())) {
 				// Atualiza a visão
 				botao.setText(jogo.getTropas(botao.getId()) + "");
-
+				//TODO testando
 				GerenciadorDeTelas.getInstancia()
 				.atualizaBarraInformacoes(jogo);
+				
 			}
 			break;
 		case FASE_2:
@@ -388,7 +389,7 @@ public class ControladorJogo {
 			JogadorIA jogadorIA = (JogadorIA) jogo.getJogadorDaVez();
 			switch (jogo.faseAtual) {
 			case FASE_1:				
-				jogadorIA.fase1();
+//				jogadorIA.fase1();
 				break;
 			case FASE_2:
 				jogadorIA.fase2();
@@ -607,7 +608,7 @@ public class ControladorJogo {
 	/**Método responsável pela seleção da carta tiro na tela de troca
 	 * @param moveBtn ????
 	 */
-	public void selecionouCartaTiro(Button moveBtn) {
+	public void selecionouCartaTiro() {
 		 
 		if(controleDeCartas[0] > 0 && totalCartasSelecionadas <= 3){
 			cartasTiroSelecionadas++;
@@ -899,5 +900,12 @@ public class ControladorJogo {
 			return fileChooser.getInitialDirectory();
 		}
      
+	}
+
+	public void jogadaIA() {
+		if (jogo.getJogadorDaVez() instanceof JogadorIA) {
+			JogadorIA jogadorIA = (JogadorIA) jogo.getJogadorDaVez();
+			jogadorIA.acaoFase1();
+		}
 	}
 }

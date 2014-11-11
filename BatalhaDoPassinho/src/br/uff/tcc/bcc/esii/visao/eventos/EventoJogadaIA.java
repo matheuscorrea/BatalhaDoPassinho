@@ -2,13 +2,13 @@ package br.uff.tcc.bcc.esii.visao.eventos;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
+import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 
-public class EventoCartaTiro implements EventHandler<ActionEvent> {
+public class EventoJogadaIA implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-	    ControladorJogo.getInstancia().selecionouCartaTiro();
+		ControladorJogo.getInstancia().jogadaIA();
 	}
 }

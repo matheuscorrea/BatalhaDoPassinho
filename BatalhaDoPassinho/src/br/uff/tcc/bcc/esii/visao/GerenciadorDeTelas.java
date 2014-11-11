@@ -135,9 +135,14 @@ public class GerenciadorDeTelas{
 	}
 	public void atualizaBarraInformacoes(Jogo jogo){
 		Scene cena = telaJogo.atualizaBarraInformacoes(jogo);
-		stagePrincipal.setScene(cena);
-          
+		stagePrincipal.setScene(cena);   
 	}
+	
+	public void atualizaTelaJogo(){
+		Scene cena = telaJogo.attJogo();
+		stagePrincipal.setScene(cena);   
+	}
+	
 	public void atualizaPersonagem(String jogador,int index){
 		Scene cena = telaEscolha.atualizaPersonagem(jogador, index);
 		stagePrincipal.setScene(cena);

@@ -50,8 +50,17 @@ public class JogadorIA extends Jogador {
 		} 
 		//Simula o clique na proxima fase
 		ControladorJogo.getInstancia().proximaFase();
-		ControladorJogo.getInstancia().atualizaTela();
+//		ControladorJogo.getInstancia().atualizaTela();
 
+	}
+	
+	public void acaoFase1(){
+		if(ControladorJogo.getInstancia().FaseUmTemTropasParaDistribuir()) {
+			Territorio territorioAlvo = obtemTerritorioFase1();
+        	chamaControladorFase1(territorioAlvo);
+		}else{
+			ControladorJogo.getInstancia().proximaFase();
+		}
 	}
 
 	/**
@@ -87,10 +96,13 @@ public class JogadorIA extends Jogador {
 			for (Button botao : ControladorJogo.getInstancia()
 					.getListaDeBotoesTerritorios()) {
 				if (botao.getId().equals(territorioAlvo.getNome())) {
-					ControladorJogo.getInstancia().acaoTerritorio(botao);
+					botao.fire();
+
+//					ControladorJogo.getInstancia().acaoTerritorio(botao);
 				}
 			}
 		}
+		GerenciadorDeTelas.getInstancia().atualizaTelaJogo();
 	}
 
 	/**

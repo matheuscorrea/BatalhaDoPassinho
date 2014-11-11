@@ -24,6 +24,7 @@ import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoJogadaIA;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMostraObjetivo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
@@ -155,11 +156,13 @@ public class TelaJogo implements ITela {
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 
+		listaDeBotoesTerritorios.clear();
 		for (Territorio territorio : mapa.getTerritorios()) {
 			listaDeBotoesTerritorios.add(FabricaDeBotoes.criaBotaoTerritorio(
 					territorio, new EventoTerritorio()));
 		}
 		
+		listaDeGroupTerritorios.clear();
 		for (Territorio territorio : mapa.getTerritorios()) {
 			listaDeGroupTerritorios.add(FabricaDeBotoes.criaGroupTerritorio(
 					territorio, new EventoTerritorio()));
@@ -167,26 +170,26 @@ public class TelaJogo implements ITela {
 		
 		
 		grupo.getChildren().clear();
-		
 		grupo.getChildren().addAll(imageView);
-		//grupo.getChildren().addAll(listaDeBotoesTerritorios);
 		grupo.getChildren().addAll(listaDeGroupTerritorios);
 		
-
 		VBox vBox = new VBox(10, grupo, barraInformacoes);
+		//vBox.setStyle("-fx-background-color: grey");
+
 		// 1123x554 mapa
 		return new Scene(vBox);
 		
 	}
 
+	public Scene attJogo(){
+		return getSceneJogo();
+	}
+	
 	public Scene atualizaBarraInformacoes(Jogo jogo) {
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase",
 				"", new EventoProximaFase());
-		;
-		
-		
-		
+	
 		Button botaoMover = FabricaDeBotoes.criaBotaoComImagem("Mover_tropas",
 				"", new EventoMove(),new Image("file:media/imagens/botoes/BTMOVE.png",125,125,true,true));
 		botaoMover.setStyle("-fx-background-color: transparent");
@@ -201,6 +204,7 @@ public class TelaJogo implements ITela {
 		
 		Button botaoObjetivo = FabricaDeBotoes.criaBotaoComImagem("Ver_objetivo",
 				"", new EventoMostraObjetivo(), new Image("file:media/imagens/botoes/BTOBJETIVO.png",125,125,true,true));
+		
 		botaoObjetivo.setStyle("-fx-background-color: transparent");
 		
 		Button botaoPausar = FabricaDeBotoes.criaBotaoComImagem("Pausar",
@@ -331,6 +335,5 @@ public class TelaJogo implements ITela {
 		}
 		return corJogador;
 	}
-	
 	
 }
