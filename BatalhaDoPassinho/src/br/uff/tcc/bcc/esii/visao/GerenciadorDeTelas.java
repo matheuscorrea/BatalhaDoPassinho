@@ -2,10 +2,13 @@ package br.uff.tcc.bcc.esii.visao;
 
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.telas.TelaAtaque;
@@ -73,6 +76,8 @@ public class GerenciadorDeTelas{
 	 */
 	public void setPrimaryStage(Stage stage){
 		this.stagePrincipal = stage;
+		this.stagePrincipal.initStyle(StageStyle.UNDECORATED);
+		this.stagePrincipal.setMaximized(true);
 		this.stagePrincipal.setTitle("Batalha do Passinho");
 	}
 	
@@ -95,6 +100,16 @@ public class GerenciadorDeTelas{
 			//Para iniciar a tela de jogo é preciso passar o mapa
 			telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
 			cena = telaJogo.getScene();
+			cena.widthProperty().addListener(new ChangeListener<Number>() {
+			    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
+			        System.out.println("Width: " + newSceneWidth);
+			    }
+			});
+			cena.heightProperty().addListener(new ChangeListener<Number>() {
+			    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
+			        System.out.println("Height: " + newSceneHeight);
+			    }
+			});
 			stagePrincipal.setScene(cena);
 			break;
 		case OPCOES:

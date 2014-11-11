@@ -684,7 +684,7 @@ public class ControladorJogo {
 			for(int i = aux[2]; i>0;i--){
 				jogo.getJogadorDaVez().removeCartaBomba();
 			}
-			for(int i = aux[0]; i>0;i--){
+			for(int i = aux[3]; i>0;i--){
 				jogo.getJogadorDaVez().removeCartaValesca();
 			}
 			

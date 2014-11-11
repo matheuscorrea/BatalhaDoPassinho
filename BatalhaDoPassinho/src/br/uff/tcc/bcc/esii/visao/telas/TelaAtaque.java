@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import com.sun.scenario.effect.Effect;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -19,6 +21,7 @@ import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
+import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
@@ -109,7 +112,6 @@ public class TelaAtaque implements ITela {
 		indiceDaLinha = 1;
 					
 		if(venceu){			
-			Som.getInstancia().tocaEfeito(2);
 			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);
 
 		}
@@ -130,6 +132,7 @@ public class TelaAtaque implements ITela {
 		}
 
 		if(venceu){
+			Som.getInstancia().tocaEfeito(Musicas.EFEITO_SUCESSO1.getID());
 			if(territorioAtacante.getQuantidadeTropa()==2){
 				ControladorJogo.getInstancia().dominarTerritorio(1);
 			}else{
@@ -195,14 +198,12 @@ public class TelaAtaque implements ITela {
 				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
 					ControladorJogo.getInstancia().eliminaJogador();
 				}
-
-				// TODO Rever com cuidado
-				// TODO Pegar da visão quantas tropas passar para o territorio
-				// dominado
-				
 				
 				//ControladorJogo.getInstancia().dominarTerritorio(1);
-
+				if (ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA){
+					ControladorJogo.getInstancia().dominarTerritorio(Math.min(territorioAtacante.getQuantidadeTropa()-1, 3));
+				}
+				
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(
 						territorioDefensor.getNome(),
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
