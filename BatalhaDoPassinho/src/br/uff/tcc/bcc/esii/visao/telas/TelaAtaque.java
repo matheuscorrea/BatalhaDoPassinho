@@ -22,6 +22,7 @@ import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoAtaque;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaAtaquePassarTropas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaJogo;
 
 public class TelaAtaque implements ITela {
@@ -107,7 +108,7 @@ public class TelaAtaque implements ITela {
 		indiceDaLinha = 1;
 		
 		if(venceu){
-			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);
+			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);			
 		}
 		
 		grid.add(botaoAtaque, indiceDaColuna, ++indiceDaLinha);
@@ -125,10 +126,28 @@ public class TelaAtaque implements ITela {
 			}
 		}
 
+		if(venceu){
+			if(territorioAtacante.getQuantidadeTropa()==2){
+				ControladorJogo.getInstancia().dominarTerritorio(1);
+			}else{
+			Button btUm = FabricaDeBotoes.criaBotaoComImagem("1", "",
+					new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/dados/datq1.png", 100,100,false,false));
+			Button btDois = FabricaDeBotoes.criaBotaoComImagem("2", "",
+					new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/dados/datq2.png", 100,100,false,false));
+			grid.add(btUm, indiceDaColuna, indiceDaLinha+1);
+			grid.add(btDois, indiceDaColuna+1, indiceDaLinha+1);
+				if(territorioAtacante.getQuantidadeTropa()>3){
+					Button btTres = FabricaDeBotoes.criaBotaoComImagem("3", "",
+							new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/dados/datq3.png", 100,100,false,false));
+					grid.add(btTres, indiceDaColuna+2, indiceDaLinha+1);
+				}
+			}
+		}
 		Group grupo = new Group();
 
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(grid);
+		
 
 		if (territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(),territorioDefensor.getDono())) {
 
@@ -177,7 +196,9 @@ public class TelaAtaque implements ITela {
 				// TODO Rever com cuidado
 				// TODO Pegar da visão quantas tropas passar para o territorio
 				// dominado
-				ControladorJogo.getInstancia().dominarTerritorio();
+				
+				
+				//ControladorJogo.getInstancia().dominarTerritorio(1);
 
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(
 						territorioDefensor.getNome(),

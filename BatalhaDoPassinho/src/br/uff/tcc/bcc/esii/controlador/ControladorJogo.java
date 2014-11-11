@@ -520,8 +520,8 @@ public class ControladorJogo {
 	/**Método responsável por tornar um jogador que tenha conquistado um dado território o dono do mesmo 
 	 * 
 	 */
-	public void dominarTerritorio(){ 
-		jogo.dominarTerritorio(territorioAtacante, territorioDefensor,1);
+	public void dominarTerritorio(int tropasAPassar){ 
+		jogo.dominarTerritorio(territorioAtacante, territorioDefensor,tropasAPassar);
 		btAtacante.setText(territorioAtacante.getQuantidadeTropa() + "");
 		btDefensor.setText(territorioDefensor.getQuantidadeTropa() + "");
 
