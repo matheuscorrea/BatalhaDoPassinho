@@ -202,7 +202,10 @@ public class TelaAtaque implements ITela {
 				
 				
 				//ControladorJogo.getInstancia().dominarTerritorio(1);
-
+				if (ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA){
+					ControladorJogo.getInstancia().dominarTerritorio(Math.min(territorioAtacante.getQuantidadeTropa()-1, 3));
+				}
+				
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(
 						territorioDefensor.getNome(),
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
