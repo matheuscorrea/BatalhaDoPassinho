@@ -217,8 +217,8 @@ public class TelaJogo implements ITela {
 				"", new EventoPausaJogo(), new Image("file:media/imagens/botoes/BTMENU.png",125,40,true,true));
 		botaoPausar.setStyle("-fx-background-color: transparent");
 		
-		Button botaoJogadaIA = FabricaDeBotoes.criaBotaoComImagem("DICA",
-				"", new EventoJogadaIA(), new Image("file:media/imagens/botoes/BTDICA.png",125,40,true,true));
+		Button botaoJogadaIA = FabricaDeBotoes.criaBotaoComImagem("PROXIMO_PASSO",
+				"", new EventoJogadaIA(), new Image("file:media/imagens/botoes/BTPROXIMOPASSO.png",125,40,true,true));
 		botaoJogadaIA.setStyle("-fx-background-color: transparent");
 
 		//Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
@@ -255,7 +255,7 @@ public class TelaJogo implements ITela {
 						new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
 						botaoJogadaIA,
 						botaoPausar,
-						new Label("IA Jogando - Distribuindo tropas"));
+						new ImageView(new Image("file:media/imagens/botoes/BANNERIA1.png",125,125,true,true)));
 			}else{
 				
 				if (jogo.getQuantidadeDeTropas() > 0)
@@ -283,7 +283,7 @@ public class TelaJogo implements ITela {
 						jogo.getJogadorDaVez().getFoto(),
 						botaoJogadaIA,
 						botaoPausar,
-						new Label("IA Jogando - Atacando"));
+						new ImageView(new Image("file:media/imagens/botoes/BANNERIA2.png",125,125,true,true)));
 			}else{
 				barraInformacoes.getChildren().addAll(
 						new ImageView(corJogador),
@@ -305,7 +305,7 @@ public class TelaJogo implements ITela {
 						jogo.getJogadorDaVez().getFoto(),
 						botaoJogadaIA,
 						botaoPausar,
-						new Label("IA Jogando - Remanejando Tropas"));
+						new ImageView(new Image("file:media/imagens/botoes/BANNERIA3.png",125,125,true,true)));
 			}else{
 				barraInformacoes.getChildren().addAll(
 						new ImageView(corJogador),

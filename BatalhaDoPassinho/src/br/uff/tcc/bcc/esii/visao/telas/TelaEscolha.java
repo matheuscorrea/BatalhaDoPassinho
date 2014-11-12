@@ -103,7 +103,7 @@ public class TelaEscolha implements ITela  {
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes); 
 		atualizaListaJogadores();
 		numJogadores = 3;
-		raiz.setTranslateX(280);
+		raiz.setLayoutX(200);
 		
 		
 		Group grupo = new Group();
