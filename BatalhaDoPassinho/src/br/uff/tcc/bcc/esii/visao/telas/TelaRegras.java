@@ -1,6 +1,7 @@
 package br.uff.tcc.bcc.esii.visao.telas;
 
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -34,7 +35,7 @@ public TelaRegras(boolean estaJogando){
 		
 		avancar = FabricaDeBotoes.criaBotaoComImagem("Anvancar_Regras", "", new EventoProximaPaginaRegras(), imagemAvancar);
 		
-		if(pagina == 2){
+		if(pagina == 3){
 			if(estajogando){
 				avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoPausaJogo(), new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true));
 			}else{
@@ -61,19 +62,22 @@ public TelaRegras(boolean estaJogando){
 		voltar.setStyle("-fx-background-color: transparent");
 		
 		GridPane grid= new GridPane();
-		grid.setMinSize(800, 600);
-		grid.setAlignment(Pos.CENTER);
-		grid.add(fundo,1,0);
-		grid.add(voltar,0,1);
-		grid.add(avancar,2,1);
+		grid.add(voltar,0,2);
+		grid.add(avancar,0,1);
 		
-		return new Scene(grid);	
+		Group grupo = new Group();
+		grupo.getChildren().add(fundo);
+		grupo.getChildren().add(grid);
+		grid.setHgap(50);
+		grid.setVgap(125);
+		
+		return new Scene(grupo);
 
 	}
 	
 	public Scene proximaPagina(){
 		pagina++;
-		if(pagina == 2){
+		if(pagina == 3){
 			if(estajogando){
 				avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoPausaJogo(), new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true));
 			}else{
@@ -101,18 +105,21 @@ public TelaRegras(boolean estaJogando){
 		
 		
 		GridPane grid= new GridPane();
-		grid.setMinSize(800, 600);
-		grid.setAlignment(Pos.CENTER);
-		grid.add(fundo,1,0);
-		grid.add(voltar,0,1);
-		grid.add(avancar,2,1);
+		grid.add(voltar,0,2);
+		grid.add(avancar,0,1);
 		
-		return new Scene(grid);		
+		Group grupo = new Group();
+		grupo.getChildren().add(fundo);
+		grupo.getChildren().add(grid);
+		grid.setHgap(50);
+		grid.setVgap(125);
+		
+		return new Scene(grupo);		
 	}
 
 	public Scene paginaAnterior() {
 		pagina--;
-		if(pagina == 2){
+		if(pagina == 3){
 			if(estajogando){
 				avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoPausaJogo(), new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true));
 			}else{
@@ -140,13 +147,16 @@ public TelaRegras(boolean estaJogando){
 		voltar.setStyle("-fx-background-color: transparent");
 		
 		GridPane grid= new GridPane();
-		grid.setMinSize(800, 600);
-		grid.setAlignment(Pos.CENTER);
-		grid.add(fundo,1,0);
-		grid.add(voltar,0,1);
-		grid.add(avancar,2,1);
+		grid.add(voltar,0,2);
+		grid.add(avancar,0,1);
 		
-		return new Scene(grid);
+		Group grupo = new Group();
+		grupo.getChildren().add(fundo);
+		grupo.getChildren().add(grid);
+		grid.setHgap(50);
+		grid.setVgap(125);
+		
+		return new Scene(grupo);
 		
 	}
 	
