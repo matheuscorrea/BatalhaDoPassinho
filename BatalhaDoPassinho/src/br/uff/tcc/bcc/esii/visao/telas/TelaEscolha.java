@@ -101,8 +101,10 @@ public class TelaEscolha implements ITela  {
 		hbBotoes = new HBox(100,voltar,iniciar);
 
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes); 
-		raiz.setLayoutX(200);
+		atualizaListaJogadores();
 		numJogadores = 3;
+		raiz.setTranslateX(280);
+		
 		
 		Group grupo = new Group();
 		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
