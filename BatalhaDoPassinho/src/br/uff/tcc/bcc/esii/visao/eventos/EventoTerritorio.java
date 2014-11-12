@@ -16,7 +16,9 @@ public class EventoTerritorio implements EventHandler<ActionEvent>{
 		Object source = event.getSource();
 		if (source instanceof Button) { //should always be true in your example
 		    Button clickedBtn = (Button) source; // that's the button that was clicked
-		    ControladorJogo.getInstancia().acaoTerritorio(clickedBtn);
+		    if(!ControladorJogo.getInstancia().jogadorDaVezEhIA()){
+			    ControladorJogo.getInstancia().acaoTerritorio(clickedBtn);	
+		    }
 		}
 	}
 }

@@ -32,6 +32,7 @@ public class JogadorIA extends Jogador {
 	public JogadorIA(String nome, ConstanteDaCor cor) {
 		super(nome, cor);
 		estadoFase2 = EstadoFase2.PARADO;
+		estadoFase3 = EstadoFase3.PARADO;
 	}
 
 	/**
@@ -97,9 +98,7 @@ public class JogadorIA extends Jogador {
 			for (Button botao : ControladorJogo.getInstancia()
 					.getListaDeBotoesTerritorios()) {
 				if (botao.getId().equals(territorioAlvo.getNome())) {
-					botao.fire();
-
-//					ControladorJogo.getInstancia().acaoTerritorio(botao);
+					ControladorJogo.getInstancia().acaoTerritorio(botao);
 				}
 			}
 		}
@@ -238,11 +237,11 @@ public class JogadorIA extends Jogador {
 			ControladorJogo.getInstancia().acaoAtaque();
 			GerenciadorDeTelas.getInstancia().ataque();
 		
-			if(ControladorJogo.getInstancia().acabouJogo()){
+			if(atacante.getDono().getObjetivo().concluido(atacante.getDono(),alvo.getDono())){
 				ControladorJogo.getInstancia().fimDeJogo();
+			}else{
+				ControladorJogo.getInstancia().voltaAoJogo();
 			}
-			
-			ControladorJogo.getInstancia().voltaAoJogo();
 			estadoFase2 = EstadoFase2.PARADO;
 
 			break;
@@ -313,6 +312,79 @@ public class JogadorIA extends Jogador {
 		ControladorJogo.getInstancia().proximaFase();
 	}
 
+	private Territorio destino = null;
+	private Territorio fonte = null;
+	private enum EstadoFase3{PARADO,SELECIONOU_TERRITORIOS};
+	private EstadoFase3 estadoFase3;
+	
+	public void acaoFase3() {
+		
+		switch (estadoFase3){
+		case PARADO:
+
+			maiorNota = 0;
+			destino = null;
+			fonte = null;
+			List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
+					.getConquistados().values());
+			//Escolhe a maior nota
+			for (Territorio territorioFonteCandidato : meusTerritorios) {
+				if(!ControladorJogo.getInstancia().jaMoveuTerritorio(territorioFonteCandidato.getNome())){
+					List<Territorio> territoriosVizinhos = new ArrayList<Territorio>(
+							territorioFonteCandidato.getVizinhos().values());
+					for (Territorio territorioDestinoCandidato : territoriosVizinhos) {
+						if (this.possuiTerritorio(territorioDestinoCandidato.getNome())) {
+							int nota = calculaNotaFaseTres(territorioFonteCandidato,
+									territorioDestinoCandidato);
+							if (nota > maiorNota) {
+								maiorNota = nota;
+								destino = territorioDestinoCandidato;
+								fonte = territorioFonteCandidato;
+							}
+						}
+					}
+				}
+			}
+			// Simula o clique dos botões para o remanejamento
+			if (destino != null && maiorNota >= notaDeCorteRemanejamento) {
+				//Para o território fonte
+				for (Button botao : ControladorJogo.getInstancia()
+						.getListaDeBotoesTerritorios()) {
+					if (botao.getId().equals(fonte.getNome())) {
+						ControladorJogo.getInstancia().acaoTerritorio(botao);
+					}
+				}
+				//Para o destino
+				for (Button botao : ControladorJogo.getInstancia()
+						.getListaDeBotoesTerritorios()) {
+					if (botao.getId().equals(destino.getNome())) {
+						ControladorJogo.getInstancia().acaoTerritorio(botao);
+					}
+				}
+
+				estadoFase2 = EstadoFase2.SELECIONOU_TERRITORIOS;
+			}else{
+				ControladorJogo.getInstancia().proximaFase();
+			}
+
+			break;
+		case SELECIONOU_TERRITORIOS:
+			//Botão mover
+			ControladorJogo.getInstancia().acaoMover();
+			ControladorJogo.getInstancia().limpaBotoesFase3();
+			estadoFase3 = EstadoFase3.PARADO;
+
+			break;
+		}
+		
+		
+		
+//		} while (maiorNota >= notaDeCorteRemanejamento);
+		//Simula o clique na proxima fase
+		//ControladorJogo.getInstancia().proximaFase();
+	}
+
+	
 	/**
 	 * Metodo da IA que toma as decisões da rodada 0 Usa o controladorJogo para
 	 * interagir com o jogo

@@ -44,6 +44,7 @@ public class TelaJogo implements ITela {
 	private List<Group> listaDeGroupTerritorios;
 	private Group grupo;
 	private HBox barraInformacoes;
+	private boolean territoriosDisable;
 	
 	private enum Estado{JOGANDO,PAUSADO};
 	private Estado estadoAtual;
@@ -55,6 +56,7 @@ public class TelaJogo implements ITela {
 	 * @param mapa
 	 */
 	public TelaJogo(Mapa mapa) {
+		territoriosDisable = false;
 		this.mapa = mapa;
 		this.barraInformacoes = new HBox(20);
 		this.grupo = new Group();
@@ -152,7 +154,7 @@ public class TelaJogo implements ITela {
 	private Scene getSceneJogo(){
 
 		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
-
+		territoriosDisable = false;
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
@@ -170,6 +172,7 @@ public class TelaJogo implements ITela {
 		}
 		
 		
+		
 		grupo.getChildren().clear();
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(listaDeGroupTerritorios);
@@ -185,7 +188,7 @@ public class TelaJogo implements ITela {
 	public Scene attJogo(){
 		return getSceneJogo();
 	}
-	
+
 	public Scene atualizaBarraInformacoes(Jogo jogo) {
 		barraInformacoes.getChildren().clear();
 		Button botaoFase = FabricaDeBotoes.criaBotao("Proxima_fase",
@@ -292,14 +295,22 @@ public class TelaJogo implements ITela {
 			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
 					"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTMOVIMENTOS COMPLETOS.png",135,125,true,true));
 			botaoFase.setStyle("-fx-background-color: transparent");
-			barraInformacoes.getChildren().addAll(
-					new ImageView(corJogador),
-					jogo.getJogadorDaVez().getFoto(),
-					botaoFase,			
-					botaoMover,
-					botaoObjetivo,
-					botaoPausar,
-					cartas);
+			
+			if(jogo.getJogadorDaVez() instanceof JogadorIA){
+				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
+						jogo.getJogadorDaVez().getFoto(),
+						botaoJogadaIA,
+						botaoPausar);
+			}else{
+				barraInformacoes.getChildren().addAll(
+						new ImageView(corJogador),
+						jogo.getJogadorDaVez().getFoto(),
+						botaoFase,			
+						botaoMover,
+						botaoObjetivo,
+						botaoPausar,
+						cartas);
+			}
 			break;
 		default:
 			barraInformacoes.getChildren().addAll(

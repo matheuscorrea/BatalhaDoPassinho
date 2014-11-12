@@ -152,18 +152,9 @@ public class TelaAtaque implements ITela {
 		grupo.getChildren().addAll(imageView);
 		grupo.getChildren().addAll(grid);
 		
-
 		if (territorioAtacante.getDono().getObjetivo().concluido(territorioAtacante.getDono(),territorioDefensor.getDono())) {
-
-			if (!(ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA)) {
-				//ControladorJogo.getInstancia().fimDeJogo();
-				TelaFimJogo telaFimJogo = new TelaFimJogo(jogadorAtacante);
-				return telaFimJogo.getScene();
-			} else {
-				//ControladorJogo.getInstancia().ganharJogo();
-				TelaFimJogo telaFimJogo = new TelaFimJogo(jogadorAtacante);
-				return telaFimJogo.getScene();
-			}
+			TelaFimJogo telaFimJogo = new TelaFimJogo(jogadorAtacante);
+			return telaFimJogo.getScene();
 		}
 		
 		return new Scene(grupo);

@@ -2,7 +2,6 @@ package br.uff.tcc.bcc.esii.controlador;
 
 import java.util.List;
 
-import javafx.scene.image.ImageView;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 

@@ -61,7 +61,6 @@ public class ControladorJogo {
 	private int cartasBombaSelecionadas = 0;
 	private int cartasValescaSelecionadas = 0;
 	private int totalCartasSelecionadas = cartasTiroSelecionadas + cartasPorradaSelecionadas + cartasBombaSelecionadas + cartasValescaSelecionadas;
-
 	// Atributos criados para evento território
 
 	/**Método responsável pelas ações relacionadas ao clique de um botão de território
@@ -385,20 +384,7 @@ public class ControladorJogo {
 			break;
 		}
 		jogo.proximaFase();
-		if (jogo.getJogadorDaVez() instanceof JogadorIA) {
-			JogadorIA jogadorIA = (JogadorIA) jogo.getJogadorDaVez();
-			switch (jogo.faseAtual) {
-			case FASE_1:				
-//				jogadorIA.fase1();
-				break;
-			case FASE_2:
-				//jogadorIA.fase2();
-				break;
-			case FASE_3:
-				jogadorIA.fase3();
-				break;
-			}
-		}
+		
 		if(!acabouJogo()){
 			GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
 		}
@@ -913,9 +899,13 @@ public class ControladorJogo {
 				jogadorIA.acaoFase2();
 				break;
 			case FASE_3:
-				//jogadorIA.fase3();
+				jogadorIA.acaoFase3();
 				break;
 			}
 		}
+	}
+	
+	public boolean jogadorDaVezEhIA(){
+		return jogo.getJogadorDaVez() instanceof JogadorIA;			
 	}
 }
