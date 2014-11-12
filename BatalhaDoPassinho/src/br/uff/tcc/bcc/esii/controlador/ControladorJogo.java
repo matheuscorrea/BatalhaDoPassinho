@@ -61,7 +61,6 @@ public class ControladorJogo {
 	private int cartasBombaSelecionadas = 0;
 	private int cartasValescaSelecionadas = 0;
 	private int totalCartasSelecionadas = cartasTiroSelecionadas + cartasPorradaSelecionadas + cartasBombaSelecionadas + cartasValescaSelecionadas;
-	// Atributos criados para evento território
 
 	/**Método responsável pelas ações relacionadas ao clique de um botão de território
 	 * @param botao Botão do território clicado
@@ -75,7 +74,6 @@ public class ControladorJogo {
 			if (distribuiTropa(jogador, botao.getId())) {
 				// Atualiza a visão
 				botao.setText(jogo.getTropas(botao.getId()) + "");
-				//TODO testando
 				GerenciadorDeTelas.getInstancia()
 				.atualizaBarraInformacoes(jogo);
 				
@@ -109,7 +107,6 @@ public class ControladorJogo {
 								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioDefensor));
 						
 					}else{
-						//btAtacante.setDisable(false);
 						selecionouTerritorioProprio = false;
 						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
 								FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
@@ -117,13 +114,11 @@ public class ControladorJogo {
 					}
 				//clicou no proprio territorio
 				}else{
-					//btAtacante.setDisable(false);
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
 							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
 					//se poder atacar
 					if(jogador.getTerritorioConquistado(botao.getId())
 								.getQuantidadeTropa() > 1){
-						//botao.setDisable(true);
 						territorioAtacante = jogador.getTerritorioConquistado(botao
 								.getId());
 						btAtacante = botao;
@@ -140,8 +135,6 @@ public class ControladorJogo {
 				if (jogador.possuiTerritorio(botao.getId())
 						&& jogador.getTerritorioConquistado(botao.getId())
 								.getQuantidadeTropa() > 1) {
-					//btAtacante.setDisable(false);
-					//btDefensor.setDisable(false);
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
 							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
@@ -150,7 +143,6 @@ public class ControladorJogo {
 					
 					selecionouTerritorioInimigo = false;
 					
-					//botao.setDisable(true);
 					selecionouTerritorioProprio = true;
 					territorioAtacante = jogador.getTerritorioConquistado(botao
 							.getId());
@@ -160,8 +152,6 @@ public class ControladorJogo {
 					
 					
 				}else{
-//					btAtacante.setDisable(false);
-//					btDefensor.setDisable(false);
 					selecionouTerritorioProprio = false;
 					selecionouTerritorioInimigo = false;
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
@@ -181,9 +171,7 @@ public class ControladorJogo {
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDestino));
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
-				
-				//btDestino.setDisable(false);
-				//btFonte.setDisable(false);
+			
 				if (jogador.possuiTerritorio(botao.getId())) {
 					if ((!jaMovidos.contains(botao.getId()))&&(jogador
 							.getTerritorioConquistado(botao.getId()).getQuantidadeTropa()>1)) {
@@ -191,7 +179,6 @@ public class ControladorJogo {
 						territorioFonte = jogador
 								.getTerritorioConquistado(botao.getId());
 						btFonte = botao;
-						//btFonte.setDisable(true);
 						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioFonte));
 						
@@ -208,7 +195,6 @@ public class ControladorJogo {
 						territorioFonte = jogador
 								.getTerritorioConquistado(botao.getId());
 						btFonte = botao;
-						//btFonte.setDisable(true);
 						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioFonte));
 						
@@ -223,7 +209,6 @@ public class ControladorJogo {
 						territorioDestino = jogador
 								.getTerritorioConquistado(botao.getId());
 						btDestino = botao;
-						//btDestino.setDisable(true);
 						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
 								FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioDestino));
 						
@@ -231,7 +216,6 @@ public class ControladorJogo {
 								.atualizaBarraInformacoes(jogo);
 					}else{
 						
-						//btFonte.setDisable(false);
 						GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 								FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
 						
@@ -240,7 +224,6 @@ public class ControladorJogo {
 							territorioFonte = jogador
 									.getTerritorioConquistado(botao.getId());
 							btFonte = botao;
-							//btFonte.setDisable(true);
 							GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 									FabricaDeBotoes.criaImagemDoBotaoTerritorioComHighLight(territorioFonte));
 							
@@ -249,7 +232,6 @@ public class ControladorJogo {
 						}					
 					}
 				}else{
-					//btFonte.setDisable(false);
 					GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 							FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
 					
@@ -285,35 +267,6 @@ public class ControladorJogo {
 		return jogo.temTropas();
 	}
 
-//	public boolean DominouTerritorio(Territorio territorioAtacante,
-//			Territorio territorioDefensor) {
-//		if (jogo.ataque(territorioAtacante, territorioDefensor)) {
-//
-//			if (territorioAtacante
-//					.getDono()
-//					.getObjetivo()
-//					.concluido(territorioAtacante.getDono(),
-//							territorioDefensor.getDono())) {
-//				
-//				jogo.ganharJogo(territorioAtacante.getDono());
-//				GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.FIM_JOGO);
-//				
-//			}
-//			// Jogador acabou de perder seu último território
-//			if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
-//				jogo.eliminaJogador(territorioAtacante.getDono(),
-//						territorioDefensor.getDono());
-//			}
-//
-//			// TODO Rever com cuidado
-//			// TODO Pegar da visão quantas tropas passar para o territorio
-//			// dominado
-//			jogo.dominarTerritorio(territorioAtacante, territorioDefensor, 1);
-//			return true;
-//		}
-//		return false;
-//	}
-
 	/**Método responsável por mover tropas de um território para outro território dominados por um mesmo jogador
 	 * @param territorioFonte Território do qual as tropas se originam
 	 * @param territorioDestino Território para onde se destinam as tropas
@@ -340,14 +293,12 @@ public class ControladorJogo {
 
 			if (selecionouTerritorioInimigo) {
 				selecionouTerritorioInimigo = false;
-				//btDefensor.setDisable(false);
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDefensor.getId(), 
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
 				
 			}
 			if (selecionouTerritorioProprio) {
 				selecionouTerritorioProprio = false;
-				//btAtacante.setDisable(false);
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btAtacante.getId(), 
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioAtacante));
 				
@@ -357,14 +308,12 @@ public class ControladorJogo {
 
 			if (selecionouTerritorioFonte) {
 				selecionouTerritorioFonte = false;
-				//btFonte.setDisable(false);
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
 				
 			}
 			if (selecionouTerritorioDestino) {
 				selecionouTerritorioDestino = false;
-				//btDestino.setDisable(false);
 				GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDestino));
 				
@@ -409,9 +358,6 @@ public class ControladorJogo {
 		// Chama gerenciador de tarefas para trocar tela
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.JOGO);
 		GerenciadorDeTelas.getInstancia().atualizaBarraInformacoes(jogo);
-		if (jogo.getJogadorDaVez() instanceof JogadorIA) {
-		//	((JogadorIA) jogo.getJogadorDaVez()).fase1();
-		}
 	}
 
 	public Mapa getMapa() {
@@ -428,8 +374,6 @@ public class ControladorJogo {
 	public void acaoAtaque() {
 		try{
 			if (selecionouTerritorioInimigo && selecionouTerritorioProprio) {
-	//			dominouTerrritorio = jogo.ataque(territorioAtacante,
-	//					territorioDefensor);
 				btAtacante.setText("" + territorioAtacante.getQuantidadeTropa());
 				btDefensor.setText("" + territorioDefensor.getQuantidadeTropa());
 				selecionouTerritorioInimigo = false;
@@ -443,42 +387,11 @@ public class ControladorJogo {
 						FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDefensor));
 			
 				GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.ATAQUE);
-	//			if (dominouTerrritorio) {
-	//
-	//				if (territorioAtacante
-	//						.getDono()
-	//						.getObjetivo()
-	//						.concluido(territorioAtacante.getDono(),
-	//								territorioDefensor.getDono())) {
-	//					if(!(jogo.getJogadorDaVez() instanceof JogadorIA)){
-	//							fimDeJogo();
-	//					}
-	//				}
-	//				// Jogador acabou de perder seu último território
-	//				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
-	//					jogo.eliminaJogador(territorioAtacante.getDono(),
-	//							territorioDefensor.getDono());
-	//				}
-	//
-	//				// TODO Rever com cuidado
-	//				// TODO Pegar da visão quantas tropas passar para o territorio
-	//				// dominado
-	//				jogo.dominarTerritorio(territorioAtacante, territorioDefensor,
-	//						1);
-	//				btAtacante
-	//						.setText(territorioAtacante.getQuantidadeTropa() + "");
-	//				btDefensor
-	//						.setText(territorioDefensor.getQuantidadeTropa() + "");
-	//				
-	//				GerenciadorDeTelas.getInstancia()
-	//					.atualizaImageBotao(territorioDefensor.getNome(), FabricaDeBotoes
-	//							.criaImageView(territorioDefensor));
-	//			}
 			}
-			}catch(Exception e){
-				new Save().save();
-			}
-			
+		}catch(Exception e){
+			new Save().save();
+		}
+		
 	}
 
 	/**Método responsável pela exibição da tela de fim de jogo
@@ -514,8 +427,7 @@ public class ControladorJogo {
 
 	}
 	
-	public Jogador getJogadorDaVez()
-	{
+	public Jogador getJogadorDaVez(){
 		return jogo.getJogadorDaVez();
 	}
 	
@@ -530,23 +442,25 @@ public class ControladorJogo {
 		}
 	}
 	
-	/**Método responsável pelas ações relacionadas ao clique do botão Trocar na tela de troca
-	 * @param Btn ?????
+	/**
+	 * Método responsável pelas ações relacionadas ao clique do botão Trocar na tela de troca
 	 */
-	public void acaoTelaTroca(Button Btn){		
+	public void acaoTelaTroca(){		
 		controleDeCartas = getNumeroCartasJogador();
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.TROCA);
 
 	}
 
-	/**Método responsável pelas ações relacionadas ao clique do botão Objetivo
+	/**
+	 * Método responsável pelas ações relacionadas ao clique do botão Objetivo
 	 * 
 	 */
 	public void acaoTelaObjetivo() {
 		GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.OBJETIVO);
 	}
 
-	/**Método responsável por voltar ao jogo a partir da tela de troca
+	/**
+	 * Método responsável por voltar ao jogo a partir da tela de troca
 	 * 
 	 */
 	public void voltaAoJogo() {
@@ -591,8 +505,8 @@ public class ControladorJogo {
 		return resp;
 	}
 
-	/**Método responsável pela seleção da carta tiro na tela de troca
-	 * @param moveBtn ????
+	/**
+	 * Método responsável pela seleção da carta tiro na tela de troca
 	 */
 	public void selecionouCartaTiro() {
 		 
@@ -604,10 +518,10 @@ public class ControladorJogo {
 		}
 	}
 
-	/**Método responsável pela seleção da carta porrada na tela de troca
-	 * @param moveBtn ????
+	/**
+	 * Método responsável pela seleção da carta porrada na tela de troca
 	 */
-	public void selecionouCartaPorrada(Button moveBtn) {
+	public void selecionouCartaPorrada() {
 		if(controleDeCartas[1] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasPorradaSelecionadas++;
 			System.out.println("selecionou porrada");
@@ -616,10 +530,10 @@ public class ControladorJogo {
 		}
 	}
 
-	/**Método responsável pela seleção da carta bomba na tela de troca
-	 * @param moveBtn
+	/**
+	 * Método responsável pela seleção da carta bomba na tela de troca
 	 */
-	public void selecionouCartaBomba(Button moveBtn) {
+	public void selecionouCartaBomba() {
 		if(controleDeCartas[2] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasBombaSelecionadas++;
 			System.out.println("selecionou bomba");
@@ -628,10 +542,10 @@ public class ControladorJogo {
 		}
 	}
 
-	/**Método responsável pela seleção da carta Valesca na tela de troca
-	 * @param moveBtn
+	/**
+	 * Método responsável pela seleção da carta Valesca na tela de troca
 	 */
-	public void selecionouCartaValesca(Button moveBtn) {
+	public void selecionouCartaValesca() {
 		if(controleDeCartas[3] > 0 && totalCartasSelecionadas <= 3){
 			cartasValescaSelecionadas++;
 			System.out.println("selecionou valesca");
@@ -651,10 +565,10 @@ public class ControladorJogo {
 		return resp;
 	}
 
-	/**Método responsável pelas ações relacionadas ao clique do botão Realiza Troca
-	 * @param moveBtn
+	/**
+	 * Método responsável pelas ações relacionadas ao clique do botão Realiza Troca
 	 */
-	public void acaoRealizaTroca(Button moveBtn) {
+	public void acaoRealizaTroca() {
 		int [] selecionadas = getCartasSelecionadas();
 		int [] aux = selecionadas;
 		
@@ -681,13 +595,12 @@ public class ControladorJogo {
 			cartasValescaSelecionadas = 0;
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();		
 			
-		}else{	
-			
-		cartasTiroSelecionadas = 0;
-		cartasPorradaSelecionadas = 0;
-		cartasBombaSelecionadas = 0;
-		cartasValescaSelecionadas = 0;
-		GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
+		}else{				
+			cartasTiroSelecionadas = 0;
+			cartasPorradaSelecionadas = 0;
+			cartasBombaSelecionadas = 0;
+			cartasValescaSelecionadas = 0;
+			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
 
 		}		
 	}
@@ -722,7 +635,8 @@ public class ControladorJogo {
 		
 	}
 
-	/**Retorna o objetivo do jogador da vez
+	/**
+	 * Retorna o objetivo do jogador da vez
 	 * @return A string com o nome do objetivo do jogador da vez
 	 */
 	public String objetivoDoJogadorAtual(){
@@ -730,10 +644,10 @@ public class ControladorJogo {
 		return jogador.getObjetivo().getNomeObjetivo();
 	}
 
-	/**Método responsável pelas ações relacionadas ao clique do botão Sair
-	 * @param moveBtn
+	/**
+	 * Método responsável pelas ações relacionadas ao clique do botão Sair
 	 */
-	public void acaoSair(Button moveBtn) {
+	public void acaoSair() {
 		GerenciadorDeTelas.getInstancia().sair();
 
 	}
@@ -742,7 +656,8 @@ public class ControladorJogo {
 		return GerenciadorDeTelas.getInstancia().getListaDeBotoesTerritorios();
 	}
 	
-	/**Método que verifica se já foram movidas tropas para um dado território
+	/**
+	 * Método que verifica se já foram movidas tropas para um dado território
 	 * @param nomeTerritorio Nome do território 
 	 * @return true caso já tenha sido movida alguma tropas para o território de nome nomeTerritório, false caso contrário
 	 */
@@ -750,13 +665,13 @@ public class ControladorJogo {
 		return jaMovidos.contains(nomeTerritorio);
 	}
 	
-	/**Método responsável por resetar os botões durante a fase 3
+	/**
+	 * Método responsável por resetar os botões durante a fase 3
 	 * 
 	 */
 	public void limpaBotoesFase3(){
 		if (selecionouTerritorioFonte) {
 			selecionouTerritorioFonte = false;
-			//btFonte.setDisable(false);
 			GerenciadorDeTelas.getInstancia().atualizaImageBotao(btFonte.getId(), 
 					FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioFonte));
 			
@@ -764,7 +679,6 @@ public class ControladorJogo {
 		}
 		if (selecionouTerritorioDestino) {
 			selecionouTerritorioDestino = false;
-			//btDestino.setDisable(false);
 			GerenciadorDeTelas.getInstancia().atualizaImageBotao(btDestino.getId(), 
 					FabricaDeBotoes.criaImagemDoBotaoTerritorio(territorioDestino));
 			
@@ -786,7 +700,8 @@ public class ControladorJogo {
 		atualizaTela();
 	}
 
-	/**Método responsável por resetar os atributos de controlador jogo
+	/**
+	 * Método responsável por resetar os atributos de controlador jogo
 	 * 
 	 */
 	public void recomecaAtributos() {
@@ -832,7 +747,8 @@ public class ControladorJogo {
 		jogo.faseAtual = fase;
 	}
 
-	/** Método responsável por descobrir quantas tropas um dado jogador ainda tem a distribuir
+	/** 
+	 * Método responsável por descobrir quantas tropas um dado jogador ainda tem a distribuir
 	 * @param jogador
 	 * @return Se o jogador passado for a da vez retorna a quantidade de tropas dele senão retorna 0
 	 */

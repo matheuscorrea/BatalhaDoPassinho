@@ -9,10 +9,6 @@ public class EventoSair implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		Object source = event.getSource();
-		if (source instanceof Button) { //should always be true in your example
-		    Button Btn = (Button) source; // that's the button that was clicked
-		    ControladorJogo.getInstancia().acaoSair(Btn);
-		}
+	    ControladorJogo.getInstancia().acaoSair();
 	}
 }

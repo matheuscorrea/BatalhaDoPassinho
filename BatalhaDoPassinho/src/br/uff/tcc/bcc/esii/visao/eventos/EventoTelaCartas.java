@@ -9,11 +9,6 @@ public class EventoTelaCartas implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		//TODO Método realmente precisa passar o botão?
-		Object source = event.getSource();
-		if (source instanceof Button) { //should always be true in your example
-		    Button moveBtn = (Button) source; // that's the button that was clicked
-		    ControladorJogo.getInstancia().acaoTelaTroca(moveBtn);
-		}
+	    ControladorJogo.getInstancia().acaoTelaTroca();
 	}
 }

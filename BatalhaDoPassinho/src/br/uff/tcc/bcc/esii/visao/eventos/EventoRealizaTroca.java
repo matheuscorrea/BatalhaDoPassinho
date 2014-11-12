@@ -11,10 +11,7 @@ public class EventoRealizaTroca implements EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		Object source = event.getSource();
-		if (source instanceof Button) { //should always be true in your example
-		    Button moveBtn = (Button) source; // that's the button that was clicked
-		    ControladorJogo.getInstancia().acaoRealizaTroca(moveBtn);
-		}
+		ControladorJogo.getInstancia().acaoRealizaTroca();
+	
 	}
 }

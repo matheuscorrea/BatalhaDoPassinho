@@ -28,10 +28,8 @@ import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoJogadaIA;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMostraObjetivo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoPausaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoRegrasInicio;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoRegrasJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSalvar;
@@ -46,7 +44,6 @@ public class TelaJogo implements ITela {
 	private List<Group> listaDeGroupTerritorios;
 	private Group grupo;
 	private HBox barraInformacoes;
-	private boolean territoriosDisable;
 	
 	private enum Estado{JOGANDO,PAUSADO};
 	private Estado estadoAtual;
@@ -58,7 +55,6 @@ public class TelaJogo implements ITela {
 	 * @param mapa
 	 */
 	public TelaJogo(Mapa mapa) {
-		territoriosDisable = false;
 		this.mapa = mapa;
 		this.barraInformacoes = new HBox(20);
 		this.grupo = new Group();
@@ -156,7 +152,6 @@ public class TelaJogo implements ITela {
 	private Scene getSceneJogo(){
 
 		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
-		territoriosDisable = false;
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
