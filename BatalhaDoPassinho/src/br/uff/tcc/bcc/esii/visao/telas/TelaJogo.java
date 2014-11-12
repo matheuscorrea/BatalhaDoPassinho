@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import br.uff.tcc.bcc.esii.modelo.Carta;
 import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
@@ -216,9 +217,6 @@ public class TelaJogo implements ITela {
 				"", new EventoJogadaIA(), new Image("file:media/imagens/botoes/BTPROXIMOPASSO.png",125,40,true,true));
 		botaoJogadaIA.setStyle("-fx-background-color: transparent");
 
-		//Button botaoSalvar = FabricaDeBotoes.criaBotao("Salvar",
-		//		"Salvar", new EventoSalvar());
-	
 		
 		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",32,32,true,true);	
 		Image iPorrada = new Image("file:media/imagens/cartas/porrada.png",32,32,true,true);		
@@ -228,26 +226,36 @@ public class TelaJogo implements ITela {
 		List<Carta> listaCartasDoJogador = jogo.getJogadorDaVez().getMao();
 		atualizaVetorCartas(vetorCartas, listaCartasDoJogador);
 		
-		HBox cartas = new HBox(new ImageView(iTiro), new Label("x"+vetorCartas[0]+"  "), 
-				new ImageView(iPorrada), new Label("x"+vetorCartas[1]+"  "), 
-				new ImageView(iBomba), new Label("x"+vetorCartas[2]+"  "), 
-				new ImageView(iValesca), new Label("x"+vetorCartas[3]+"  "));
+		Label carta1 = new Label("x"+vetorCartas[0]+"  ");
+		carta1.setTextFill(Color.WHITE);
+		Label carta2 = new Label("x"+vetorCartas[1]+"  ");
+		carta2.setTextFill(Color.WHITE);
+		Label carta3 = new Label("x"+vetorCartas[2]+"  ");
+		carta3.setTextFill(Color.WHITE);
+		Label carta4 = new Label("x"+vetorCartas[3]+"  ");
+		carta4.setTextFill(Color.WHITE);
+		
+		HBox cartas = new HBox(new ImageView(iTiro), carta1, 
+				new ImageView(iPorrada), carta2, 
+				new ImageView(iBomba), carta3, 
+				new ImageView(iValesca), carta4);
 		
 		Image corJogador;
 		corJogador = obtemImageCorJogador(jogo);
 		
-		
+		Label tropasParaDistribuir = new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas());
+		tropasParaDistribuir.setTextFill(Color.WHITE);
 		
 		switch (jogo.faseAtual) {
 		case FASE_1:
 			botaoFase = FabricaDeBotoes.criaBotaoComImagem("Proxima_fase",
 				"", new EventoProximaFase(), new Image("file:media/imagens/botoes/BTTROPASDISTRIBUIDAS.png",125,125,true,true));
 			botaoFase.setStyle("-fx-background-color: transparent");
-
+			
 			if(jogo.getJogadorDaVez() instanceof JogadorIA){
 				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
 						jogo.getJogadorDaVez().getFoto(),
-						new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
+						tropasParaDistribuir, 
 						botaoJogadaIA,
 						botaoPausar,
 						new ImageView(new Image("file:media/imagens/botoes/BANNERIA1.png",125,125,true,true)));
@@ -260,7 +268,7 @@ public class TelaJogo implements ITela {
 	
 				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
 						jogo.getJogadorDaVez().getFoto(),
-						new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
+						tropasParaDistribuir, 
 						botaoFase,
 						botaoObjetivo,
 						botaoTroca,

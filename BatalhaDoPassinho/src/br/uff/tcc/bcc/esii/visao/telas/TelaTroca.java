@@ -1,36 +1,22 @@
 package br.uff.tcc.bcc.esii.visao.telas;
 
 
-import java.util.List;
-
-import com.sun.prism.paint.Color;
-
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
-import br.uff.tcc.bcc.esii.modelo.Carta;
-import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaBomba;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaPorrada;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaTiro;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCartaValesca;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoRealizaTroca;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaJogo;
 
 public class TelaTroca implements ITela{
@@ -44,7 +30,7 @@ public class TelaTroca implements ITela{
 	private GridPane grid;
 	private ImageView fundo;
 	private int tiro,porrada,bomba,valesca;
-	private Label cartasSelecionadas;
+	private Label cartasSelecionadas;	
 	private Image image = new Image("file:media/imagens/mapa/mapaSemBrilho.png");
 	
 	
@@ -89,16 +75,16 @@ public class TelaTroca implements ITela{
 		cartaValesca.setStyle("-fx-background-color: gold;");
 		
 		int [] controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
-		trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
-		cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
-		trocar.setStyle("-fx-border-color: red;");
-		cancelar.setStyle("-fx-border-color: red;");
+		trocar = FabricaDeBotoes.criaBotaoComImagem("Trocar_Cartas", "", new EventoRealizaTroca(),new Image("file:media/imagens/botoes/BTCARTAS.png",125,125,true,true));
+		cancelar = FabricaDeBotoes.criaBotaoComImagem("Voltar_Cartas", "",new EventoTelaJogo(),new Image("file:media/imagens/botoes/BTVOLTAR.png",125,125,true,true));
+		trocar.setStyle("-fx-background-color: transparent");
+		cancelar.setStyle("-fx-background-color: transparent");
 		botoes.getChildren().addAll(cartaTiro, cartaPorrada, cartaBomba, cartaValesca);
 		
 		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);
-		cartasSelecionadas.setStyle("-fx-background-color: greenyellow;");
+		cartasSelecionadas.setTextFill(Color.WHITE);
 		inferior.getChildren().addAll(cartasSelecionadas,trocar, cancelar);
-		inferior.setStyle("-fx-background-color: cornsilk;");
+		inferior.setStyle("-fx-background-color: grey;");
 		
 		
 		botoes.setAlignment(Pos.BASELINE_CENTER);
@@ -116,15 +102,15 @@ public class TelaTroca implements ITela{
 		atualizarValores();
 		
 		int [] controleDeCartas = ControladorJogo.getInstancia().getCartasSelecionadas();
-		trocar = FabricaDeBotoes.criaBotao("Trocar_Cartas", "TROCAR", new EventoRealizaTroca());
-		cancelar = FabricaDeBotoes.criaBotao("Voltar_Cartas", "VOLTAR",new EventoTelaJogo());
-		trocar.setStyle("-fx-border-color: red;");
-		cancelar.setStyle("-fx-border-color: red;");
-		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);
-		cartasSelecionadas.setStyle("-fx-background-color: greenyellow;");
+		trocar = FabricaDeBotoes.criaBotaoComImagem("Trocar_Cartas", "", new EventoRealizaTroca(),new Image("file:media/imagens/botoes/BTCARTAS.png",125,125,true,true));
+		cancelar = FabricaDeBotoes.criaBotaoComImagem("Voltar_Cartas", "",new EventoTelaJogo(),new Image("file:media/imagens/botoes/BTVOLTAR.png",125,125,true,true));
+		trocar.setStyle("-fx-background-color: transparent");
+		cancelar.setStyle("-fx-background-color: transparent");
+		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);		
+		cartasSelecionadas.setTextFill(Color.WHITE);
 		
 		inferior.getChildren().addAll(cartasSelecionadas,trocar, cancelar);	
-		inferior.setStyle("-fx-background-color: cornsilk;");
+		inferior.setStyle("-fx-background-color: grey");
 		
 		grid = new GridPane();
 		grid.add(fundo,2,1);
