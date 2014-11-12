@@ -8,10 +8,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 
-import br.uff.tcc.bcc.esii.modelo.Jogo.TipoFase;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.save.Save;
-import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 
 /**
@@ -102,9 +100,7 @@ public class Jogo {
 		jogadorDominouTerritorio=false;
 		Jogador jogador = jogadores.poll();
 		jogadores.add(jogador);		
-		//if(faseAtual == TipoFase.FASE_1){
-			calculaTropa(getJogadorDaVez());
-		//}
+		calculaTropa(getJogadorDaVez());
 	}
 	
 	public boolean ehFaseUmRodada0(){
