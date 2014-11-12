@@ -3,12 +3,16 @@ package br.uff.tcc.bcc.esii.visao.telas;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.controlador.ControladorTelaEscolha;
@@ -18,6 +22,7 @@ import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoCarregaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCheckBoxIA;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
@@ -29,22 +34,25 @@ public class TelaEscolha implements ITela  {
 	
 	private HBox hbSuperior;
 	private HBox hbInferior;
-	private HBox hbButoes;	
+	private HBox hbBotoes;	
 	private int numJogadores;
 	private Button iniciar;
 	
 	public TelaEscolha() {
 		numJogadores = 0;
 		this.avatar = new VBox[6];
-		iniciar = FabricaDeBotoes.criaBotao("Iniciar", "Iniciar",new EventoNovoJogo());
+		iniciar = FabricaDeBotoes.criaBotaoComImagem("Iniciar", "", new EventoNovoJogo(), new Image("file:media/imagens/botoes/BTINICIAR.png",100,100,true,true));
+        iniciar.setStyle("-fx-background-color: transparent");
 	}
 	
 	@Override
 	public Scene getScene() {
 		Som.getInstancia().toca(Musicas.ESCOLHA.getID());
 		
-		Button voltar = FabricaDeBotoes.criaBotao("Voltar", "Voltar",new EventoTelaInicial());
-	
+		Button voltar = FabricaDeBotoes.criaBotaoComImagem("Voltar", "", new EventoTelaInicial(), new Image("file:media/imagens/botoes/BTVOLTAR.png",100,100,true,true));
+		voltar.setStyle("-fx-background-color: transparent");
+		
+		iniciar.setDisable(true);
 		String imagemAvatar[] = new String[6];
 		Image image[] = new Image[6];
 		ImageView imageView[] = new ImageView[6];
@@ -88,15 +96,23 @@ public class TelaEscolha implements ITela  {
 			vetorCheckBox[i].selectedProperty().addListener(new EventoCheckBoxIA());	
 		}
 		
-		hbSuperior = new HBox(10,avatar[0],avatar[1],avatar[2]);
-		hbInferior = new HBox(10,avatar[3],avatar[4],avatar[5]);
-		hbButoes = new HBox(100,voltar,iniciar);
+		hbSuperior = new HBox(80,avatar[0],avatar[1],avatar[2]);
+		hbInferior = new HBox(80,avatar[3],avatar[4],avatar[5]);
+		hbBotoes = new HBox(100,voltar,iniciar);
 
-		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes); 
-		atualizaListaJogadores();
+		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes); 
+		raiz.setLayoutX(200);
 		numJogadores = 3;
 		
-		return new Scene(raiz);
+		Group grupo = new Group();
+		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
+	    ImageView imv = new ImageView(fundo);
+	       
+	    grupo.getChildren().addAll(imv);
+		grupo.getChildren().addAll(raiz);
+		
+		
+		return new Scene(grupo);
 	}
 
 	public Scene atualizaPersonagem(String jogador,int index){
@@ -116,16 +132,32 @@ public class TelaEscolha implements ITela  {
 			}
 			
 		}	
-		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes);		
+		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes);	
+		raiz.setLayoutX(200);
+		Group grupo = new Group();
+		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
+	    ImageView imv = new ImageView(fundo);
+	       
+	    grupo.getChildren().addAll(imv);
+		grupo.getChildren().addAll(raiz);
+		
 		atualizaListaJogadores();
 		
-		return new Scene(raiz);
+		return new Scene(grupo);
 	}
 	
 	public Scene atualizaCheckBox(){
 		atualizaListaJogadores();
-		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbButoes);		
-		return new Scene(raiz);
+		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes);	
+		raiz.setLayoutX(200);
+		Group grupo = new Group();
+		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
+	    ImageView imv = new ImageView(fundo);
+	       
+	    grupo.getChildren().addAll(imv);
+		grupo.getChildren().addAll(raiz);
+		
+		return new Scene(grupo);
 	}
 	
 	/**

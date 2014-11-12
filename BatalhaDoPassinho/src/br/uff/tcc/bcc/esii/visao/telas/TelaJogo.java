@@ -254,7 +254,8 @@ public class TelaJogo implements ITela {
 						jogo.getJogadorDaVez().getFoto(),
 						new Label("Tropas para distribuir: "+jogo.getQuantidadeDeTropas()), 
 						botaoJogadaIA,
-						botaoPausar);
+						botaoPausar,
+						new Label("IA Jogando - Distribuindo tropas"));
 			}else{
 				
 				if (jogo.getQuantidadeDeTropas() > 0)
@@ -281,7 +282,8 @@ public class TelaJogo implements ITela {
 				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
 						jogo.getJogadorDaVez().getFoto(),
 						botaoJogadaIA,
-						botaoPausar);
+						botaoPausar,
+						new Label("IA Jogando - Atacando"));
 			}else{
 				barraInformacoes.getChildren().addAll(
 						new ImageView(corJogador),
@@ -302,7 +304,8 @@ public class TelaJogo implements ITela {
 				barraInformacoes.getChildren().addAll(new ImageView(corJogador),
 						jogo.getJogadorDaVez().getFoto(),
 						botaoJogadaIA,
-						botaoPausar);
+						botaoPausar,
+						new Label("IA Jogando - Remanejando Tropas"));
 			}else{
 				barraInformacoes.getChildren().addAll(
 						new ImageView(corJogador),
