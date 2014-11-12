@@ -31,6 +31,8 @@ import br.uff.tcc.bcc.esii.visao.eventos.EventoMove;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoOpcoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoPausaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoProximaFase;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoRegrasInicio;
+import br.uff.tcc.bcc.esii.visao.eventos.EventoRegrasJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSair;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoSalvar;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaCartas;
@@ -109,7 +111,7 @@ public class TelaJogo implements ITela {
 
 		Button botaoContinua = FabricaDeBotoes.criaBotaoComImagem("Continua", "", new EventoContinuaJogo(),new Image("file:media/imagens/botoes/BTVOLTARPAUSA.png",100,100,true,true));
 		Button botaoMenuPricipal = FabricaDeBotoes.criaBotaoComImagem("Menu_Principal","",new EventoTelaInicial(),new Image("file:media/imagens/botoes/BTMAINMENU.png",100,100,true,true));
-		Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Regras_In_Game", "", new EventoOpcoes(), new Image("file:media/imagens/botoes/BTREGRASINGAME.png",100,100,true,true));
+		Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Regras2", "", new EventoRegrasJogo(), new Image("file:media/imagens/botoes/BTREGRASINGAME.png",100,100,true,true));
 		Button botaoSalvar = FabricaDeBotoes.criaBotaoComImagem("Salvar_Jogo", "", new EventoSalvar(), new Image("file:media/imagens/botoes/BTSALVAR.png",100,100,true,true));
 		Button botaoSairInGame = FabricaDeBotoes.criaBotaoComImagem("Sair_In_Game", "", new EventoSair(), new Image("file:media/imagens/botoes/BTEXIT2.png",100,100,true,true));
 		botaoContinua.setStyle("-fx-background-color: transparent");
