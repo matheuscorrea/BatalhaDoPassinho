@@ -130,25 +130,26 @@ public class TelaAtaque implements ITela {
 		}
 
 		if(venceu){
+			botaoAtaque.setDisable(true);
+			botaoSair.setDisable(true);
 			Som.getInstancia().tocaEfeito(Musicas.EFEITO_SUCESSO1.getID());
-			if(territorioAtacante.getQuantidadeTropa()==2){
-				ControladorJogo.getInstancia().dominarTerritorio(1);
-			}else{
-			Button btUm = FabricaDeBotoes.criaBotaoComImagem("1", "",
-					new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas1.png", 100,100,false,false));
-			btUm.setStyle("-fx-background-color: transparent");
-			Button btDois = FabricaDeBotoes.criaBotaoComImagem("2", "",
-					new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas2.png", 100,100,false,false));
-			btDois.setStyle("-fx-background-color: transparent");
-			grid.add(btUm, indiceDaColuna, indiceDaLinha+1);
-			grid.add(btDois, indiceDaColuna+1, indiceDaLinha+1);
-				if(territorioAtacante.getQuantidadeTropa()>3){
-					Button btTres = FabricaDeBotoes.criaBotaoComImagem("3", "",
-							new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas3.png", 100,100,false,false));
-					btTres.setStyle("-fx-background-color: transparent");
-					grid.add(btTres, indiceDaColuna+2, indiceDaLinha+1);
-				}
+			if(territorioAtacante.getQuantidadeTropa()>1){
+				Button btUm = FabricaDeBotoes.criaBotaoComImagem("1", "",
+						new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas1.png", 100,100,false,false));
+				btUm.setStyle("-fx-background-color: transparent");
+				grid.add(btUm, indiceDaColuna, indiceDaLinha+1);
+			}if(territorioAtacante.getQuantidadeTropa()>2){				
+				Button btDois = FabricaDeBotoes.criaBotaoComImagem("2", "",
+						new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas2.png", 100,100,false,false));
+				btDois.setStyle("-fx-background-color: transparent");
+				grid.add(btDois, indiceDaColuna+1, indiceDaLinha+1);
+			}if(territorioAtacante.getQuantidadeTropa()>3){
+				Button btTres = FabricaDeBotoes.criaBotaoComImagem("3", "",
+						new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas3.png", 100,100,false,false));
+				btTres.setStyle("-fx-background-color: transparent");
+				grid.add(btTres, indiceDaColuna+2, indiceDaLinha+1);
 			}
+			
 		}
 		Group grupo = new Group();
 
@@ -175,17 +176,6 @@ public class TelaAtaque implements ITela {
 			if (ataque(territorioAtacante, territorioDefensor, dados_atacante,
 					dados_defensor)) {
 
-				if (territorioAtacante
-						.getDono()
-						.getObjetivo()
-						.concluido(territorioAtacante.getDono(),
-								territorioDefensor.getDono())) {
-					if (!(ControladorJogo.getInstancia().getJogadorDaVez() instanceof JogadorIA)) {
-						//ControladorJogo.getInstancia().fimDeJogo();
-					} else {
-						//ControladorJogo.getInstancia().ganharJogo();
-					}
-				}
 				// Jogador acabou de perder seu último território
 				if (territorioDefensor.getDono().numeroDeConquistados() == 1) {
 					ControladorJogo.getInstancia().eliminaJogador();
