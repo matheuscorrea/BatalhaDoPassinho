@@ -35,14 +35,9 @@ public class TelaInicial implements ITela {
         Button botaoNovoJogo = FabricaDeBotoes.criaBotaoComImagem("Novo_Jogo", "", new EventoTelaCarregar(), image);
         botaoNovoJogo.setStyle("-fx-background-color: transparent");
         
-
         Button botaoCarrega = FabricaDeBotoes.criaBotaoComImagem("Carrega_Partida", "", new EventoCarregaJogo(), new Image("file:media/imagens/botoes/BTCARREGAR.png",100,100,true,true));
         botaoCarrega.setStyle("-fx-background-color: transparent");
-        
-        Button botaoOpcoes = FabricaDeBotoes.criaBotaoComImagem("Opcoes", "", new EventoOpcoes(), new Image("file:media/imagens/botoes/BTOPCOES.png",100,100,true,true));
-        botaoOpcoes.setStyle("-fx-background-color: transparent");
-
-        
+               
         Image imageRegras = new Image("file:media/imagens/botoes/BTREGRAS.png",100,100,true,true);
         Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Regras1", "", new EventoRegrasInicio(), imageRegras);
         botaoRegras.setStyle("-fx-background-color: transparent");
@@ -63,8 +58,7 @@ public class TelaInicial implements ITela {
 
         grid.add(botaoCarrega, 2, 2);
         grid.add(botaoRegras, 2, 3);
-        grid.add(botaoOpcoes,2, 4);
-        grid.add(botaoSair,2, 5);
+        grid.add(botaoSair,2, 4);
         
         Group grupo = new Group();
         

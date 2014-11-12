@@ -39,7 +39,11 @@ public class FabricaDeObjetivo {
 	}
 	
 	public Objetivo criaObjetivo(int index){
-		return this.objetivos.get(index);
+		if(index>=0 && index<=10){
+				System.out.println(index);
+				return this.objetivos.get(index);
+		}		
+		return null;		
 	}
 	public Objetivo carregaObjetivo(int index){
 		for (Objetivo objetivo : objetivos) {
