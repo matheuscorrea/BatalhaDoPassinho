@@ -41,7 +41,9 @@ public TelaRegras(boolean estaJogando){
 			}else{
 				avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoTelaInicial(), new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true));
 			}
-		}		
+		}else{
+			avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoProximaPaginaRegras(), new Image("file:media/imagens/botoes/BTAVANCAR.png",100,100,true,true));
+		}
 		
 		if(pagina == 1){
 			if(estajogando){
@@ -83,6 +85,8 @@ public TelaRegras(boolean estaJogando){
 			}else{
 				avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoTelaInicial(), new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true));
 			}
+		}else{
+			avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoProximaPaginaRegras(), new Image("file:media/imagens/botoes/BTAVANCAR.png",100,100,true,true));
 		}
 		
 		String caminho = "file:media/imagens/regras/regras"+pagina+".png";
@@ -125,6 +129,8 @@ public TelaRegras(boolean estaJogando){
 			}else{
 				avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoTelaInicial(), new Image("file:media/imagens/botoes/BTSAIR.png",100,100,true,true));
 			}
+		}else{
+			avancar = FabricaDeBotoes.criaBotaoComImagem("Avancar_regras", "", new EventoProximaPaginaRegras(), new Image("file:media/imagens/botoes/BTAVANCAR.png",100,100,true,true));
 		}
 		
 		
