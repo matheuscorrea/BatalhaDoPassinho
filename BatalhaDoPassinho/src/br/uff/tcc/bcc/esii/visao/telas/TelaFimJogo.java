@@ -23,14 +23,14 @@ public class TelaFimJogo implements ITela {
 		// TODO Auto-generated method stub
 		final String imagemURL = "file:media/imagens/mcs/catraGanhou.jpg";
 
-		Image image = new Image(imagemURL,1123,554,true,true);
+		Image image = new Image(imagemURL,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 
 		Button botaoMenuPricipal = FabricaDeBotoes.criaBotaoComImagem("Menu_Principal","",new EventoTelaInicial(),new Image("file:media/imagens/botoes/BTMAINMENU.png",100,100,true,true));
 		botaoMenuPricipal.setStyle("-fx-background-color: transparent");
-		botaoMenuPricipal.setLayoutX(10);
-		botaoMenuPricipal.setLayoutY(40);
+		botaoMenuPricipal.setLayoutX(ConstantesTelas.resolucaoX/5 - 50);
+		botaoMenuPricipal.setLayoutY(ConstantesTelas.resolucaoY/5 - 50);
         
 		
 		Label labelGanhou;

@@ -123,10 +123,10 @@ public class TelaJogo implements ITela {
 				
 		GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
-        grid.setGridLinesVisible(true);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(25, 25, 25, 25));
+//        grid.setGridLinesVisible(true);
+//        grid.setHgap(10);
+//        grid.setVgap(10);
+//        grid.setPadding(new Insets(25, 25, 25, 25));
         
         grid.add(volume,0,1);
         grid.add(botaoContinua, 0, 2);
@@ -134,6 +134,9 @@ public class TelaJogo implements ITela {
         grid.add(botaoRegras,0,4);
         grid.add(botaoSalvar,0,5);
         grid.add(botaoSairInGame,0,6);
+        
+        grid.setLayoutX(ConstantesTelas.resolucaoX/2 - 50);
+        grid.setLayoutY(ConstantesTelas.resolucaoY/5);
 
 		
         Group grupoPausa = new Group();

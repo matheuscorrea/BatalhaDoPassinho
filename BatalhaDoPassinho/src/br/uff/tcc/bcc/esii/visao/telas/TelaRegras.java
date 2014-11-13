@@ -58,7 +58,7 @@ public TelaRegras(boolean estaJogando){
 		
 		String caminho = "file:media/imagens/regras/regras"+pagina+".png";
 		ImageView fundo = new ImageView();
-		fundo.setImage(new Image(caminho));
+		fundo.setImage(new Image(caminho,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true));
 		
 		avancar.setStyle("-fx-background-color: transparent");
 		voltar.setStyle("-fx-background-color: transparent");
@@ -91,7 +91,7 @@ public TelaRegras(boolean estaJogando){
 		
 		String caminho = "file:media/imagens/regras/regras"+pagina+".png";
 		ImageView fundo = new ImageView();
-		fundo.setImage(new Image(caminho));
+		fundo.setImage(new Image(caminho,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true));
 		
 		if(pagina == 1){
 			if(estajogando){
@@ -136,7 +136,7 @@ public TelaRegras(boolean estaJogando){
 		
 		String caminho = "file:media/imagens/regras/regras"+pagina+".png";
 		ImageView fundo = new ImageView();
-		fundo.setImage(new Image(caminho));
+		fundo.setImage(new Image(caminho,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true));
 		
 		if(pagina == 1){
 			if(estajogando){
@@ -165,6 +165,4 @@ public TelaRegras(boolean estaJogando){
 		return new Scene(grupo);
 		
 	}
-	
-
 }
