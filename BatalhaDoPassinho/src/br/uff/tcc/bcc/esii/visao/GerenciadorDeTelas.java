@@ -58,6 +58,7 @@ public class GerenciadorDeTelas{
 	private GerenciadorDeTelas(){
 		
 	}
+	
 
 	/**
 	 * Retorna a instância do Gerenciador de telas caso este já tenha 
@@ -70,6 +71,10 @@ public class GerenciadorDeTelas{
 			gerenciador = new GerenciadorDeTelas();
 		}
 		return gerenciador;
+	}
+	
+	public TelaJogo getTelaJogo(){
+		return telaJogo;
 	}
 
 	/**

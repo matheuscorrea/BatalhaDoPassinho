@@ -73,6 +73,18 @@ public class Som {
     	mediaPlayerBatida.play();
 	    mediaPlayerBatida.setCycleCount(MediaPlayer.INDEFINITE);
     }
-    
+    public void mutaVolume(){
+    	mediaPlayerAtual.setMute(true);
+    	mediaPlayerBatida.setMute(true);
+    	mediaPlayerEfeito.setMute(true);
+    }
+    public void restauraVolume(){
+    	mediaPlayerAtual.setMute(false);
+    	mediaPlayerBatida.setMute(false);
+    	mediaPlayerEfeito.setMute(false);
+    }
+    public MediaPlayer getMediaPlayerAtual(){
+    	return mediaPlayerAtual;
+    }
     
 }

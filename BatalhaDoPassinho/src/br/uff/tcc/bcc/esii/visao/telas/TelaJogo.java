@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,6 +25,8 @@ import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
+import br.uff.tcc.bcc.esii.som.eventos.EventoMutaJogo;
+import br.uff.tcc.bcc.esii.som.eventos.EventoRestauraVolume;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoChamaTelaAtaque;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoContinuaJogo;
@@ -45,6 +49,7 @@ public class TelaJogo implements ITela {
 	private List<Group> listaDeGroupTerritorios;
 	private Group grupo;
 	private HBox barraInformacoes;
+	
 	
 	private enum Estado{JOGANDO,PAUSADO};
 	private Estado estadoAtual;
@@ -111,12 +116,21 @@ public class TelaJogo implements ITela {
 		Button botaoRegras = FabricaDeBotoes.criaBotaoComImagem("Regras2", "", new EventoRegrasJogo(), new Image("file:media/imagens/botoes/BTREGRASINGAME.png",100,100,true,true));
 		Button botaoSalvar = FabricaDeBotoes.criaBotaoComImagem("Salvar_Jogo", "", new EventoSalvar(), new Image("file:media/imagens/botoes/BTSALVAR.png",100,100,true,true));
 		Button botaoSairInGame = FabricaDeBotoes.criaBotaoComImagem("Sair_In_Game", "", new EventoSair(), new Image("file:media/imagens/botoes/BTEXIT2.png",100,100,true,true));
+		Button botaoVolume = FabricaDeBotoes.criaBotaoComImagem("Permitir_Volume", "", new EventoRestauraVolume(), new Image("file:media/imagens/botoes/BTSOUND.png",50,50,true,true));
+	    Button botaoMudo = FabricaDeBotoes.criaBotaoComImagem("Tirar_Volume", "", new EventoMutaJogo(), new Image("file:media/imagens/botoes/BTMUTE.png",50,50,true,true));
+		
+	    
 		botaoContinua.setStyle("-fx-background-color: transparent");
 		botaoMenuPricipal.setStyle("-fx-background-color: transparent");
 		botaoRegras.setStyle("-fx-background-color: transparent");
 		botaoSalvar.setStyle("-fx-background-color: transparent");
 		botaoSairInGame.setStyle("-fx-background-color: transparent");
+		botaoVolume.setStyle("-fx-background-color: transparent");
+		botaoMudo.setStyle("-fx-background-color: transparent");
 		
+		HBox volume = new HBox();
+		volume.getChildren().addAll(botaoVolume, botaoMudo);
+		volume.setTranslateX(-6);
 				
 		GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -124,11 +138,12 @@ public class TelaJogo implements ITela {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
-        grid.add(botaoContinua, 2, 1);
-        grid.add(botaoMenuPricipal, 2,2);
-        grid.add(botaoRegras,2,3);
-        grid.add(botaoSalvar,2,4);
-        grid.add(botaoSairInGame,2,5);
+        grid.add(volume,2,1);
+        grid.add(botaoContinua, 2, 2);
+        grid.add(botaoMenuPricipal, 2,3);
+        grid.add(botaoRegras,2,4);
+        grid.add(botaoSalvar,2,5);
+        grid.add(botaoSairInGame,2,6);
 		
         Group grupoPausa = new Group();
         
@@ -138,6 +153,8 @@ public class TelaJogo implements ITela {
 		return new Scene(grupoPausa);
 	}
 	
+	
+
 	public void atualizaImageNoBotao(String idBotao,ImageView imageView){
 		for (Group gTerritorio:listaDeGroupTerritorios){
 			Object[] vetorElementoGroup =  gTerritorio.getChildren().toArray();
