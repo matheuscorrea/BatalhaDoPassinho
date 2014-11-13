@@ -107,7 +107,7 @@ public class TelaEscolha implements ITela  {
 		
 		
 		Group grupo = new Group();
-		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
+		Image fundo = new Image("file:media/imagens/plateia.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 	    ImageView imv = new ImageView(fundo);
 	       
 	    grupo.getChildren().addAll(imv);
@@ -137,7 +137,7 @@ public class TelaEscolha implements ITela  {
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes);	
 		raiz.setLayoutX(200);
 		Group grupo = new Group();
-		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
+		Image fundo = new Image("file:media/imagens/plateia.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 	    ImageView imv = new ImageView(fundo);
 	       
 	    grupo.getChildren().addAll(imv);
@@ -153,7 +153,7 @@ public class TelaEscolha implements ITela  {
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes);	
 		raiz.setLayoutX(200);
 		Group grupo = new Group();
-		Image fundo = new Image("file:media/imagens/plateia.png",1120,580,true,true);
+		Image fundo = new Image("file:media/imagens/plateia.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 	    ImageView imv = new ImageView(fundo);
 	       
 	    grupo.getChildren().addAll(imv);

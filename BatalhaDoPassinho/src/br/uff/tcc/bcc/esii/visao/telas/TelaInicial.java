@@ -48,26 +48,30 @@ public class TelaInicial implements ITela {
         
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
+        //grid.setGridLinesVisible(true);
         
-        grid.setHgap(218);
+       /* grid.setHgap(218);
         grid.setMinHeight(650);
         grid.setVgap(5);
-        grid.setPadding(new Insets(25, 25, 25, 25));        
+        grid.setPadding(new Insets(25, 25, 25, 25));   */     
 		
-        grid.add(botaoNovoJogo, 2, 1);
-
-        grid.add(botaoCarrega, 2, 2);
-        grid.add(botaoRegras, 2, 3);
-        grid.add(botaoSair,2, 4);
+        grid.setLayoutX(ConstantesTelas.resolucaoX/2 - 50);
+        grid.setLayoutY(ConstantesTelas.resolucaoY/2 - (ConstantesTelas.TAMANHO_BT_TELA_INICIAL/2)*3);
+        
+        grid.add(botaoNovoJogo, 0, 1);
+        grid.add(botaoCarrega, 0, 2);
+        grid.add(botaoRegras, 0, 3);
+        grid.add(botaoSair,0, 4);
         
         Group grupo = new Group();
         
-        Image telaInicial = new Image("file:media/imagens/telaInicial.png",1120,580,true,true);
+        Image telaInicial = new Image("file:media/imagens/telaInicial.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
         ImageView imv = new ImageView(telaInicial);
         grupo.getChildren().addAll(imv);
 		grupo.getChildren().addAll(grid);
 
         
-		return new Scene(grupo, 1048,580);
+//		return new Scene(grupo, 1048,580);
+		return new Scene(grupo);
 	}
 }

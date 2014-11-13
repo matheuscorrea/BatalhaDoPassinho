@@ -7,6 +7,7 @@ import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas.TipoDaTela;
+import br.uff.tcc.bcc.esii.visao.telas.ConstantesTelas;
 
 public class BatalhaDoPassinho extends Application {
 
@@ -26,6 +27,7 @@ public class BatalhaDoPassinho extends Application {
 		Som.getInstancia().toca(Musicas.INICIAL.getID());
 				
 	    GerenciadorDeTelas.getInstancia().setPrimaryStage(stage);
+	    ConstantesTelas.setResolucao();
  		try {
  			GerenciadorDeTelas.getInstancia().mudaTela(TipoDaTela.INICIO);			
 		} catch (Exception e) {
