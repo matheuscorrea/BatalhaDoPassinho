@@ -35,27 +35,15 @@ public class JogadorIA extends Jogador {
 		estadoFase3 = EstadoFase3.PARADO;
 	}
 
+	
 	/**
 	 * Metodo da IA que toma as decisões da fase 1. Usa o controladorJogo para
 	 * interagir com o jogo.<p>
-	 * O método fica em um loop, que cada iteração é uma ação da IA,
+	 * O método é uma ação da IA,
 	 * ele ve todas possibilidades de distribuição de tropas do JogadorIa atual, e
 	 * baseando-se nas heurísticas da fase 3, escolhe o território com maior
 	 * nota para distribuir uma tropa. <br>
 	 */
-	public void fase1() {
-	
-		//Territorio territorioAlvo = null;
-		while (ControladorJogo.getInstancia().FaseUmTemTropasParaDistribuir()) {
-			Territorio territorioAlvo = obtemTerritorioFase1();
-        	chamaControladorFase1(territorioAlvo);
-		} 
-		//Simula o clique na proxima fase
-		ControladorJogo.getInstancia().proximaFase();
-//		ControladorJogo.getInstancia().atualizaTela();
-
-	}
-	
 	public void acaoFase1(){
 		if(ControladorJogo.getInstancia().FaseUmTemTropasParaDistribuir()) {
 			Territorio territorioAlvo = obtemTerritorioFase1();
@@ -105,75 +93,6 @@ public class JogadorIA extends Jogador {
 		GerenciadorDeTelas.getInstancia().atualizaTelaJogo();
 	}
 
-	/**
-	 * Metodo da IA que toma as decisões da fase 2 <p>
-	 * O método fica em um loop, que cada iteração é uma ação da IA,
-	 * ele ve todas possibilidades de ataque do JogadorIa atual, e
-	 * baseando-se nas heurísticas de ataque, escolhe a maior nota. <br>
-	 * Caso essa nota seja maior que a nota de corte, ele faz o ataque, simulando 
-	 * o clique nos botões que são obtidos pelo controlador. No final,
-	 * simula o clique no botão de passar a fase.
-	 */
-	public void fase2() {
-		//TODO disparar uma thread para fazer esses calculos
-		
-		float maiorNota = 0;
-		Territorio alvo = null;
-		Territorio atacante = null;
-		
-		do {
-			maiorNota = 0;
-			alvo = null;
-			atacante = null;
-			List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
-					.getConquistados().values());
-			//Escolhe a maior nota
-			for (Territorio territorioProprio : meusTerritorios) {
-				List<Territorio> territoriosVizinhos = new ArrayList<Territorio>(
-						territorioProprio.getVizinhos().values());
-				for (Territorio territorioInimigo : territoriosVizinhos) {
-					if (!this.possuiTerritorio(territorioInimigo.getNome())) {
-						int nota = calculaNotaFaseDois(territorioProprio,
-								territorioInimigo);
-						if (nota > maiorNota) {
-							maiorNota = nota;
-							alvo = territorioInimigo;
-							atacante = territorioProprio;
-						}
-					}
-				}
-			}
-			
-			// Simula o clique dos botões para o ataque
-			if (alvo != null && maiorNota >= notaDeCorteAtaque) {
-				//Para o atacante
-				for (Button botao : ControladorJogo.getInstancia()
-						.getListaDeBotoesTerritorios()) {
-					if (botao.getId().equals(atacante.getNome())) {
-						ControladorJogo.getInstancia().acaoTerritorio(botao);
-					}
-				}
-				//Para o alvo
-				for (Button botao : ControladorJogo.getInstancia()
-						.getListaDeBotoesTerritorios()) {
-					if (botao.getId().equals(alvo.getNome())) {
-						ControladorJogo.getInstancia().acaoTerritorio(botao);
-					}
-				}
-				//Botão ataque
-				ControladorJogo.getInstancia().acaoAtaque();
-				GerenciadorDeTelas.getInstancia().ataque();
-			}
-		} while (maiorNota >= notaDeCorteAtaque && !ControladorJogo.getInstancia().acabouJogo());
-
-		if(ControladorJogo.getInstancia().acabouJogo()){
-			ControladorJogo.getInstancia().fimDeJogo();
-		}else{
-			//Simula o clique na proxima fase
-			ControladorJogo.getInstancia().proximaFase();
-		}
-	}
-
 	private enum EstadoFase2{PARADO,SELECIONOU_TERRITORIOS};
 	private EstadoFase2 estadoFase2;
 	
@@ -181,6 +100,15 @@ public class JogadorIA extends Jogador {
 	private Territorio alvo = null;
 	private Territorio atacante = null;
 	
+
+	/**
+	 * Metodo da IA que toma as decisões da fase 2 <p>
+	 * O método é uma ação da IA,
+	 * ele ve todas possibilidades de ataque do JogadorIa atual, e
+	 * baseando-se nas heurísticas de ataque, escolhe a maior nota. <br>
+	 * Caso essa nota seja maior que a nota de corte, ele faz o ataque, simulando 
+	 * o clique nos botões que são obtidos pelo controlador. 
+	 */
 	public void acaoFase2(){
 
 		switch (estadoFase2){
@@ -250,73 +178,17 @@ public class JogadorIA extends Jogador {
 		
 	}
 	
-	/**
-	 * Metodo da IA que toma as decisões da fase 3 Usa o controladorJogo para
-	 * interagir com o jogo<p>
-	 * O método fica em um loop, que cada iteração é uma ação da IA,
-	 * ele ve todas possibilidades de movimento de tropas do JogadorIa atual, e
-	 * baseando-se nas heurísticas da fase 3, escolhe o território com maior nota. 
-	 */
-	public void fase3() {
-		//TODO disparar uma thread para fazer esses calculos
-		float maiorNota = 0;
-		Territorio destino = null;
-		Territorio fonte = null;
-		
-		do {
-			maiorNota = 0;
-			destino = null;
-			fonte = null;
-			List<Territorio> meusTerritorios = new ArrayList<Territorio>(this
-					.getConquistados().values());
-			//Escolhe a maior nota
-			for (Territorio territorioFonteCandidato : meusTerritorios) {
-				if(!ControladorJogo.getInstancia().jaMoveuTerritorio(territorioFonteCandidato.getNome())){
-					List<Territorio> territoriosVizinhos = new ArrayList<Territorio>(
-							territorioFonteCandidato.getVizinhos().values());
-					for (Territorio territorioDestinoCandidato : territoriosVizinhos) {
-						if (this.possuiTerritorio(territorioDestinoCandidato.getNome())) {
-							int nota = calculaNotaFaseTres(territorioFonteCandidato,
-									territorioDestinoCandidato);
-							if (nota > maiorNota) {
-								maiorNota = nota;
-								destino = territorioDestinoCandidato;
-								fonte = territorioFonteCandidato;
-							}
-						}
-					}
-				}
-			}
-			// Simula o clique dos botões para o remanejamento
-			if (destino != null && maiorNota >= notaDeCorteRemanejamento) {
-				//Para o território fonte
-				for (Button botao : ControladorJogo.getInstancia()
-						.getListaDeBotoesTerritorios()) {
-					if (botao.getId().equals(fonte.getNome())) {
-						ControladorJogo.getInstancia().acaoTerritorio(botao);
-					}
-				}
-				//Para o destino
-				for (Button botao : ControladorJogo.getInstancia()
-						.getListaDeBotoesTerritorios()) {
-					if (botao.getId().equals(destino.getNome())) {
-						ControladorJogo.getInstancia().acaoTerritorio(botao);
-					}
-				}
-				//Botão mover
-				ControladorJogo.getInstancia().acaoMover();
-				ControladorJogo.getInstancia().limpaBotoesFase3();				
-			}
-		} while (maiorNota >= notaDeCorteRemanejamento);
-		//Simula o clique na proxima fase
-		ControladorJogo.getInstancia().proximaFase();
-	}
-
 	private Territorio destino = null;
 	private Territorio fonte = null;
 	private enum EstadoFase3{PARADO,SELECIONOU_TERRITORIOS};
 	private EstadoFase3 estadoFase3;
-	
+	/**
+	 * Metodo da IA que toma as decisões da fase 3 Usa o controladorJogo para
+	 * interagir com o jogo<p>
+	 * O método realiza uma ação da IA,
+	 * ele ve todas possibilidades de movimento de tropas do JogadorIa atual, e
+	 * baseando-se nas heurísticas da fase 3, escolhe o território com maior nota. 
+	 */
 	public void acaoFase3() {
 		
 		switch (estadoFase3){
@@ -362,7 +234,7 @@ public class JogadorIA extends Jogador {
 					}
 				}
 
-				estadoFase2 = EstadoFase2.SELECIONOU_TERRITORIOS;
+				estadoFase3 = EstadoFase3.SELECIONOU_TERRITORIOS;
 			}else{
 				ControladorJogo.getInstancia().proximaFase();
 			}
@@ -372,25 +244,15 @@ public class JogadorIA extends Jogador {
 			//Botão mover
 			ControladorJogo.getInstancia().acaoMover();
 			ControladorJogo.getInstancia().limpaBotoesFase3();
+			GerenciadorDeTelas.getInstancia().atualizaTelaJogo();
+
 			estadoFase3 = EstadoFase3.PARADO;
 
 			break;
 		}
 		
-		
-		
-//		} while (maiorNota >= notaDeCorteRemanejamento);
-		//Simula o clique na proxima fase
-		//ControladorJogo.getInstancia().proximaFase();
 	}
 
-	
-	/**
-	 * Metodo da IA que toma as decisões da rodada 0 Usa o controladorJogo para
-	 * interagir com o jogo
-	 */
-	public void rodada0() {
-	}
 
 	/**
 	 * Método que utiliza as Heurísticas para calcular a nota de 
