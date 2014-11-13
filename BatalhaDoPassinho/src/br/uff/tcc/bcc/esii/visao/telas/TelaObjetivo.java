@@ -26,7 +26,9 @@ public class TelaObjetivo implements ITela{
 	
 	@Override
 	public Scene getScene() {
-		Button voltar = FabricaDeBotoes.criaBotao("Voltar_Objetivo", "VOLTAR",new EventoTelaJogo());
+		Button voltar = FabricaDeBotoes.criaBotaoComImagem("Voltar_Objetivo", "",new EventoTelaJogo(), new Image("file:media/imagens/botoes/BTVOLTAR.png",125,125,true,true));
+		voltar.setStyle("-fx-background-color: transparent");
+
 		Image cartaObjetivo = new Image("file:media/imagens/cartas/template.png",400,400,true,true);	
 		
 		ImageView imageView = new ImageView();
@@ -36,7 +38,6 @@ public class TelaObjetivo implements ITela{
 		fundo.setImage(new Image("file:media/imagens/mapa/mapaSemBrilho.png"));
 		
 		Group grupo = new Group();
-		//TODO Coordenadas relativas
 		Label textoObjetivo = new Label(objetivo);
 		textoObjetivo.setMaxWidth(200);
 		textoObjetivo.setWrapText(true);
