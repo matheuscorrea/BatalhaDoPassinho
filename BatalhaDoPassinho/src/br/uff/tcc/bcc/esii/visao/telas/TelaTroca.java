@@ -31,9 +31,7 @@ public class TelaTroca implements ITela{
 	private ImageView fundo;
 	private int tiro,porrada,bomba,valesca;
 	private Label cartasSelecionadas;	
-	private Image image = new Image("file:media/imagens/mapa/mapaSemBrilho.png");
-	
-	
+	private Image image = new Image("file:media/imagens/mapa/mapaSemBrilho.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY-80,false,true);
 	
 	private HBox botoes;
 	private HBox inferior;
@@ -44,22 +42,16 @@ public class TelaTroca implements ITela{
 		this.porrada = valores[1];
 		this.bomba = valores[2];
 		this.valesca = valores[3];
-	}
-	
-	
+	}	
 
 	@Override
 	public Scene getScene() {
-		
-
 		
 		fundo = new ImageView();
 		fundo.setImage(image);
 		
 		inferior = new HBox(40);
-		botoes = new HBox(40);
-		
-		
+		botoes = new HBox(40);		
 		
 		Image iTiro = new Image("file:media/imagens/cartas/tiro.png",300,300,true,true);	
 		cartaTiro = FabricaDeBotoes.criaBotaoComImagem("Botao_Tiro", ""+this.tiro, new EventoCartaTiro(), iTiro);		
@@ -84,14 +76,14 @@ public class TelaTroca implements ITela{
 		cartasSelecionadas = new Label("Cartas selecionadas: Tiro x"+ controleDeCartas[0] +"  Porrada x"+ controleDeCartas[1] +"  Bomba x"+ controleDeCartas[2] +"  Valesca x"+ controleDeCartas[3]);
 		cartasSelecionadas.setTextFill(Color.WHITE);
 		inferior.getChildren().addAll(cartasSelecionadas,trocar, cancelar);
-		inferior.setStyle("-fx-background-color: grey;");
-		
+		inferior.setStyle("-fx-background-color: grey;");		
 		
 		botoes.setAlignment(Pos.BASELINE_CENTER);
 		grid = new GridPane();
 		grid.add(fundo,2,1);
 		grid.add(botoes, 2, 1);
 		grid.add(inferior, 2, 2);
+		//grid.setGridLinesVisible(true);
         
 		return new Scene(grid);
 	}
@@ -120,16 +112,11 @@ public class TelaTroca implements ITela{
 		return new Scene(grid);
 	}
 
-
-
 	private void atualizarValores() {
 		int[] mao = ControladorJogo.getInstancia().getNumeroCartasJogador();
 		cartaTiro.setText(""+mao[0]);
 		cartaPorrada.setText(""+mao[1]);
 		cartaBomba.setText(""+mao[2]);
-		cartaValesca.setText(""+mao[3]);
-		
-		
+		cartaValesca.setText(""+mao[3]);		
 	}
-
 }

@@ -33,9 +33,10 @@ public class TelaObjetivo implements ITela{
 		
 		ImageView imageView = new ImageView();
 		imageView.setImage(cartaObjetivo);
+		//imageView.setLayoutX(ConstantesTelas.resolucaoX/2 - 100);
 
 		ImageView fundo = new ImageView();
-		fundo.setImage(new Image("file:media/imagens/mapa/mapaSemBrilho.png"));
+		fundo.setImage(new Image("file:media/imagens/mapa/mapaSemBrilho.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY-80,false,true));
 		
 		Group grupo = new Group();
 		Label textoObjetivo = new Label(objetivo);
@@ -43,11 +44,9 @@ public class TelaObjetivo implements ITela{
 		textoObjetivo.setWrapText(true);
 		textoObjetivo.setLayoutX(25);
 		textoObjetivo.setLayoutY(120);
+		//textoObjetivo.setLayoutX(ConstantesTelas.resolucaoX/2 - 100);
 		
-			
-		
-		grupo.getChildren().addAll(imageView);
-		grupo.getChildren().addAll(textoObjetivo);
+		grupo.getChildren().addAll(imageView,textoObjetivo);
 		
 		GridPane grid = new GridPane();
 		grid.add(fundo,2,0);
@@ -56,6 +55,8 @@ public class TelaObjetivo implements ITela{
 		grid.setAlignment(Pos.TOP_CENTER);
 		grid.setStyle("-fx-background-color: black;");
 		grid.setMinSize(1120, 580);
+		//grid.setGridLinesVisible(true);
+
 		
 		
 		//VBox raiz = new VBox(grupo, voltar);
