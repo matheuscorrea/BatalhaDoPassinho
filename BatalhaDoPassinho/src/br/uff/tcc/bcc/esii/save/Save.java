@@ -6,12 +6,8 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.Scanner;
 
-import javafx.stage.FileChooser;
-import javafx.stage.FileChooser.ExtensionFilter;
-
 import javax.swing.JOptionPane;
 
-import org.hamcrest.core.IsInstanceOf;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +21,6 @@ import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
-import br.uff.tcc.bcc.esii.visao.GerenciadorDeTelas;
 
 public class Save {
 
@@ -87,7 +82,6 @@ public class Save {
 		
 		//serializa para uma string e imprime
 		String jsonString = meuArq.toString();
-		System.out.println();
 		
 		try {
 			PrintWriter arquivo = new PrintWriter(nomeArq);

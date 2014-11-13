@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -13,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -90,10 +88,8 @@ public class TelaJogo implements ITela {
 	public Scene getScene() {
 		Random random = new Random();
 		int rand = random.nextInt(Musicas.ULTIMO_JOGO.getID()-Musicas.JOGO1.getID()+1)+Musicas.JOGO1.getID();
-		System.out.println(rand+"");
 		Som.getInstancia().toca(rand);
 		rand = random.nextInt(Musicas.ULTIMA_BATIDA.getID()-Musicas.BATIDA1.getID()+1)+Musicas.BATIDA1.getID();
-		System.out.println(rand+"");
 		Som.getInstancia().tocaBatida(rand);
 		if(estadoAtual==Estado.JOGANDO){
 			return getSceneJogo();

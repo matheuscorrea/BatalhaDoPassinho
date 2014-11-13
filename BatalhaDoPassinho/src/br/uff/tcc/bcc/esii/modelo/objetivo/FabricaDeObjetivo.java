@@ -40,7 +40,6 @@ public class FabricaDeObjetivo {
 	
 	public Objetivo criaObjetivo(int index){
 		if(index>=0 && index<=10){
-				System.out.println(index);
 				return this.objetivos.get(index);
 		}		
 		return null;		

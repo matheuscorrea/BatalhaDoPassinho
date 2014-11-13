@@ -3,7 +3,6 @@ package br.uff.tcc.bcc.esii.visao.telas;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,8 +10,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import br.uff.tcc.bcc.esii.controlador.ControladorTelaEscolha;
@@ -22,7 +19,6 @@ import br.uff.tcc.bcc.esii.som.Musicas;
 import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.ConstanteDaCor;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
-import br.uff.tcc.bcc.esii.visao.eventos.EventoCarregaJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoCheckBoxIA;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoNovoJogo;
 import br.uff.tcc.bcc.esii.visao.eventos.EventoTelaInicial;
@@ -152,7 +148,7 @@ public class TelaEscolha implements ITela  {
 	public Scene atualizaCheckBox(){
 		atualizaListaJogadores();
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes);	
-		raiz.setLayoutX(200);
+		raiz.setLayoutX(ConstantesTelas.resolucaoX/3 - 100);
 		Group grupo = new Group();
 		Image fundo = new Image("file:media/imagens/plateia.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 	    ImageView imv = new ImageView(fundo);

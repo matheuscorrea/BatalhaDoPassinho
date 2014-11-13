@@ -512,7 +512,6 @@ public class ControladorJogo {
 		 
 		if(controleDeCartas[0] > 0 && totalCartasSelecionadas <= 3){
 			cartasTiroSelecionadas++;
-			System.out.println("selecionou tiro");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
 			controleDeCartas[0]--;
 		}
@@ -524,7 +523,6 @@ public class ControladorJogo {
 	public void selecionouCartaPorrada() {
 		if(controleDeCartas[1] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasPorradaSelecionadas++;
-			System.out.println("selecionou porrada");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
 			controleDeCartas[1]--;
 		}
@@ -536,7 +534,6 @@ public class ControladorJogo {
 	public void selecionouCartaBomba() {
 		if(controleDeCartas[2] > 0 && totalCartasSelecionadas <= 3){ 
 			cartasBombaSelecionadas++;
-			System.out.println("selecionou bomba");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
 			controleDeCartas[2]--;
 		}
@@ -548,14 +545,12 @@ public class ControladorJogo {
 	public void selecionouCartaValesca() {
 		if(controleDeCartas[3] > 0 && totalCartasSelecionadas <= 3){
 			cartasValescaSelecionadas++;
-			System.out.println("selecionou valesca");
 			GerenciadorDeTelas.getInstancia().atualizaBarraTroca();
 			controleDeCartas[3]--;
 		}
 	}
 
 	public int[] getCartasSelecionadas() {
-		System.out.println("mandou as cartas selecionadas");
 		int[] resp = new int[4];
 		resp[0] = cartasTiroSelecionadas;
 		resp[1] = cartasPorradaSelecionadas;

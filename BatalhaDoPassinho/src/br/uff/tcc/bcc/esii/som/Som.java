@@ -25,7 +25,6 @@ public class Som {
 	    		
 	    for (int i = 0; i < TOTAL_MUSICA; i++) {
 	    	if(Musicas.fromID(i)!=null){
-	    		System.out.println(Musicas.fromID(i).toString());
 				resource[i] = getClass().getResource(Musicas.fromID(i).toString());
 				media[i] = new Media(resource[i].toString());
 				mediaPlayer[i] = new MediaPlayer(media[i]);

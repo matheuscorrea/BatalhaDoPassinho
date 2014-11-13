@@ -143,7 +143,6 @@ public class Jogador {
 	public void ganhaCarta(){
 		
 		int random = 1 + (int)(Math.random()*44);
-		System.out.println(random);
 		
 		if(random <= 14 ){			
 			mao.add(new Carta(Carta.Tipo.TIRO));
@@ -160,7 +159,6 @@ public class Jogador {
 	public void descartar(){
 		int descarte = (int)(Math.random()*mao.size());
 		mao.remove(descarte);
-		System.out.println("descartou " + descarte);
 	}
 	public void removeCartaTiro() {
 		Carta remove = new Carta(Tipo.BLANK);
