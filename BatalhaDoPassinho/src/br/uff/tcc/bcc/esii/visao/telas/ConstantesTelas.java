@@ -9,12 +9,13 @@ public class ConstantesTelas {
 	public static final double TAMANHO_IMG_TELA_INICIAL_Y = 580;
 	public static final double TAMANHO_BT_TELA_INICIAL = 100;
 
-	//PEGAR TAMANHO DA IMAGEM
 	public static final double TAMANHO_IMG_TELA_ESCOLHA_X = 1123;
 	public static final double TAMANHO_IMG_TELA_ESCOLHA_Y = 554;
+	public static final double TAMANHO_QUADRO_TELA_ESCOLHA = 0;
 	
 	public static final double TAMANHO_IMG_TELA_JOGO_X = 1123;
 	public static final double TAMANHO_IMG_TELA_JOGO_Y = 554;
+	public static final double TAMANHO_BARRA_TELA_JOGO_Y = 120;
 
 	//PEGAR TAMANHO DA IMAGEM
 	public static final double TAMANHO_IMG_TELA_OPCOES_X = 0;

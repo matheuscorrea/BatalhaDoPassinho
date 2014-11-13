@@ -102,7 +102,7 @@ public class TelaJogo implements ITela {
 	private Scene getScenePausa(){
 		final String imagemURL = "file:media/imagens/mapa/mapaSemBrilho.png";
 
-		Image image = new Image(imagemURL);
+		Image image = new Image(imagemURL,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 
@@ -120,15 +120,16 @@ public class TelaJogo implements ITela {
 				
 		GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
+        grid.setGridLinesVisible(true);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
         
-        grid.add(botaoContinua, 2, 1);
-        grid.add(botaoMenuPricipal, 2,2);
-        grid.add(botaoRegras,2,3);
-        grid.add(botaoSalvar,2,4);
-        grid.add(botaoSairInGame,2,5);
+        grid.add(botaoContinua, 0, 1);
+        grid.add(botaoMenuPricipal, 0,2);
+        grid.add(botaoRegras,0,3);
+        grid.add(botaoSalvar,0,4);
+        grid.add(botaoSairInGame,0,5);
 		
         Group grupoPausa = new Group();
         
@@ -153,7 +154,7 @@ public class TelaJogo implements ITela {
 	private Scene getSceneJogo(){
 
 		final String imagemURL = "file:media/imagens/mapa/mapa.jpg";
-		Image image = new Image(imagemURL);
+		Image image = new Image(imagemURL,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY-120,false,true);
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 
@@ -167,9 +168,7 @@ public class TelaJogo implements ITela {
 		for (Territorio territorio : mapa.getTerritorios()) {
 			listaDeGroupTerritorios.add(FabricaDeBotoes.criaGroupTerritorio(
 					territorio, new EventoTerritorio()));
-		}
-		
-		
+		}		
 		
 		grupo.getChildren().clear();
 		grupo.getChildren().addAll(imageView);
@@ -378,6 +377,5 @@ public class TelaJogo implements ITela {
 			default: corJogador = new Image("file:media/imagens/peoes/PAWNYELLOW.png",20,20,true,true);				
 		}
 		return corJogador;
-	}
-	
+	}	
 }

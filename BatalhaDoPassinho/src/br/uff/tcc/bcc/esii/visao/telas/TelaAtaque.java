@@ -13,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import br.uff.tcc.bcc.esii.controlador.ControladorJogo;
 import br.uff.tcc.bcc.esii.modelo.Jogador;
@@ -59,7 +61,7 @@ public class TelaAtaque implements ITela {
 
 		final String imagemMapa = "file:media/imagens/mapa/mapaSemBrilho.png";
 
-		Image image = new Image(imagemMapa);
+		Image image = new Image(imagemMapa,ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 		ImageView imageView = new ImageView();
 		imageView.setImage(image);
 
@@ -78,8 +80,8 @@ public class TelaAtaque implements ITela {
 		nomeJogadorDefensor.setTextFill(Color.WHITE);
 		qtdTropasJogadorDefensor.setTextFill(Color.WHITE);
 
-		int indiceDaColuna = 1;
-		int indiceDaLinha = 1;
+		int indiceDaColuna = 0;
+		int indiceDaLinha = 0;
 
 		botaoAtaque = FabricaDeBotoes.criaBotaoComImagem("Ataque", "",
 				new EventoAtaque(), new Image(
@@ -91,40 +93,42 @@ public class TelaAtaque implements ITela {
 		botaoSair.setStyle("-fx-background-color: transparent");
 
 		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER_LEFT);
+		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
+		//grid.setGridLinesVisible(true);
 
-		grid.add(nomeJogadorAtacante, indiceDaColuna, indiceDaLinha);
-		grid.add(qtdTropasJogadorAtacante, indiceDaColuna, ++indiceDaLinha);
-
+		grid.add(nomeJogadorAtacante, 0, 0);
+		grid.add(qtdTropasJogadorAtacante, 0, 1);
+		
+		indiceDaLinha = 2;
 		if (dados_atacante != null) {
 			for (Integer i : dados_atacante) {
-				grid.add(intToDadoAtq(i.intValue()), indiceDaColuna,
-						++indiceDaLinha);
+				grid.add(intToDadoAtq(i.intValue()), 0,
+						indiceDaLinha++);
 			}
 		}
 
-		indiceDaColuna = 2;
-		indiceDaLinha = 1;
-					
+//		indiceDaColuna = 0;
+//		indiceDaLinha = 1;
+//					
 		if(venceu){			
-			grid.add(msgVitoria, indiceDaColuna, indiceDaLinha);
+			grid.add(msgVitoria, 1, 0);
 
 		}
 		
-		grid.add(botaoAtaque, indiceDaColuna, ++indiceDaLinha);
-		grid.add(botaoSair, indiceDaColuna, ++indiceDaLinha);
+		grid.add(botaoAtaque, 1, 1);
+		grid.add(botaoSair, 1, 2);
 
 		indiceDaColuna = 3;
-		indiceDaLinha = 1;
-		grid.add(nomeJogadorDefensor, indiceDaColuna, indiceDaLinha++);
-		grid.add(qtdTropasJogadorDefensor, indiceDaColuna, indiceDaLinha++);
+		indiceDaLinha = 2;
+		grid.add(nomeJogadorDefensor, 2, 0);
+		grid.add(qtdTropasJogadorDefensor,2, 1);
 
+		indiceDaLinha = 2;
 		if (dados_defensor != null) {
 			for (Integer i : dados_defensor) {
-				grid.add(intToDadoDef(i.intValue()), indiceDaColuna,
+				grid.add(intToDadoDef(i.intValue()), 2,
 						indiceDaLinha++);
 			}
 		}
@@ -137,20 +141,24 @@ public class TelaAtaque implements ITela {
 				Button btUm = FabricaDeBotoes.criaBotaoComImagem("1", "",
 						new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas1.png", 100,100,false,false));
 				btUm.setStyle("-fx-background-color: transparent");
-				grid.add(btUm, indiceDaColuna, indiceDaLinha+1);
+				grid.add(btUm, 0, 5);
 			}if(territorioAtacante.getQuantidadeTropa()>2){				
 				Button btDois = FabricaDeBotoes.criaBotaoComImagem("2", "",
 						new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas2.png", 100,100,false,false));
 				btDois.setStyle("-fx-background-color: transparent");
-				grid.add(btDois, indiceDaColuna+1, indiceDaLinha+1);
+				grid.add(btDois, 1, 5);
 			}if(territorioAtacante.getQuantidadeTropa()>3){
 				Button btTres = FabricaDeBotoes.criaBotaoComImagem("3", "",
 						new EventoTelaAtaquePassarTropas(), new Image("file:media/imagens/peoes/tropas3.png", 100,100,false,false));
 				btTres.setStyle("-fx-background-color: transparent");
-				grid.add(btTres, indiceDaColuna+2, indiceDaLinha+1);
+				grid.add(btTres, 2, 5);
 			}
 			
 		}
+		grid.setLayoutX(ConstantesTelas.resolucaoX/2 - 200);
+		grid.getColumnConstraints().addAll(new ColumnConstraints(100));
+		grid.getRowConstraints().addAll(new RowConstraints(100));
+
 		Group grupo = new Group();
 
 		grupo.getChildren().addAll(imageView);

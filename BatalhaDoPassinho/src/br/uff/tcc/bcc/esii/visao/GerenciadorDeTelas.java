@@ -102,16 +102,6 @@ public class GerenciadorDeTelas{
 			//Para iniciar a tela de jogo é preciso passar o mapa
 			telaJogo= new TelaJogo(ControladorJogo.getInstancia().getMapa());		
 			cena = telaJogo.getScene();
-			cena.widthProperty().addListener(new ChangeListener<Number>() {
-			    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneWidth, Number newSceneWidth) {
-			        System.out.println("Width: " + newSceneWidth);
-			    }
-			});
-			cena.heightProperty().addListener(new ChangeListener<Number>() {
-			    @Override public void changed(ObservableValue<? extends Number> observableValue, Number oldSceneHeight, Number newSceneHeight) {
-			        System.out.println("Height: " + newSceneHeight);
-			    }
-			});
 			stagePrincipal.setScene(cena);
 			break;
 		case OPCOES:

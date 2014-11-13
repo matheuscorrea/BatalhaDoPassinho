@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
+import br.uff.tcc.bcc.esii.visao.telas.ConstantesTelas;
 
 /**
  * Fábrica responsável por criar objetos do tipo {@link Botao}
@@ -49,6 +50,7 @@ public class FabricaDeBotoes {
 	 * @param acao
 	 * @return
 	 */
+	//TODO Verificar método deprecated
 	public static Button criaBotaoTerritorio(Territorio territorio,
 			EventHandler<ActionEvent> acao) {
 
@@ -94,8 +96,12 @@ public class FabricaDeBotoes {
 		botao.setMaxWidth(100);
 		ConstanteDoTerritorio constanteDoTerritorio = ConstanteDoTerritorio
 				.fromString(territorio.getNome());
-		botao.setLayoutX(constanteDoTerritorio.getX());
-		botao.setLayoutY(constanteDoTerritorio.getY());
+		//botao.setLayoutX(constanteDoTerritorio.getX());
+		//botao.setLayoutY(constanteDoTerritorio.getY());
+		botao.setLayoutX((constanteDoTerritorio.getX()/ConstantesTelas.TAMANHO_IMG_TELA_JOGO_X)*ConstantesTelas.resolucaoX);
+		botao.setLayoutY((constanteDoTerritorio.getY()/(ConstantesTelas.TAMANHO_IMG_TELA_JOGO_Y-ConstantesTelas.TAMANHO_BARRA_TELA_JOGO_Y))*
+				(ConstantesTelas.resolucaoY - ConstantesTelas.TAMANHO_BARRA_TELA_JOGO_Y*2));
+		
 		return botao;
 	}
 
@@ -161,8 +167,11 @@ public class FabricaDeBotoes {
 		Group g = new Group();
 		g.getChildren().addAll(imageView, botao);
 
-		g.setLayoutX(constanteDoTerritorio.getX());
-		g.setLayoutY(constanteDoTerritorio.getY());
+		//g.setLayoutX(constanteDoTerritorio.getX());
+		//g.setLayoutY(constanteDoTerritorio.getY());
+		g.setLayoutX((constanteDoTerritorio.getX()/ConstantesTelas.TAMANHO_IMG_TELA_JOGO_X)*ConstantesTelas.resolucaoX);
+		g.setLayoutY((constanteDoTerritorio.getY()/(ConstantesTelas.TAMANHO_IMG_TELA_JOGO_Y-ConstantesTelas.TAMANHO_BARRA_TELA_JOGO_Y))*
+				(ConstantesTelas.resolucaoY - ConstantesTelas.TAMANHO_BARRA_TELA_JOGO_Y*2));
 		g.setId(territorio.getNome());
 
 		return g;

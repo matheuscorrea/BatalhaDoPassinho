@@ -103,7 +103,8 @@ public class TelaEscolha implements ITela  {
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes); 
 		atualizaListaJogadores();
 		numJogadores = 3;
-		raiz.setLayoutX(200);
+		raiz.setLayoutX(ConstantesTelas.resolucaoX/3 - 100);
+
 		
 		
 		Group grupo = new Group();
@@ -135,7 +136,7 @@ public class TelaEscolha implements ITela  {
 			
 		}	
 		VBox raiz = new VBox(10,hbSuperior,hbInferior,hbBotoes);	
-		raiz.setLayoutX(200);
+		raiz.setLayoutX(ConstantesTelas.resolucaoX/3 - 100);
 		Group grupo = new Group();
 		Image fundo = new Image("file:media/imagens/plateia.png",ConstantesTelas.resolucaoX,ConstantesTelas.resolucaoY,false,true);
 	    ImageView imv = new ImageView(fundo);
