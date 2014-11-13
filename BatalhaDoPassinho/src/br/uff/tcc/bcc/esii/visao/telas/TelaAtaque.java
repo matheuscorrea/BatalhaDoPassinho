@@ -231,7 +231,7 @@ public class TelaAtaque implements ITela {
 		return random.nextInt(6) + 1;
 	}
 
-	private boolean ataque(Territorio atacante, Territorio defensor,
+	protected boolean ataque(Territorio atacante, Territorio defensor,
 			List<Integer> dados_atacante, List<Integer> dados_defensor) {
 		for (int i = 0; i < dados_atacante.size() && i < dados_defensor.size(); i++) {
 			if (dados_atacante.get(i) > dados_defensor.get(i)) {
