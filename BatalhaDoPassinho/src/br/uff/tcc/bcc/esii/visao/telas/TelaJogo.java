@@ -2,7 +2,6 @@ package br.uff.tcc.bcc.esii.visao.telas;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,8 +20,6 @@ import br.uff.tcc.bcc.esii.modelo.Jogo;
 import br.uff.tcc.bcc.esii.modelo.Mapa;
 import br.uff.tcc.bcc.esii.modelo.Territorio;
 import br.uff.tcc.bcc.esii.modelo.ia.JogadorIA;
-import br.uff.tcc.bcc.esii.som.Musicas;
-import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.som.eventos.EventoMutaJogo;
 import br.uff.tcc.bcc.esii.som.eventos.EventoRestauraVolume;
 import br.uff.tcc.bcc.esii.visao.FabricaDeBotoes;
@@ -86,11 +83,7 @@ public class TelaJogo implements ITela {
 	 */
 	@Override
 	public Scene getScene() {
-		Random random = new Random();
-		int rand = random.nextInt(Musicas.ULTIMO_JOGO.getID()-Musicas.JOGO1.getID()+1)+Musicas.JOGO1.getID();
-		Som.getInstancia().toca(rand);
-		rand = random.nextInt(Musicas.ULTIMA_BATIDA.getID()-Musicas.BATIDA1.getID()+1)+Musicas.BATIDA1.getID();
-		Som.getInstancia().tocaBatida(rand);
+
 		if(estadoAtual==Estado.JOGANDO){
 			return getSceneJogo();
 		}

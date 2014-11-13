@@ -24,9 +24,7 @@ public class TelaAtaqueTest {
 		defensor = new Territorio("Teste2", "ContTeste2");
 		
 		
-	}
-	
-	
+	}	
 	
 	/**
 	 * Testa se o ataque funciona so com um dado da defesa

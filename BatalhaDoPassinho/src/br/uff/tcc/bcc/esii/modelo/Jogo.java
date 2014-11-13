@@ -10,6 +10,8 @@ import java.util.Random;
 
 import br.uff.tcc.bcc.esii.modelo.objetivo.FabricaDeObjetivo;
 import br.uff.tcc.bcc.esii.save.Save;
+import br.uff.tcc.bcc.esii.som.Musicas;
+import br.uff.tcc.bcc.esii.som.Som;
 import br.uff.tcc.bcc.esii.visao.ConstanteDoTerritorio;
 
 /**
@@ -89,6 +91,12 @@ public class Jogo {
 	 * Inicia uma nova rodada
 	 */
 	public void proximaRodada()	{
+		Random random = new Random();
+		int rand = random.nextInt(Musicas.ULTIMO_JOGO.getID()-Musicas.JOGO1.getID()+1)+Musicas.JOGO1.getID();
+		Som.getInstancia().toca(rand);
+		rand = random.nextInt(Musicas.ULTIMA_BATIDA.getID()-Musicas.BATIDA1.getID()+1)+Musicas.BATIDA1.getID();
+		Som.getInstancia().tocaBatida(rand);
+		
 		setJogada(getJogada() + 1);
 		
 		if(ehFaseDoisETresRodada0()){
