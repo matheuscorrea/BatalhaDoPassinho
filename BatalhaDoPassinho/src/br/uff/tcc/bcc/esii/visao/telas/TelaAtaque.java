@@ -257,8 +257,8 @@ public class TelaAtaque implements ITela {
 
 		Image image = new Image(imagemURL);
 		ImageView imageView = new ImageView();
-		imageView.setFitHeight(20);
-		imageView.setFitWidth(20);
+		imageView.setFitHeight(80);
+		imageView.setFitWidth(80);
 		imageView.setImage(image);
 
 		return imageView;
